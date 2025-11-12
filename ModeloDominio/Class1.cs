@@ -8,5 +8,6 @@ namespace ModeloDominio
 {
     public class Class1
     {
+
     }
 }
