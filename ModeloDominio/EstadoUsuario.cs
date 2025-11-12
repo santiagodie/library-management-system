@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Properties
 {
-    public class Usuario:Persona
+    public enum EstadoUsuario
     {
-
+        Activo,
+        Sancionado
     }
 }

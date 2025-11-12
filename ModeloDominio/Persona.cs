@@ -20,5 +20,21 @@ namespace LogicaNegocio.Properties
             Nombre = nombre;
             this.dni = dni;
         }
+        public string getId()
+        {
+            return id;
+        }
+        public string getName()
+        {
+            return Nombre;
+        }
+        public string getContraseña()
+        {
+            return Contraseña;
+        }
+        public string getDNI()
+        {
+            return dni;
+        }
     }
 }
