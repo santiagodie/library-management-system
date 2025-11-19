@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Persistencia
 {
-    public static class OperacionesBD
+    public class Persistencia
     {
+        private Entidad entidad;
+        public Persistencia(Entidad entidad)
+        {
+
+        }
     }
 }
