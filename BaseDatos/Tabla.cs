@@ -45,11 +45,13 @@ public class Tabla : KeyedList<Entidad>
 		if (this.Dictionary.TryGetValue(clave, out Entidad entidad){
 			return entidad.ModificarDato(columna, dato);
 		}
-	}
+        return false;
+    }
 	public Object ObtenerUnDato(string clave,string columna)
 	{
         if (this.Dictionary.TryGetValue(clave, out Entidad entidad){
             return entidad.ObtenerDato(columna);
         }
+        return null;
     }
 }
