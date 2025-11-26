@@ -9,7 +9,7 @@ namespace ModeloDominio
     public class Personal:Persona
     {
         private int NSS;
-        public Personal(string id, string contraseña, string nombre, string dni,int NSS): base(id, contraseña, nombre, dni)
+        public Personal(string id, string nombre, string dni,int NSS): base(id, nombre, dni)
         {
             this.NSS = NSS;
         }

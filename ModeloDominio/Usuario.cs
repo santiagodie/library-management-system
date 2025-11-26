@@ -9,7 +9,7 @@ namespace ModeloDominio
     public class Usuario:Persona
     {
         private EstadoUsuario estado;
-        public Usuario(string id, string contraseña, string nombre, string dni) : base(id, contraseña, nombre, dni)
+        public Usuario(string id, string nombre, string dni) : base(id, nombre, dni)
         {
             estado = EstadoUsuario.Activo;
         }
