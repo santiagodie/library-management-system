@@ -8,5 +8,7 @@ namespace BaseDatos
 {
     public static class BaseDatos
     {
+        public static Tabla Personatabla;
+        public static Tabla PersonalTabla;
     }
 }

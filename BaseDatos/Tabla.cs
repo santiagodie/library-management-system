@@ -14,12 +14,12 @@ public class KeyedList<TItem> : KeyedCollection<string,TItem>
 		return "";
 	}
 }
-public class Tabla<T> : KeyedList<T> where T : Entidad
+public class Tabla : KeyedList<Entidad>
 {
 	public Tabla() : base()
 	{
 	}
-	public bool AñadirFila(T entidad)
+	public bool AñadirFila(Entidad entidad)
 	{
 		if (!this.Contains(entidad.ObtenerClave()))
 		{
@@ -30,7 +30,7 @@ public class Tabla<T> : KeyedList<T> where T : Entidad
 	}
 	public Entidad ObtenerDatos(string clave)
 	{
-		if (this.Dictionary.TryGetValue(clave, out T entidad))
+		if (this.Dictionary.TryGetValue(clave, out Entidad entidad))
 		{
 			return entidad;
 		}
@@ -42,14 +42,14 @@ public class Tabla<T> : KeyedList<T> where T : Entidad
 	}
 	public bool ModificarFila(string clave, string columna, Object dato)
 	{
-		if (this.Dictionary.TryGetValue(clave, out T entidad)){
+		if (this.Dictionary.TryGetValue(clave, out Entidad entidad)){
 			return entidad.ModificarDato(columna, dato);
 		}
 		return false;
 	}
 	public Object ObtenerUnDato(string clave,string columna)
 	{
-        if (this.Dictionary.TryGetValue(clave, out T entidad)){
+        if (this.Dictionary.TryGetValue(clave, out Entidad entidad)){
             return entidad.ObtenerDato(columna);
         }
 		return null;
