@@ -40,16 +40,18 @@ public class Tabla : KeyedList<Entidad>
 	{
 		return this.Dictionary.Remove(clave);
 	}
-	public bool ModificarFila(string clave, string columna, Object dato)
-	{
-		if (this.Dictionary.TryGetValue(clave, out Entidad entidad){
-			return entidad.ModificarDato(columna, dato);
-		}
-        return false;
+    // ✅ CORRECTO
+    public bool ModificarFila(string clave, string columna, Object dato)
+    {
+        if (this.Dictionary.TryGetValue(clave, out Entidad entidad))  
+        {
+            return entidad.ModificarDato(columna, dato);
+        }
+        return false;  
     }
-	public Object ObtenerUnDato(string clave,string columna)
+    public Object ObtenerUnDato(string clave,string columna)
 	{
-        if (this.Dictionary.TryGetValue(clave, out Entidad entidad){
+        if (this.Dictionary.TryGetValue(clave, out Entidad entidad)){
             return entidad.ObtenerDato(columna);
         }
         return null;

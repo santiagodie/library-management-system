@@ -18,5 +18,6 @@ namespace ModeloDominio
         {
             return this.estado;
         }
+
     }
 }
