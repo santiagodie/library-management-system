@@ -93,26 +93,5 @@ using ModeloDominio;
                        TablaPersonal.Count == 0;
             }
         }
-
-        /// <summary>
-        /// Clase auxiliar para almacenar estadísticas del sistema
-        /// </summary>
-        public class EstadisticasSistema
-        {
-            public int TotalUsuarios { get; set; }
-            public int TotalDocumentos { get; set; }
-            public int TotalEjemplares { get; set; }
-            public int TotalPrestamos { get; set; }
-            public int TotalPersonal { get; set; }
-
-            public override string ToString()
-            {
-                return $"Usuarios: {TotalUsuarios}, " +
-                       $"Documentos: {TotalDocumentos}, " +
-                       $"Ejemplares: {TotalEjemplares}, " +
-                       $"Préstamos: {TotalPrestamos}, " +
-                       $"Personal: {TotalPersonal}";
-            }
-        }
     }
 
