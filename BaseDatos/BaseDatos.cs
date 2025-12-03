@@ -30,7 +30,7 @@ namespace BaseDatos
         }
         public static Entidad ObtenerDatos(string Tabla,string clave)
         {
-            Tabla tabla = this.GetType().GetProperty(Tabla);
+            Tabla tabla = typeof(BaseDatos).GetProperty(Tabla).GetValue(null) as Tabla;
             return tabla.ObtenerDatos(clave);
         }
         public static bool BorrarFila(string Tabla,string clave)
