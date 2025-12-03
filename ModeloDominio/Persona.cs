@@ -24,7 +24,7 @@ namespace ModeloDominio
 
         public override string ObtenerClave()
         {
-            return this.getId();
+            return this.Id;
         }
 
         public override bool ModificarDato(string nombre, object dato)
@@ -33,9 +33,6 @@ namespace ModeloDominio
             {
                 case "nombre":
                     this.Nombre = dato.ToString();
-                    return true;
-                case "contraseña":
-                    this.Contraseña = dato.ToString();
                     return true;
                 default:
                     return false;
@@ -46,10 +43,9 @@ namespace ModeloDominio
         {
             switch (nombre.ToLower())
             {
-                case "id": return this.getId();
-                case "nombre": return this.getName();
-                case "dni": return this.getDNI();
-                case "contraseña": return this.getContraseña();
+                case "id": return this.Id;
+                case "nombre": return this.Nombre;
+                case "dni": return this.Dni;
                 default: return null;
             }
         }

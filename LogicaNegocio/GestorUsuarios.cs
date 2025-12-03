@@ -4,7 +4,7 @@ using Persistencia;
 
 public class GestorUsuarios
 {
-    private Persistencia persistencia;
+   protected Persistencia persistencia;
 
     const string LetrasDNI = "TRWAGMYFPDXBNJZSQVHLCKE";
 
@@ -13,7 +13,7 @@ public class GestorUsuarios
         this.persistencia = new Persistencia();
 	}
 
-    public bool altaUsuario(Usuario usuario)
+    public bool AltaUsuario(Usuario usuario)
     {
         if (this.persistencia.ExisteUsuario(usuario.Id))
         {
@@ -27,7 +27,7 @@ public class GestorUsuarios
             return false;
         }
 
-        if (!esDniValido(usuario.Dni))
+        if (!EsDniValido(usuario.Dni))
         {
             Console.WriteLine("Error: El DNI no es válido.");
             return false;
@@ -36,29 +36,29 @@ public class GestorUsuarios
         return persistencia.AltaUsuario(usuario);
     }
 
-    public bool bajaUsuario(Usuario usuario)
+    public bool BajaUsuario(Usuario usuario)
     {
-        persistencia.BajaUsuario(usuario);
+        return persistencia.BajaUsuario(usuario);
     }
 
     // Consultar usuario??
 
-    public Usuario[] getListaUsuarios()
+    public Usuario[] GetListaUsuarios()
     {
-        persistencia.GetListaUsuarios();
+        return persistencia.GetListaUsuarios();
     }
 
-    public prestamo[] getPrestamosRetrasados(Usuario usuario)
+    public Prestamo[] getPrestamosRetrasados(Usuario usuario)
     {
-        persistencia.GetPrestamosRetrasados(usuario);
+        return persistencia.GetPrestamosRetrasados(usuario);
     }
 
-    public ejemplar[] getEjemplaresPrestados(Usuario usuario)
+    public Ejemplar[] GetEjemplaresPrestados(Usuario usuario)
     {
-        persistencia.GetEjemplaresPrestados(usuario);
+        return persistencia.GetEjemplaresPrestados(usuario);
     }
 
-    public bool esDniValido(string dniCompleto)
+    public bool EsDniValido(string dniCompleto)
     {
         if (dniCompleto.Length != 9)
         {

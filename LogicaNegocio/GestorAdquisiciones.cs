@@ -1,8 +1,9 @@
 ﻿using System;
 
-public class GestorAdquisiciones
+public class GestorAdquisiciones : GestorUsuarios
 {
-	public GestorAdquisiciones()
+
+    public GestorAdquisiciones() : base()
 	{
 	}
 }
