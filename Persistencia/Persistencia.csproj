@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DocumentoDato.cs" />
+    <Compile Include="EjemplarDato.cs" />
     <Compile Include="PersonaDato.cs" />
     <Compile Include="PersonalAdquisicionesDato.cs" />
     <Compile Include="PersonalDato.cs" />
