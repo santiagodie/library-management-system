@@ -8,20 +8,22 @@ namespace BaseDatos
 {
     public class PersonaDato : Entidad
     {
-        private string id;
+        private static int NextID=0;
+        private int id;
         private string Nombre;
         private string DNI;
         private string Contraseña;
-        public PersonaDato(string id, string Contraseña, string Nombre, string DNI)
+        public PersonaDato(string Contraseña, string Nombre, string DNI)
         {
-            this.id = id;
+            this.id = NextID;
+            NextID++;
             this.Contraseña = Contraseña;
             this.Nombre = Nombre;
             this.DNI = DNI;
         }
         public override string ObtenerClave()
         {
-            return id;
+            return id.ToString();
         }
         public override bool ModificarDato(string nombre, Object dato)
         {
@@ -41,7 +43,7 @@ namespace BaseDatos
             switch (nombre)
             {
                 case "id":
-                    return id;
+                    return id.ToString();
                 case "Contraseña":
                     return Contraseña;
                 case "Nombre":
@@ -50,5 +52,6 @@ namespace BaseDatos
                     return DNI;
             }
         }
+
     }
 }

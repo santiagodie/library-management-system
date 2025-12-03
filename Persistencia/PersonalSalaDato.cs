@@ -8,21 +8,18 @@ namespace BaseDatos
 {
     public class PersonalSalaDato:Entidad
     {
-        private string id;
+        private int id;
         public PersonalSalaDato(string id)
         {
-            this.id = id;
+            this.id = int.Parse(id);
         }
         public override string ObtenerClave()
         {
-            return id;
+            return id.ToString();
         }
         public override bool ModificarDato(string nombre, Object dato)
         {
-            switch (nombre)
-            {
-                default: return false;
-            }
+            return false;
         }
         public override Object ObtenerDato(string nombre)
         {

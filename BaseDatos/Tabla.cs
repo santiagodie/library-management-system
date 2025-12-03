@@ -47,11 +47,4 @@ public class Tabla : KeyedList<Entidad>
 		}
 		return false;
 	}
-	public Object ObtenerUnDato(string clave,string columna)
-	{
-        if (this.Dictionary.TryGetValue(clave, out Entidad entidad)){
-            return entidad.ObtenerDato(columna);
-        }
-		return null;
-    }
 }
