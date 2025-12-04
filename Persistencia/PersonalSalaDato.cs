@@ -9,13 +9,13 @@ namespace BaseDatos
     public class PersonalSalaDato:Entidad
     {
         private int id;
-        public PersonalSalaDato(string id)
+        public PersonalSalaDato(int id)
         {
-            this.id = int.Parse(id);
+            this.id = id;
         }
-        public override string ObtenerClave()
+        public override object ObtenerClave()
         {
-            return id.ToString();
+            return id;
         }
         public override bool ModificarDato(string nombre, Object dato)
         {
@@ -23,11 +23,7 @@ namespace BaseDatos
         }
         public override Object ObtenerDato(string nombre)
         {
-            switch (nombre)
-            {
-                case "id":
-                    return id;
-            }
+            return this.GetType().GetProperty(nombre).GetValue(this);
         }
     }
 }

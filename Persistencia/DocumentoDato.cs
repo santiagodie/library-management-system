@@ -38,7 +38,7 @@ namespace BaseDatos
             Año = año;
             Tipo = TipoDocumento.Libro;
         }
-        public override string ObtenerClave()
+        public override object ObtenerClave()
         {
             return ISBN;
         }
@@ -51,25 +51,7 @@ namespace BaseDatos
         }
         public override Object ObtenerDato(string nombre)
         {
-            switch (nombre)
-            {
-                case "ISBN":
-                    return ISBN;
-                case "Título":
-                    return Título;
-                case "Autor":
-                    return Autor;
-                case "Editorial":
-                    return Editorial;
-                case "Año":
-                    return Año;
-                case "Tipo":
-                    return Tipo;
-                case "Formato":
-                    return Formato;
-                case "Duración":
-                    return Duración;
-            }
+            return this.GetType().GetProperty(nombre).GetValue(this);
         }
     }
 }

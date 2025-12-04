@@ -23,9 +23,9 @@ namespace Persistencia
             Localización = localización;
             Estado = estado;
         }
-        public override string ObtenerClave()
+        public override object ObtenerClave()
         {
-            return id.ToString();
+            return id;
         }
         public override bool ModificarDato(string nombre, Object dato)
         {

@@ -10,14 +10,14 @@ namespace BaseDatos
     {
         private int id;
         private string NSS;
-        public PersonalDato(string id,string NSS)
+        public PersonalDato(int id,string NSS)
         {
-            this.id = int.Parse(id);
+            this.id = id;
             this.NSS = NSS;
         }
-        public override string ObtenerClave()
+        public override object ObtenerClave()
         {
-            return id.ToString();
+            return id;
         }
         public override bool ModificarDato(string nombre, Object dato)
         {
@@ -25,13 +25,7 @@ namespace BaseDatos
         }
         public override Object ObtenerDato(string nombre)
         {
-            switch (nombre)
-            {
-                case "id":
-                    return id;
-                case "NSS":
-                    return NSS;
-            }
+            return this.GetType().GetProperty(nombre).GetValue(this);
         }
     }
 }

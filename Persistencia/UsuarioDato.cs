@@ -23,11 +23,7 @@ namespace BaseDatos
         }
         public override Object ObtenerDato(string nombre)
         {
-            switch (nombre)
-            {
-                case "id":
-                    return id;
-            }
+            return this.GetType().GetProperty(nombre).GetValue(this);
         }
     }
 }

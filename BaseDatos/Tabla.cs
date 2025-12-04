@@ -3,15 +3,15 @@ using System;
 using System.Collections.ObjectModel;
 using System.Security.Policy;
 
-public class KeyedList<TItem> : KeyedCollection<string,TItem>
+public class KeyedList<TItem> : KeyedCollection<object,TItem>
 {
 	public KeyedList() : base()
 	{
 
 	}
-	protected override string GetKeyForItem(TItem item)
+	protected override Object GetKeyForItem(TItem item)
 	{
-		return "";
+		return null;
 	}
 }
 public class Tabla : KeyedList<Entidad>
@@ -28,7 +28,7 @@ public class Tabla : KeyedList<Entidad>
 		}
 		return false;
 	}
-	public Entidad ObtenerDatos(string clave)
+	public Entidad ObtenerDatos(object clave)
 	{
 		if (this.Dictionary.TryGetValue(clave, out Entidad entidad))
 		{
@@ -36,11 +36,11 @@ public class Tabla : KeyedList<Entidad>
 		}
 		return null;
 	}
-	public bool BorrarFila(string clave)
+	public bool BorrarFila(object clave)
 	{
 		return this.Dictionary.Remove(clave);
 	}
-	public bool ModificarFila(string clave, string columna, Object dato)
+	public bool ModificarFila(object clave, string columna, bject dato)
 	{
 		if (this.Dictionary.TryGetValue(clave, out Entidad entidad)){
 			return entidad.ModificarDato(columna, dato);

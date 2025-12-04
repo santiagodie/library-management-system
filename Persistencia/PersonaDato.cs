@@ -21,9 +21,9 @@ namespace BaseDatos
             this.Nombre = Nombre;
             this.DNI = DNI;
         }
-        public override string ObtenerClave()
+        public override object ObtenerClave()
         {
-            return id.ToString();
+            return id;
         }
         public override bool ModificarDato(string nombre, Object dato)
         {
@@ -40,17 +40,7 @@ namespace BaseDatos
         }
         public override Object ObtenerDato(string nombre)
         {
-            switch (nombre)
-            {
-                case "id":
-                    return id.ToString();
-                case "Contraseña":
-                    return Contraseña;
-                case "Nombre":
-                    return Nombre;
-                case "DNI":
-                    return DNI;
-            }
+            return this.GetType().GetProperty(nombre).GetValue(this);
         }
 
     }
