@@ -10,7 +10,7 @@ namespace ModeloDominio
     {
         public string Localizacion {  get; set; }
 
-        public bool Estado { get; set; }
+        public bool Disponible { get; set; }
 
         public Documento Documento { get; private set; }
 

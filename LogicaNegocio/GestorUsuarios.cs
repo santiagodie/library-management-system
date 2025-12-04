@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ModeloDominio;
 using Persistencia;
 
@@ -41,19 +42,22 @@ public class GestorUsuarios
         return persistencia.BajaUsuario(usuario);
     }
 
-    // Consultar usuario??
+    public Usuario ConsultarUusuario(String Dni)
+    {
+       return Persistencia.GetUsuario(Dni);
+    }
 
-    public Usuario[] GetListaUsuarios()
+    public List<Usuario> GetListaUsuarios()
     {
         return persistencia.GetListaUsuarios();
     }
-
-    public Prestamo[] getPrestamosRetrasados(Usuario usuario)
+    
+    public List<Prestamo> GetPrestamosRetrasados(Usuario usuario)
     {
         return persistencia.GetPrestamosRetrasados(usuario);
     }
 
-    public Ejemplar[] GetEjemplaresPrestados(Usuario usuario)
+    public List<Ejemplar> GetEjemplaresPrestados(Usuario usuario)
     {
         return persistencia.GetEjemplaresPrestados(usuario);
     }

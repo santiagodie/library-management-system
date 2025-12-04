@@ -16,6 +16,8 @@ namespace ModeloDominio
 
         public string Estado { get; set; }
 
+        public TipoDocumento Tipo {  get; private set; }
+
         public Documento(string Titulo, string ISBN, string Autor) 
         {
             this.Titulo = Titulo;

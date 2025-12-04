@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ModeloDominio
+{
+    public class PersonalSala : Personal
+    {
+        public PersonalSala(string id, string nombre, string dni, int NSS) : base(id, nombre, dni, NSS)
+        {
+        }
+    }
+}
