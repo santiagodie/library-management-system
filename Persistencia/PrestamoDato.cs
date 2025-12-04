@@ -25,11 +25,13 @@ namespace Persistencia
         private List<int> EjemplaresPrestados;
         private List<int> EjemplaresDevueltos;
         private DateTime[] FechaFin;
-        public PrestamoDato(int id,DateTime fechainicio,List<int> ejemplares)
+        private int idResponsable;
+        public PrestamoDato(int id,DateTime fechainicio,List<int> ejemplares,int responsable)
         {
             idUsuario = id;
             FechaInicio= fechainicio;
             EjemplaresPrestados = ejemplares;
+            idResponsable = responsable;
         }
         public override object ObtenerClave()
         {
@@ -37,7 +39,7 @@ namespace Persistencia
         }
         public override bool ModificarDato(string nombre, Object dato)
         {
-            if (nombre != "idUsuario" && nombre != "FechaInicio")
+            if (nombre != "idUsuario" && nombre != "FechaInicio" && nombre != "idResponsable")
             {
                 this.GetType().GetProperty(nombre).SetValue(this, dato);
                 return true;
