@@ -14,6 +14,8 @@ namespace BaseDatos
         private static Tabla PersonalAdquisicionesTabla;
         private static Tabla PersonalSalaTabla;
         private static Tabla DocumentoTabla;
+        private static Tabla EjemplarTabla;
+        private static Tabla PrestamoTabla;
         static BaseDatos()
         {
             PersonalTabla = new Tabla();
@@ -22,6 +24,8 @@ namespace BaseDatos
             PersonalAdquisicionesTabla = new Tabla();
             PersonalSalaTabla = new Tabla();
             DocumentoTabla = new Tabla();
+            EjemplarTabla = new Tabla();
+            PrestamoTabla = new Tabla();
         }
         public static bool AñadirFila(string Tabla,Entidad Dato)
         {
