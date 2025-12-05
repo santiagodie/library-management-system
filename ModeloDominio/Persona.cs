@@ -14,6 +14,8 @@ namespace ModeloDominio
         public string Nombre { get; private set; }
         public string Dni { get; private set; }
 
+        public string HashContraseña { get; private set; }
+
         //No los construimos con contraseña, se pedirá al dar de alta (logicaNegocio) y se guardará un hash
         public Persona(string id, string nombre, string dni)
         {

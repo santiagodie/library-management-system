@@ -2,6 +2,7 @@
 using Persistencia;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GestorAdquisiciones : GestorUsuarios
 {
@@ -14,7 +15,7 @@ public class GestorAdquisiciones : GestorUsuarios
 	{
         if (documento == null || string.IsNullOrEmpty(documento.Titulo) || string.IsNullOrEmpty(documento.Editorial) || string.IsNullOrEmpty(documento.Autor) || string.IsNullOrEmpty(documento.ISBN)) return false;
 
-        if (Persistencia.ExisteDocumento(documento)) return false;
+        if (Persistencia.ExisteDocumento(documento.ISBN)) return false;
 
         if (documento is Audiolibro audio)
         {
@@ -26,36 +27,36 @@ public class GestorAdquisiciones : GestorUsuarios
 
 	public bool AltaEjemplar(string localizacion, bool disponible, Documento documento, PersonalAdquisiciones responsable)
 	{
-		if (documento == null || responsable == null || !Persistencia.ExisteDocumento(documento) || string.IsNullOrEmpty(localizacion)) return false;
+		if (documento == null || responsable == null || !Persistencia.ExisteDocumento(documento.ISBN) || string.IsNullOrEmpty(localizacion)) return false;
 
         return Persistencia.AltaEjemplar(new Ejemplar(localizacion, disponible, documento, responsable));
 	}
 
     public bool BajaEjemplar(Ejemplar ejemplar)
     {
-        if (ejemplar == null || !Persistencia.Existe(ejemplar)) return false;
+        if (ejemplar == null || !Persistencia.ExisteEjemplar(ejemplar.Codigo)) return false;
 
         return Persistencia.BajaEjemplar(ejemplar);
 
     }
 
-    public Ejemplar ConsultarEjemplar(string ISBN) 
-    {
-        if(string.IsNullOrEmpty(ISBN)|| !Persistencia.Existe(ISBN)) return null;
+    public Ejemplar ConsultarEjemplar(string idEjemplar) 
+    { 
+        if(string.IsNullOrEmpty(idEjemplar)|| !Persistencia.ExisteEjemplar(idEjemplar)) return null;
 
-        return Persistencia.GetEjemplar(ISBN);
-
+        return Persistencia.GetEjemplar(idEjemplar);
     }
 
     public bool HayDisponibles(Documento documento)
     {
-        if(documento == null || !Persistencia.Existe(documento)) return false;
-        return Persistencia.HayDisponibles(documento);
+        if(documento == null || !Persistencia.ExisteDocumento(documento.ISBN)) return false;
+        var ejemplares = Persistencia.GetEjemplares(documento);
+        return ejemplares.Any(e => e.Disponible);
     }
 
     public DateTime? FechaDisponible(Documento documento)
     {
-        if (documento == null || !Persistencia.Existe(documento)) return null;
+        if (documento == null || !Persistencia.ExisteDocumento(documento.ISBN)) return null;
 
         if (HayDisponibles(documento)) return DateTime.Now;
 
@@ -68,9 +69,22 @@ public class GestorAdquisiciones : GestorUsuarios
         return fecha;
     }
 
-    public Documento DocumentoMasLeidoMes(Documento documento) //del último mes
+    public Documento DocumentoMasLeidoMes()
     {
-        return PersistenciaDocumentoMasLeidoMes(documento);
+        List<Prestamo> prestamos = Persistencia.GetPrestamos();
+
+        DateTime haceUnMes = DateTime.Today.AddDays(-30);
+
+        var documentoTop = prestamos
+            .Where(p => p.FechaInicio >= haceUnMes)
+            .SelectMany(p => p.EjemplaresPrestados)
+            .GroupBy(e => e.Documento.Titulo)
+            .OrderByDescending(grupo => grupo.Count())
+            .FirstOrDefault();
+
+        if (documentoTop == null) return null;
+
+        return documentoTop.First().Documento;
     }
 
     public List<Documento> GetDocumentos()
@@ -82,6 +96,4 @@ public class GestorAdquisiciones : GestorUsuarios
     {
         return Persistencia.GetEjemplares(documento);
     }
-
-
 }

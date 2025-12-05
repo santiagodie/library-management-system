@@ -5,41 +5,39 @@ using Persistencia;
 
 public class GestorUsuarios
 {
-   protected Persistencia persistencia;
 
     const string LetrasDNI = "TRWAGMYFPDXBNJZSQVHLCKE";
 
     public GestorUsuarios()
 	{
-        this.persistencia = new Persistencia();
 	}
 
     public bool AltaUsuario(Usuario usuario)
     {
-        if (this.persistencia.ExisteUsuario(usuario.Id))
+        if (Persistencia.ExisteUsuario(usuario.Dni))
         {
-            Console.WriteLine($"Error: El usuario con ID {usuario.Id} ya existe.");
+            //Console.WriteLine($"Error: El usuario con ID {usuario.Id} ya existe."); Creo que hay que hacerlo con excepciones para poder cogerlas en la interfaz ( try{} catch(e){} )
             return false;
         }
 
-        if (string.IsNullOrEmpty(usuario.Nombre) || string.IsNullOrEmpty(usuario.Dni) || string.IsNullOrEmpty(usuario.Contraseña))
+        if (string.IsNullOrEmpty(usuario.Nombre) || string.IsNullOrEmpty(usuario.Dni) || string.IsNullOrEmpty(usuario.HashContraseña))
         {
-            Console.WriteLine("Error: El nombre, DNI y contraseña son obligatorios.");
+           // Console.WriteLine("Error: El nombre, DNI y contraseña son obligatorios.");
             return false;
         }
 
         if (!EsDniValido(usuario.Dni))
         {
-            Console.WriteLine("Error: El DNI no es válido.");
+            //Console.WriteLine("Error: El DNI no es válido.");
             return false;
         }
 
-        return persistencia.AltaUsuario(usuario);
+        return Persistencia.AltaUsuario(usuario);
     }
 
     public bool BajaUsuario(Usuario usuario)
     {
-        return persistencia.BajaUsuario(usuario);
+        return Persistencia.BajaUsuario(usuario);
     }
 
     public Usuario ConsultarUusuario(String Dni)
@@ -49,17 +47,44 @@ public class GestorUsuarios
 
     public List<Usuario> GetListaUsuarios()
     {
-        return persistencia.GetListaUsuarios();
+        return Persistencia.GetListaUsuarios();
     }
-    
+
     public List<Prestamo> GetPrestamosRetrasados(Usuario usuario)
     {
-        return persistencia.GetPrestamosRetrasados(usuario);
+        var todos = Persistencia.GetPrestamos(usuario);
+
+        List<Prestamo> retrasados = new List<Prestamo>();
+
+        foreach (var p in todos)
+        {
+            if (!p.EstaFinalizado())
+            {
+                bool libroCaducado = p.QuedanLibros() && DateTime.Today > p.FechaFin[0];
+                bool audioCaducado = p.QuedanAudios() && DateTime.Today > p.FechaFin[1];
+
+                if (libroCaducado || audioCaducado)
+                {
+                    retrasados.Add(p);
+                }
+            }
+        }
+        return retrasados;
     }
 
     public List<Ejemplar> GetEjemplaresPrestados(Usuario usuario)
     {
-        return persistencia.GetEjemplaresPrestados(usuario);
+        var todos = Persistencia.GetPrestamos(usuario);
+        List<Ejemplar> enCasaUsuario = new List<Ejemplar>();
+
+        foreach (var p in todos)
+        {
+            if (!p.EstaFinalizado())
+            {
+                enCasaUsuario.AddRange(p.EjemplaresPrestados);
+            }
+        }
+        return enCasaUsuario;
     }
 
     public bool EsDniValido(string dniCompleto)

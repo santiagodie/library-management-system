@@ -18,7 +18,7 @@ public class GestorSala : GestorUsuarios
 		bool hayLibros = false;
 		bool hayAudio = false;
 
-        if (usuario ==null || !Persistencia.Existe(usuario) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count==0 || responsable == null)
+        if (usuario ==null || !Persistencia.ExisteUsuario(usuario.Dni) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count==0 || responsable == null)
         {
             return false;
         }
