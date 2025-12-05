@@ -14,12 +14,14 @@ namespace ModeloDominio
 
         public Documento Documento { get; private set; }
 
-//No guardamos ahora el personalAdquisiciones responsable de darlo de alta, se guardá, al dar de alta, al guardarlo en la base de datos
-        public Ejemplar(string Localizacion, bool Estado, Documento Documento) 
+        public PersonalAdquisiciones Responsable { get; set; }
+
+        public Ejemplar(string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable) 
         {
             this.Localizacion = Localizacion;
-            this.Estado = Estado;
+            this.Disponible = Disponible;
             this.Documento = Documento;
+            this.Responsable = Responsable;
         }
     }
 }

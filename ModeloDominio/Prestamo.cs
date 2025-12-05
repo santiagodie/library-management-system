@@ -95,22 +95,22 @@ namespace ModeloDominio
 
         public List<Ejemplar> GetLibrosPendientes()
         {
-            return EjemplaresPrestados.Where(e => e.Documento.Tipo == TipoDocumento.Libro).ToList();
+            return EjemplaresPrestados.Where(e => e.Documento is Libro).ToList();
         }
 
         public List<Ejemplar> GetAudiosPendientes()
         {
-            return EjemplaresPrestados.Where(e => e.Documento.Tipo == TipoDocumento.Libro).ToList();
+            return EjemplaresPrestados.Where(e => e.Documento is Audiolibro).ToList();
         }
 
         public bool QuedanLibros()
         {
-            return EjemplaresPrestados.Any(e => e.Documento.Tipo == TipoDocumento.Libro);
+            return EjemplaresPrestados.Any(e => e.Documento is Libro);
         }
 
         public bool QuedanAudios()
         {
-            return EjemplaresPrestados.Any(e => e.Documento.Tipo == TipoDocumento.Audiolibro);
+            return EjemplaresPrestados.Any(e => e.Documento is Audiolibro);
         }
     }
 }

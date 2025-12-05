@@ -12,18 +12,26 @@ namespace ModeloDominio
 
         public string Autor { get; private set; }
 
+        public string Editorial { get; private set; }
+
+        public int AñoEdicion {  get; private set; }
+
         public string ISBN { get; private set; }
 
-        public string Estado { get; set; }
-
-        public TipoDocumento Tipo {  get; private set; }
-
-        public Documento(string Titulo, string ISBN, string Autor) 
+        public Documento(string Titulo, string Autor, string ISBN, string Editorial, int AñoEdicion) 
         {
             this.Titulo = Titulo;
             this.Autor = Autor;
             this.ISBN = ISBN;
-            Estado = "disponible";
+            this.Editorial = Editorial;
+            this.AñoEdicion = AñoEdicion;
+        }
+
+        public Documento(string titulo, string iSBN, string autor)
+        {
+            Titulo = titulo;
+            ISBN = iSBN;
+            Autor = autor;
         }
     }
 }

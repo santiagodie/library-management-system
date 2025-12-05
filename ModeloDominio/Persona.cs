@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDominio
 {
-    public class Persona : Entidad
+    public class Persona 
     {
 
         public string Id { get; private set; }

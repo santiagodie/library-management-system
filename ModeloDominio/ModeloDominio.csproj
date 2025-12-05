@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audiolibro.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Documento.cs" />
     <Compile Include="Ejemplar.cs" />
     <Compile Include="EstadoUsuario.cs" />
+    <Compile Include="FormatoAudio.cs" />
+    <Compile Include="Libro.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Personal.cs" />
+    <Compile Include="PersonalAdquisiciones.cs" />
     <Compile Include="PersonalSala.cs" />
     <Compile Include="Prestamo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

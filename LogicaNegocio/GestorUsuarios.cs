@@ -77,4 +77,11 @@ public class GestorUsuarios
         // Ignoramos mayúsculas/minúsculas para la comparación
         return char.ToUpper(dniCompleto[8]) == LetrasDNI[numeroDNI % 23];
     }
+
+    public DateTime GetFechaDisponible(Ejemplar ejemplar) //lo necesito para que el personal de adquisiciones pueda saber fechas de disponibilidad de documentos
+    {
+        if(ejemplar.Documento is Libro) return Persistencia.GetPrestamoActivo(ejemplar).FechaFin[0];
+        else if (ejemplar.Documento is Audiolibro) return Persistencia.GetPrestamoActivo(ejemplar).FechaFin[1];
+        return DateTime.MinValue;
+    }
 }

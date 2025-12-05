@@ -12,29 +12,40 @@ public class GestorSala : GestorUsuarios
 
 	public bool AltaPrestamo(Usuario usuario, List<Ejemplar> ejemplares, PersonalSala responsable)
 	{
+		
 		DateTime[] fechas = new DateTime[2];
 
 		bool hayLibros = false;
 		bool hayAudio = false;
 
-		foreach (var ej in ejemplares)
+        if (usuario ==null || !Persistencia.Existe(usuario) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count==0 || responsable == null)
+        {
+            return false;
+        }
+
+        foreach (var ej in ejemplares)
 		{
-			if(ej.Documento.Tipo == TipoDocumento.Libro) hayLibros=true;
-			else hayAudio=true;
-			ej.Disponible = false;
+            if (!ej.Disponible)
+            {
+                return false;
+            }
+            if (ej.Documento is Libro) hayLibros=true;
+			else if (ej.Documento is Audiolibro)hayAudio=true;
 		}
 
-		if (hayLibros)
-		{
-			fechas[0]= DateTime.Today.AddDays(15);
-		}
-		if (hayAudio) 
-		{
-			fechas[1] = DateTime.Today.AddDays(10);
-		}
+		foreach(var ej in ejemplares) ej.Disponible = false;
+
+            if (hayLibros) fechas[0]= DateTime.Today.AddDays(15);
+		if (hayAudio) fechas[1] = DateTime.Today.AddDays(10);
 
 		Prestamo nuevoPrestamo = new Prestamo(fechas, usuario, ejemplares, responsable);
-		return Persistencia.AltaPrestamo(nuevoPrestamo);
+		bool guardado = Persistencia.AltaPrestamo(nuevoPrestamo);
+		if (guardado)
+		{
+			Persistencia.ActualizarDisponibilidad(ejemplares);
+			return true;
+		}
+		return false;
 	}
 
 	public Usuario ConsultarUsuario(Prestamo prestamo) 
@@ -52,12 +63,12 @@ public class GestorSala : GestorUsuarios
 		return prestamo.EjemplaresPrestados;
 	}
 
-	public Prestamo GetPrestamoActivo(Ejemplar ejemplar)
-	{
-		return Persistencia.GetPrestamoActivo(ejemplar);
-	}
+    public Prestamo GetPrestamoActivo(Ejemplar ejemplar) //lo necesito también para que el personal de adquisiciones pueda saber fechas de disponibilidad de documentos
+    {
+        return Persistencia.GetPrestamoActivo(ejemplar);
+    }
 
-	//Post: devuelve la lista de préstamos hechos por el usuario en ese día 
+    //Post: devuelve la lista de préstamos hechos por el usuario en ese día 
     public List<Prestamo> GetPrestamos(Usuario usuario, DateTime fecha)
     {
         return Persistencia.GetPrestamos(usuario, fecha);
@@ -131,12 +142,4 @@ public class GestorSala : GestorUsuarios
 		}
 		return lista;
 	}
-
-	private DateTime GenerarFechaFin(Ejemplar ejemplar)
-	{
-		if(ejemplar.Documento.Tipo == TipoDocumento.Libro) return DateTime.Now.AddDays(15);
-		else return DateTime.Now.AddDays(10); //si es audiolibro
-    }
-
-
 }
