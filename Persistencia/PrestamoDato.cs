@@ -8,47 +8,108 @@ using System.Threading.Tasks;
 
 namespace Persistencia
 {
-    public class ClavePrestamo
+    internal class ClavePrestamo
     {
-        public int idUsuario { get;private set };
+        public string DniUsuario { get; private set; }
         public DateTime FechaInicio { get; private set; }
-        public ClavePrestamo(int id,DateTime fechaInicio)
+
+        public ClavePrestamo(string dniUsuario, DateTime fechaInicio)
         {
-            this.idUsuario = id;
+            this.DniUsuario = dniUsuario;
             this.FechaInicio = fechaInicio;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ClavePrestamo other)
+                return DniUsuario == other.DniUsuario &&
+                       FechaInicio.Date == other.FechaInicio.Date;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return (DniUsuario + FechaInicio.Date.ToString()).GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"{DniUsuario}_{FechaInicio:yyyyMMdd}";
+        }
     }
-    public class PrestamoDato:Entidad
+
+    internal class PrestamoDato : Entidad
     {
-        private int idUsuario;
-        private DateTime FechaInicio;
-        private List<int> EjemplaresPrestados;
-        private List<int> EjemplaresDevueltos;
-        private DateTime[] FechaFin;
-        private int idResponsable;
-        public PrestamoDato(int id,DateTime fechainicio,List<int> ejemplares,int responsable)
+        private string dniUsuario;
+        private DateTime fechaInicio;
+        private List<string> codigosEjemplaresPrestados;
+        private List<string> codigosEjemplaresDevueltos;
+        private Dictionary<string, DateTime> fechasDevolucion;  // código -> fecha devolución
+        private Dictionary<string, DateTime> fechasPrevistaDevolucion;  // código -> fecha prevista
+        private string idResponsable;  // PersonalSala que realizó el préstamo
+
+        public PrestamoDato(string dniUsuario, DateTime fechaInicio,
+                           List<string> codigosEjemplares,
+                           Dictionary<string, DateTime> fechasPrevistas,
+                           string idResponsable)
         {
-            idUsuario = id;
-            FechaInicio= fechainicio;
-            EjemplaresPrestados = ejemplares;
-            idResponsable = responsable;
+            this.dniUsuario = dniUsuario;
+            this.fechaInicio = fechaInicio;
+            this.codigosEjemplaresPrestados = new List<string>(codigosEjemplares);
+            this.codigosEjemplaresDevueltos = new List<string>();
+            this.fechasDevolucion = new Dictionary<string, DateTime>();
+            this.fechasPrevistaDevolucion = fechasPrevistas;
+            this.idResponsable = idResponsable;
         }
-        public override object ObtenerClave()
+
+        public string DniUsuario { get { return dniUsuario; } }
+        public DateTime FechaInicio { get { return fechaInicio; } }
+        public List<string> CodigosEjemplaresPrestados { get { return codigosEjemplaresPrestados; } }
+        public List<string> CodigosEjemplaresDevueltos { get { return codigosEjemplaresDevueltos; } }
+        public Dictionary<string, DateTime> FechasDevolucion { get { return fechasDevolucion; } }
+        public Dictionary<string, DateTime> FechasPrevistaDevolucion { get { return fechasPrevistaDevolucion; } }
+        public string IdResponsable { get { return idResponsable; } }
+
+        public bool EstaFinalizado()
         {
-            return new ClavePrestamo(idUsuario,FechaInicio);
+            return codigosEjemplaresPrestados.Count == 0;
         }
-        public override bool ModificarDato(string nombre, Object dato)
+
+        public bool EstaVencido()
         {
-            if (nombre != "idUsuario" && nombre != "FechaInicio" && nombre != "idResponsable")
+            foreach (var codigo in codigosEjemplaresPrestados)
             {
-                this.GetType().GetProperty(nombre).SetValue(this, dato);
-                return true;
+                if (fechasPrevistaDevolucion.ContainsKey(codigo))
+                {
+                    if (DateTime.Now.Date > fechasPrevistaDevolucion[codigo].Date)
+                        return true;
+                }
             }
             return false;
         }
-        public override Object ObtenerDato(string nombre)
+
+        public override object ObtenerClave()
         {
-            return this.GetType().GetProperty(nombre).GetValue(this);
+            return new ClavePrestamo(dniUsuario, fechaInicio);
+        }
+
+        public override bool ModificarDato(string nombre, object dato)
+        {
+            return false;
+        }
+
+        public override object ObtenerDato(string nombre)
+        {
+            switch (nombre)
+            {
+                case "DniUsuario": return dniUsuario;
+                case "FechaInicio": return fechaInicio;
+                case "IdResponsable": return idResponsable;
+                default: return null;
+            }
         }
     }
 }
+
+
+
