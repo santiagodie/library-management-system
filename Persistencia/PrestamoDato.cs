@@ -22,8 +22,7 @@ namespace Persistencia
         public override bool Equals(object obj)
         {
             if (obj is ClavePrestamo other)
-                return DniUsuario == other.DniUsuario &&
-                       FechaInicio.Date == other.FechaInicio.Date;
+                return DniUsuario == other.DniUsuario && FechaInicio.Date == other.FechaInicio.Date;
             return false;
         }
 
@@ -48,10 +47,7 @@ namespace Persistencia
         private Dictionary<string, DateTime> fechasPrevistaDevolucion;  // código -> fecha prevista
         private string idResponsable;  // PersonalSala que realizó el préstamo
 
-        public PrestamoDato(string dniUsuario, DateTime fechaInicio,
-                           List<string> codigosEjemplares,
-                           Dictionary<string, DateTime> fechasPrevistas,
-                           string idResponsable)
+        public PrestamoDato(string dniUsuario, DateTime fechaInicio, List<string> codigosEjemplares, Dictionary<string, DateTime> fechasPrevistas, string idResponsable)
         {
             this.dniUsuario = dniUsuario;
             this.fechaInicio = fechaInicio;
