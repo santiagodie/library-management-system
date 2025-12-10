@@ -8,50 +8,75 @@ using System.Threading.Tasks;
 
 namespace BaseDatos
 {
-    public class DocumentoDato:Entidad
+    public class DocumentoDato : Entidad
     {
-        private string ISBN;
-        private string Título;
-        private string Autor;
-        private string Editorial;
-        private string Año;
-        private TipoDocumento Tipo;
-        private string Formato;
-        private int Duración;
-        public DocumentoDato(string iSBN, string título, string autor, string editorial, string año, string formato, int duración)
+        //Atributos de todos los documentos
+
+        private string isbn;
+        private string titulo;
+        private string autor;
+        private string editorial;
+        private int añoEdicion;
+        private TipoDocumento tipo;
+
+        //Atributos adicionales de audiolibros, los pongo nullable porque no todos los documentos los usan
+
+        private FormatoAudio? formato;
+        private int? duracionSegundos;
+
+
+        //Constructor de libros
+        public DocumentoDato(string isbn, string titulo, string autor, string editorial, int año)
         {
-            ISBN = iSBN;
-            Título = título;
-            Autor = autor;
-            Editorial = editorial;
-            Año = año;
-            Tipo = TipoDocumento.Audiolibro;
-            Formato = formato;
-            Duración = duración;   
+            this.isbn = isbn;
+            this.titulo = titulo;
+            this.autor = autor;
+            this.editorial = editorial;
+            this.añoEdicion = año;
+            this.tipo = TipoDocumento.Libro;
         }
-        public DocumentoDato(string iSBN, string título, string autor, string editorial, string año)
+        //Constructor de audiolibros
+        public DocumentoDato(string isbn, string titulo, string autor, string editorial, int añoEdicion, FormatoAudio formato, int duracionSegundos)
         {
-            ISBN = iSBN;
-            Título = título;
-            Autor = autor;
-            Editorial = editorial;
-            Año = año;
-            Tipo = TipoDocumento.Libro;
+            this.isbn = isbn;
+            this.titulo = titulo;
+            this.autor = autor;
+            this.editorial = editorial;
+            this.añoEdicion = añoEdicion;
+            this.tipo = TipoDocumento.Audiolibro;
+            this.formato = formato;
+            this.duracionSegundos = duracionSegundos;
         }
+        public string ISBN { get { return isbn; } }
+        public string Titulo { get { return titulo; } }
+        public string Autor { get { return autor; } }
+        public string Editorial { get { return editorial; } }
+        public int AñoEdicion { get { return añoEdicion; } }
+        public TipoDocumento Tipo { get { return tipo; } }
+        public FormatoAudio? Formato { get { return formato; } }
+        public int? DuracionSegundos { get { return duracionSegundos; } }
         public override object ObtenerClave()
         {
-            return ISBN;
+            return isbn;
         }
-        public override bool ModificarDato(string nombre, Object dato)
+        public override bool ModificarDato(string nombre, object dato)
+        {
+            return false;
+        }
+        public override object ObtenerDato(string nombre)
         {
             switch (nombre)
             {
-                default: return false;
+                case "ISBN": return isbn;
+                case "Titulo": return titulo;
+                case "Autor": return autor;
+                case "Editorial": return editorial;
+                case "AñoEdicion": return añoEdicion;
+                case "Tipo": return tipo;
+                case "Formato": return formato;
+                case "DuracionSegundos": return duracionSegundos;
+                default: return null;
             }
-        }
-        public override Object ObtenerDato(string nombre)
-        {
-            return this.GetType().GetProperty(nombre).GetValue(this);
         }
     }
 }

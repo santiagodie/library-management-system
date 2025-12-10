@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloDominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,22 +9,45 @@ namespace BaseDatos
 {
     public class UsuarioDato:Entidad
     {
-        private int id;
-        public UsuarioDato(string id)
+        private string dni;
+        private string nombre;
+        private EstadoUsuario estado;
+        public UsuarioDato(string dni, string nombre, EstadoUsuario estado)
         {
-            this.id = int.Parse(id);
+            this.dni = dni;
+            this.nombre = nombre;
+            this.estado = estado;
         }
-        public override string ObtenerClave()
+        public string Dni { get { return dni; } }
+        public string Nombre { get { return nombre; } }
+        public EstadoUsuario Estado
         {
-            return id.ToString();
+            get { return estado; }
+            set { estado = value; }
         }
-        public override bool ModificarDato(string nombre, Object dato)
+        public override object ObtenerClave()
         {
+            return dni; // DNI es la clave primaria
+        }
+
+        public override bool ModificarDato(string nombre, object dato)
+        {
+            if (nombre == "Estado")
+            {
+                estado = (EstadoUsuario)dato;
+                return true;
+            }
             return false;
         }
-        public override Object ObtenerDato(string nombre)
+        public override object ObtenerDato(string nombre)
         {
-            return this.GetType().GetProperty(nombre).GetValue(this);
+            switch (nombre)
+            {
+                case "Dni": return dni;
+                case "Nombre": return this.nombre;
+                case "Estado": return estado;
+                default: return null;
+            }
         }
     }
 }

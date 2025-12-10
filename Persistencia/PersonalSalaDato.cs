@@ -6,24 +6,47 @@ using System.Threading.Tasks;
 
 namespace BaseDatos
 {
-    public class PersonalSalaDato:Entidad
+    internal class PersonalSalaDato : Entidad
     {
-        private int id;
-        public PersonalSalaDato(int id)
+        private string id;
+        private string nombre;
+        private string dni;
+        private string usuario;
+        private string contraseña;
+        public PersonalSalaDato(string id, string nombre, string dni,
+        string usuario, string contraseña)
         {
             this.id = id;
+            this.nombre = nombre;
+            this.dni = dni;
+            this.usuario = usuario;
+            this.contraseña = contraseña;
         }
+        public string Id { get { return id; } }
+        public string Nombre { get { return nombre; } }
+        public string Dni { get { return dni; } }
+        public string Usuario { get { return usuario; } }
+        public string Contraseña { get { return contraseña; } }
         public override object ObtenerClave()
         {
             return id;
         }
-        public override bool ModificarDato(string nombre, Object dato)
+        public override bool ModificarDato(string nombre, object dato)
         {
             return false;
         }
-        public override Object ObtenerDato(string nombre)
+        public override object ObtenerDato(string nombre)
         {
-            return this.GetType().GetProperty(nombre).GetValue(this);
+            switch (nombre)
+            {
+                case "Id": return id;
+                case "Nombre": return this.nombre;
+                case "Dni": return dni;
+                case "Usuario": return usuario;
+                case "Contraseña": return contraseña;
+                default: return null;
+            }
         }
     }
 }
+

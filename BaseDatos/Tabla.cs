@@ -40,7 +40,7 @@ public class Tabla : KeyedList<Entidad>
 	{
 		return this.Dictionary.Remove(clave);
 	}
-	public bool ModificarFila(object clave, string columna, bject dato)
+	public bool ModificarFila(object clave, string columna, Object dato)
 	{
 		if (this.Dictionary.TryGetValue(clave, out Entidad entidad)){
 			return entidad.ModificarDato(columna, dato);

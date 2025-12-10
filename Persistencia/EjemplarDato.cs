@@ -8,37 +8,64 @@ using System.Threading.Tasks;
 
 namespace Persistencia
 {
-    public class EjemplarDato: Entidad
+    internal class EjemplarDato : Entidad
     {
-        private static int NextID = 0;
-        private int id;
-        private string ISBN;
-        private string Localización;
-        private bool Estado;
-        public EjemplarDato(string iSBN, string localización, bool estado)
+        private string codigo;
+        private string isbnDocumento;
+        private bool prestado;
+        private bool activo; // Para bajas
+        private string idResponsable; // ID del PersonalAdquisiciones
+        public EjemplarDato(string codigo, string isbnDocumento, bool prestado,
+        string idResponsable, bool activo = true)
         {
-            this.id = NextID;
-            NextID++;
-            ISBN = iSBN;
-            Localización = localización;
-            Estado = estado;
+            this.codigo = codigo;
+            this.isbnDocumento = isbnDocumento;
+            this.prestado = prestado;
+            this.idResponsable = idResponsable;
+            this.activo = activo;
         }
+        public string Codigo { get { return codigo; } }
+        public string IsbnDocumento { get { return isbnDocumento; } }
+        public bool Prestado
+        {
+            get { return prestado; }
+            set { prestado = value; }
+        }
+        public bool Activo
+        {
+            get { return activo; }
+            set { activo = value; } // Para bajas lógicas
+        }
+        public string IdResponsable { get { return idResponsable; } }
         public override object ObtenerClave()
         {
-            return id;
+            return codigo;
         }
-        public override bool ModificarDato(string nombre, Object dato)
+        public override bool ModificarDato(string nombre, object dato)
         {
-            if(nombre!="id" && nombre != "ISBN")
+            switch (nombre)
             {
-                this.GetType().GetProperty(nombre).SetValue(this,dato);
-                return true;
+                case "Prestado":
+                    prestado = (bool)dato;
+                    return true;
+                case "Activo":
+                    activo = (bool)dato;
+                    return true;
+                default:
+                    return false;
             }
-            return false;
         }
-        public override Object ObtenerDato(string nombre)
+        public override object ObtenerDato(string nombre)
         {
-            return this.GetType().GetProperty(nombre).GetValue(this);
+            switch (nombre)
+            {
+                case "Codigo": return codigo;
+                case "IsbnDocumento": return isbnDocumento;
+                case "Prestado": return prestado;
+                case "Activo": return activo;
+                case "IdResponsable": return idResponsable;
+                default: return null;
+            }
         }
     }
 }
