@@ -10,7 +10,7 @@ namespace Persistencia
 {
     internal class Transformer
     {
-        //USUARIO 
+        //----------------------------------USUARIO 
 
         public static UsuarioDato ToUsuarioDato(Usuario u)
         {
@@ -24,7 +24,7 @@ namespace Persistencia
             return u;
         }
 
-        //DOCUMENTO
+        //--------------------------------------DOCUMENTO
 
         public static DocumentoDato ToDocumentoDato(Documento d)
         {
@@ -34,8 +34,7 @@ namespace Persistencia
             }
             else // Libro
             {
-                return new DocumentoDato(d.ISBN, d.Titulo, d.Autor,
-                                        d.Editorial, d.AñoEdicion);
+                return new DocumentoDato(d.ISBN, d.Titulo, d.Autor, d.Editorial, d.AñoEdicion);
             }
         }
 
@@ -43,27 +42,25 @@ namespace Persistencia
         {
             if (dd.Tipo == TipoDocumento.Audiolibro)
             {
-                Audiolibro audio = new Audiolibro(dd.Titulo, dd.Autor, dd.ISBN,
-                                                  dd.Editorial, dd.AñoEdicion);
+                Audiolibro audio = new Audiolibro(dd.Titulo, dd.Autor, dd.ISBN, dd.Editorial, dd.AñoEdicion);
                 audio.Formato = dd.Formato.Value;
                 audio.DuracionSegundos = dd.DuracionSegundos.Value;
                 return audio;
             }
             else // Libro
             {
-                return new Libro(dd.Titulo, dd.Autor, dd.ISBN,
-                                dd.Editorial, dd.AñoEdicion);
+                return new Libro(dd.Titulo, dd.Autor, dd.ISBN, dd.Editorial, dd.AñoEdicion);
             }
         }
 
-        // EJEMPLAR
+        //-------------------------------EJEMPLAR
 
         public static EjemplarDato ToEjemplarDato(Ejemplar e)
         {
             return new EjemplarDato(
                 e.Codigo,
                 e.Documento.ISBN,
-                e.Disponible,
+                !e.Disponible, 
                 e.Responsable.Id
             );
         }
@@ -71,24 +68,22 @@ namespace Persistencia
         public static Ejemplar ToEjemplar(EjemplarDato ed)
         {
             // Reconstruir documento
-
             DocumentoDato docDato = BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", ed.IsbnDocumento) as DocumentoDato;
             Documento doc = ToDocumento(docDato);
 
-
             // Reconstruir responsable
-
             PersonalAdquisicionesDato respDato = BaseDatos.BaseDatos.ObtenerDatos("PersonalAdquisicionesTabla", ed.IdResponsable) as PersonalAdquisicionesDato;
             PersonalAdquisiciones resp = ToPersonalAdquisiciones(respDato);
 
-            return new Ejemplar(ed.Codigo, ed.Prestado, doc, resp);
+            // Localización como vacio de momento
+            return new Ejemplar(ed.Codigo, "", !ed.Prestado, doc, resp);
         }
 
-        // PRESTAMO 
+        //------------------------PRESTAMO 
 
         public static PrestamoDato ToPrestamoDato(Prestamo p)
         {
-            // Extraer códigos
+            // Extraer códigos de ejemplares prestados
             List<string> codigos = new List<string>();
             Dictionary<string, DateTime> fechasPrevistas = new Dictionary<string, DateTime>();
 
@@ -98,9 +93,9 @@ namespace Persistencia
                 // Calcular fecha prevista según tipo de documento
                 DateTime fechaPrevista = p.FechaInicio;
                 if (ej.Documento is Libro)
-                    fechaPrevista = fechaPrevista.AddDays(15);  // 15 días para libros
+                    fechaPrevista = fechaPrevista.AddDays(15);  
                 else if (ej.Documento is Audiolibro)
-                    fechaPrevista = fechaPrevista.AddDays(10);  // 10 días para audiolibros
+                    fechaPrevista = fechaPrevista.AddDays(10);  
 
                 fechasPrevistas[ej.Codigo] = fechaPrevista;
             }
@@ -117,30 +112,22 @@ namespace Persistencia
         public static Prestamo ToPrestamo(PrestamoDato pd)
         {
             // Reconstruir usuario
-
-            UsuarioDato usuDato = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", pd.DniUsuario)
-                                 as UsuarioDato;
+            UsuarioDato usuDato = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", pd.DniUsuario) as UsuarioDato;
             Usuario usuario = ToUsuario(usuDato);
 
             // Reconstruir ejemplares prestados
-
             List<Ejemplar> ejemplaresPrestados = new List<Ejemplar>();
             foreach (string codigo in pd.CodigosEjemplaresPrestados)
             {
-                EjemplarDato ejDato = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo)
-                                     as EjemplarDato;
+                EjemplarDato ejDato = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
                 ejemplaresPrestados.Add(ToEjemplar(ejDato));
             }
 
             // Reconstruir responsable
-
-            PersonalSalaDato respDato =
-                BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", pd.IdResponsable)
-                as PersonalSalaDato;
+            PersonalSalaDato respDato = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", pd.IdResponsable) as PersonalSalaDato;
             PersonalSala responsable = ToPersonalSala(respDato);
 
-            // Calcular fechas fin 
-
+            // Calcular fechas fin basándose en los ejemplares
             DateTime[] fechasFin = new DateTime[2];
             foreach (var ej in ejemplaresPrestados)
             {
@@ -150,13 +137,13 @@ namespace Persistencia
                     fechasFin[1] = pd.FechaInicio.AddDays(10);
             }
 
+            // Usar el constructor existente
             Prestamo prestamo = new Prestamo(fechasFin, usuario, ejemplaresPrestados, responsable);
 
-            // Restaurar los ejemplares devueltos
+            // Restaurar los ejemplares devueltos manualmente
             foreach (string codigo in pd.CodigosEjemplaresDevueltos)
             {
-                EjemplarDato ejDato = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo)
-                                     as EjemplarDato;
+                EjemplarDato ejDato = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
                 Ejemplar ejemplar = ToEjemplar(ejDato);
                 prestamo.DevolverEjemplar(ejemplar);
             }
@@ -164,7 +151,7 @@ namespace Persistencia
             return prestamo;
         }
 
-        // ==================== PERSONAL ====================
+        //----------------------PERSONAL
 
         public static PersonalSalaDato ToPersonalSalaDato(PersonalSala p)
         {

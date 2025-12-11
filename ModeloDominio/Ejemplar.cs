@@ -27,6 +27,15 @@ namespace ModeloDominio
             this.Responsable = Responsable;
             Codigo = GenerarCodigo();
         }
+        // Constructor para cuando se transforma desde persistencia y ya se tiene el código
+        public Ejemplar(string codigo, string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable)
+        {
+            this.Codigo = codigo;  // Usar el código provisto
+            this.Localizacion = Localizacion;
+            this.Disponible = Disponible;
+            this.Documento = Documento;
+            this.Responsable = Responsable;
+        }
 
         public string GenerarCodigo()
         {
