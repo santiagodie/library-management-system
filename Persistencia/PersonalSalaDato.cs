@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BaseDatos;
 
 namespace Persistencia
 {
@@ -11,30 +12,44 @@ namespace Persistencia
         private string id;
         private string nombre;
         private string dni;
-        private string usuario;
-        private string contraseña;
-        public PersonalSalaDato(string id, string nombre, string dni,
-        string usuario, string contraseña)
+        private string contraseña;  
+        private string nss;        
+
+        public PersonalSalaDato(string id, string nombre, string dni, string contraseña, string nss)
         {
             this.id = id;
             this.nombre = nombre;
             this.dni = dni;
-            this.usuario = usuario;
             this.contraseña = contraseña;
+            this.nss = nss;
         }
+
         public string Id { get { return id; } }
         public string Nombre { get { return nombre; } }
         public string Dni { get { return dni; } }
-        public string Usuario { get { return usuario; } }
         public string Contraseña { get { return contraseña; } }
+        public string Nss { get { return nss; } }
+
         public override object ObtenerClave()
         {
             return id;
         }
+
         public override bool ModificarDato(string nombre, object dato)
         {
-            return false;
+            switch (nombre)
+            {
+                case "Contraseña":
+                    this.contraseña = dato as string;
+                    return true;
+                case "Nombre":
+                    this.nombre = dato as string;
+                    return true;
+                default:
+                    return false;
+            }
         }
+
         public override object ObtenerDato(string nombre)
         {
             switch (nombre)
@@ -42,11 +57,10 @@ namespace Persistencia
                 case "Id": return id;
                 case "Nombre": return this.nombre;
                 case "Dni": return dni;
-                case "Usuario": return usuario;
                 case "Contraseña": return contraseña;
+                case "Nss": return nss;
                 default: return null;
             }
         }
     }
 }
-

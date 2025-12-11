@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ModeloDominio
 {
-    public class Personal:Persona
+    public abstract class Personal:Persona
     {
-        private int NSS;
+        public int NSS { get; private set; }
         public Personal(string id, string nombre, string dni,int NSS): base(id, nombre, dni)
         {
             this.NSS = NSS;
@@ -23,19 +23,19 @@ namespace ModeloDominio
         }
         public Usuario[] getListaUsuarios()
         {
-
+            return null;
         }
         public Usuario ConsultarUsuario(string id)
         {
-           
+            return null;
         }
         public Prestamo[] GetPrestRetrasados(Usuario usuario)
         {
-
+            return null;
         }
         public Ejemplar[] GetEjemplaresPrest(Usuario usuario)
         {
-
+            return null;
         }
     }
 }

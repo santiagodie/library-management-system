@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDominio
 {
-    public class Persona 
+    public abstract class Persona : Entidad
     {
 
         public string Id { get; private set; }
@@ -22,9 +22,16 @@ namespace ModeloDominio
             this.Id = id;
             this.Nombre = nombre;
             this.Dni = dni;
+            this.HashContraseña = "";
         }
 
-        public override string ObtenerClave()
+        //Añadi esto para poder setear el hash al recrarlo con el Transformer
+        public void SetHashContraseña(string hash)
+        {
+            this.HashContraseña = hash;
+        }
+
+        public override object ObtenerClave()
         {
             return this.Id;
         }

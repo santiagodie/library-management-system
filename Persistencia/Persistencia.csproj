@@ -41,15 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Persistencia.cs" />
     <Compile Include="DocumentoDato.cs" />
     <Compile Include="EjemplarDato.cs" />
-    <Compile Include="PersonaDato.cs" />
     <Compile Include="PersonalAdquisicionesDato.cs" />
-    <Compile Include="PersonalDato.cs" />
     <Compile Include="PersonalSalaDato.cs" />
     <Compile Include="PrestamoDato.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformer.cs" />
     <Compile Include="UsuarioDato.cs" />
   </ItemGroup>
   <ItemGroup>

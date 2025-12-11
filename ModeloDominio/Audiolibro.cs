@@ -8,7 +8,10 @@ namespace ModeloDominio
 {
     public class Audiolibro : Documento
     {
-        public FormatoAudio Formato;
+        public FormatoAudio Formato { get; set; }
+        public int DuracionSegundos { get; set; }
+
+
         public Audiolibro(string Titulo, string Autor, string ISBN, string Editorial, int AñoEdicion) : base(Titulo, Autor, ISBN, Editorial, AñoEdicion)
         {
         }
