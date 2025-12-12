@@ -7,16 +7,32 @@ namespace Persistencia
 {
     internal class Transformer
     {
+        //----------------------------------PERSONA 
+
+        public static PersonaDato ToPersonaDato(Persona persona)
+        {
+            return new PersonaDato(persona.Id, persona.Nombre, persona.Dni, persona.HashContraseña);
+        }
+
+        public static Persona ToPersona(PersonaDato personaData)
+        {
+            // Persona es abstracta no se puede instanciar directamente
+            return null;
+        }
         //----------------------------------USUARIO 
 
         public static UsuarioDato ToUsuarioDato(Usuario user)
         {
-            return new UsuarioDato(user.Dni, user.Nombre, user.Estado);
+            return new UsuarioDato(user.Id, user.Estado);
         }
 
         public static Usuario ToUsuario(UsuarioDato userData)
         {
-            Usuario user = new Usuario(userData.Dni, userData.Nombre, userData.Dni);
+            PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", userData.PersonaId) as PersonaDato;
+            if (personaData == null) return null;
+
+            Usuario user = new Usuario(personaData.Id, personaData.Nombre, personaData.Dni);
+            user.SetHashContraseña(personaData.HashContraseña);
             user.SetEstado(userData.Estado);
             return user;
         }
@@ -135,29 +151,34 @@ namespace Persistencia
 
         public static PersonalSalaDato ToPersonalSalaDato(PersonalSala personalSala)
         {
-            return new PersonalSalaDato(personalSala.Id, personalSala.Nombre, personalSala.Dni, personalSala.HashContraseña, personalSala.NSS.ToString());
+            return new PersonalSalaDato(personalSala.Id, personalSala.NSS.ToString());
         }
 
         public static PersonalSala ToPersonalSala(PersonalSalaDato personalSalaData)
         {
+            PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", personalSalaData.PersonaId) as PersonaDato;
+            if (personaData == null) return null;
+
             int nss = 0;
             int.TryParse(personalSalaData.Nss, out nss);
-            PersonalSala personalSala = new PersonalSala(personalSalaData.Id, personalSalaData.Nombre, personalSalaData.Dni, nss);
-            personalSala.SetHashContraseña(personalSalaData.Contraseña);
+            PersonalSala personalSala = new PersonalSala(personaData.Id, personaData.Nombre, personaData.Dni, nss);
+            personalSala.SetHashContraseña(personaData.HashContraseña);
             return personalSala;
         }
 
         public static PersonalAdquisicionesDato ToPersonalAdquisicionesDato(PersonalAdquisiciones personalAdquisiciones)
         {
-            return new PersonalAdquisicionesDato(personalAdquisiciones.Id, personalAdquisiciones.Nombre, personalAdquisiciones.Dni, personalAdquisiciones.HashContraseña, personalAdquisiciones.NSS.ToString());
+            return new PersonalAdquisicionesDato(personalAdquisiciones.Id, personalAdquisiciones.NSS.ToString());
         }
 
         public static PersonalAdquisiciones ToPersonalAdquisiciones(PersonalAdquisicionesDato personalAdquisicionesData)
         {
+            PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", personalAdquisicionesData.PersonaId) as PersonaDato;
+            if (personaData == null) return null;
             int nss = 0;
             int.TryParse(personalAdquisicionesData.Nss, out nss);
-            PersonalAdquisiciones pa = new PersonalAdquisiciones(personalAdquisicionesData.Id, personalAdquisicionesData.Nombre, personalAdquisicionesData.Dni, nss);
-            pa.SetHashContraseña(personalAdquisicionesData.Contraseña);
+            PersonalAdquisiciones pa = new PersonalAdquisiciones(personaData.Id, personaData.Nombre, personaData.Dni, nss);
+            pa.SetHashContraseña(personaData.HashContraseña);
             return pa;
         }
     }

@@ -3,27 +3,27 @@ using BaseDatos;
 
 namespace Persistencia
 {
-    public class UsuarioDato:Entidad
+    internal class UsuarioDato : Entidad
     {
-        private string dni;
-        private string nombre;
+        private string personaId;
         private EstadoUsuario estado;
-        public UsuarioDato(string dni, string nombre, EstadoUsuario estado)
+
+        public UsuarioDato(string personaId, EstadoUsuario estado)
         {
-            this.dni = dni;
-            this.nombre = nombre;
+            this.personaId = personaId;
             this.estado = estado;
         }
-        public string Dni { get { return dni; } }
-        public string Nombre { get { return nombre; } }
+
+        public string PersonaId { get { return personaId; } }
         public EstadoUsuario Estado
         {
             get { return estado; }
             set { estado = value; }
         }
+
         public override object ObtenerClave()
         {
-            return dni; // DNI es la clave primaria
+            return personaId;
         }
 
         public override bool ModificarDato(string nombre, object dato)
@@ -35,12 +35,12 @@ namespace Persistencia
             }
             return false;
         }
+
         public override object ObtenerDato(string nombre)
         {
             switch (nombre)
             {
-                case "Dni": return dni;
-                case "Nombre": return this.nombre;
+                case "PersonaId": return personaId;
                 case "Estado": return estado;
                 default: return null;
             }

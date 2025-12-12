@@ -4,53 +4,38 @@ namespace Persistencia
 {
     internal class PersonalSalaDato : Entidad
     {
-        private string id;
-        private string nombre;
-        private string dni;
-        private string contraseña;  
-        private string nss;        
-        public PersonalSalaDato(string id, string nombre, string dni, string contraseña, string nss)
+        private string personaId;
+        private string nss;
+
+        public PersonalSalaDato(string personaId, string nss)
         {
-            this.id = id;
-            this.nombre = nombre;
-            this.dni = dni;
-            this.contraseña = contraseña;
+            this.personaId = personaId;
             this.nss = nss;
         }
 
-        public string Id { get { return id; } }
-        public string Nombre { get { return nombre; } }
-        public string Dni { get { return dni; } }
-        public string Contraseña { get { return contraseña; } }
+        public string PersonaId { get { return personaId; } }
         public string Nss { get { return nss; } }
 
         public override object ObtenerClave()
         {
-            return id;
+            return personaId;  // PersonaID es la clave
         }
 
         public override bool ModificarDato(string nombre, object dato)
         {
-            switch (nombre)
+            if (nombre == "Nss")
             {
-                case "Contraseña":
-                    this.contraseña = dato as string;
-                    return true;
-                case "Nombre":
-                    this.nombre = dato as string;
-                    return true;
-                default:
-                    return false;
+                nss = (string)dato;
+                return true;
             }
+            return false;
         }
+
         public override object ObtenerDato(string nombre)
         {
             switch (nombre)
             {
-                case "Id": return id;
-                case "Nombre": return this.nombre;
-                case "Dni": return dni;
-                case "Contraseña": return contraseña;
+                case "PersonaId": return personaId;
                 case "Nss": return nss;
                 default: return null;
             }

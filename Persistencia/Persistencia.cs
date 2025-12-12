@@ -17,7 +17,9 @@ namespace Persistencia
 
         public static bool AltaUsuario(Usuario usuario)
         {
-            return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario));
+            PersonaDato personaData = new PersonaDato(usuario.Id, usuario.Nombre, usuario.Dni,usuario.HashContraseña);
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+            return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", new UsuarioDato(usuario.Id, usuario.Estado));
         }
 
         public static bool BajaUsuario(Usuario usuario)

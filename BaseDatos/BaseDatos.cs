@@ -10,6 +10,7 @@ namespace BaseDatos
     {
         //  Pongo publicas las tablas por que GetProperty() solo puede acceder a propiedades públicas, no a campos privados
         // Los seter se mantienen privados
+        public static Tabla PersonaTabla { get; private set; }
         public static Tabla UsuarioTabla { get; private set; }
         public static Tabla PersonalAdquisicionesTabla { get; private set; }
         public static Tabla PersonalSalaTabla { get; private set; }
@@ -19,6 +20,7 @@ namespace BaseDatos
 
         static BaseDatos()
         {
+            PersonaTabla = new Tabla();
             UsuarioTabla = new Tabla();
             PersonalAdquisicionesTabla = new Tabla();
             PersonalSalaTabla = new Tabla();
