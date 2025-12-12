@@ -1,10 +1,5 @@
-﻿using Microsoft.SqlServer.Server;
-using ModeloDominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BaseDatos;
+
 
 namespace Persistencia
 {

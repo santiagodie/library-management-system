@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ModeloDominio;
-using BaseDatos;
+
 
 namespace Persistencia
 {
@@ -12,139 +9,122 @@ namespace Persistencia
     {
         //----------------------------------USUARIO 
 
-        public static UsuarioDato ToUsuarioDato(Usuario u)
+        public static UsuarioDato ToUsuarioDato(Usuario user)
         {
-            return new UsuarioDato(u.Dni, u.Nombre, u.Estado);
+            return new UsuarioDato(user.Dni, user.Nombre, user.Estado);
         }
 
-        public static Usuario ToUsuario(UsuarioDato ud)
+        public static Usuario ToUsuario(UsuarioDato userData)
         {
-            Usuario u = new Usuario(ud.Dni, ud.Nombre, ud.Dni);
-            u.SetEstado(ud.Estado);
-            return u;
+            Usuario user = new Usuario(userData.Dni, userData.Nombre, userData.Dni);
+            user.SetEstado(userData.Estado);
+            return user;
         }
 
         //--------------------------------------DOCUMENTO
 
-        public static DocumentoDato ToDocumentoDato(Documento d)
+        public static DocumentoDato ToDocumentoDato(Documento document)
         {
-            if (d is Audiolibro audio)
-            {
-                return new DocumentoDato(d.ISBN, d.Titulo, d.Autor, d.Editorial, d.AñoEdicion, audio.Formato, audio.DuracionSegundos);
-            }
-            else // Libro
-            {
-                return new DocumentoDato(d.ISBN, d.Titulo, d.Autor, d.Editorial, d.AñoEdicion);
-            }
+            if (document is Audiolibro audio) 
+                return new DocumentoDato(document.ISBN, document.Titulo, document.Autor, document.Editorial, document.AñoEdicion, audio.Formato, audio.DuracionSegundos);
+            
+            else 
+                return new DocumentoDato(document.ISBN, document.Titulo, document.Autor, document.Editorial, document.AñoEdicion);
+            
         }
 
-        public static Documento ToDocumento(DocumentoDato dd)
+        public static Documento ToDocumento(DocumentoDato documentData)
         {
-            if (dd.Tipo == TipoDocumento.Audiolibro)
+            if (documentData.Tipo == TipoDocumento.Audiolibro)
             {
-                Audiolibro audio = new Audiolibro(dd.Titulo, dd.Autor, dd.ISBN, dd.Editorial, dd.AñoEdicion);
-                audio.Formato = dd.Formato.Value;
-                audio.DuracionSegundos = dd.DuracionSegundos.Value;
+                Audiolibro audio = new Audiolibro(documentData.Titulo, documentData.Autor, documentData.ISBN, documentData.Editorial, documentData.AñoEdicion);
+                audio.Formato = documentData.Formato.Value;
+                audio.DuracionSegundos = documentData.DuracionSegundos.Value;
                 return audio;
             }
-            else // Libro
-            {
-                return new Libro(dd.Titulo, dd.Autor, dd.ISBN, dd.Editorial, dd.AñoEdicion);
-            }
+            else return new Libro(documentData.Titulo, documentData.Autor, documentData.ISBN, documentData.Editorial, documentData.AñoEdicion);
+            
         }
 
         //-------------------------------EJEMPLAR
 
-        public static EjemplarDato ToEjemplarDato(Ejemplar e)
+        public static EjemplarDato ToEjemplarDato(Ejemplar ejemplar)
         {
-            return new EjemplarDato(
-                e.Codigo,
-                e.Documento.ISBN,
-                !e.Disponible, 
-                e.Responsable.Id
-            );
+            return new EjemplarDato( ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Id );
         }
 
-        public static Ejemplar ToEjemplar(EjemplarDato ed)
+        public static Ejemplar ToEjemplar(EjemplarDato ejemplarData)
         {
             // Reconstruir documento
-            DocumentoDato docDato = BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", ed.IsbnDocumento) as DocumentoDato;
-            Documento doc = ToDocumento(docDato);
+            DocumentoDato documentData = BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", ejemplarData.IsbnDocumento) as DocumentoDato;
+            if (documentData == null) return null;
+            Documento document = ToDocumento(documentData);
 
             // Reconstruir responsable
-            PersonalAdquisicionesDato respDato = BaseDatos.BaseDatos.ObtenerDatos("PersonalAdquisicionesTabla", ed.IdResponsable) as PersonalAdquisicionesDato;
-            PersonalAdquisiciones resp = ToPersonalAdquisiciones(respDato);
+            PersonalAdquisicionesDato responsableData = BaseDatos.BaseDatos.ObtenerDatos("PersonalAdquisicionesTabla", ejemplarData.IdResponsable) as PersonalAdquisicionesDato;
+            if (responsableData == null) return null;
+            PersonalAdquisiciones responsable = ToPersonalAdquisiciones(responsableData);
 
             // Localización como vacio de momento
-            return new Ejemplar(ed.Codigo, "", !ed.Prestado, doc, resp);
+            return new Ejemplar(ejemplarData.Codigo, "", !ejemplarData.Prestado, document, responsable);
         }
 
         //------------------------PRESTAMO 
 
-        public static PrestamoDato ToPrestamoDato(Prestamo p)
+        public static PrestamoDato ToPrestamoDato(Prestamo prestamo)
         {
-            // Extraer códigos de ejemplares prestados
             List<string> codigos = new List<string>();
             Dictionary<string, DateTime> fechasPrevistas = new Dictionary<string, DateTime>();
 
-            foreach (Ejemplar ej in p.EjemplaresPrestados)
+            foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
             {
-                codigos.Add(ej.Codigo);
-                // Calcular fecha prevista según tipo de documento
-                DateTime fechaPrevista = p.FechaInicio;
-                if (ej.Documento is Libro)
-                    fechaPrevista = fechaPrevista.AddDays(15);  
-                else if (ej.Documento is Audiolibro)
-                    fechaPrevista = fechaPrevista.AddDays(10);  
+                codigos.Add(ejemplar.Codigo);
+                DateTime fechaPrevista;
+                if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaInicio.AddDays(15);  
+                else fechaPrevista = prestamo.FechaInicio.AddDays(10);  
 
-                fechasPrevistas[ej.Codigo] = fechaPrevista;
+                fechasPrevistas[ejemplar.Codigo] = fechaPrevista;
             }
-
-            return new PrestamoDato(
-                p.Usuario.Dni,
-                p.FechaInicio,
-                codigos,
-                fechasPrevistas,
-                p.Responsable.Id
-            );
+            return new PrestamoDato(prestamo.Usuario.Dni,prestamo.FechaInicio,codigos,fechasPrevistas,prestamo.Responsable.Id);
         }
 
-        public static Prestamo ToPrestamo(PrestamoDato pd)
+        public static Prestamo ToPrestamo(PrestamoDato prestamoData)
         {
             // Reconstruir usuario
-            UsuarioDato usuDato = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", pd.DniUsuario) as UsuarioDato;
-            Usuario usuario = ToUsuario(usuDato);
+            UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", prestamoData.DniUsuario) as UsuarioDato;
+            if (userData == null) return null;
+            Usuario usuario = ToUsuario(userData);
 
             // Reconstruir ejemplares prestados
             List<Ejemplar> ejemplaresPrestados = new List<Ejemplar>();
-            foreach (string codigo in pd.CodigosEjemplaresPrestados)
+            foreach (string codigo in prestamoData.CodigosEjemplaresPrestados)
             {
-                EjemplarDato ejDato = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
-                ejemplaresPrestados.Add(ToEjemplar(ejDato));
+                EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
+                if (ejemplarData == null) return null;
+                Ejemplar ejemplar = ToEjemplar(ejemplarData);
+                if (ejemplar == null) return null;
+                ejemplaresPrestados.Add(ejemplar);
             }
 
             // Reconstruir responsable
-            PersonalSalaDato respDato = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", pd.IdResponsable) as PersonalSalaDato;
-            PersonalSala responsable = ToPersonalSala(respDato);
+            PersonalSalaDato responsableData = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", prestamoData.IdResponsable) as PersonalSalaDato;
+            if (responsableData == null) return null;
+            PersonalSala responsable = ToPersonalSala(responsableData);
 
-            // Calcular fechas fin basándose en los ejemplares
             DateTime[] fechasFin = new DateTime[2];
-            foreach (var ej in ejemplaresPrestados)
+            foreach (var ejemplar in ejemplaresPrestados)
             {
-                if (ej.Documento is Libro)
-                    fechasFin[0] = pd.FechaInicio.AddDays(15);
-                else if (ej.Documento is Audiolibro)
-                    fechasFin[1] = pd.FechaInicio.AddDays(10);
+                if (ejemplar.Documento is Libro) fechasFin[0] = prestamoData.FechaInicio.AddDays(15);
+                else fechasFin[1] = prestamoData.FechaInicio.AddDays(10);
             }
 
-            // Usar el constructor existente
             Prestamo prestamo = new Prestamo(fechasFin, usuario, ejemplaresPrestados, responsable);
-
-            // Restaurar los ejemplares devueltos manualmente
-            foreach (string codigo in pd.CodigosEjemplaresDevueltos)
+            foreach (string codigo in prestamoData.CodigosEjemplaresDevueltos)
             {
-                EjemplarDato ejDato = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
-                Ejemplar ejemplar = ToEjemplar(ejDato);
+                EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
+                if (ejemplarData == null) continue; 
+                Ejemplar ejemplar = ToEjemplar(ejemplarData);
+                if (ejemplar == null) continue; 
                 prestamo.DevolverEjemplar(ejemplar);
             }
 
@@ -153,31 +133,31 @@ namespace Persistencia
 
         //----------------------PERSONAL
 
-        public static PersonalSalaDato ToPersonalSalaDato(PersonalSala p)
+        public static PersonalSalaDato ToPersonalSalaDato(PersonalSala personalSala)
         {
-            return new PersonalSalaDato(p.Id, p.Nombre, p.Dni, p.HashContraseña, p.NSS.ToString());
+            return new PersonalSalaDato(personalSala.Id, personalSala.Nombre, personalSala.Dni, personalSala.HashContraseña, personalSala.NSS.ToString());
         }
 
-        public static PersonalSala ToPersonalSala(PersonalSalaDato pd)
+        public static PersonalSala ToPersonalSala(PersonalSalaDato personalSalaData)
         {
             int nss = 0;
-            int.TryParse(pd.Nss, out nss);
-            PersonalSala ps = new PersonalSala(pd.Id, pd.Nombre, pd.Dni, nss);
-            ps.SetHashContraseña(pd.Contraseña);
-            return ps;
+            int.TryParse(personalSalaData.Nss, out nss);
+            PersonalSala personalSala = new PersonalSala(personalSalaData.Id, personalSalaData.Nombre, personalSalaData.Dni, nss);
+            personalSala.SetHashContraseña(personalSalaData.Contraseña);
+            return personalSala;
         }
 
-        public static PersonalAdquisicionesDato ToPersonalAdquisicionesDato(PersonalAdquisiciones p)
+        public static PersonalAdquisicionesDato ToPersonalAdquisicionesDato(PersonalAdquisiciones personalAdquisiciones)
         {
-            return new PersonalAdquisicionesDato(p.Id, p.Nombre, p.Dni, p.HashContraseña, p.NSS.ToString());
+            return new PersonalAdquisicionesDato(personalAdquisiciones.Id, personalAdquisiciones.Nombre, personalAdquisiciones.Dni, personalAdquisiciones.HashContraseña, personalAdquisiciones.NSS.ToString());
         }
 
-        public static PersonalAdquisiciones ToPersonalAdquisiciones(PersonalAdquisicionesDato pd)
+        public static PersonalAdquisiciones ToPersonalAdquisiciones(PersonalAdquisicionesDato personalAdquisicionesData)
         {
             int nss = 0;
-            int.TryParse(pd.Nss, out nss);
-            PersonalAdquisiciones pa = new PersonalAdquisiciones(pd.Id, pd.Nombre, pd.Dni, nss);
-            pa.SetHashContraseña(pd.Contraseña);
+            int.TryParse(personalAdquisicionesData.Nss, out nss);
+            PersonalAdquisiciones pa = new PersonalAdquisiciones(personalAdquisicionesData.Id, personalAdquisicionesData.Nombre, personalAdquisicionesData.Dni, nss);
+            pa.SetHashContraseña(personalAdquisicionesData.Contraseña);
             return pa;
         }
     }

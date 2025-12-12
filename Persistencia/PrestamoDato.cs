@@ -1,10 +1,7 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using BaseDatos;
+
 
 namespace Persistencia
 {
@@ -43,8 +40,8 @@ namespace Persistencia
         private DateTime fechaInicio;
         private List<string> codigosEjemplaresPrestados;
         private List<string> codigosEjemplaresDevueltos;
-        private Dictionary<string, DateTime> fechasDevolucion;  // código -> fecha devolución
-        private Dictionary<string, DateTime> fechasPrevistaDevolucion;  // código -> fecha prevista
+        private Dictionary<string, DateTime> fechasDevolucion; 
+        private Dictionary<string, DateTime> fechasPrevistaDevolucion;  
         private string idResponsable;  // PersonalSala que realizó el préstamo
 
         public PrestamoDato(string dniUsuario, DateTime fechaInicio, List<string> codigosEjemplares, Dictionary<string, DateTime> fechasPrevistas, string idResponsable)

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BaseDatos;
+﻿using BaseDatos;
 
 namespace Persistencia
 {
@@ -14,7 +9,6 @@ namespace Persistencia
         private string dni;
         private string contraseña;  
         private string nss;        
-
         public PersonalSalaDato(string id, string nombre, string dni, string contraseña, string nss)
         {
             this.id = id;
@@ -49,7 +43,6 @@ namespace Persistencia
                     return false;
             }
         }
-
         public override object ObtenerDato(string nombre)
         {
             switch (nombre)

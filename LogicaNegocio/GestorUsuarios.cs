@@ -14,7 +14,7 @@ public class GestorUsuarios
 
     public bool AltaUsuario(Usuario usuario)
     {
-        if (Persistencia.ExisteUsuario(usuario.Dni))
+        if (Persistencia.Persistencia.ExisteUsuario(usuario.Dni))
         {
             //Console.WriteLine($"Error: El usuario con ID {usuario.Id} ya existe."); Creo que hay que hacerlo con excepciones para poder cogerlas en la interfaz ( try{} catch(e){} )
             return false;
@@ -32,27 +32,27 @@ public class GestorUsuarios
             return false;
         }
 
-        return Persistencia.AltaUsuario(usuario);
+        return Persistencia.Persistencia.AltaUsuario(usuario);
     }
 
     public bool BajaUsuario(Usuario usuario)
     {
-        return Persistencia.BajaUsuario(usuario);
+        return Persistencia.Persistencia.BajaUsuario(usuario);
     }
 
     public Usuario ConsultarUusuario(String Dni)
     {
-       return Persistencia.GetUsuario(Dni);
+       return Persistencia.Persistencia.GetUsuario(Dni);
     }
 
     public List<Usuario> GetListaUsuarios()
     {
-        return Persistencia.GetListaUsuarios();
+        return Persistencia.Persistencia.GetListaUsuarios();
     }
 
     public List<Prestamo> GetPrestamosRetrasados(Usuario usuario)
     {
-        var todos = Persistencia.GetPrestamos(usuario);
+        var todos = Persistencia.Persistencia.GetPrestamos(usuario);
 
         List<Prestamo> retrasados = new List<Prestamo>();
 
@@ -74,7 +74,7 @@ public class GestorUsuarios
 
     public List<Ejemplar> GetEjemplaresPrestados(Usuario usuario)
     {
-        var todos = Persistencia.GetPrestamos(usuario);
+        var todos = Persistencia.Persistencia.GetPrestamos(usuario);
         List<Ejemplar> enCasaUsuario = new List<Ejemplar>();
 
         foreach (var p in todos)
@@ -105,8 +105,8 @@ public class GestorUsuarios
 
     public DateTime GetFechaDisponible(Ejemplar ejemplar) //lo necesito para que el personal de adquisiciones pueda saber fechas de disponibilidad de documentos
     {
-        if(ejemplar.Documento is Libro) return Persistencia.GetPrestamoActivo(ejemplar).FechaFin[0];
-        else if (ejemplar.Documento is Audiolibro) return Persistencia.GetPrestamoActivo(ejemplar).FechaFin[1];
+        if(ejemplar.Documento is Libro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[0];
+        else if (ejemplar.Documento is Audiolibro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[1];
         return DateTime.MinValue;
     }
 }

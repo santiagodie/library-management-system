@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BaseDatos;
+﻿using BaseDatos;
 
 namespace Persistencia
 {
@@ -49,7 +44,6 @@ namespace Persistencia
                     return false;
             }
         }
-
         public override object ObtenerDato(string nombre)
         {
             switch (nombre)

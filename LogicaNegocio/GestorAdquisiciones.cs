@@ -15,48 +15,48 @@ public class GestorAdquisiciones : GestorUsuarios
 	{
         if (documento == null || string.IsNullOrEmpty(documento.Titulo) || string.IsNullOrEmpty(documento.Editorial) || string.IsNullOrEmpty(documento.Autor) || string.IsNullOrEmpty(documento.ISBN)) return false;
 
-        if (Persistencia.ExisteDocumento(documento.ISBN)) return false;
+        if (Persistencia.Persistencia.ExisteDocumento(documento.ISBN)) return false;
 
         if (documento is Audiolibro audio)
         {
             if (audio.Formato == 0) return false;
         }
 
-        return Persistencia.AltaDocumento(documento);
+        return Persistencia.Persistencia.AltaDocumento(documento);
     }
 
 	public bool AltaEjemplar(string localizacion, bool disponible, Documento documento, PersonalAdquisiciones responsable)
 	{
-		if (documento == null || responsable == null || !Persistencia.ExisteDocumento(documento.ISBN) || string.IsNullOrEmpty(localizacion)) return false;
+		if (documento == null || responsable == null || !Persistencia.Persistencia.ExisteDocumento(documento.ISBN) || string.IsNullOrEmpty(localizacion)) return false;
 
-        return Persistencia.AltaEjemplar(new Ejemplar(localizacion, disponible, documento, responsable));
+        return Persistencia.Persistencia.AltaEjemplar(new Ejemplar(localizacion, disponible, documento, responsable));
 	}
 
     public bool BajaEjemplar(Ejemplar ejemplar)
     {
-        if (ejemplar == null || !Persistencia.ExisteEjemplar(ejemplar.Codigo)) return false;
+        if (ejemplar == null || !Persistencia.Persistencia.ExisteEjemplar(ejemplar.Codigo)) return false;
 
-        return Persistencia.BajaEjemplar(ejemplar);
+        return Persistencia.Persistencia.BajaEjemplar(ejemplar);
 
     }
 
     public Ejemplar ConsultarEjemplar(string idEjemplar) 
     { 
-        if(string.IsNullOrEmpty(idEjemplar)|| !Persistencia.ExisteEjemplar(idEjemplar)) return null;
+        if(string.IsNullOrEmpty(idEjemplar)|| !Persistencia.Persistencia.ExisteEjemplar(idEjemplar)) return null;
 
-        return Persistencia.GetEjemplar(idEjemplar);
+        return Persistencia.Persistencia.GetEjemplar(idEjemplar);
     }
 
     public bool HayDisponibles(Documento documento)
     {
-        if(documento == null || !Persistencia.ExisteDocumento(documento.ISBN)) return false;
-        var ejemplares = Persistencia.GetEjemplares(documento);
+        if(documento == null || !Persistencia.Persistencia.ExisteDocumento(documento.ISBN)) return false;
+        var ejemplares = Persistencia.Persistencia.GetEjemplares(documento);
         return ejemplares.Any(e => e.Disponible);
     }
 
     public DateTime? FechaDisponible(Documento documento)
     {
-        if (documento == null || !Persistencia.ExisteDocumento(documento.ISBN)) return null;
+        if (documento == null || !Persistencia.Persistencia.ExisteDocumento(documento.ISBN)) return null;
 
         if (HayDisponibles(documento)) return DateTime.Now;
 
@@ -71,7 +71,7 @@ public class GestorAdquisiciones : GestorUsuarios
 
     public Documento DocumentoMasLeidoMes()
     {
-        List<Prestamo> prestamos = Persistencia.GetPrestamos();
+        List<Prestamo> prestamos = Persistencia.Persistencia.GetPrestamos();
 
         DateTime haceUnMes = DateTime.Today.AddDays(-30);
 
@@ -89,11 +89,11 @@ public class GestorAdquisiciones : GestorUsuarios
 
     public List<Documento> GetDocumentos()
     {
-        return Persistencia.GetDocumentos();
+        return Persistencia.Persistencia.GetDocumentos();
     }
 
     public List<Ejemplar> GetEjemplares(Documento documento)
     {
-        return Persistencia.GetEjemplares(documento);
+        return Persistencia.Persistencia.GetEjemplares(documento);
     }
 }
