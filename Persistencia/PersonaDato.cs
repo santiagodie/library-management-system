@@ -20,23 +20,26 @@ namespace Persistencia
         public string Id { get { return id; } }
         public string Nombre { get { return nombre; } }
         public string Dni { get { return dni; } }
-        public string HashContraseña
-        {
-            get { return hashContraseña; }
-            set { hashContraseña = value; }
+        public string HashContraseña 
+        { 
+            get { return hashContraseña; } 
+            set { hashContraseña = value; } 
         }
 
         public override object ObtenerClave()
         {
-            return id;
+            return this.id;
         }
 
         public override bool ModificarDato(string nombre, object dato)
         {
             switch (nombre)
             {
+                case "Nombre":
+                    this.nombre = (string)dato;
+                    return true;
                 case "HashContraseña":
-                    hashContraseña = (string)dato;
+                    this.hashContraseña = (string)dato;
                     return true;
                 default:
                     return false;

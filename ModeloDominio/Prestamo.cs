@@ -18,7 +18,7 @@ namespace ModeloDominio
 
         public PersonalSala Responsable { get; private set; }
 
-        public DateTime FechaInicio { get; private set; }
+        public DateTime FechaInicio { get; set; }//Puse public el seter, porque cuando se reconstruye con el transformer necesitamos poner la fecha original
 
         //Pre: fechaFinPrevista debe tener tamaño 2
         public Prestamo(DateTime[] fechaFin, Usuario usuario, List<Ejemplar> ejemplares, PersonalSala responsable)

@@ -18,7 +18,7 @@ namespace Persistencia
 
         public override object ObtenerClave()
         {
-            return personaId;  // PersonaID es la clave
+            return personaId;
         }
 
         public override bool ModificarDato(string nombre, object dato)

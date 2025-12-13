@@ -9,6 +9,7 @@ namespace ModeloDominio
     public enum EstadoUsuario
     {
         Activo,
-        Sancionado
+        Sancionado,
+        Inactivo
     }
 }

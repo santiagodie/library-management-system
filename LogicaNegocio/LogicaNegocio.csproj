@@ -47,6 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaseDatos\BaseDatos.csproj">
+      <Project>{008cb349-2034-4ce7-adba-9ab6732503cf}</Project>
+      <Name>BaseDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModeloDominio\ModeloDominio.csproj">
       <Project>{ea801c38-4475-4462-8d82-684df6fd5b05}</Project>
       <Name>ModeloDominio</Name>

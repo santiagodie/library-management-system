@@ -13,28 +13,32 @@ namespace ModeloDominio
 
         public bool Disponible { get; set; }
 
+        public bool Activo { get; set; } // para la baja logica de los ejemplares
+
         public Documento Documento { get; private set; }
 
         public PersonalAdquisiciones Responsable { get; set; }
 
         public string Codigo { get; private set; }
 
-        public Ejemplar(string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable) 
+        public Ejemplar(string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable)
         {
             this.Localizacion = Localizacion;
             this.Disponible = Disponible;
             this.Documento = Documento;
             this.Responsable = Responsable;
+            this.Activo = true;
             Codigo = GenerarCodigo();
         }
         // Constructor para cuando se transforma desde persistencia y ya se tiene el código
-        public Ejemplar(string codigo, string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable)
+        public Ejemplar(string codigo, string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable, bool activo)
         {
-            this.Codigo = codigo;  // Usar el código provisto
+            this.Codigo = codigo;
             this.Localizacion = Localizacion;
             this.Disponible = Disponible;
             this.Documento = Documento;
             this.Responsable = Responsable;
+            this.Activo = activo;
         }
 
         public string GenerarCodigo()

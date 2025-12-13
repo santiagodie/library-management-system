@@ -7,23 +7,16 @@ namespace Persistencia
 {
     internal class Transformer
     {
-        //----------------------------------PERSONA 
-
-        public static PersonaDato ToPersonaDato(Persona persona)
-        {
-            return new PersonaDato(persona.Id, persona.Nombre, persona.Dni, persona.HashContraseña);
-        }
-
-        public static Persona ToPersona(PersonaDato personaData)
-        {
-            // Persona es abstracta no se puede instanciar directamente
-            return null;
-        }
-        //----------------------------------USUARIO 
+        //----------------------------------USUARIO
 
         public static UsuarioDato ToUsuarioDato(Usuario user)
         {
             return new UsuarioDato(user.Id, user.Estado);
+        }
+
+        public static PersonaDato ToPersonaDatoFromUsuario(Usuario user)
+        {
+            return new PersonaDato(user.Id, user.Nombre, user.Dni, user.HashContraseña);
         }
 
         public static Usuario ToUsuario(UsuarioDato userData)
@@ -66,7 +59,7 @@ namespace Persistencia
 
         public static EjemplarDato ToEjemplarDato(Ejemplar ejemplar)
         {
-            return new EjemplarDato( ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Id );
+            return new EjemplarDato( ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Id, ejemplar.Activo );
         }
 
         public static Ejemplar ToEjemplar(EjemplarDato ejemplarData)
@@ -82,7 +75,7 @@ namespace Persistencia
             PersonalAdquisiciones responsable = ToPersonalAdquisiciones(responsableData);
 
             // Localización como vacio de momento
-            return new Ejemplar(ejemplarData.Codigo, "", !ejemplarData.Prestado, document, responsable);
+            return new Ejemplar(ejemplarData.Codigo, "", !ejemplarData.Prestado, document, responsable, ejemplarData.Activo);
         }
 
         //------------------------PRESTAMO 
@@ -96,22 +89,20 @@ namespace Persistencia
             {
                 codigos.Add(ejemplar.Codigo);
                 DateTime fechaPrevista;
-                if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaInicio.AddDays(15);  
-                else fechaPrevista = prestamo.FechaInicio.AddDays(10);  
+                if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaInicio.AddDays(15);
+                else fechaPrevista = prestamo.FechaInicio.AddDays(10);
 
                 fechasPrevistas[ejemplar.Codigo] = fechaPrevista;
             }
-            return new PrestamoDato(prestamo.Usuario.Dni,prestamo.FechaInicio,codigos,fechasPrevistas,prestamo.Responsable.Id);
+            return new PrestamoDato(prestamo.Usuario.Id,prestamo.FechaInicio,codigos,fechasPrevistas,prestamo.Responsable.Id);
         }
 
         public static Prestamo ToPrestamo(PrestamoDato prestamoData)
         {
-            // Reconstruir usuario
-            UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", prestamoData.DniUsuario) as UsuarioDato;
+
+            UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", prestamoData.IdUsuario) as UsuarioDato;
             if (userData == null) return null;
             Usuario usuario = ToUsuario(userData);
-
-            // Reconstruir ejemplares prestados
             List<Ejemplar> ejemplaresPrestados = new List<Ejemplar>();
             foreach (string codigo in prestamoData.CodigosEjemplaresPrestados)
             {
@@ -122,7 +113,6 @@ namespace Persistencia
                 ejemplaresPrestados.Add(ejemplar);
             }
 
-            // Reconstruir responsable
             PersonalSalaDato responsableData = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", prestamoData.IdResponsable) as PersonalSalaDato;
             if (responsableData == null) return null;
             PersonalSala responsable = ToPersonalSala(responsableData);
@@ -135,6 +125,7 @@ namespace Persistencia
             }
 
             Prestamo prestamo = new Prestamo(fechasFin, usuario, ejemplaresPrestados, responsable);
+            prestamo.FechaInicio = prestamoData.FechaInicio;  // Restaurar la fecha original
             foreach (string codigo in prestamoData.CodigosEjemplaresDevueltos)
             {
                 EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
@@ -154,6 +145,11 @@ namespace Persistencia
             return new PersonalSalaDato(personalSala.Id, personalSala.NSS.ToString());
         }
 
+        public static PersonaDato ToPersonaDatoFromPersonalSala(PersonalSala personalSala)
+        {
+            return new PersonaDato(personalSala.Id, personalSala.Nombre, personalSala.Dni, personalSala.HashContraseña);
+        }
+
         public static PersonalSala ToPersonalSala(PersonalSalaDato personalSalaData)
         {
             PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", personalSalaData.PersonaId) as PersonaDato;
@@ -169,6 +165,11 @@ namespace Persistencia
         public static PersonalAdquisicionesDato ToPersonalAdquisicionesDato(PersonalAdquisiciones personalAdquisiciones)
         {
             return new PersonalAdquisicionesDato(personalAdquisiciones.Id, personalAdquisiciones.NSS.ToString());
+        }
+
+        public static PersonaDato ToPersonaDatoFromPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
+        {
+            return new PersonaDato(personalAdquisiciones.Id, personalAdquisiciones.Nombre, personalAdquisiciones.Dni, personalAdquisiciones.HashContraseña);
         }
 
         public static PersonalAdquisiciones ToPersonalAdquisiciones(PersonalAdquisicionesDato personalAdquisicionesData)

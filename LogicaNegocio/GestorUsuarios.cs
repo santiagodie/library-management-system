@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ModeloDominio;
 using Persistencia;
+using BaseDatos;
 
 public class GestorUsuarios
 {

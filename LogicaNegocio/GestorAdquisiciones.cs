@@ -27,7 +27,7 @@ public class GestorAdquisiciones : GestorUsuarios
 
 	public bool AltaEjemplar(string localizacion, bool disponible, Documento documento, PersonalAdquisiciones responsable)
 	{
-		if (documento == null || responsable == null || !Persistencia.Persistencia.ExisteDocumento(documento.ISBN) || string.IsNullOrEmpty(localizacion)) return false;
+		if (documento == null || responsable is null || !Persistencia.Persistencia.ExisteDocumento(documento.ISBN) || string.IsNullOrEmpty(localizacion)) return false;
 
         return Persistencia.Persistencia.AltaEjemplar(new Ejemplar(localizacion, disponible, documento, responsable));
 	}

@@ -2,61 +2,95 @@
 using BaseDatos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Persistencia
 {
     public static class Persistencia
     {
-        // ------------- GESTIÓN DE USUARIOS 
+        // ------------- GESTIÓN DE USUARIOS
 
+        //PRE: dni no puede ser nulo.
+        //POST: devuelve true si existe un usuario con ese dni en la BD.
         public static bool ExisteUsuario(string dni)
         {
-            return BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", dni) != null;
+            PersonaDato personaData = BaseDatos.BaseDatos.ObtenerTodos("PersonaTabla")
+                .OfType<PersonaDato>()
+                .FirstOrDefault(persona => persona.Dni == dni);
+
+            return personaData != null && BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", personaData.Id) != null;
         }
 
+        //PRE: usuario no puede ser nulo y no debe existir previamente en la BD.
+        //POST: da de alta al usuario en PersonaTabla y UsuarioTabla. Devuelve true si tuvo éxito.
         public static bool AltaUsuario(Usuario usuario)
         {
-            PersonaDato personaData = new PersonaDato(usuario.Id, usuario.Nombre, usuario.Dni,usuario.HashContraseña);
+            PersonaDato personaData = Transformer.ToPersonaDatoFromUsuario(usuario);
             if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
-            return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", new UsuarioDato(usuario.Id, usuario.Estado));
+            return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario));
         }
 
+        //PRE: usuario no puede ser nulo y debe existir en la BD.
+        //POST: marca el usuario como Inactivo (baja lógica). Devuelve true si tuvo éxito.
         public static bool BajaUsuario(Usuario usuario)
         {
-            return BaseDatos.BaseDatos.BorrarFila("UsuarioTabla", usuario.Dni);
+            return BaseDatos.BaseDatos.ModificarFila("UsuarioTabla", usuario.Id, "Estado", EstadoUsuario.Inactivo);
         }
 
+        //PRE: usuario no puede ser nulo y debe existir en la BD.
+        //POST: actualiza los datos del usuario en PersonaTabla y UsuarioTabla. Devuelve true si tuvo éxito.
+        public static bool ActualizarUsuario(Usuario usuario)
+        {
+            // Actualizar PersonaTabla 
+            BaseDatos.BaseDatos.BorrarFila("PersonaTabla", usuario.Id);
+            PersonaDato personaData = Transformer.ToPersonaDatoFromUsuario(usuario);
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+
+            // Actualizar UsuarioTabla 
+            BaseDatos.BaseDatos.BorrarFila("UsuarioTabla", usuario.Id);
+            return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario));
+        }
+
+        //PRE: dni no puede ser nulo.
+        //POST: devuelve el usuario con ese dni. Si no existe, devuelve null.
         public static Usuario GetUsuario(string dni)
         {
-            UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", dni) as UsuarioDato;
+            PersonaDato personaData = BaseDatos.BaseDatos.ObtenerTodos("PersonaTabla")
+                .OfType<PersonaDato>()
+                .FirstOrDefault(persona => persona.Dni == dni);
+
+            if (personaData == null) return null;
+
+            UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", personaData.Id) as UsuarioDato;
             if (userData == null) return null;
             return Transformer.ToUsuario(userData);
         }
 
+        //PRE: ---
+        //POST: devuelve una lista con todos los usuarios de la BD.
         public static List<Usuario> GetListaUsuarios()
         {
-            List<Usuario> usuarios = new List<Usuario>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("UsuarioTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                UsuarioDato userData = entidad as UsuarioDato;
-                if (userData != null) usuarios.Add(Transformer.ToUsuario(userData));
-                
-            }
-            return usuarios;
+            return BaseDatos.BaseDatos.ObtenerTodos("UsuarioTabla")
+                .OfType<UsuarioDato>()
+                .Select(userData => Transformer.ToUsuario(userData))
+                .ToList();
         }
-        // ------------- GESTIÓN DE PRÉSTAMOS 
 
+        // ------------- GESTIÓN DE PRÉSTAMOS
+
+        //PRE: prestamo no puede ser nulo y no debe existir previamente en la BD.
+        //POST: da de alta el préstamo. Devuelve true si tuvo éxito.
         public static bool AltaPrestamo(Prestamo prestamo)
         {
             return BaseDatos.BaseDatos.AñadirFila("PrestamoTabla", Transformer.ToPrestamoDato(prestamo));
         }
 
+        //PRE: prestamo no puede ser nulo y debe existir en la BD.
+        //POST: actualiza el préstamo y la disponibilidad de los ejemplares. Devuelve true si tuvo éxito.
         public static bool ActualizarPrestamo(Prestamo prestamo)
         {
-            ClavePrestamo clave = new ClavePrestamo(prestamo.Usuario.Dni, prestamo.FechaInicio);
+            ClavePrestamo clave = new ClavePrestamo(prestamo.Usuario.Id, prestamo.FechaInicio);
             BaseDatos.BaseDatos.BorrarFila("PrestamoTabla", clave);
 
             PrestamoDato prestamoData = Transformer.ToPrestamoDato(prestamo);
@@ -74,190 +108,143 @@ namespace Persistencia
             return BaseDatos.BaseDatos.AñadirFila("PrestamoTabla", prestamoData);
         }
 
+        //PRE: ejemplar no puede ser nulo.
+        //POST: devuelve el préstamo activo que contiene ese ejemplar. Si no existe, devuelve null.
         public static Prestamo GetPrestamoActivo(Ejemplar ejemplar)
         {
-            List<Entidad> prestamos = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla");
+            PrestamoDato prestamoData = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
+                .OfType<PrestamoDato>()
+                .FirstOrDefault(pd => !pd.EstaFinalizado() && pd.CodigosEjemplaresPrestados.Contains(ejemplar.Codigo));
 
-            foreach (Entidad entidad in prestamos)
-            {
-                PrestamoDato prestamoData = entidad as PrestamoDato;
-                if (prestamoData != null && !prestamoData.EstaFinalizado() && prestamoData.CodigosEjemplaresPrestados.Contains(ejemplar.Codigo))
-                return Transformer.ToPrestamo(prestamoData);
-                
-            }
-
-            return null;
+            return prestamoData != null ? Transformer.ToPrestamo(prestamoData) : null;
         }
 
+        //PRE: ---
+        //POST: devuelve una lista con todos los préstamos de la BD.
         public static List<Prestamo> GetPrestamos()
         {
-            List<Prestamo> prestamos = new List<Prestamo>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                PrestamoDato prestamoData = entidad as PrestamoDato;
-                if (prestamoData != null) prestamos.Add(Transformer.ToPrestamo(prestamoData));  
-            }
-            return prestamos;
+            return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
+                .OfType<PrestamoDato>()
+                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
+                .ToList();
         }
 
+        //PRE: usuario no puede ser nulo.
+        //POST: devuelve una lista con todos los préstamos del usuario.
         public static List<Prestamo> GetPrestamos(Usuario usuario)
         {
-            List<Prestamo> prestamos = new List<Prestamo>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                PrestamoDato prestamoData = entidad as PrestamoDato;
-                if (prestamoData != null && prestamoData.DniUsuario == usuario.Dni) prestamos.Add(Transformer.ToPrestamo(prestamoData));
-            }
-
-            return prestamos;
+            return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
+                .OfType<PrestamoDato>()
+                .Where(prestamoData => prestamoData.IdUsuario == usuario.Id)
+                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
+                .ToList();
         }
 
+        //PRE: documento no puede ser nulo.
+        //POST: devuelve una lista con todos los préstamos que contienen ejemplares de ese documento.
         public static List<Prestamo> GetPrestamos(Documento documento)
         {
-            List<Prestamo> prestamos = new List<Prestamo>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                PrestamoDato prestamoData = entidad as PrestamoDato;
-                if (prestamoData != null)
-                {
-                    Prestamo prestamo = Transformer.ToPrestamo(prestamoData);
-
-                    bool contieneDocumento = false;
-                    foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
-                    {
-                        if (ejemplar.Documento.ISBN == documento.ISBN)
-                        {
-                            contieneDocumento = true;
-                            break;
-                        }
-                    }
-
-                    foreach (Ejemplar ejemplar in prestamo.EjemplaresDevueltos)
-                    {
-                        if (ejemplar.Documento.ISBN == documento.ISBN)
-                        {
-                            contieneDocumento = true;
-                            break;
-                        }
-                    }
-
-                    if (contieneDocumento) prestamos.Add(prestamo);
-                    
-                }
-            }
-
-            return prestamos;
+            return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
+                .OfType<PrestamoDato>()
+                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
+                .Where(prestamo =>
+                    prestamo.EjemplaresPrestados.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN) ||
+                    prestamo.EjemplaresDevueltos.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN))
+                .ToList();
         }
 
+        //PRE: usuario no puede ser nulo y fecha debe ser válida.
+        //POST: devuelve una lista con todos los préstamos del usuario en esa fecha.
         public static List<Prestamo> GetPrestamos(Usuario usuario, DateTime fecha)
         {
-            List<Prestamo> prestamos = new List<Prestamo>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                PrestamoDato prestamoData = entidad as PrestamoDato;
-                if (prestamoData != null && prestamoData.DniUsuario == usuario.Dni && prestamoData.FechaInicio.Date == fecha.Date) 
-                    prestamos.Add(Transformer.ToPrestamo(prestamoData));
-                
-            }
-
-            return prestamos;
+            return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
+                .OfType<PrestamoDato>()
+                .Where(prestamoData => prestamoData.IdUsuario == usuario.Id && prestamoData.FechaInicio.Date == fecha.Date)
+                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
+                .ToList();
         }
+
+        //PRE: usuario y documento no pueden ser nulos.
+        //POST: devuelve una lista con todos los préstamos del usuario que contienen ejemplares de ese documento.
         public static List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
         {
-            List<Prestamo> prestamos = new List<Prestamo>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                PrestamoDato prestamoData = entidad as PrestamoDato;
-                if (prestamoData != null && prestamoData.DniUsuario == usuario.Dni)
-                {
-                    Prestamo prestamo = Transformer.ToPrestamo(prestamoData);
-
-                    // Verificar si alguno de los ejemplares pertenece al documento
-                    bool contieneDocumento = false;
-                    foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
-                    {
-                        if (ejemplar.Documento.ISBN == documento.ISBN)
-                        {
-                            contieneDocumento = true;
-                            break;
-                        }
-                    }
-
-                    foreach (Ejemplar ejemplar in prestamo.EjemplaresDevueltos)
-                    {
-                        if (ejemplar.Documento.ISBN == documento.ISBN)
-                        {
-                            contieneDocumento = true;
-                            break;
-                        }
-                    }
-
-                    if (contieneDocumento) prestamos.Add(prestamo);
-                    
-                }
-            }
-
-            return prestamos;
+            return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
+                .OfType<PrestamoDato>()
+                .Where(prestamoData => prestamoData.IdUsuario == usuario.Id)
+                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
+                .Where(prestamo =>
+                    prestamo.EjemplaresPrestados.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN) ||
+                    prestamo.EjemplaresDevueltos.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN))
+                .ToList();
         }
 
-        // ------------- C. GESTIÓN DE DOCUMENTOS Y EJEMPLARES 
+        // ------------- GESTION DE DOCUMENTOS Y EJEMPLARES
 
+        //PRE: documento no puede ser nulo y no debe existir previamente en la BD.
+        //POST: da de alta el documento. Devuelve true si tuvo éxito.
         public static bool AltaDocumento(Documento documento)
         {
             return BaseDatos.BaseDatos.AñadirFila("DocumentoTabla", Transformer.ToDocumentoDato(documento));
         }
 
+        //PRE: ISBN no puede ser nulo.
+        //POST: devuelve true si existe un documento con ese ISBN en la BD.
         public static bool ExisteDocumento(string ISBN)
         {
             return BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", ISBN) != null;
         }
 
+        //PRE: isbn no puede ser nulo.
+        //POST: devuelve el documento con ese ISBN. Si no existe, devuelve null.
         public static Documento GetDocumento(string isbn)
         {
-            DocumentoDato dd = BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", isbn) as DocumentoDato;
-            if (dd == null) return null;
-            return Transformer.ToDocumento(dd);
+            DocumentoDato documentData = BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", isbn) as DocumentoDato;
+            if (documentData == null) return null;
+            return Transformer.ToDocumento(documentData);
         }
 
+        //PRE: ---
+        //POST: devuelve una lista con todos los documentos de la BD.
         public static List<Documento> GetDocumentos()
         {
-            List<Documento> documentos = new List<Documento>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("DocumentoTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                DocumentoDato documentData = entidad as DocumentoDato;
-                if (documentData != null) documentos.Add(Transformer.ToDocumento(documentData));
-            }
-
-            return documentos;
+            return BaseDatos.BaseDatos.ObtenerTodos("DocumentoTabla")
+                .OfType<DocumentoDato>()
+                .Select(documentData => Transformer.ToDocumento(documentData))
+                .ToList();
         }
 
+        //PRE: documento no puede ser nulo y debe existir en la BD.
+        //POST: actualiza los datos del documento. Devuelve true si tuvo éxito.
+        public static bool ActualizarDocumento(Documento documento)
+        {
+            BaseDatos.BaseDatos.BorrarFila("DocumentoTabla", documento.ISBN);
+            return BaseDatos.BaseDatos.AñadirFila("DocumentoTabla", Transformer.ToDocumentoDato(documento));
+        }
+
+        //PRE: ejemplar no puede ser nulo y no debe existir previamente en la BD.
+        //POST: da de alta el ejemplar. Devuelve true si tuvo éxito.
         public static bool AltaEjemplar(Ejemplar ejemplar)
         {
             return BaseDatos.BaseDatos.AñadirFila("EjemplarTabla", Transformer.ToEjemplarDato(ejemplar));
         }
 
+        //PRE: ejemplar no puede ser nulo y debe existir en la BD.
+        //POST: marca el ejemplar como inactivo (baja lógica). Devuelve true si tuvo éxito.
         public static bool BajaEjemplar(Ejemplar ejemplar)
         {
-            return BaseDatos.BaseDatos.BorrarFila("EjemplarTabla", ejemplar.Codigo);
+            // Baja lógica: marcar como inactivo en lugar de borrar
+            return BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Activo", false);
         }
 
+        //PRE: codigo no puede ser nulo.
+        //POST: devuelve true si existe un ejemplar con ese código en la BD.
         public static bool ExisteEjemplar(string codigo)
         {
             return BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) != null;
         }
 
+        //PRE: codigo no puede ser nulo.
+        //POST: devuelve el ejemplar con ese código. Si no existe, devuelve null.
         public static Ejemplar GetEjemplar(string codigo)
         {
             EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
@@ -265,39 +252,107 @@ namespace Persistencia
             return Transformer.ToEjemplar(ejemplarData);
         }
 
+        //PRE: documento no puede ser nulo.
+        //POST: devuelve una lista con todos los ejemplares activos de ese documento.
         public static List<Ejemplar> GetEjemplares(Documento documento)
         {
-            List<Ejemplar> ejemplares = new List<Ejemplar>();
-            List<Entidad> datos = BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla");
-
-            foreach (Entidad entidad in datos)
-            {
-                EjemplarDato ejemplarData = entidad as EjemplarDato;
-                if (ejemplarData != null && ejemplarData.IsbnDocumento == documento.ISBN)
-                {
-                    ejemplares.Add(Transformer.ToEjemplar(ejemplarData));
-                }
-            }
-            return ejemplares;
+            return BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
+                .OfType<EjemplarDato>()
+                .Where(ejemplarData => ejemplarData.IsbnDocumento == documento.ISBN && ejemplarData.Activo)
+                .Select(ejemplarData => Transformer.ToEjemplar(ejemplarData))
+                .ToList();
         }
 
+        //PRE: ejemplar no puede ser nulo y debe existir en la BD.
+        //POST: actualiza los datos del ejemplar. Devuelve true si tuvo éxito.
         public static bool ActualizarEjemplar(Ejemplar ejemplar)
         {
             BaseDatos.BaseDatos.BorrarFila("EjemplarTabla", ejemplar.Codigo);
             return BaseDatos.BaseDatos.AñadirFila("EjemplarTabla", Transformer.ToEjemplarDato(ejemplar));
         }
 
+        //PRE: ejemplares no puede ser nulo ni vacío.
+        //POST: actualiza la disponibilidad de todos los ejemplares. Devuelve true si todos se actualizaron correctamente.
         public static bool ActualizarDisponibilidad(List<Ejemplar> ejemplares)
         {
-            bool exito = true;
-
-            foreach (Ejemplar ej in ejemplares)
-            {
-                bool resultado = BaseDatos.BaseDatos.ModificarFila("EjemplarTabla",ej.Codigo,"Prestado",!ej.Disponible);
-                if (!resultado) exito = false;
-
-            }
-            return exito;
+            return ejemplares.All(ejemplar =>
+                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", !ejemplar.Disponible));
         }
+
+        //PRE: isbn no puede ser nulo.
+        //POST: devuelve true si hay al menos un ejemplar disponible de ese documento.
+        public static bool HayEjemplaresDisponibles(string isbn)
+        {
+            return BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
+                .OfType<EjemplarDato>()
+                .Any(ejemplarData => ejemplarData.IsbnDocumento == isbn && ejemplarData.Activo && !ejemplarData.Prestado);
+        }
+
+        // ------------- GESTIÓN DE PERSONAL
+
+        //PRE: personalSala no puede ser nulo y no debe existir previamente en la BD.
+        //POST: da de alta el personal de sala en PersonaTabla y PersonalSalaTabla. Devuelve true si tuvo éxito.
+        public static bool AltaPersonalSala(PersonalSala personalSala)
+        {
+            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalSala(personalSala);
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+            return BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala));
+        }
+
+        //PRE: personalAdquisiciones no puede ser nulo y no debe existir previamente en la BD.
+        //POST: da de alta el personal de adquisiciones en PersonaTabla y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
+        public static bool AltaPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
+        {
+            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+            return BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones));
+        }
+
+        //PRE: id no puede ser nulo.
+        //POST: devuelve el personal de sala con ese id. Si no existe, devuelve null.
+        public static PersonalSala GetPersonalSala(string id)
+        {
+            PersonalSalaDato personalSalaData = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", id) as PersonalSalaDato;
+            if (personalSalaData == null) return null;
+            return Transformer.ToPersonalSala(personalSalaData);
+        }
+
+        //PRE: id no puede ser nulo.
+        //POST: devuelve el personal de adquisiciones con ese id. Si no existe, devuelve null.
+        public static PersonalAdquisiciones GetPersonalAdquisiciones(string id)
+        {
+            PersonalAdquisicionesDato personalAdquisicionesData = BaseDatos.BaseDatos.ObtenerDatos("PersonalAdquisicionesTabla", id) as PersonalAdquisicionesDato;
+            if (personalAdquisicionesData == null) return null;
+            return Transformer.ToPersonalAdquisiciones(personalAdquisicionesData);
+        }
+
+        //PRE: personalSala no puede ser nulo y debe existir en la BD.
+        //POST: actualiza los datos del personal de sala en PersonaTabla y PersonalSalaTabla. Devuelve true si tuvo éxito.
+        public static bool ActualizarPersonalSala(PersonalSala personalSala)
+        {
+            // Actualizar PersonaTabla
+            BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalSala.Id);
+            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalSala(personalSala);
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+
+            // Actualizar PersonalSalaTabla
+            BaseDatos.BaseDatos.BorrarFila("PersonalSalaTabla", personalSala.Id);
+            return BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala));
+        }
+
+        //PRE: personalAdquisiciones no puede ser nulo y debe existir en la BD.
+        //POST: actualiza los datos del personal de adquisiciones en PersonaTabla y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
+        public static bool ActualizarPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
+        {
+            // Actualizar PersonaTabla 
+            BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalAdquisiciones.Id);
+            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+
+            // Actualizar PersonalAdquisicionesTabla 
+            BaseDatos.BaseDatos.BorrarFila("PersonalAdquisicionesTabla", personalAdquisiciones.Id);
+            return BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones));
+        }
+
     }
 }

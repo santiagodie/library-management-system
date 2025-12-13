@@ -8,7 +8,8 @@ namespace Persistencia
         private string codigo;
         private string isbnDocumento;
         private bool prestado;
-        private string idResponsable; // ID del PersonalAdquisiciones
+        private bool activo;
+        private string idResponsable;
         public EjemplarDato(string codigo, string isbnDocumento, bool prestado,
         string idResponsable, bool activo = true)
         {
@@ -16,6 +17,7 @@ namespace Persistencia
             this.isbnDocumento = isbnDocumento;
             this.prestado = prestado;
             this.idResponsable = idResponsable;
+            this.activo = activo;
         }
         public string Codigo { get { return codigo; } }
         public string IsbnDocumento { get { return isbnDocumento; } }
@@ -23,6 +25,11 @@ namespace Persistencia
         {
             get { return prestado; }
             set { prestado = value; }
+        }
+        public bool Activo
+        {
+            get { return activo; }
+            set { activo = value; }
         }
         public string IdResponsable { get { return idResponsable; } }
         public override object ObtenerClave()
@@ -36,6 +43,9 @@ namespace Persistencia
                 case "Prestado":
                     prestado = (bool)dato;
                     return true;
+                case "Activo":
+                    activo = (bool)dato;
+                    return true;
                 default:
                     return false;
             }
@@ -47,6 +57,7 @@ namespace Persistencia
                 case "Codigo": return codigo;
                 case "IsbnDocumento": return isbnDocumento;
                 case "Prestado": return prestado;
+                case "Activo": return activo;
                 case "IdResponsable": return idResponsable;
                 default: return null;
             }

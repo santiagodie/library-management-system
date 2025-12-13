@@ -7,46 +7,46 @@ namespace Persistencia
 {
     internal class ClavePrestamo
     {
-        public string DniUsuario { get; private set; }
+        public string IdUsuario { get; private set; }
         public DateTime FechaInicio { get; private set; }
 
-        public ClavePrestamo(string dniUsuario, DateTime fechaInicio)
+        public ClavePrestamo(string idUsuario, DateTime fechaInicio)
         {
-            this.DniUsuario = dniUsuario;
+            this.IdUsuario = idUsuario;
             this.FechaInicio = fechaInicio;
         }
 
         public override bool Equals(object obj)
         {
             if (obj is ClavePrestamo other)
-                return DniUsuario == other.DniUsuario && FechaInicio.Date == other.FechaInicio.Date;
+                return IdUsuario == other.IdUsuario && FechaInicio.Date == other.FechaInicio.Date;
             return false;
         }
 
         public override int GetHashCode()
         {
-            return (DniUsuario + FechaInicio.Date.ToString()).GetHashCode();
+            return (IdUsuario + FechaInicio.Date.ToString()).GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"{DniUsuario}_{FechaInicio:yyyyMMdd}";
+            return $"{IdUsuario}_{FechaInicio:yyyyMMdd}";
         }
     }
 
     internal class PrestamoDato : Entidad
     {
-        private string dniUsuario;
+        private string idUsuario;
         private DateTime fechaInicio;
         private List<string> codigosEjemplaresPrestados;
         private List<string> codigosEjemplaresDevueltos;
-        private Dictionary<string, DateTime> fechasDevolucion; 
-        private Dictionary<string, DateTime> fechasPrevistaDevolucion;  
+        private Dictionary<string, DateTime> fechasDevolucion;
+        private Dictionary<string, DateTime> fechasPrevistaDevolucion;
         private string idResponsable;  // PersonalSala que realizó el préstamo
 
-        public PrestamoDato(string dniUsuario, DateTime fechaInicio, List<string> codigosEjemplares, Dictionary<string, DateTime> fechasPrevistas, string idResponsable)
+        public PrestamoDato(string idUsuario, DateTime fechaInicio, List<string> codigosEjemplares, Dictionary<string, DateTime> fechasPrevistas, string idResponsable)
         {
-            this.dniUsuario = dniUsuario;
+            this.idUsuario = idUsuario;
             this.fechaInicio = fechaInicio;
             this.codigosEjemplaresPrestados = new List<string>(codigosEjemplares);
             this.codigosEjemplaresDevueltos = new List<string>();
@@ -55,7 +55,7 @@ namespace Persistencia
             this.idResponsable = idResponsable;
         }
 
-        public string DniUsuario { get { return dniUsuario; } }
+        public string IdUsuario { get { return idUsuario; } }
         public DateTime FechaInicio { get { return fechaInicio; } }
         public List<string> CodigosEjemplaresPrestados { get { return codigosEjemplaresPrestados; } }
         public List<string> CodigosEjemplaresDevueltos { get { return codigosEjemplaresDevueltos; } }
@@ -83,7 +83,7 @@ namespace Persistencia
 
         public override object ObtenerClave()
         {
-            return new ClavePrestamo(dniUsuario, fechaInicio);
+            return new ClavePrestamo(idUsuario, fechaInicio);
         }
 
         public override bool ModificarDato(string nombre, object dato)
@@ -95,7 +95,7 @@ namespace Persistencia
         {
             switch (nombre)
             {
-                case "DniUsuario": return dniUsuario;
+                case "IdUsuario": return idUsuario;
                 case "FechaInicio": return fechaInicio;
                 case "IdResponsable": return idResponsable;
                 default: return null;
