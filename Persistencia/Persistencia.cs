@@ -9,6 +9,15 @@ namespace Persistencia
 {
     public static class Persistencia
     {
+        // ------------- GESTIÓN DE PERSONAS
+
+        //PRE: dni no puede ser nulo.
+        //POST: devuelve true si existe una persona con ese dni en la BD.
+        public static bool ExistePersona(string dni)
+        {
+            return BaseDatos.BaseDatos.Existe("PersonaTabla", dni);
+        }
+
         // ------------- GESTIÓN DE USUARIOS
 
         //PRE: dni no puede ser nulo.
@@ -285,6 +294,20 @@ namespace Persistencia
 
         // ------------- GESTIÓN DE PERSONAL
 
+        //PRE: dni no puede ser nulo.
+        //POST: devuelve true si existe un personal sala con ese dni en la BD.
+        public static bool ExistePersonalSala(string dni)
+        {
+            return BaseDatos.BaseDatos.Existe("PersonaTabla", dni) && BaseDatos.BaseDatos.Existe("PersonalSalaTabla", dni);
+        }
+        
+        //PRE: dni no puede ser nulo.
+        //POST: devuelve true si existe un personal de adquisiciones con ese dni en la BD.
+        public static bool ExistePersonalAdquisiciones(string dni)
+        {
+            return BaseDatos.BaseDatos.Existe("PersonaTabla", dni) && BaseDatos.BaseDatos.Existe("PersonalAdquisicionesTabla", dni);
+        }
+        
         //PRE: personalSala no puede ser nulo y no debe existir previamente en la BD.
         //POST: da de alta el personal de sala en PersonaTabla y PersonalSalaTabla. Devuelve true si tuvo éxito.
         public static bool AltaPersonalSala(PersonalSala personalSala)
