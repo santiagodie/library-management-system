@@ -9,16 +9,22 @@ namespace Persistencia
     {
         //----------------------------------USUARIO
 
+        //PRE: user no puede ser nulo.
+        //POST: devuelve un UsuarioDato creado a partir del Usuario.
         public static UsuarioDato ToUsuarioDato(Usuario user)
         {
             return new UsuarioDato(user.Id, user.Estado);
         }
 
+        //PRE: user no puede ser nulo.
+        //POST: devuelve un PersonaDato creado a partir del Usuario.
         public static PersonaDato ToPersonaDatoFromUsuario(Usuario user)
         {
             return new PersonaDato(user.Id, user.Nombre, user.Dni, user.HashContraseña);
         }
 
+        //PRE: userData no puede ser nulo.
+        //POST: reconstruye un Usuario a partir de UsuarioDato y PersonaDato de la BD. Devuelve null si no existe PersonaDato.
         public static Usuario ToUsuario(UsuarioDato userData)
         {
             PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", userData.PersonaId) as PersonaDato;
@@ -32,16 +38,20 @@ namespace Persistencia
 
         //--------------------------------------DOCUMENTO
 
+        //PRE: document no puede ser nulo.
+        //POST: devuelve un DocumentoDato creado a partir del Documento (Libro o Audiolibro).
         public static DocumentoDato ToDocumentoDato(Documento document)
         {
-            if (document is Audiolibro audio) 
+            if (document is Audiolibro audio)
                 return new DocumentoDato(document.ISBN, document.Titulo, document.Autor, document.Editorial, document.AñoEdicion, audio.Formato, audio.DuracionSegundos);
-            
-            else 
+
+            else
                 return new DocumentoDato(document.ISBN, document.Titulo, document.Autor, document.Editorial, document.AñoEdicion);
-            
+
         }
 
+        //PRE: documentData no puede ser nulo.
+        //POST: reconstruye un Documento (Libro o Audiolibro) a partir de DocumentoDato.
         public static Documento ToDocumento(DocumentoDato documentData)
         {
             if (documentData.Tipo == TipoDocumento.Audiolibro)
@@ -52,16 +62,20 @@ namespace Persistencia
                 return audio;
             }
             else return new Libro(documentData.Titulo, documentData.Autor, documentData.ISBN, documentData.Editorial, documentData.AñoEdicion);
-            
+
         }
 
         //-------------------------------EJEMPLAR
 
+        //PRE: ejemplar no puede ser nulo.
+        //POST: devuelve un EjemplarDato creado a partir del Ejemplar.
         public static EjemplarDato ToEjemplarDato(Ejemplar ejemplar)
         {
             return new EjemplarDato( ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Id, ejemplar.Activo );
         }
 
+        //PRE: ejemplarData no puede ser nulo.
+        //POST: reconstruye un Ejemplar a partir de EjemplarDato, DocumentoDato y PersonalAdquisicionesDato de la BD. Devuelve null si faltan datos.
         public static Ejemplar ToEjemplar(EjemplarDato ejemplarData)
         {
             // Reconstruir documento
@@ -78,8 +92,10 @@ namespace Persistencia
             return new Ejemplar(ejemplarData.Codigo, "", !ejemplarData.Prestado, document, responsable, ejemplarData.Activo);
         }
 
-        //------------------------PRESTAMO 
+        //------------------------PRESTAMO
 
+        //PRE: prestamo no puede ser nulo.
+        //POST: devuelve un PrestamoDato creado a partir del Prestamo, calculando las fechas previstas de devolución.
         public static PrestamoDato ToPrestamoDato(Prestamo prestamo)
         {
             List<string> codigos = new List<string>();
@@ -97,6 +113,8 @@ namespace Persistencia
             return new PrestamoDato(prestamo.Usuario.Id,prestamo.FechaInicio,codigos,fechasPrevistas,prestamo.Responsable.Id);
         }
 
+        //PRE: prestamoData no puede ser nulo.
+        //POST: reconstruye un Prestamo a partir de PrestamoDato y datos relacionados de la BD. Devuelve null si faltan datos críticos.
         public static Prestamo ToPrestamo(PrestamoDato prestamoData)
         {
 
@@ -129,9 +147,9 @@ namespace Persistencia
             foreach (string codigo in prestamoData.CodigosEjemplaresDevueltos)
             {
                 EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
-                if (ejemplarData == null) continue; 
+                if (ejemplarData == null) continue;
                 Ejemplar ejemplar = ToEjemplar(ejemplarData);
-                if (ejemplar == null) continue; 
+                if (ejemplar == null) continue;
                 prestamo.DevolverEjemplar(ejemplar);
             }
 
@@ -140,16 +158,22 @@ namespace Persistencia
 
         //----------------------PERSONAL
 
+        //PRE: personalSala no puede ser nulo.
+        //POST: devuelve un PersonalSalaDato creado a partir del PersonalSala.
         public static PersonalSalaDato ToPersonalSalaDato(PersonalSala personalSala)
         {
             return new PersonalSalaDato(personalSala.Id, personalSala.NSS.ToString());
         }
 
+        //PRE: personalSala no puede ser nulo.
+        //POST: devuelve un PersonaDato creado a partir del PersonalSala.
         public static PersonaDato ToPersonaDatoFromPersonalSala(PersonalSala personalSala)
         {
             return new PersonaDato(personalSala.Id, personalSala.Nombre, personalSala.Dni, personalSala.HashContraseña);
         }
 
+        //PRE: personalSalaData no puede ser nulo.
+        //POST: reconstruye un PersonalSala a partir de PersonalSalaDato y PersonaDato de la BD. Devuelve null si no existe PersonaDato.
         public static PersonalSala ToPersonalSala(PersonalSalaDato personalSalaData)
         {
             PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", personalSalaData.PersonaId) as PersonaDato;
@@ -162,16 +186,22 @@ namespace Persistencia
             return personalSala;
         }
 
+        //PRE: personalAdquisiciones no puede ser nulo.
+        //POST: devuelve un PersonalAdquisicionesDato creado a partir del PersonalAdquisiciones.
         public static PersonalAdquisicionesDato ToPersonalAdquisicionesDato(PersonalAdquisiciones personalAdquisiciones)
         {
             return new PersonalAdquisicionesDato(personalAdquisiciones.Id, personalAdquisiciones.NSS.ToString());
         }
 
+        //PRE: personalAdquisiciones no puede ser nulo.
+        //POST: devuelve un PersonaDato creado a partir del PersonalAdquisiciones.
         public static PersonaDato ToPersonaDatoFromPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
             return new PersonaDato(personalAdquisiciones.Id, personalAdquisiciones.Nombre, personalAdquisiciones.Dni, personalAdquisiciones.HashContraseña);
         }
 
+        //PRE: personalAdquisicionesData no puede ser nulo.
+        //POST: reconstruye un PersonalAdquisiciones a partir de PersonalAdquisicionesDato y PersonaDato de la BD. Devuelve null si no existe PersonaDato.
         public static PersonalAdquisiciones ToPersonalAdquisiciones(PersonalAdquisicionesDato personalAdquisicionesData)
         {
             PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", personalAdquisicionesData.PersonaId) as PersonaDato;

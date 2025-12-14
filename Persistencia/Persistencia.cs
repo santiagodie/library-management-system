@@ -17,7 +17,7 @@ namespace Persistencia
         {
             PersonaDato personaData = BaseDatos.BaseDatos.ObtenerTodos("PersonaTabla")
                 .OfType<PersonaDato>()
-                .FirstOrDefault(persona => persona.Dni == dni);
+                .FirstOrDefault(persona => persona.Dni == dni); 
 
             return personaData != null && BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", personaData.Id) != null;
         }
@@ -31,6 +31,7 @@ namespace Persistencia
             return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario));
         }
 
+
         //PRE: usuario no puede ser nulo y debe existir en la BD.
         //POST: marca el usuario como Inactivo (baja lógica). Devuelve true si tuvo éxito.
         public static bool BajaUsuario(Usuario usuario)
@@ -42,12 +43,12 @@ namespace Persistencia
         //POST: actualiza los datos del usuario en PersonaTabla y UsuarioTabla. Devuelve true si tuvo éxito.
         public static bool ActualizarUsuario(Usuario usuario)
         {
-            // Actualizar PersonaTabla 
+            // Actualizar PersonaTabla   
             BaseDatos.BaseDatos.BorrarFila("PersonaTabla", usuario.Id);
             PersonaDato personaData = Transformer.ToPersonaDatoFromUsuario(usuario);
             if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
 
-            // Actualizar UsuarioTabla 
+             // Actualizar UsuarioTabla 
             BaseDatos.BaseDatos.BorrarFila("UsuarioTabla", usuario.Id);
             return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario));
         }
@@ -57,10 +58,10 @@ namespace Persistencia
         public static Usuario GetUsuario(string dni)
         {
             PersonaDato personaData = BaseDatos.BaseDatos.ObtenerTodos("PersonaTabla")
-                .OfType<PersonaDato>()
-                .FirstOrDefault(persona => persona.Dni == dni);
+                .OfType<PersonaDato>() 
+                .FirstOrDefault(persona => persona.Dni == dni); 
 
-            if (personaData == null) return null;
+             if (personaData == null) return null;
 
             UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", personaData.Id) as UsuarioDato;
             if (userData == null) return null;
@@ -90,19 +91,19 @@ namespace Persistencia
         //POST: actualiza el préstamo y la disponibilidad de los ejemplares. Devuelve true si tuvo éxito.
         public static bool ActualizarPrestamo(Prestamo prestamo)
         {
-            ClavePrestamo clave = new ClavePrestamo(prestamo.Usuario.Id, prestamo.FechaInicio);
-            BaseDatos.BaseDatos.BorrarFila("PrestamoTabla", clave);
+            ClavePrestamo clave = new ClavePrestamo(prestamo.Usuario.Id, prestamo.FechaInicio);  
+            BaseDatos.BaseDatos.BorrarFila("PrestamoTabla", clave); 
 
-            PrestamoDato prestamoData = Transformer.ToPrestamoDato(prestamo);
+            PrestamoDato prestamoData = Transformer.ToPrestamoDato(prestamo); 
 
             foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
             {
-                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", true);
+                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", true); 
             }
 
             foreach (Ejemplar ejemplar in prestamo.EjemplaresDevueltos)
             {
-                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", false);
+                 BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", false); 
             }
 
             return BaseDatos.BaseDatos.AñadirFila("PrestamoTabla", prestamoData);
@@ -116,7 +117,7 @@ namespace Persistencia
                 .OfType<PrestamoDato>()
                 .FirstOrDefault(pd => !pd.EstaFinalizado() && pd.CodigosEjemplaresPrestados.Contains(ejemplar.Codigo));
 
-            return prestamoData != null ? Transformer.ToPrestamo(prestamoData) : null;
+            return prestamoData != null ? Transformer.ToPrestamo(prestamoData) :  null;
         }
 
         //PRE: ---
@@ -125,7 +126,7 @@ namespace Persistencia
         {
             return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
                 .OfType<PrestamoDato>()
-                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
+                .Select(prestamoData => Transformer.ToPrestamo(prestamoData) )
                 .ToList();
         }
 
@@ -168,7 +169,7 @@ namespace Persistencia
         //POST: devuelve una lista con todos los préstamos del usuario que contienen ejemplares de ese documento.
         public static List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
         {
-            return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
+            return BaseDatos.BaseDatos.ObtenerTodos( "PrestamoTabla")
                 .OfType<PrestamoDato>()
                 .Where(prestamoData => prestamoData.IdUsuario == usuario.Id)
                 .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
@@ -199,18 +200,19 @@ namespace Persistencia
         public static Documento GetDocumento(string isbn)
         {
             DocumentoDato documentData = BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", isbn) as DocumentoDato;
-            if (documentData == null) return null;
+             if (documentData == null) return null;
             return Transformer.ToDocumento(documentData);
         }
 
         //PRE: ---
         //POST: devuelve una lista con todos los documentos de la BD.
-        public static List<Documento> GetDocumentos()
+        public static List<Documento> GetDocumentos() 
         {
             return BaseDatos.BaseDatos.ObtenerTodos("DocumentoTabla")
                 .OfType<DocumentoDato>()
                 .Select(documentData => Transformer.ToDocumento(documentData))
-                .ToList();
+                .ToList()
+                ; 
         }
 
         //PRE: documento no puede ser nulo y debe existir en la BD.
@@ -218,7 +220,7 @@ namespace Persistencia
         public static bool ActualizarDocumento(Documento documento)
         {
             BaseDatos.BaseDatos.BorrarFila("DocumentoTabla", documento.ISBN);
-            return BaseDatos.BaseDatos.AñadirFila("DocumentoTabla", Transformer.ToDocumentoDato(documento));
+             return BaseDatos.BaseDatos.AñadirFila("DocumentoTabla", Transformer.ToDocumentoDato(documento));
         }
 
         //PRE: ejemplar no puede ser nulo y no debe existir previamente en la BD.
@@ -233,14 +235,14 @@ namespace Persistencia
         public static bool BajaEjemplar(Ejemplar ejemplar)
         {
             // Baja lógica: marcar como inactivo en lugar de borrar
-            return BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Activo", false);
+            return BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Activo", false );
         }
 
         //PRE: codigo no puede ser nulo.
         //POST: devuelve true si existe un ejemplar con ese código en la BD.
         public static bool ExisteEjemplar(string codigo)
         {
-            return BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) != null;
+            return BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) !=  null;
         }
 
         //PRE: codigo no puede ser nulo.
@@ -250,6 +252,7 @@ namespace Persistencia
             EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
             if (ejemplarData == null) return null;
             return Transformer.ToEjemplar(ejemplarData);
+
         }
 
         //PRE: documento no puede ser nulo.
@@ -258,7 +261,7 @@ namespace Persistencia
         {
             return BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
                 .OfType<EjemplarDato>()
-                .Where(ejemplarData => ejemplarData.IsbnDocumento == documento.ISBN && ejemplarData.Activo)
+                .Where(ejemplarData => ejemplarData.IsbnDocumento == documento.ISBN &&  ejemplarData.Activo)
                 .Select(ejemplarData => Transformer.ToEjemplar(ejemplarData))
                 .ToList();
         }
@@ -268,7 +271,7 @@ namespace Persistencia
         public static bool ActualizarEjemplar(Ejemplar ejemplar)
         {
             BaseDatos.BaseDatos.BorrarFila("EjemplarTabla", ejemplar.Codigo);
-            return BaseDatos.BaseDatos.AñadirFila("EjemplarTabla", Transformer.ToEjemplarDato(ejemplar));
+            return BaseDatos.BaseDatos.AñadirFila("EjemplarTabla", Transformer.ToEjemplarDato(ejemplar)) ;
         }
 
         //PRE: ejemplares no puede ser nulo ni vacío.
@@ -276,7 +279,7 @@ namespace Persistencia
         public static bool ActualizarDisponibilidad(List<Ejemplar> ejemplares)
         {
             return ejemplares.All(ejemplar =>
-                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", !ejemplar.Disponible));
+                 BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", !ejemplar.Disponible));
         }
 
         //PRE: isbn no puede ser nulo.
@@ -285,7 +288,7 @@ namespace Persistencia
         {
             return BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
                 .OfType<EjemplarDato>()
-                .Any(ejemplarData => ejemplarData.IsbnDocumento == isbn && ejemplarData.Activo && !ejemplarData.Prestado);
+                .Any(ejemplarData => ejemplarData.IsbnDocumento  == isbn && ejemplarData.Activo  && !ejemplarData.Prestado);
         }
 
         // ------------- GESTIÓN DE PERSONAL
@@ -294,6 +297,7 @@ namespace Persistencia
         //POST: da de alta el personal de sala en PersonaTabla y PersonalSalaTabla. Devuelve true si tuvo éxito.
         public static bool AltaPersonalSala(PersonalSala personalSala)
         {
+
             PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalSala(personalSala);
             if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
             return BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala));
@@ -304,7 +308,7 @@ namespace Persistencia
         public static bool AltaPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
             PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return  false ;
             return BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones));
         }
 
@@ -312,8 +316,8 @@ namespace Persistencia
         //POST: devuelve el personal de sala con ese id. Si no existe, devuelve null.
         public static PersonalSala GetPersonalSala(string id)
         {
-            PersonalSalaDato personalSalaData = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", id) as PersonalSalaDato;
-            if (personalSalaData == null) return null;
+            PersonalSalaDato personalSalaData = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla",  id) as PersonalSalaDato;
+             if (personalSalaData == null)  return null;
             return Transformer.ToPersonalSala(personalSalaData);
         }
 
@@ -333,24 +337,24 @@ namespace Persistencia
             // Actualizar PersonaTabla
             BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalSala.Id);
             PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalSala(personalSala);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
-
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false; 
+                  
             // Actualizar PersonalSalaTabla
             BaseDatos.BaseDatos.BorrarFila("PersonalSalaTabla", personalSala.Id);
-            return BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala));
+            return BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala));               
         }
 
         //PRE: personalAdquisiciones no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del personal de adquisiciones en PersonaTabla y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
         public static bool ActualizarPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
-            // Actualizar PersonaTabla 
+             // Actualizar PersonaTabla 
             BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalAdquisiciones.Id);
             PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
             if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
 
-            // Actualizar PersonalAdquisicionesTabla 
-            BaseDatos.BaseDatos.BorrarFila("PersonalAdquisicionesTabla", personalAdquisiciones.Id);
+            // Actualizar PersonalAdquisicionesTabla  
+            BaseDatos.BaseDatos.BorrarFila("PersonalAdquisicionesTabla", personalAdquisiciones.Id);  
             return BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones));
         }
 

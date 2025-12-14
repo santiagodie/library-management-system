@@ -10,24 +10,32 @@ namespace Persistencia
         public string IdUsuario { get; private set; }
         public DateTime FechaInicio { get; private set; }
 
+        //PRE: idUsuario no puede ser nulo.
+        //POST: crea una nueva ClavePrestamo con el id de usuario y fecha de inicio proporcionados.
         public ClavePrestamo(string idUsuario, DateTime fechaInicio)
         {
             this.IdUsuario = idUsuario;
             this.FechaInicio = fechaInicio;
         }
 
+        //PRE: ---
+        //POST: devuelve true si el objeto es una ClavePrestamo con el mismo id de usuario y fecha.
         public override bool Equals(object obj)
         {
-            if (obj is ClavePrestamo other)
-                return IdUsuario == other.IdUsuario && FechaInicio.Date == other.FechaInicio.Date;
+            if (obj is ClavePrestamo other )
+                 return IdUsuario == other.IdUsuario && FechaInicio.Date == other.FechaInicio.Date;
             return false;
         }
 
+        //PRE: ---
+        //POST: devuelve el código hash de esta clave compuesta.
         public override int GetHashCode()
         {
             return (IdUsuario + FechaInicio.Date.ToString()).GetHashCode();
         }
 
+        //PRE: ---
+        //POST: devuelve una representación en string de la clave en formato "IdUsuario_AAAAMMDD".
         public override string ToString()
         {
             return $"{IdUsuario}_{FechaInicio:yyyyMMdd}";
@@ -44,6 +52,8 @@ namespace Persistencia
         private Dictionary<string, DateTime> fechasPrevistaDevolucion;
         private string idResponsable;  // PersonalSala que realizó el préstamo
 
+        //PRE: idUsuario, codigosEjemplares, fechasPrevistas e idResponsable no pueden ser nulos.
+        //POST: crea un nuevo PrestamoDato con los datos proporcionados. Inicializa las listas de devoluciones vacías.
         public PrestamoDato(string idUsuario, DateTime fechaInicio, List<string> codigosEjemplares, Dictionary<string, DateTime> fechasPrevistas, string idResponsable)
         {
             this.idUsuario = idUsuario;
@@ -63,11 +73,15 @@ namespace Persistencia
         public Dictionary<string, DateTime> FechasPrevistaDevolucion { get { return fechasPrevistaDevolucion; } }
         public string IdResponsable { get { return idResponsable; } }
 
+        //PRE: ---
+        //POST: devuelve true si todos los ejemplares han sido devueltos.
         public bool EstaFinalizado()
         {
             return codigosEjemplaresPrestados.Count == 0;
         }
 
+        //PRE: ---
+        //POST: devuelve true si algún ejemplar aún prestado tiene fecha de devolución prevista vencida.
         public bool EstaVencido()
         {
             foreach (var codigo in codigosEjemplaresPrestados)
@@ -81,16 +95,22 @@ namespace Persistencia
             return false;
         }
 
+        //PRE: ---
+        //POST: devuelve la clave primaria compuesta (idUsuario, fechaInicio) de esta entidad.
         public override object ObtenerClave()
         {
             return new ClavePrestamo(idUsuario, fechaInicio);
         }
 
+        //PRE: nombre indica el campo a modificar y dato contiene el nuevo valor.
+        //POST: los datos de préstamo son inmutables. Devuelve false siempre.
         public override bool ModificarDato(string nombre, object dato)
         {
             return false;
         }
 
+        //PRE: nombre indica el campo a obtener.
+        //POST: devuelve el valor del campo indicado, o null si no existe.
         public override object ObtenerDato(string nombre)
         {
             switch (nombre)

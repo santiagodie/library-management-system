@@ -5,25 +5,28 @@ namespace Persistencia
 {
     internal class EjemplarDato : Entidad
     {
-        private string codigo;
+        private string codigo;  
         private string isbnDocumento;
         private bool prestado;
         private bool activo;
-        private string idResponsable;
-        public EjemplarDato(string codigo, string isbnDocumento, bool prestado,
-        string idResponsable, bool activo = true)
+        private string idResponsable; 
+
+        //PRE: codigo, isbnDocumento e idResponsable no pueden ser nulos.
+        //POST: crea un nuevo EjemplarDato con los datos proporcionados. Por defecto está activo.
+        public EjemplarDato(string codigo, string isbnDocumento, bool prestado,string idResponsable, bool activo = true)
         {
-            this.codigo = codigo;
+            this.codigo = codigo;  
             this.isbnDocumento = isbnDocumento;
             this.prestado = prestado;
-            this.idResponsable = idResponsable;
+            this.idResponsable = idResponsable; 
             this.activo = activo;
+
         }
-        public string Codigo { get { return codigo; } }
-        public string IsbnDocumento { get { return isbnDocumento; } }
+        public string Codigo {  get { return codigo; } }
+        public string IsbnDocumento { get {  return isbnDocumento; } }
         public bool Prestado
         {
-            get { return prestado; }
+            get { return prestado;  }
             set { prestado = value; }
         }
         public bool Activo
@@ -31,11 +34,17 @@ namespace Persistencia
             get { return activo; }
             set { activo = value; }
         }
-        public string IdResponsable { get { return idResponsable; } }
+        public string IdResponsable { get { return idResponsable; }  }
+
+        //PRE: ---
+        //POST: devuelve la clave primaria (codigo) de esta entidad.
         public override object ObtenerClave()
         {
             return codigo;
         }
+
+        //PRE: nombre indica el campo a modificar y dato contiene el nuevo valor.
+        //POST: modifica el campo indicado si existe. Devuelve true si se modificó correctamente.
         public override bool ModificarDato(string nombre, object dato)
         {
             switch (nombre)
@@ -48,8 +57,11 @@ namespace Persistencia
                     return true;
                 default:
                     return false;
+
             }
         }
+        //PRE: nombre indica el campo a obtener.
+        //POST: devuelve el valor del campo indicado, o null si no existe.
         public override object ObtenerDato(string nombre)
         {
             switch (nombre)
@@ -63,4 +75,5 @@ namespace Persistencia
             }
         }
     }
+
 }
