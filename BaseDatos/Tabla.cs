@@ -59,5 +59,9 @@ namespace BaseDatos
             }
             return false;
         }
+        public bool Existe(object clave)
+        {
+            return this.Contains(clave);
+        }
     }
 }
