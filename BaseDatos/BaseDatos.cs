@@ -74,6 +74,8 @@ namespace BaseDatos
             }
             return resultado;
         }
+        //PRE: Tabla debe ser el nombre de una tabla válida. clave no puede ser nula.
+        //POST: devuelve true si existe una entidad con la clave especificada en la tabla.
         public static bool Existe(string Tabla,object clave)
         {
             Tabla tabla = typeof(BaseDatos).GetProperty(Tabla).GetValue(null) as Tabla;

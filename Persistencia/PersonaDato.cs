@@ -4,35 +4,32 @@ namespace Persistencia
 {
     internal class PersonaDato : Entidad
     {
-        private string id;
         private string nombre;
         private string dni;
         private string hashContraseña;
 
-        //PRE: id, nombre, dni y hashContraseña no pueden ser nulos.
+        //PRE: nombre, dni y hashContraseña no pueden ser nulos.
         //POST: crea un nuevo PersonaDato con los datos proporcionados.
-        public PersonaDato(string id, string nombre, string dni, string hashContraseña)
+        public PersonaDato(string nombre, string dni, string hashContraseña)
         {
-            this.id = id; 
             this.nombre = nombre;
             this.dni = dni;
-            this.hashContraseña = hashContraseña;  
+            this.hashContraseña = hashContraseña;
         }
 
-        public string Id { get { return id; } }
         public string Nombre { get { return nombre; }}
         public string Dni { get { return dni; } }
-        public string HashContraseña 
-        { 
-            get { return hashContraseña;  } 
-            set { hashContraseña = value; } 
+        public string HashContraseña
+        {
+            get { return hashContraseña;  }
+            set { hashContraseña = value; }
         }
 
         //PRE: ---
-        //POST: devuelve la clave primaria (id) de esta entidad.
+        //POST: devuelve la clave primaria (dni) de esta entidad.
         public override object ObtenerClave()
         {
-            return this.id;
+            return this.dni;
         }
 
         //PRE: nombre indica el campo a modificar y dato contiene el nuevo valor.
@@ -59,7 +56,6 @@ namespace Persistencia
         {
             switch (nombre)
             {
-                case "Id": return id;
                 case "Nombre": return this.nombre;
                 case "Dni": return dni;
                 case "HashContraseña": return hashContraseña;

@@ -13,14 +13,14 @@ namespace Persistencia
         //POST: devuelve un UsuarioDato creado a partir del Usuario.
         public static UsuarioDato ToUsuarioDato(Usuario user)
         {
-            return new UsuarioDato(user.Id, user.Estado);
+            return new UsuarioDato(user.Dni, user.Estado);
         }
 
         //PRE: user no puede ser nulo.
         //POST: devuelve un PersonaDato creado a partir del Usuario.
         public static PersonaDato ToPersonaDatoFromUsuario(Usuario user)
         {
-            return new PersonaDato(user.Id, user.Nombre, user.Dni, user.HashContraseña);
+            return new PersonaDato(user.Nombre, user.Dni, user.HashContraseña);
         }
 
         //PRE: userData no puede ser nulo.
@@ -30,7 +30,7 @@ namespace Persistencia
             PersonaDato personaData = BaseDatos.BaseDatos.ObtenerDatos("PersonaTabla", userData.PersonaId) as PersonaDato;
             if (personaData == null) return null;
 
-            Usuario user = new Usuario(personaData.Id, personaData.Nombre, personaData.Dni);
+            Usuario user = new Usuario(personaData.Nombre, personaData.Dni);
             user.SetHashContraseña(personaData.HashContraseña);
             user.SetEstado(userData.Estado);
             return user;
@@ -71,7 +71,7 @@ namespace Persistencia
         //POST: devuelve un EjemplarDato creado a partir del Ejemplar.
         public static EjemplarDato ToEjemplarDato(Ejemplar ejemplar)
         {
-            return new EjemplarDato( ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Id, ejemplar.Activo );
+            return new EjemplarDato( ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Dni, ejemplar.Activo );
         }
 
         //PRE: ejemplarData no puede ser nulo.
@@ -110,7 +110,7 @@ namespace Persistencia
 
                 fechasPrevistas[ejemplar.Codigo] = fechaPrevista;
             }
-            return new PrestamoDato(prestamo.Usuario.Id,prestamo.FechaInicio,codigos,fechasPrevistas,prestamo.Responsable.Id);
+            return new PrestamoDato(prestamo.Usuario.Dni,prestamo.FechaInicio,codigos,fechasPrevistas,prestamo.Responsable.Dni);
         }
 
         //PRE: prestamoData no puede ser nulo.
@@ -162,14 +162,14 @@ namespace Persistencia
         //POST: devuelve un PersonalSalaDato creado a partir del PersonalSala.
         public static PersonalSalaDato ToPersonalSalaDato(PersonalSala personalSala)
         {
-            return new PersonalSalaDato(personalSala.Id, personalSala.NSS.ToString());
+            return new PersonalSalaDato(personalSala.Dni, personalSala.NSS.ToString());
         }
 
         //PRE: personalSala no puede ser nulo.
         //POST: devuelve un PersonaDato creado a partir del PersonalSala.
         public static PersonaDato ToPersonaDatoFromPersonalSala(PersonalSala personalSala)
         {
-            return new PersonaDato(personalSala.Id, personalSala.Nombre, personalSala.Dni, personalSala.HashContraseña);
+            return new PersonaDato(personalSala.Nombre, personalSala.Dni, personalSala.HashContraseña);
         }
 
         //PRE: personalSalaData no puede ser nulo.
@@ -181,7 +181,7 @@ namespace Persistencia
 
             int nss = 0;
             int.TryParse(personalSalaData.Nss, out nss);
-            PersonalSala personalSala = new PersonalSala(personaData.Id, personaData.Nombre, personaData.Dni, nss);
+            PersonalSala personalSala = new PersonalSala(personaData.Nombre, personaData.Dni, nss);
             personalSala.SetHashContraseña(personaData.HashContraseña);
             return personalSala;
         }
@@ -190,14 +190,14 @@ namespace Persistencia
         //POST: devuelve un PersonalAdquisicionesDato creado a partir del PersonalAdquisiciones.
         public static PersonalAdquisicionesDato ToPersonalAdquisicionesDato(PersonalAdquisiciones personalAdquisiciones)
         {
-            return new PersonalAdquisicionesDato(personalAdquisiciones.Id, personalAdquisiciones.NSS.ToString());
+            return new PersonalAdquisicionesDato(personalAdquisiciones.Dni, personalAdquisiciones.NSS.ToString());
         }
 
         //PRE: personalAdquisiciones no puede ser nulo.
         //POST: devuelve un PersonaDato creado a partir del PersonalAdquisiciones.
         public static PersonaDato ToPersonaDatoFromPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
-            return new PersonaDato(personalAdquisiciones.Id, personalAdquisiciones.Nombre, personalAdquisiciones.Dni, personalAdquisiciones.HashContraseña);
+            return new PersonaDato(personalAdquisiciones.Nombre, personalAdquisiciones.Dni, personalAdquisiciones.HashContraseña);
         }
 
         //PRE: personalAdquisicionesData no puede ser nulo.
@@ -208,7 +208,7 @@ namespace Persistencia
             if (personaData == null) return null;
             int nss = 0;
             int.TryParse(personalAdquisicionesData.Nss, out nss);
-            PersonalAdquisiciones pa = new PersonalAdquisiciones(personaData.Id, personaData.Nombre, personaData.Dni, nss);
+            PersonalAdquisiciones pa = new PersonalAdquisiciones(personaData.Nombre, personaData.Dni, nss);
             pa.SetHashContraseña(personaData.HashContraseña);
             return pa;
         }

@@ -76,6 +76,8 @@ namespace BaseDatos
             }
             return false;
         }
+        //PRE: clave no puede ser nula.
+        //POST: devuelve true si existe una entidad con la clave especificada en la tabla.
         public bool Existe(object clave)
         {
             return this.Contains(clave);

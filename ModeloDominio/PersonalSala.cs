@@ -8,7 +8,7 @@ namespace ModeloDominio
 {
     public class PersonalSala : Personal
     {
-        public PersonalSala(string id, string nombre, string dni, int NSS) : base(id, nombre, dni, NSS)
+        public PersonalSala(string nombre, string dni, int NSS) : base(nombre, dni, NSS)
         {
         }
     }
