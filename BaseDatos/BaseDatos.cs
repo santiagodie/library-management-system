@@ -74,5 +74,10 @@ namespace BaseDatos
             }
             return resultado;
         }
+        public static bool Existe(string Tabla,object clave)
+        {
+            Tabla tabla = typeof(BaseDatos).GetProperty(Tabla).GetValue(null) as Tabla;
+            return tabla.Existe(clave);
+        }
     }
 }
