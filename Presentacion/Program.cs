@@ -24,7 +24,13 @@ namespace Presentacion
                 Rol rol = login.RolLogueado;
                 Persona persona = login.PersonaLogueada;
 
-                Application.Run(new Main(rol, persona));
+                switch (rol)
+                {
+                    case Rol.Usuario:
+                        Application.Run(new FormUsuario(persona as Usuario));
+                        break;
+                }
+
             }
             else
             {
