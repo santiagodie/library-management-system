@@ -11,18 +11,15 @@ using System.Windows.Forms;
 
 namespace Presentacion
 {
-    public partial class FormUsuario : UserControl
+    public partial class FormUsuario : Form
     {
         public Usuario usuario { get; set; }
-        public FormUsuario()
+        public FormUsuario(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
         }
 
-        private void FormUsuario_VisibleChanged(object sender, EventArgs e)
-        {
-
-        }
         private void CargarLibros()
         {
             
