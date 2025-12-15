@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloDominio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,19 @@ namespace Presentacion
 {
     public partial class FormUsuario : UserControl
     {
+        public Usuario usuario { get;set }
         public FormUsuario()
         {
             InitializeComponent();
+        }
+
+        private void FormUsuario_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void CargarLibros()
+        {
+            
         }
     }
 }
