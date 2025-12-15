@@ -26,7 +26,7 @@ namespace Presentacion
                 if (resultado.Exito)
                 {
                     this.RolLogueado = resultado.Rol;
-                    this.PersonaLogueada = resultado.Persona;
+                    this.PersonaLogueada = rehsultado.Persona;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
