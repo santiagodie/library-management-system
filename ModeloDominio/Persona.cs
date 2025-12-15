@@ -3,11 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ModeloDominio
 {
+    public enum Rol
+    {
+        Usuario,
+        PersonalAdquisiciones,
+        PersonalSala
+    }
     public abstract class Persona
     {
         public string Nombre { get; private set; }

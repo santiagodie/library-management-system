@@ -37,6 +37,9 @@
             // 
             // DNILabel
             // 
+            this.DNILabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DNILabel.AutoSize = true;
             this.DNILabel.Location = new System.Drawing.Point(150, 48);
             this.DNILabel.Name = "DNILabel";
@@ -46,6 +49,9 @@
             // 
             // PasswordLabel
             // 
+            this.PasswordLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordLabel.AutoSize = true;
             this.PasswordLabel.Location = new System.Drawing.Point(150, 109);
             this.PasswordLabel.Name = "PasswordLabel";
@@ -55,23 +61,30 @@
             // 
             // DNIBox
             // 
+            this.DNIBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DNIBox.Location = new System.Drawing.Point(153, 67);
             this.DNIBox.Name = "DNIBox";
-            this.DNIBox.Size = new System.Drawing.Size(143, 22);
+            this.DNIBox.Size = new System.Drawing.Size(201, 22);
             this.DNIBox.TabIndex = 2;
             // 
             // PasswordBox
             // 
+            this.PasswordBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordBox.Location = new System.Drawing.Point(153, 128);
             this.PasswordBox.Name = "PasswordBox";
             this.PasswordBox.PasswordChar = '*';
-            this.PasswordBox.Size = new System.Drawing.Size(143, 22);
+            this.PasswordBox.Size = new System.Drawing.Size(201, 22);
             this.PasswordBox.TabIndex = 3;
             this.PasswordBox.UseSystemPasswordChar = true;
             // 
             // AcceptBtn
             // 
-            this.AcceptBtn.Location = new System.Drawing.Point(360, 172);
+            this.AcceptBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AcceptBtn.Location = new System.Drawing.Point(418, 206);
             this.AcceptBtn.Name = "AcceptBtn";
             this.AcceptBtn.Size = new System.Drawing.Size(75, 23);
             this.AcceptBtn.TabIndex = 4;
@@ -79,17 +92,16 @@
             this.AcceptBtn.UseVisualStyleBackColor = true;
             this.AcceptBtn.Click += new System.EventHandler(this.AcceptBtn_Click);
             // 
-            // UserControl1
+            // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.AcceptBtn);
             this.Controls.Add(this.PasswordBox);
             this.Controls.Add(this.DNIBox);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.DNILabel);
-            this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(483, 224);
+            this.Name = "Login";
+            this.Size = new System.Drawing.Size(541, 258);
             this.ResumeLayout(false);
             this.PerformLayout();
 
