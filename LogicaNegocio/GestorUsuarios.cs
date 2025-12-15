@@ -13,6 +13,73 @@ public class GestorUsuarios
 	{
 	}
 
+    // En GestorUsuarios.cs
+
+    // Clase auxiliar pequeña para devolver el resultado del login
+    public class ResultadoLogin
+    {
+        public Rol Rol { get; set; }
+        public Persona Persona { get; set; }
+        public bool Exito { get; set; }
+        public string MensajeError { get; set; }
+    }
+
+    public ResultadoLogin ValidarLogin(string dni, string contraseña)
+    {
+        ResultadoLogin resultado = new ResultadoLogin { Exito = false };
+
+        if (string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(contraseña))
+        {
+            resultado.MensajeError = "Datos vacíos.";
+            return resultado;
+        }
+
+        if (!Persistencia.Persistencia.ExistePersona(dni))
+        {
+            resultado.MensajeError = "No existe ninguna cuenta con ese DNI.";
+            return resultado;
+        }
+
+        string hashPass = Hash.GetHash(contraseña);
+
+        if (Persistencia.Persistencia.ExisteUsuario(dni))
+        {
+            Usuario u = Persistencia.Persistencia.GetUsuario(dni);
+            if (u.HashContraseña == hashPass)
+            {
+                resultado.Exito = true;
+                resultado.Rol = Rol.Usuario;
+                resultado.Persona = u;
+                return resultado;
+            }
+        }
+        else if (Persistencia.Persistencia.ExistePersonalSala(dni))
+        {
+            PersonalSala p = Persistencia.Persistencia.GetPersonalSala(dni);
+            if (p.HashContraseña == hashPass)
+            {
+                resultado.Exito = true;
+                resultado.Rol = Rol.PersonalSala;
+                resultado.Persona = p;
+                return resultado;
+            }
+        }
+        else if (Persistencia.Persistencia.ExistePersonalAdquisiciones(dni))
+        {
+            PersonalAdquisiciones p = Persistencia.Persistencia.GetPersonalAdquisiciones(dni);
+            if (p.HashContraseña == hashPass)
+            {
+                resultado.Exito = true;
+                resultado.Rol = Rol.PersonalAdquisiciones;
+                resultado.Persona = p;
+                return resultado;
+            }
+        }
+
+        resultado.MensajeError = "Contraseña incorrecta.";
+        return resultado;
+    }
+
     public bool AltaUsuario(Usuario usuario)
     {
         if (Persistencia.Persistencia.ExisteUsuario(usuario.Dni))

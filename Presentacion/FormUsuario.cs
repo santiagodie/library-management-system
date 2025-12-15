@@ -13,7 +13,7 @@ namespace Presentacion
 {
     public partial class FormUsuario : UserControl
     {
-        public Usuario usuario { get;set }
+        public Usuario usuario { get; set; }
         public FormUsuario()
         {
             InitializeComponent();

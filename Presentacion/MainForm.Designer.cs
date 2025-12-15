@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.loginForm = new Presentacion.Login();
             this.SuspendLayout();
-            // 
-            // loginForm
-            // 
-            this.loginForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.loginForm.Location = new System.Drawing.Point(0, 0);
-            this.loginForm.Name = "loginForm";
-            this.loginForm.Size = new System.Drawing.Size(618, 233);
-            this.loginForm.TabIndex = 0;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 233);
-            this.Controls.Add(this.loginForm);
             this.Name = "Main";
             this.Text = "GestionBiblioteca";
             this.ResumeLayout(false);
@@ -53,7 +43,6 @@
 
         #endregion
 
-        private Login loginForm;
     }
 }
 

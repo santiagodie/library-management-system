@@ -12,29 +12,29 @@ using System.Windows.Forms;
 
 namespace Presentacion
 {
-    
+
     public partial class Main : Form
     {
         private Rol rol;
         private Persona persona;
-        public Main()
+        public Main(Rol rol, Persona persona)
         {
             InitializeComponent();
-            loginForm.LoginExitoso += InicioSesion;
-
-
-        }
-        private void InicioSesion(object sender, Rol rol,Persona persona)
-        {
             this.rol = rol;
             this.persona = persona;
-            loginForm.Visible = false;
-            switch (rol)
-            {
-                
-            }
-        }
+            ConfigurarPermisos();
 
-        
+
+        }
+        private void ConfigurarPermisos()
+        {
+            switch (this.rol)
+            {
+                case Rol.Usuario:
+                case Rol.PersonalSala:
+                case Rol.PersonalAdquisiciones: break;
+            }
+
+        }
     }
 }
