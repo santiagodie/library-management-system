@@ -98,6 +98,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LogicaNegocio\LogicaNegocio.csproj">
+      <Project>{98c5e991-7d0d-4370-9d51-f1e74e119110}</Project>
+      <Name>LogicaNegocio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModeloDominio\ModeloDominio.csproj">
       <Project>{ea801c38-4475-4462-8d82-684df6fd5b05}</Project>
       <Name>ModeloDominio</Name>
