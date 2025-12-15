@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ModeloDominio;
 using Persistencia;
 using BaseDatos;
+using System.Linq;
 
 public class GestorUsuarios
 {
@@ -10,12 +11,9 @@ public class GestorUsuarios
     const string LetrasDNI = "TRWAGMYFPDXBNJZSQVHLCKE";
 
     public GestorUsuarios()
-	{
-	}
+    {
+    }
 
-    // En GestorUsuarios.cs
-
-    // Clase auxiliar pequeña para devolver el resultado del login
     public class ResultadoLogin
     {
         public Rol Rol { get; set; }
@@ -90,7 +88,7 @@ public class GestorUsuarios
 
         if (string.IsNullOrEmpty(usuario.Nombre) || string.IsNullOrEmpty(usuario.Dni) || string.IsNullOrEmpty(usuario.HashContraseña))
         {
-           // Console.WriteLine("Error: El nombre, DNI y contraseña son obligatorios.");
+            // Console.WriteLine("Error: El nombre, DNI y contraseña son obligatorios.");
             return false;
         }
 
@@ -110,7 +108,7 @@ public class GestorUsuarios
 
     public Usuario ConsultarUusuario(String Dni)
     {
-       return Persistencia.Persistencia.GetUsuario(Dni);
+        return Persistencia.Persistencia.GetUsuario(Dni);
     }
 
     public List<Usuario> GetListaUsuarios()
@@ -173,8 +171,32 @@ public class GestorUsuarios
 
     public DateTime GetFechaDisponible(Ejemplar ejemplar) //lo necesito para que el personal de adquisiciones pueda saber fechas de disponibilidad de documentos
     {
-        if(ejemplar.Documento is Libro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[0];
+        if (ejemplar.Documento is Libro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[0];
         else if (ejemplar.Documento is Audiolibro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[1];
         return DateTime.MinValue;
+    }
+
+    public List<Prestamo> ObtenerMisPrestamosFiltrados(Persona personaLogueada, string textoBuscar, bool soloPendientes)
+    {
+        Usuario usuario = Persistencia.Persistencia.GetUsuario(personaLogueada.Dni);
+        if (usuario == null) return new List<Prestamo>();
+        List<Prestamo> misPrestamos = Persistencia.Persistencia.GetPrestamos(usuario);
+
+        var consulta = misPrestamos.AsQueryable();
+
+        if (soloPendientes)
+        {
+            consulta = consulta.Where(p => !p.EstaFinalizado());
+        }
+
+        if (!string.IsNullOrEmpty(textoBuscar))
+        {
+            string textoMinuscula = textoBuscar.ToLower();
+            consulta = consulta.Where(p =>
+                p.EjemplaresPrestados.Any(e => e.Documento.Titulo.ToLower().Contains(textoMinuscula))
+            );
+        }
+
+        return consulta.OrderByDescending(p => p.FechaInicio).ToList();
     }
 }
