@@ -34,7 +34,6 @@
             this.checkBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Book = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.Tabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
             this.Panel.SuspendLayout();
@@ -44,17 +43,16 @@
             // 
             this.Tabla.ColumnCount = 1;
             this.Tabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Tabla.Controls.Add(this.Grid, 0, 2);
-            this.Tabla.Controls.Add(this.Panel, 0, 1);
-            this.Tabla.Controls.Add(this.label2, 0, 0);
+            this.Tabla.Controls.Add(this.Grid, 0, 1);
+            this.Tabla.Controls.Add(this.Panel, 0, 0);
             this.Tabla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tabla.Location = new System.Drawing.Point(0, 0);
             this.Tabla.Name = "Tabla";
-            this.Tabla.RowCount = 3;
-            this.Tabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.Tabla.RowCount = 2;
             this.Tabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.Tabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 326F));
-            this.Tabla.Size = new System.Drawing.Size(771, 520);
+            this.Tabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Tabla.Size = new System.Drawing.Size(753, 473);
             this.Tabla.TabIndex = 0;
             // 
             // Grid
@@ -63,11 +61,11 @@
             this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Grid.GridColor = System.Drawing.SystemColors.Control;
-            this.Grid.Location = new System.Drawing.Point(3, 95);
+            this.Grid.Location = new System.Drawing.Point(3, 63);
             this.Grid.Name = "Grid";
             this.Grid.RowHeadersWidth = 51;
             this.Grid.RowTemplate.Height = 24;
-            this.Grid.Size = new System.Drawing.Size(765, 422);
+            this.Grid.Size = new System.Drawing.Size(747, 407);
             this.Grid.TabIndex = 0;
             // 
             // Panel
@@ -76,9 +74,9 @@
             this.Panel.Controls.Add(this.label1);
             this.Panel.Controls.Add(this.Book);
             this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel.Location = new System.Drawing.Point(3, 35);
+            this.Panel.Location = new System.Drawing.Point(3, 3);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(765, 54);
+            this.Panel.Size = new System.Drawing.Size(747, 54);
             this.Panel.TabIndex = 1;
             // 
             // checkBox
@@ -113,29 +111,15 @@
             this.Book.Size = new System.Drawing.Size(126, 22);
             this.Book.TabIndex = 0;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(765, 32);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Documentos prestados";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // FormUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(753, 473);
             this.Controls.Add(this.Tabla);
             this.Name = "FormUsuario";
-            this.Size = new System.Drawing.Size(771, 520);
-            this.VisibleChanged += new System.EventHandler(this.FormUsuario_VisibleChanged);
+            this.Text = "Documentos prestados";
             this.Tabla.ResumeLayout(false);
-            this.Tabla.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
             this.Panel.ResumeLayout(false);
             this.Panel.PerformLayout();
@@ -151,6 +135,5 @@
         private System.Windows.Forms.CheckBox checkBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox Book;
-        private System.Windows.Forms.Label label2;
     }
 }
