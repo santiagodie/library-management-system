@@ -40,6 +40,46 @@ public class GestorUsuarios
 
         string hashPass = Hash.GetHash(contraseña);
 
+        if (Persistencia.Persistencia.ExistePersonalSala(dni))
+        {
+            PersonalSala p = Persistencia.Persistencia.GetPersonalSala(dni);
+            if (p.HashContraseña == hashPass)
+            {
+                resultado.Exito = true;
+                resultado.Persona = p;
+
+                if (Persistencia.Persistencia.ExisteUsuario(dni))
+                {
+                    resultado.Rol = Rol.UsuarioYSala; 
+                }
+                else
+                {
+                    resultado.Rol = Rol.PersonalSala;
+                }
+                return resultado;
+            }
+        }
+
+        if (Persistencia.Persistencia.ExistePersonalAdquisiciones(dni))
+        {
+            PersonalAdquisiciones p = Persistencia.Persistencia.GetPersonalAdquisiciones(dni);
+            if (p.HashContraseña == hashPass)
+            {
+                resultado.Exito = true;
+                resultado.Persona = p;
+
+                if (Persistencia.Persistencia.ExisteUsuario(dni))
+                {
+                    resultado.Rol = Rol.UsuarioYAdquisiciones;
+                }
+                else
+                {
+                    resultado.Rol = Rol.PersonalAdquisiciones;
+                }
+                return resultado;
+            }
+        }
+
         if (Persistencia.Persistencia.ExisteUsuario(dni))
         {
             Usuario u = Persistencia.Persistencia.GetUsuario(dni);
@@ -48,28 +88,6 @@ public class GestorUsuarios
                 resultado.Exito = true;
                 resultado.Rol = Rol.Usuario;
                 resultado.Persona = u;
-                return resultado;
-            }
-        }
-        else if (Persistencia.Persistencia.ExistePersonalSala(dni))
-        {
-            PersonalSala p = Persistencia.Persistencia.GetPersonalSala(dni);
-            if (p.HashContraseña == hashPass)
-            {
-                resultado.Exito = true;
-                resultado.Rol = Rol.PersonalSala;
-                resultado.Persona = p;
-                return resultado;
-            }
-        }
-        else if (Persistencia.Persistencia.ExistePersonalAdquisiciones(dni))
-        {
-            PersonalAdquisiciones p = Persistencia.Persistencia.GetPersonalAdquisiciones(dni);
-            if (p.HashContraseña == hashPass)
-            {
-                resultado.Exito = true;
-                resultado.Rol = Rol.PersonalAdquisiciones;
-                resultado.Persona = p;
                 return resultado;
             }
         }
