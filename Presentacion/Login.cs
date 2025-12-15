@@ -26,9 +26,27 @@ namespace Presentacion
                 if (resultado.Exito)
                 {
                     this.RolLogueado = resultado.Rol;
-                    this.PersonaLogueada = rehsultado.Persona;
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    this.PersonaLogueada = resultado.Persona;
+                    if (RolLogueado == Rol.UsuarioYAdquisiciones || RolLogueado==Rol.UsuarioYSala)
+                    {
+                        RolLog rolLog= new RolLog(RolLogueado);
+                        if (rolLog.ShowDialog() == DialogResult.OK)
+                        {
+                            RolLogueado = rolLog.rolLogin;
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se ha elegido ningún rol.");
+                        }
+                    }
+                    else
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    
                 }
                 else
                 {

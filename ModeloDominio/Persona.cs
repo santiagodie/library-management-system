@@ -13,7 +13,9 @@ namespace ModeloDominio
     {
         Usuario,
         PersonalAdquisiciones,
-        PersonalSala
+        PersonalSala,
+        UsuarioYSala,
+        UsuarioYAdquisiciones
     }
     public abstract class Persona
     {
