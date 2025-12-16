@@ -70,12 +70,13 @@ namespace ModeloDominio
     }
     public class EjemplarPrestado
     {
-        public string Título;
-        public string Autor;
-        public string ISBN;
-        public DateTime FechaPrestamo;
-        public DateTime FechaFin;
-        public bool Pendiente;
+        public string Título { get; set; }
+        public string Autor { get; set; }
+        public string ISBN { get; set; }
+        public DateTime FechaPrestamo { get; set; }
+        public DateTime FechaFin { get; set; }
+        public bool Pendiente { get; set; }
+
         public EjemplarPrestado(string titulo, string autor, string iSBN, DateTime fechaPrestamo, DateTime fechaFin, bool pendiente)
         {
             this.Título = titulo;
