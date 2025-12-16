@@ -71,7 +71,7 @@ namespace Persistencia
         //POST: devuelve un EjemplarDato creado a partir del Ejemplar.
         public static EjemplarDato ToEjemplarDato(Ejemplar ejemplar)
         {
-            return new EjemplarDato( ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Dni, ejemplar.Activo );
+            return new EjemplarDato(ejemplar.Localizacion, ejemplar.Codigo, ejemplar.Documento.ISBN, !ejemplar.Disponible, ejemplar.Responsable.Dni, ejemplar.Activo );
         }
 
         //PRE: ejemplarData no puede ser nulo.
@@ -88,8 +88,7 @@ namespace Persistencia
             if (responsableData == null) return null;
             PersonalAdquisiciones responsable = ToPersonalAdquisiciones(responsableData);
 
-            // Localización como vacio de momento
-            return new Ejemplar(ejemplarData.Codigo, "", !ejemplarData.Prestado, document, responsable, ejemplarData.Activo);
+            return new Ejemplar(ejemplarData.Codigo, ejemplarData.Localizacion, !ejemplarData.Prestado, document, responsable, ejemplarData.Activo);
         }
 
         //------------------------PRESTAMO

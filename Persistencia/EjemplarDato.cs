@@ -5,6 +5,7 @@ namespace Persistencia
 {
     internal class EjemplarDato : Entidad
     {
+        private string localizacion;
         private string codigo;  
         private string isbnDocumento;
         private bool prestado;
@@ -13,8 +14,9 @@ namespace Persistencia
 
         //PRE: codigo, isbnDocumento e idResponsable no pueden ser nulos.
         //POST: crea un nuevo EjemplarDato con los datos proporcionados. Por defecto está activo.
-        public EjemplarDato(string codigo, string isbnDocumento, bool prestado,string idResponsable, bool activo = true)
+        public EjemplarDato(string localizacion,string codigo, string isbnDocumento, bool prestado,string idResponsable, bool activo = true)
         {
+            this.localizacion = localizacion;
             this.codigo = codigo;  
             this.isbnDocumento = isbnDocumento;
             this.prestado = prestado;
@@ -35,6 +37,7 @@ namespace Persistencia
             set { activo = value; }
         }
         public string IdResponsable { get { return idResponsable; }  }
+        public string Localizacion { get { return localizacion; } }
 
         //PRE: ---
         //POST: devuelve la clave primaria (codigo) de esta entidad.
@@ -55,6 +58,9 @@ namespace Persistencia
                 case "Activo":
                     activo = (bool)dato;
                     return true;
+                case "Localizacion":
+                    localizacion = (string)dato;
+                    return true;
                 default:
                     return false;
 
@@ -71,6 +77,7 @@ namespace Persistencia
                 case "Prestado": return prestado;
                 case "Activo": return activo;
                 case "IdResponsable": return idResponsable;
+                case "Localizacion": return localizacion;
                 default: return null;
             }
         }
