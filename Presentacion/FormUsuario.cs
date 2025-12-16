@@ -39,10 +39,7 @@ namespace Presentacion
             CargarLibros(BookBox.Text,PendientesBox.Checked);
         }
 
-        private void FormUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
+        
     }
     
 }
