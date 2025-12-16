@@ -72,6 +72,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RolLog";
             this.Text = "Varios roles encontrados";
+            this.Load += new System.EventHandler(this.RolLog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

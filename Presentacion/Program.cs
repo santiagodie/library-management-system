@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Persistencia;
 
 namespace Presentacion
 {
@@ -17,6 +18,9 @@ namespace Presentacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            PoblarBaseDatos.Inicializar();// poblamos aqui con algunos datos de prueba.
+
             Login login = new Login();
 
             if (login.ShowDialog() == DialogResult.OK)

@@ -13,7 +13,7 @@ namespace Presentacion
 {
     public partial class RolLog : Form
     {
-        public Rol rolLogin { get;set }
+        public Rol rolLogin { get; set; }
         private Rol Roles;
         public RolLog(Rol rol)
         {
@@ -40,6 +40,11 @@ namespace Presentacion
             }
             this.DialogResult=DialogResult.OK;
             this.Close();
+        }
+
+        private void RolLog_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -104,6 +104,7 @@
             this.Controls.Add(this.DNILabel);
             this.Name = "Login";
             this.Text = "Inicio de sesión";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
