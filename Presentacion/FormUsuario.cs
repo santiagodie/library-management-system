@@ -20,6 +20,7 @@ namespace Presentacion
         {
             InitializeComponent();
             this.usuario = usuario;
+            Grid.AutoGenerateColumns = false;
             CargarLibros(null, PendientesBox.Checked);
         }
 

@@ -84,6 +84,7 @@
     <EmbeddedResource Include="RolLog.resx">
       <DependentUpon>RolLog.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\FormUsuario.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

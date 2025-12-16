@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Tabla = new System.Windows.Forms.TableLayoutPanel();
             this.Grid = new System.Windows.Forms.DataGridView();
@@ -35,9 +36,17 @@
             this.PendientesBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BookBox = new System.Windows.Forms.TextBox();
+            this.formUsuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Título = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaPrestamo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pendiente = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Tabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
             this.Panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.formUsuarioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Tabla
@@ -63,6 +72,13 @@
             this.Grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Grid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Título,
+            this.Autor,
+            this.ISBN,
+            this.FechaPrestamo,
+            this.FechaFin,
+            this.Pendiente});
             this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Grid.GridColor = System.Drawing.SystemColors.Control;
             this.Grid.Location = new System.Drawing.Point(3, 63);
@@ -120,6 +136,52 @@
             this.BookBox.TabIndex = 0;
             this.BookBox.TextChanged += new System.EventHandler(this.Cambio);
             // 
+            // formUsuarioBindingSource
+            // 
+            this.formUsuarioBindingSource.DataSource = typeof(Presentacion.FormUsuario);
+            // 
+            // Título
+            // 
+            this.Título.HeaderText = "Título";
+            this.Título.MinimumWidth = 6;
+            this.Título.Name = "Título";
+            this.Título.ReadOnly = true;
+            // 
+            // Autor
+            // 
+            this.Autor.HeaderText = "Autor";
+            this.Autor.MinimumWidth = 6;
+            this.Autor.Name = "Autor";
+            this.Autor.ReadOnly = true;
+            // 
+            // ISBN
+            // 
+            this.ISBN.HeaderText = "ISBN";
+            this.ISBN.MinimumWidth = 6;
+            this.ISBN.Name = "ISBN";
+            this.ISBN.ReadOnly = true;
+            // 
+            // FechaPrestamo
+            // 
+            this.FechaPrestamo.HeaderText = "Fecha de préstamo";
+            this.FechaPrestamo.MinimumWidth = 6;
+            this.FechaPrestamo.Name = "FechaPrestamo";
+            this.FechaPrestamo.ReadOnly = true;
+            // 
+            // FechaFin
+            // 
+            this.FechaFin.HeaderText = "Fecha fin de préstamo";
+            this.FechaFin.MinimumWidth = 6;
+            this.FechaFin.Name = "FechaFin";
+            this.FechaFin.ReadOnly = true;
+            // 
+            // Pendiente
+            // 
+            this.Pendiente.HeaderText = "Pendiente de devolución";
+            this.Pendiente.MinimumWidth = 6;
+            this.Pendiente.Name = "Pendiente";
+            this.Pendiente.ReadOnly = true;
+            // 
             // FormUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -132,6 +194,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
             this.Panel.ResumeLayout(false);
             this.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.formUsuarioBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -144,5 +207,12 @@
         private System.Windows.Forms.CheckBox PendientesBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox BookBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Título;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Autor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ISBN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaPrestamo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaFin;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Pendiente;
+        private System.Windows.Forms.BindingSource formUsuarioBindingSource;
     }
 }
