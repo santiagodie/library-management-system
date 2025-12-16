@@ -141,42 +141,48 @@
             this.formUsuarioBindingSource.DataSource = typeof(Presentacion.FormUsuario);
             // 
             // Título
-            // 
+            //
+            this.Título.DataPropertyName = "Título";
             this.Título.HeaderText = "Título";
             this.Título.MinimumWidth = 6;
             this.Título.Name = "Título";
             this.Título.ReadOnly = true;
             // 
             // Autor
-            // 
+            //
+            this.Autor.DataPropertyName = "Autor";
             this.Autor.HeaderText = "Autor";
             this.Autor.MinimumWidth = 6;
             this.Autor.Name = "Autor";
             this.Autor.ReadOnly = true;
             // 
             // ISBN
-            // 
+            //
+            this.ISBN.DataPropertyName = "ISBN";
             this.ISBN.HeaderText = "ISBN";
             this.ISBN.MinimumWidth = 6;
             this.ISBN.Name = "ISBN";
             this.ISBN.ReadOnly = true;
             // 
             // FechaPrestamo
-            // 
+            //
+            this.FechaPrestamo.DataPropertyName = "FechaPrestamo";
             this.FechaPrestamo.HeaderText = "Fecha de préstamo";
             this.FechaPrestamo.MinimumWidth = 6;
             this.FechaPrestamo.Name = "FechaPrestamo";
             this.FechaPrestamo.ReadOnly = true;
             // 
             // FechaFin
-            // 
+            //
+            this.FechaFin.DataPropertyName = "FechaFin";
             this.FechaFin.HeaderText = "Fecha fin de préstamo";
             this.FechaFin.MinimumWidth = 6;
             this.FechaFin.Name = "FechaFin";
             this.FechaFin.ReadOnly = true;
             // 
             // Pendiente
-            // 
+            //
+            this.Pendiente.DataPropertyName = "Pendiente";
             this.Pendiente.HeaderText = "Pendiente de devolución";
             this.Pendiente.MinimumWidth = 6;
             this.Pendiente.Name = "Pendiente";

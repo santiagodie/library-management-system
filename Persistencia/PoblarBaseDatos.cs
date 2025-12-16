@@ -20,6 +20,7 @@ namespace Persistencia
             PoblarPersonal();
             PoblarUsuarios();
             PoblarDocumentosYEjemplares();
+            PoblarPrestamos();
             poblada = true;
         }
 
@@ -154,6 +155,66 @@ namespace Persistencia
             Persistencia.AltaEjemplar(ejemplar9);
             Persistencia.AltaEjemplar(ejemplar10);
             Persistencia.AltaEjemplar(ejemplar11);
+        }
+
+        //PRE: deben haberse ejecutado PoblarPersonal(), PoblarUsuarios() y PoblarDocumentosYEjemplares() antes.
+        //POST: crea préstamos de prueba con diferentes estados (activos y finalizados).
+        private static void PoblarPrestamos()
+        {   //Maria y Juan
+            Usuario usuario1 = Persistencia.GetUsuario("12345678A");
+            Usuario usuario2 = Persistencia.GetUsuario("87654321B");
+            PersonalSala responsableSala1 = Persistencia.GetPersonalSala("33333333E");
+            PersonalSala responsableSala2 = Persistencia.GetPersonalSala("44444444F");
+
+            Documento quijote = Persistencia.GetDocumento("978-84-376-0494-7");
+            Documento cienAnos = Persistencia.GetDocumento("978-84-204-8246-8");
+            Documento audio1984 = Persistencia.GetDocumento("978-84-666-1146-8");
+            Documento principito = Persistencia.GetDocumento("978-84-9838-499-1");
+
+            List<Ejemplar> ejemplaresQuijote = Persistencia.GetEjemplares(quijote);
+            List<Ejemplar> ejemplaresCienAnos = Persistencia.GetEjemplares(cienAnos);
+            List<Ejemplar> ejemplaresAudio = Persistencia.GetEjemplares(audio1984);
+            List<Ejemplar> ejemplaresPrincipito = Persistencia.GetEjemplares(principito);
+
+            // Prestamo 1: JUAN:  2 libros
+            List<Ejemplar> prestamo1Ejemplares = new List<Ejemplar> {ejemplaresQuijote[0],ejemplaresCienAnos[0]};
+            DateTime[] fechaFin1 = new DateTime[2];
+            fechaFin1[0] = DateTime.Today.AddDays(15);
+            fechaFin1[1] = DateTime.MinValue;            
+            Prestamo prestamo1 = new Prestamo(fechaFin1, usuario1, prestamo1Ejemplares, responsableSala1);
+            Persistencia.AltaPrestamo(prestamo1);
+            Persistencia.ActualizarDisponibilidad(prestamo1Ejemplares); 
+
+            // Prestamo 2: MARIA: mixto 
+            List<Ejemplar> prestamo2Ejemplares = new List<Ejemplar> {ejemplaresPrincipito[0],ejemplaresAudio[0]};
+            DateTime[] fechaFin2 = new DateTime[2];
+            fechaFin2[0] = DateTime.Today.AddDays(15);  
+            fechaFin2[1] = DateTime.Today.AddDays(10);   
+            Prestamo prestamo2 = new Prestamo(fechaFin2, usuario2, prestamo2Ejemplares, responsableSala2);
+            Persistencia.AltaPrestamo(prestamo2);
+            Persistencia.ActualizarDisponibilidad(prestamo2Ejemplares);
+
+            // Prestamo 3:JUAN: Prestamo finalizado
+            List<Ejemplar> prestamo3Ejemplares = new List<Ejemplar> {ejemplaresQuijote[2]};
+            DateTime[] fechaFin3 = new DateTime[2];
+            fechaFin3[0] = DateTime.Today.AddDays(-10); 
+            fechaFin3[1] = DateTime.MinValue;
+            Prestamo prestamo3 = new Prestamo(fechaFin3, usuario1, prestamo3Ejemplares, responsableSala2);
+            prestamo3.FechaInicio = DateTime.Today.AddDays(-25); 
+            prestamo3.DevolverEjemplar(ejemplaresQuijote[2]);
+            ejemplaresQuijote[2].Disponible = true;
+            Persistencia.AltaPrestamo(prestamo3);
+            Persistencia.ActualizarEjemplar(ejemplaresQuijote[2]);
+
+            // Prestamo 4: MARIA:Prestamo proximo a vencer
+            List<Ejemplar> prestamo4Ejemplares = new List<Ejemplar> {ejemplaresCienAnos[1] };
+            DateTime[] fechaFin4 = new DateTime[2];
+            fechaFin4[0] = DateTime.Today.AddDays(2);
+            fechaFin4[1] = DateTime.MinValue;
+            Prestamo prestamo4 = new Prestamo(fechaFin4, usuario2, prestamo4Ejemplares, responsableSala1);
+            prestamo4.FechaInicio = DateTime.Today.AddDays(-13); 
+            Persistencia.AltaPrestamo(prestamo4);
+            Persistencia.ActualizarDisponibilidad(prestamo4Ejemplares);
         }
     }
 }
