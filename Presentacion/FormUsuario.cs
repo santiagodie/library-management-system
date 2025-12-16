@@ -11,28 +11,32 @@ using System.Windows.Forms;
 
 namespace Presentacion
 {
+    
     public partial class FormUsuario : Form
     {
         public Usuario usuario { get; set; }
+        public List<EjemplarPrestado> listaLibros=new List<EjemplarPrestado>();
         public FormUsuario(Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
+            CargarLibros(null, PendientesBox.Checked);
         }
 
         private void CargarLibros(string titulo,bool pendientes)
         {
             GestorUsuarios gestor = new GestorUsuarios();
-            List<Prestamo> prestamos = gestor.ObtenerMisPrestamosFiltrados(usuario, titulo, pendientes);
-            List<Ejemplar> ejemplares= new List<Ejemplar>();
-            foreach(Prestamo p in prestamos)
-            {
-                foreach(Ejemplar e in p.EjemplaresPrestados)
-                {
-                    ejemplares.Add(e);
-                }
-            }
+            listaLibros = gestor.ObtenerMisPrestamosFiltrados(this.usuario, titulo, pendientes);
+            Grid.DataSource = null;
+            Grid.DataSource = listaLibros;
+            Grid.Columns["FechaPrestamo"].DefaultCellStyle.Format= "dd/MM/yyyy";
+            Grid.Columns["FechaFin"].DefaultCellStyle.Format = "dd/MM/yyyy";
+        }
 
+        private void Cambio(object sender, EventArgs e)
+        {
+            CargarLibros(BookBox.Text,PendientesBox.Checked);
         }
     }
+    
 }

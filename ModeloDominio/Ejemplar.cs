@@ -68,4 +68,22 @@ namespace ModeloDominio
             return $"{prefijo}-{idDoc}-{idEjemplar}";
         }
     }
+    public class EjemplarPrestado
+    {
+        public string Título;
+        public string Autor;
+        public string ISBN;
+        public DateTime FechaPrestamo;
+        public DateTime FechaFin;
+        public bool Pendiente;
+        public EjemplarPrestado(string titulo, string autor, string iSBN, DateTime fechaPrestamo, DateTime fechaFin, bool pendiente)
+        {
+            this.Título = titulo;
+            this.Autor = autor;
+            this.ISBN = iSBN;
+            this.FechaPrestamo = fechaPrestamo;
+            this.FechaFin = fechaFin;
+            this.Pendiente = pendiente;
+        }
+    }
 }

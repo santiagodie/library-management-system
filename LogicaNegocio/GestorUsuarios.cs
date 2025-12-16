@@ -194,10 +194,10 @@ public class GestorUsuarios
         return DateTime.MinValue;
     }
 
-    public List<Prestamo> ObtenerMisPrestamosFiltrados(Persona personaLogueada, string textoBuscar, bool soloPendientes)
+    public List<EjemplarPrestado> ObtenerMisPrestamosFiltrados(Persona personaLogueada, string textoBuscar, bool soloPendientes)
     {
         Usuario usuario = Persistencia.Persistencia.GetUsuario(personaLogueada.Dni);
-        if (usuario == null) return new List<Prestamo>();
+        if (usuario == null) return new List<EjemplarPrestado>();
         List<Prestamo> misPrestamos = Persistencia.Persistencia.GetPrestamos(usuario);
 
         var consulta = misPrestamos.AsQueryable();
@@ -215,6 +215,28 @@ public class GestorUsuarios
             );
         }
 
-        return consulta.OrderByDescending(p => p.FechaInicio).ToList();
+        List<Prestamo> prestamos= consulta.OrderByDescending(p => p.FechaInicio).ToList();
+        List<EjemplarPrestado> ejemplares=new List<EjemplarPrestado>();
+        foreach (Prestamo p in prestamos)
+        {
+            foreach (Ejemplar e in p.EjemplaresPrestados)
+            {
+                Documento d = e.Documento;
+                int i;
+                if (d is Libro)
+                {
+                    i = 0;
+                }
+                else
+                {
+                    i = 1;
+                }
+                if ((soloPendientes && p.GetLibrosPendientes().Contains(e)) || !soloPendientes)
+                {
+                    ejemplares.Add(new EjemplarPrestado(d.Titulo, d.Autor, d.ISBN, p.FechaInicio, p.FechaFin[i], p.GetLibrosPendientes().Contains(e)));
+                }
+            }
+        }
+        return ejemplares;
     }
 }
