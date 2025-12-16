@@ -47,9 +47,9 @@ namespace Persistencia
             personalAdq2.SetHashContraseña(Hash.GetHash("adq456"));
             Persistencia.AltaPersonalAdquisiciones(personalAdq2);
 
-            // Personal de Adquisiciones 2: dni=66666666H, contraseña=adq456, NSS=200002
-            PersonalAdquisiciones personalAdq3 = new PersonalAdquisiciones("Alberto", "77777777H", 200003);
-            personalAdq2.SetHashContraseña(Hash.GetHash("adq456"));
+            // Personal de Adquisiciones 3: dni=77777777G, contraseña=adq789, NSS=3
+            PersonalAdquisiciones personalAdq3 = new PersonalAdquisiciones("Alberto", "77777777G", 200003);
+            personalAdq2.SetHashContraseña(Hash.GetHash("adq789"));
             Persistencia.AltaPersonalAdquisiciones(personalAdq3);
         }
 
@@ -78,8 +78,8 @@ namespace Persistencia
             usuario4.Sancionar();
             Persistencia.AltaUsuario(usuario4);
 
-            // Usuario 5: dni=77777777H, contraseña=adq456
-            Usuario usuario5 = new Usuario("Alberto", "77777777H");
+            // Usuario 5: dni=77777777H, contraseña=adq789
+            Usuario usuario5 = new Usuario("Alberto", "77777777G");
             Persistencia.AltaUsuario(usuario5);
         }
 
