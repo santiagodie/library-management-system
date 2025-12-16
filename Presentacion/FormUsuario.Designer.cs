@@ -128,6 +128,7 @@
             this.Controls.Add(this.Tabla);
             this.Name = "FormUsuario";
             this.Text = "Documentos prestados";
+            this.Load += new System.EventHandler(this.FormUsuario_Load);
             this.Tabla.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
             this.Panel.ResumeLayout(false);

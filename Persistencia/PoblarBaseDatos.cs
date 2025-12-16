@@ -49,7 +49,7 @@ namespace Persistencia
 
             // Personal de Adquisiciones 3: dni=77777777G, contraseña=adq789, NSS=3
             PersonalAdquisiciones personalAdq3 = new PersonalAdquisiciones("Alberto", "77777777G", 200003);
-            personalAdq2.SetHashContraseña(Hash.GetHash("adq789"));
+            personalAdq3.SetHashContraseña(Hash.GetHash("adq789"));
             Persistencia.AltaPersonalAdquisiciones(personalAdq3);
         }
 

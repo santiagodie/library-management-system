@@ -31,7 +31,15 @@ namespace Presentacion
                 switch (rol)
                 {
                     case Rol.Usuario:
-                        Application.Run(new FormUsuario(persona as Usuario));
+                        Usuario user = persona as Usuario;
+                        if (user == null)
+                        {
+                            GestorUsuarios gestor = new GestorUsuarios();
+                            user = gestor.ConsultarUusuario(persona.Dni);
+                        }
+
+                        if (user != null)  Application.Run(new FormUsuario(user));
+                        
                         break;
                 }
 
