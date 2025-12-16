@@ -40,10 +40,6 @@ namespace Persistencia
                 if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
                 nuevaPersonaCreada = true;
             }
-            else {
-                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", usuario.Dni, "Nombre", usuario.Nombre);
-                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", usuario.Dni, "HashContraseña", usuario.HashContraseña);
-            }
             if (!BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario)))
             {
                 if (nuevaPersonaCreada) BaseDatos.BaseDatos.BorrarFila("PersonaTabla", usuario.Dni);
@@ -345,10 +341,6 @@ namespace Persistencia
                 if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
                 nuevaPersonaCreada = true;
             }
-            else { 
-                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalSala.Dni, "Nombre", personalSala.Nombre);
-                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalSala.Dni, "HashContraseña", personalSala.HashContraseña);
-            }
             if (!BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala)))
             {
                 if (nuevaPersonaCreada) BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalSala.Dni);
@@ -366,11 +358,6 @@ namespace Persistencia
                 PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
                 if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
                 nuevaPersonaCreada = true;
-            }
-            else
-            {
-                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalAdquisiciones.Dni, "Nombre", personalAdquisiciones.Nombre);
-                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalAdquisiciones.Dni, "HashContraseña", personalAdquisiciones.HashContraseña);
             }
             if (!BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones)))
             {

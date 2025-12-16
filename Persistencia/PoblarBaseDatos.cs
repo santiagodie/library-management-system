@@ -77,6 +77,10 @@ namespace Persistencia
             usuario4.SetHashContraseña(Hash.GetHash("sancionado"));
             usuario4.Sancionar();
             Persistencia.AltaUsuario(usuario4);
+
+            // Usuario 5: dni=77777777H, contraseña=adq456
+            Usuario usuario5 = new Usuario("Alberto", "77777777H");
+            Persistencia.AltaUsuario(usuario5);
         }
 
         //PRE: debe haberse ejecutado PoblarPersonal() antes.
