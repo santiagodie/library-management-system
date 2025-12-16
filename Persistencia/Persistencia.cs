@@ -1,8 +1,10 @@
-﻿using ModeloDominio;
-using BaseDatos;
+﻿using BaseDatos;
+using ModeloDominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 
 
 namespace Persistencia
@@ -27,13 +29,27 @@ namespace Persistencia
             return BaseDatos.BaseDatos.Existe("PersonaTabla", dni) && BaseDatos.BaseDatos.Existe("UsuarioTabla", dni);
         }
 
-        //PRE: usuario no puede ser nulo y no debe existir previamente en la BD.
-        //POST: da de alta al usuario en PersonaTabla y UsuarioTabla. Devuelve true si tuvo éxito.
+        // PRE: usuario no puede ser nulo y no debe existir previamente en la BD.
+        // POST: da de alta al usuario. Si falla, revierte los cambios en PersonaTabla.
         public static bool AltaUsuario(Usuario usuario)
         {
-            PersonaDato personaData = Transformer.ToPersonaDatoFromUsuario(usuario);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
-            return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario));
+            bool nuevaPersonaCreada = false;
+            if (!BaseDatos.BaseDatos.Existe("PersonaTabla", usuario.Dni))
+            {
+                PersonaDato personaData = Transformer.ToPersonaDatoFromUsuario(usuario);
+                if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+                nuevaPersonaCreada = true;
+            }
+            else {
+                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", usuario.Dni, "Nombre", usuario.Nombre);
+                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", usuario.Dni, "HashContraseña", usuario.HashContraseña);
+            }
+            if (!BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario)))
+            {
+                if (nuevaPersonaCreada) BaseDatos.BaseDatos.BorrarFila("PersonaTabla", usuario.Dni);
+                return false;
+            }
+            return true;
         }
 
 
@@ -48,14 +64,25 @@ namespace Persistencia
         //POST: actualiza los datos del usuario en PersonaTabla y UsuarioTabla. Devuelve true si tuvo éxito.
         public static bool ActualizarUsuario(Usuario usuario)
         {
-            // Actualizar PersonaTabla
-            BaseDatos.BaseDatos.BorrarFila("PersonaTabla", usuario.Dni);
-            PersonaDato personaData = Transformer.ToPersonaDatoFromUsuario(usuario);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+            // Guardar datos originales para rollback
+            UsuarioDato datosOriginales = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", usuario.Dni) as UsuarioDato;
+            if (datosOriginales == null) return false;
 
-            // Actualizar UsuarioTabla (PersonaId = Dni porque UsuarioDato.PersonaId apunta a PersonaDato cuya clave es Dni)
+            // Actualizar PersonaTabla
+            if (!BaseDatos.BaseDatos.ModificarFila("PersonaTabla", usuario.Dni, "Nombre", usuario.Nombre))
+                return false;
+            if (!BaseDatos.BaseDatos.ModificarFila("PersonaTabla", usuario.Dni, "HashContraseña", usuario.HashContraseña))
+                return false;
+
+            // Actualizar UsuarioTabla
             BaseDatos.BaseDatos.BorrarFila("UsuarioTabla", usuario.Dni);
-            return BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario));
+            if (!BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", Transformer.ToUsuarioDato(usuario)))
+            {
+                // Rollback
+                BaseDatos.BaseDatos.AñadirFila("UsuarioTabla", datosOriginales);
+                return false;
+            }
+            return true;
         }
 
         //PRE: dni no puede ser nulo.
@@ -309,50 +336,98 @@ namespace Persistencia
         }
         
         //PRE: personalSala no puede ser nulo y no debe existir previamente en la BD.
-        //POST: da de alta el personal de sala en PersonaTabla y PersonalSalaTabla. Devuelve true si tuvo éxito.
+        //POST: da de alta el personal de sala en PersonaTabla(si es necesario) y PersonalSalaTabla. Devuelve true si tuvo éxito.
         public static bool AltaPersonalSala(PersonalSala personalSala)
         {
-
-            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalSala(personalSala);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
-            return BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala));
+            bool nuevaPersonaCreada = false;
+            if (!BaseDatos.BaseDatos.Existe("PersonaTabla", personalSala.Dni)) {
+                PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalSala(personalSala);
+                if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+                nuevaPersonaCreada = true;
+            }
+            else { 
+                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalSala.Dni, "Nombre", personalSala.Nombre);
+                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalSala.Dni, "HashContraseña", personalSala.HashContraseña);
+            }
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala)))
+            {
+                if (nuevaPersonaCreada) BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalSala.Dni);
+                return false;
+            }
+            return true;
         }
 
         //PRE: personalAdquisiciones no puede ser nulo y no debe existir previamente en la BD.
-        //POST: da de alta el personal de adquisiciones en PersonaTabla y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
+        //POST: da de alta el personal de adquisiciones en PersonaTabla(si necesario) y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
         public static bool AltaPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
-            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return  false ;
-            return BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones));
+            bool nuevaPersonaCreada = false;
+            if (!BaseDatos.BaseDatos.Existe("PersonaTabla", personalAdquisiciones.Dni)) {
+                PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
+                if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+                nuevaPersonaCreada = true;
+            }
+            else
+            {
+                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalAdquisiciones.Dni, "Nombre", personalAdquisiciones.Nombre);
+                BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalAdquisiciones.Dni, "HashContraseña", personalAdquisiciones.HashContraseña);
+            }
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones)))
+            {
+                if (nuevaPersonaCreada) BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalAdquisiciones.Dni);
+                return false;
+            }
+            return true;
         }
 
         //PRE: personalSala no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del personal de sala en PersonaTabla y PersonalSalaTabla. Devuelve true si tuvo éxito.
         public static bool ActualizarPersonalSala(PersonalSala personalSala)
         {
+            // Guardar datos originales para rollback
+            PersonalSalaDato datosOriginales = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", personalSala.Dni) as PersonalSalaDato;
+            if (datosOriginales == null) return false;
+
             // Actualizar PersonaTabla
-            BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalSala.Dni);
-            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalSala(personalSala);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+            if (!BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalSala.Dni, "Nombre", personalSala.Nombre))
+                return false;
+            if (!BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalSala.Dni, "HashContraseña", personalSala.HashContraseña))
+                return false;
 
             // Actualizar PersonalSalaTabla
             BaseDatos.BaseDatos.BorrarFila("PersonalSalaTabla", personalSala.Dni);
-            return BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala));
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", Transformer.ToPersonalSalaDato(personalSala)))
+            {
+                // Rollback si falla
+                BaseDatos.BaseDatos.AñadirFila("PersonalSalaTabla", datosOriginales);
+                return false;
+            }
+            return true;
         }
 
         //PRE: personalAdquisiciones no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del personal de adquisiciones en PersonaTabla y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
         public static bool ActualizarPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
+            // Guardar datos originales para rollback
+            PersonalAdquisicionesDato datosOriginales = BaseDatos.BaseDatos.ObtenerDatos("PersonalAdquisicionesTabla", personalAdquisiciones.Dni) as PersonalAdquisicionesDato;
+            if (datosOriginales == null) return false;
+
             // Actualizar PersonaTabla
-            BaseDatos.BaseDatos.BorrarFila("PersonaTabla", personalAdquisiciones.Dni);
-            PersonaDato personaData = Transformer.ToPersonaDatoFromPersonalAdquisiciones(personalAdquisiciones);
-            if (!BaseDatos.BaseDatos.AñadirFila("PersonaTabla", personaData)) return false;
+            if (!BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalAdquisiciones.Dni, "Nombre", personalAdquisiciones.Nombre))
+                return false;
+            if (!BaseDatos.BaseDatos.ModificarFila("PersonaTabla", personalAdquisiciones.Dni, "HashContraseña", personalAdquisiciones.HashContraseña))
+                return false;
 
             // Actualizar PersonalAdquisicionesTabla
             BaseDatos.BaseDatos.BorrarFila("PersonalAdquisicionesTabla", personalAdquisiciones.Dni);
-            return BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones));
+            if (!BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", Transformer.ToPersonalAdquisicionesDato(personalAdquisiciones)))
+            {
+                // Rollback
+                BaseDatos.BaseDatos.AñadirFila("PersonalAdquisicionesTabla", datosOriginales);
+                return false;
+            }
+            return true;
         }
 
         //PRE: dni no puede ser nulo.

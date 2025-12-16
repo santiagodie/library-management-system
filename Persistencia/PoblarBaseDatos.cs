@@ -46,6 +46,11 @@ namespace Persistencia
             PersonalAdquisiciones personalAdq2 = new PersonalAdquisiciones("Javier", "66666666H", 200002);
             personalAdq2.SetHashContraseña(Hash.GetHash("adq456"));
             Persistencia.AltaPersonalAdquisiciones(personalAdq2);
+
+            // Personal de Adquisiciones 2: dni=66666666H, contraseña=adq456, NSS=200002
+            PersonalAdquisiciones personalAdq3 = new PersonalAdquisiciones("Alberto", "77777777H", 200003);
+            personalAdq2.SetHashContraseña(Hash.GetHash("adq456"));
+            Persistencia.AltaPersonalAdquisiciones(personalAdq3);
         }
 
         //PRE: ---
