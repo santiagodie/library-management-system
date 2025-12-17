@@ -231,7 +231,7 @@ public class GestorUsuarios
                 {
                     i = 1;
                 }
-                if ((soloPendientes && p.GetLibrosPendientes().Contains(e)) || !soloPendientes)
+                if (((soloPendientes && p.GetLibrosPendientes().Contains(e)) || !soloPendientes)&&((!string.IsNullOrEmpty(textoBuscar) && d.Titulo.ToLower().Contains(textoBuscar.ToLower())) || string.IsNullOrEmpty(textoBuscar)))
                 {
                     ejemplares.Add(new EjemplarPrestado(d.Titulo, d.Autor, d.ISBN, p.FechaInicio, p.FechaFin[i], p.GetLibrosPendientes().Contains(e)));
                 }
