@@ -27,21 +27,23 @@ namespace Presentacion
             {
                 Rol rol = login.RolLogueado;
                 Persona persona = login.PersonaLogueada;
-
-                switch (rol)
+                if (rol == Rol.Usuario)
                 {
-                    case Rol.Usuario:
-                        Usuario user = persona as Usuario;
-                        if (user == null)
-                        {
-                            GestorUsuarios gestor = new GestorUsuarios();
-                            user = gestor.ConsultarUusuario(persona.Dni);
-                        }
+                    Usuario user = persona as Usuario;
+                    if (user == null)
+                    {
+                        GestorUsuarios gestor = new GestorUsuarios();
+                        user = gestor.ConsultarUusuario(persona.Dni);
+                    }
 
-                        if (user != null)  Application.Run(new FormUsuario(user));
-                        
-                        break;
+                    if (user != null) Application.Run(new FormUsuario(user));
                 }
+                else
+                {
+                    Application.Run(new FormPersonal(persona as Personal, rol));
+                }
+                        
+                
 
             }
             else
