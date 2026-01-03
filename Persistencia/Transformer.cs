@@ -123,7 +123,7 @@ namespace Persistencia
             if (prestamoEjemplares.Count == 0) return null; 
 
 
-            //Reconstruir TODOS los ejemplares 
+            //Reconstruir TODOS los ejemplares
             List<Ejemplar> todosLosEjemplares = new List<Ejemplar>();
             List<Ejemplar> ejemplaresYaDevueltos = new List<Ejemplar>();
 
@@ -136,12 +136,21 @@ namespace Persistencia
                 todosLosEjemplares.Add(ejemplar);
                 if (pe.FechaDevolucion != null) ejemplaresYaDevueltos.Add(ejemplar);
             }
+
+            // Obtener fechas desde la BD (FechaPrevistaDevolucion almacenada en PrestamoEjemplarTabla)
             DateTime[] fechasFin = new DateTime[2];
-            foreach (var ejemplar in todosLosEjemplares)
-            {
-                if (ejemplar.Documento is Libro)fechasFin[0] = prestamoData.FechaInicio.AddDays(15);
-                else  fechasFin[1] = prestamoData.FechaInicio.AddDays(10);
-            }
+            var librosPE = prestamoEjemplares.Where(pe => {
+                var ej = todosLosEjemplares.FirstOrDefault(e => e.Codigo == pe.CodigoEjemplar);
+                return ej?.Documento is Libro;
+            });
+            var audiosPE = prestamoEjemplares.Where(pe => {
+                var ej = todosLosEjemplares.FirstOrDefault(e => e.Codigo == pe.CodigoEjemplar);
+                return ej?.Documento is Audiolibro;
+            });
+
+            if (librosPE.Any()) fechasFin[0] = librosPE.First().FechaPrevistaDevolucion;
+            if (audiosPE.Any()) fechasFin[1] = audiosPE.First().FechaPrevistaDevolucion;
+
             Prestamo prestamo = new Prestamo(fechasFin, usuario, todosLosEjemplares, responsable);
             prestamo.FechaInicio = prestamoData.FechaInicio;  // Restaurar la fecha original
             foreach (var ejemplar in ejemplaresYaDevueltos)

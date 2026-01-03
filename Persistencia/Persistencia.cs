@@ -118,8 +118,8 @@ namespace Persistencia
             foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
             {
                 DateTime fechaPrevista;
-                if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaInicio.AddDays(15);
-                else fechaPrevista = prestamo.FechaInicio.AddDays(10);
+                if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaFin[0];
+                else fechaPrevista = prestamo.FechaFin[1];
 
                 PrestamoEjemplarDato peData = Transformer.ToPrestamoEjemplarDato(prestamo.Usuario.Dni,prestamo.FechaInicio,ejemplar,fechaPrevista,null);
 
@@ -200,12 +200,23 @@ namespace Persistencia
         //POST: devuelve una lista con todos los préstamos que contienen ejemplares de ese documento.
         public static List<Prestamo> GetPrestamos(Documento documento)
         {
-            return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
-                .OfType<PrestamoDato>()
-                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
-                .Where(prestamo =>
-                    prestamo.EjemplaresPrestados.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN) ||
-                    prestamo.EjemplaresDevueltos.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN))
+            var ejemplaresDocumento = BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
+                .OfType<EjemplarDato>()
+                .Where(ej => ej.IsbnDocumento == documento.ISBN)
+                .Select(ej => ej.Codigo)
+                .ToHashSet();
+
+            var prestamosRelacionados = BaseDatos.BaseDatos.ObtenerTodos("PrestamoEjemplarTabla")
+                .OfType<PrestamoEjemplarDato>()
+                .Where(pe => ejemplaresDocumento.Contains(pe.CodigoEjemplar))
+                .Select(pe => new ClavePrestamo(pe.IdUsuario, pe.FechaInicio))
+                .Distinct()
+                .ToList();
+
+            return prestamosRelacionados
+                .Select(clave => BaseDatos.BaseDatos.ObtenerDatos("PrestamoTabla", clave) as PrestamoDato)
+                .Where(pd => pd != null)
+                .Select(pd => Transformer.ToPrestamo(pd))
                 .ToList();
         }
 
@@ -224,13 +235,23 @@ namespace Persistencia
         //POST: devuelve una lista con todos los préstamos del usuario que contienen ejemplares de ese documento.
         public static List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
         {
-            return BaseDatos.BaseDatos.ObtenerTodos( "PrestamoTabla")
-                .OfType<PrestamoDato>()
-                .Where(prestamoData => prestamoData.IdUsuario == usuario.Dni)
-                .Select(prestamoData => Transformer.ToPrestamo(prestamoData))
-                .Where(prestamo =>
-                    prestamo.EjemplaresPrestados.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN) ||
-                    prestamo.EjemplaresDevueltos.Any(ejemplar => ejemplar.Documento.ISBN == documento.ISBN))
+            var ejemplaresDocumento = BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
+                .OfType<EjemplarDato>()
+                .Where(ej => ej.IsbnDocumento == documento.ISBN)
+                .Select(ej => ej.Codigo)
+                .ToHashSet();
+
+            var prestamosRelacionados = BaseDatos.BaseDatos.ObtenerTodos("PrestamoEjemplarTabla")
+                .OfType<PrestamoEjemplarDato>()
+                .Where( pe => pe.IdUsuario == usuario.Dni && ejemplaresDocumento.Contains(pe.CodigoEjemplar) )
+                .Select(pe => new ClavePrestamo( pe.IdUsuario, pe.FechaInicio ))
+                .Distinct()
+                .ToList() ;
+
+            return prestamosRelacionados
+                .Select(clave => BaseDatos.BaseDatos.ObtenerDatos("PrestamoTabla", clave) as PrestamoDato)
+                .Where(pd => pd != null )
+                .Select(pd => Transformer.ToPrestamo(pd))
                 .ToList();
         }
 
