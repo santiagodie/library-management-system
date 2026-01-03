@@ -49,6 +49,7 @@
     <Compile Include="PersonalSalaDato.cs" />
     <Compile Include="PoblarBaseDatos.cs" />
     <Compile Include="PrestamoDato.cs" />
+    <Compile Include="PrestamoEjemplarDato.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transformer.cs" />
     <Compile Include="UsuarioDato.cs" />

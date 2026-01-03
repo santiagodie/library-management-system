@@ -46,54 +46,20 @@ namespace Persistencia
     {
         private string idUsuario;
         private DateTime fechaInicio;
-        private List<string> codigosEjemplaresPrestados;
-        private List<string> codigosEjemplaresDevueltos;
-        private Dictionary<string, DateTime> fechasDevolucion;
-        private Dictionary<string, DateTime> fechasPrevistaDevolucion;
         private string idResponsable;  // PersonalSala que realizó el préstamo
 
-        //PRE: idUsuario, codigosEjemplares, fechasPrevistas e idResponsable no pueden ser nulos.
-        //POST: crea un nuevo PrestamoDato con los datos proporcionados. Inicializa las listas de devoluciones vacías.
-        public PrestamoDato(string idUsuario, DateTime fechaInicio, List<string> codigosEjemplares, Dictionary<string, DateTime> fechasPrevistas, string idResponsable)
+        //PRE: idUsuario e idResponsable no pueden ser nulos.
+        //POST: crea un nuevo PrestamoDato con los datos proporcionados.
+        public PrestamoDato(string idUsuario, DateTime fechaInicio, string idResponsable)
         {
             this.idUsuario = idUsuario;
             this.fechaInicio = fechaInicio;
-            this.codigosEjemplaresPrestados = new List<string>(codigosEjemplares);
-            this.codigosEjemplaresDevueltos = new List<string>();
-            this.fechasDevolucion = new Dictionary<string, DateTime>();
-            this.fechasPrevistaDevolucion = fechasPrevistas;
             this.idResponsable = idResponsable;
         }
 
         public string IdUsuario { get { return idUsuario; } }
         public DateTime FechaInicio { get { return fechaInicio; } }
-        public List<string> CodigosEjemplaresPrestados { get { return codigosEjemplaresPrestados; } }
-        public List<string> CodigosEjemplaresDevueltos { get { return codigosEjemplaresDevueltos; } }
-        public Dictionary<string, DateTime> FechasDevolucion { get { return fechasDevolucion; } }
-        public Dictionary<string, DateTime> FechasPrevistaDevolucion { get { return fechasPrevistaDevolucion; } }
         public string IdResponsable { get { return idResponsable; } }
-
-        //PRE: ---
-        //POST: devuelve true si todos los ejemplares han sido devueltos.
-        public bool EstaFinalizado()
-        {
-            return codigosEjemplaresPrestados.Count == 0;
-        }
-
-        //PRE: ---
-        //POST: devuelve true si algún ejemplar aún prestado tiene fecha de devolución prevista vencida.
-        public bool EstaVencido()
-        {
-            foreach (var codigo in codigosEjemplaresPrestados)
-            {
-                if (fechasPrevistaDevolucion.ContainsKey(codigo))
-                {
-                    if (DateTime.Now.Date > fechasPrevistaDevolucion[codigo].Date)
-                        return true;
-                }
-            }
-            return false;
-        }
 
         //PRE: ---
         //POST: devuelve la clave primaria compuesta (idUsuario, fechaInicio) de esta entidad.

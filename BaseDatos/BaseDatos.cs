@@ -17,6 +17,7 @@ namespace BaseDatos
         public static Tabla DocumentoTabla { get; private set; }
         public static Tabla EjemplarTabla { get; private set; }
         public static Tabla PrestamoTabla { get; private set; }
+        public static Tabla PrestamoEjemplarTabla { get; private set; }
 
         //PRE: ---
         //POST: inicializa todas las tablas de la base de datos vacías.
@@ -29,6 +30,7 @@ namespace BaseDatos
             DocumentoTabla = new Tabla();
             EjemplarTabla = new Tabla();
             PrestamoTabla = new Tabla();
+            PrestamoEjemplarTabla = new Tabla();
         }
 
         //PRE: Tabla debe ser el nombre de una tabla válida. Dato no puede ser nulo.

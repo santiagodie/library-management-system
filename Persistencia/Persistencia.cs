@@ -104,44 +104,75 @@ namespace Persistencia
         // ------------- GESTIÓN DE PRÉSTAMOS
 
         //PRE: prestamo no puede ser nulo y no debe existir previamente en la BD.
-        //POST: da de alta el préstamo. Devuelve true si tuvo éxito.
+        //POST: da de alta el préstamo en PrestamoTabla y PrestamoEjemplarTabla. Devuelve true si tuvo éxito. Si falla, revierte los cambios.
         public static bool AltaPrestamo(Prestamo prestamo)
         {
-            return BaseDatos.BaseDatos.AñadirFila("PrestamoTabla", Transformer.ToPrestamoDato(prestamo));
-        }
+            // Añadir fila a PrestamoTabla
+            PrestamoDato prestamoData = Transformer.ToPrestamoDato(prestamo);
+            if (!BaseDatos.BaseDatos.AñadirFila("PrestamoTabla", prestamoData))
+                return false;
 
-        //PRE: prestamo no puede ser nulo y debe existir en la BD.
-        //POST: actualiza el préstamo y la disponibilidad de los ejemplares. Devuelve true si tuvo éxito.
-        public static bool ActualizarPrestamo(Prestamo prestamo)
-        {
-            // PrestamoDato.IdUsuario es el dni del usuario
-            ClavePrestamo clave = new ClavePrestamo(prestamo.Usuario.Dni, prestamo.FechaInicio);
-            BaseDatos.BaseDatos.BorrarFila("PrestamoTabla", clave); 
-
-            PrestamoDato prestamoData = Transformer.ToPrestamoDato(prestamo); 
+            // Añadir filas a PrestamoEjemplarTabla para cada ejemplar
+            List<PrestamoEjemplarDato> ejemplaresInsertados = new List<PrestamoEjemplarDato>();
 
             foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
             {
-                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", true); 
+                DateTime fechaPrevista;
+                if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaInicio.AddDays(15);
+                else fechaPrevista = prestamo.FechaInicio.AddDays(10);
+
+                PrestamoEjemplarDato peData = Transformer.ToPrestamoEjemplarDato(prestamo.Usuario.Dni,prestamo.FechaInicio,ejemplar,fechaPrevista,null);
+
+                if (!BaseDatos.BaseDatos.AñadirFila("PrestamoEjemplarTabla", peData))
+                {
+                    // rollback
+                    foreach (var peInsertado in ejemplaresInsertados)
+                    {
+                        BaseDatos.BaseDatos.BorrarFila("PrestamoEjemplarTabla", peInsertado.ObtenerClave());
+                    }
+                    BaseDatos.BaseDatos.BorrarFila("PrestamoTabla", prestamoData.ObtenerClave());
+                    return false;
+                }
+
+                ejemplaresInsertados.Add(peData);
             }
 
+            return true;
+        }
+
+        //PRE: prestamo no puede ser nulo y debe existir en la BD.
+        //POST: actualiza la disponibilidad de los ejemplares y marca FechaDevolucion en PrestamoEjemplarTabla. Devuelve true si tuvo éxito.
+        public static bool ActualizarPrestamo(Prestamo prestamo)
+        {
+            foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
+            {
+                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", true);
+            }
             foreach (Ejemplar ejemplar in prestamo.EjemplaresDevueltos)
             {
-                 BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", false); 
+                BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", false);
+                ClavePrestamoEjemplar clavePE = new ClavePrestamoEjemplar(prestamo.Usuario.Dni,prestamo.FechaInicio,ejemplar.Codigo);
+                BaseDatos.BaseDatos.ModificarFila("PrestamoEjemplarTabla", clavePE, "FechaDevolucion", DateTime.Now);
             }
-
-            return BaseDatos.BaseDatos.AñadirFila("PrestamoTabla", prestamoData);
+            return true;
         }
 
         //PRE: ejemplar no puede ser nulo.
         //POST: devuelve el préstamo activo que contiene ese ejemplar. Si no existe, devuelve null.
         public static Prestamo GetPrestamoActivo(Ejemplar ejemplar)
         {
-            PrestamoDato prestamoData = BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
-                .OfType<PrestamoDato>()
-                .FirstOrDefault(pd => !pd.EstaFinalizado() && pd.CodigosEjemplaresPrestados.Contains(ejemplar.Codigo));
+            // Buscar en PrestamoEjemplarTabla un ejemplar no devuelto
+            PrestamoEjemplarDato peData = BaseDatos.BaseDatos.ObtenerTodos("PrestamoEjemplarTabla")
+                .OfType<PrestamoEjemplarDato>()
+                .FirstOrDefault(pe => pe.CodigoEjemplar == ejemplar.Codigo && pe.FechaDevolucion == null);
 
-            return prestamoData != null ? Transformer.ToPrestamo(prestamoData) :  null;
+            if (peData == null) return null;
+
+            // Obtener el PrestamoDato correspondiente
+            ClavePrestamo clavePrestamo = new ClavePrestamo(peData.IdUsuario, peData.FechaInicio);
+            PrestamoDato prestamoData = BaseDatos.BaseDatos.ObtenerDatos("PrestamoTabla", clavePrestamo) as PrestamoDato;
+
+            return prestamoData != null ? Transformer.ToPrestamo(prestamoData) : null;
         }
 
         //PRE: ---
