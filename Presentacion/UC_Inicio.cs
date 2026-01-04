@@ -65,7 +65,7 @@ namespace Presentacion
                 }
             }
 
-                dgvVencidos.DataSource = tabla;
+                dgvPrestamos.DataSource = tabla;
             }
         }
     }

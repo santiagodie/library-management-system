@@ -33,10 +33,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbNombre = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
             this.Tab = new System.Windows.Forms.TabControl();
             this.Usuarios = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -178,6 +177,9 @@
             this.button_Bajas = new System.Windows.Forms.Button();
             this.button_Altas = new System.Windows.Forms.Button();
             this.label_Main_Adquisiciones = new System.Windows.Forms.Label();
+            this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -202,6 +204,7 @@
             this.panel_Baja_Ejemplar.SuspendLayout();
             this.panel_Alta_Ejemplar.SuspendLayout();
             this.panel_Alta_Documento.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -209,8 +212,8 @@
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -224,9 +227,9 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.LightSlateGray;
             this.panel4.Controls.Add(this.button1);
-            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.lbNombre);
             this.panel4.Controls.Add(this.pictureBox2);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(843, 85);
@@ -245,14 +248,14 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lbNombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "tuNombre";
+            this.lbNombre.AutoSize = true;
+            this.lbNombre.Location = new System.Drawing.Point(16, 53);
+            this.lbNombre.Name = "lbNombre";
+            this.lbNombre.Size = new System.Drawing.Size(66, 16);
+            this.lbNombre.TabIndex = 1;
+            this.lbNombre.Text = "tuNombre";
             // 
             // pictureBox2
             // 
@@ -282,7 +285,7 @@
             this.Tab.Location = new System.Drawing.Point(0, 0);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(843, 474);
+            this.Tab.Size = new System.Drawing.Size(843, 341);
             this.Tab.TabIndex = 1;
             // 
             // Usuarios
@@ -392,7 +395,7 @@
             this.Sala.Location = new System.Drawing.Point(4, 25);
             this.Sala.Name = "Sala";
             this.Sala.Padding = new System.Windows.Forms.Padding(3);
-            this.Sala.Size = new System.Drawing.Size(835, 445);
+            this.Sala.Size = new System.Drawing.Size(835, 312);
             this.Sala.TabIndex = 1;
             this.Sala.Text = "Sala";
             this.Sala.UseVisualStyleBackColor = true;
@@ -402,12 +405,13 @@
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenedor.Location = new System.Drawing.Point(3, 118);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(829, 324);
+            this.panelContenedor.Size = new System.Drawing.Size(829, 191);
             this.panelContenedor.TabIndex = 3;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.gbPrestamos);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -420,7 +424,7 @@
             this.gbPrestamos.Controls.Add(this.button4);
             this.gbPrestamos.Controls.Add(this.button2);
             this.gbPrestamos.Controls.Add(this.btPrestamo);
-            this.gbPrestamos.Location = new System.Drawing.Point(3, 3);
+            this.gbPrestamos.Location = new System.Drawing.Point(119, 3);
             this.gbPrestamos.Name = "gbPrestamos";
             this.gbPrestamos.Size = new System.Drawing.Size(313, 109);
             this.gbPrestamos.TabIndex = 0;
@@ -495,7 +499,7 @@
             this.Adquisiciones.Controls.Add(this.label_Main_Adquisiciones);
             this.Adquisiciones.Location = new System.Drawing.Point(4, 25);
             this.Adquisiciones.Name = "Adquisiciones";
-            this.Adquisiciones.Size = new System.Drawing.Size(841, 445);
+            this.Adquisiciones.Size = new System.Drawing.Size(835, 445);
             this.Adquisiciones.TabIndex = 2;
             this.Adquisiciones.Text = "Adquisiciones";
             this.Adquisiciones.UseVisualStyleBackColor = true;
@@ -1743,6 +1747,25 @@
             this.label_Main_Adquisiciones.TabIndex = 6;
             this.label_Main_Adquisiciones.Text = "Gestion de Adquisiciones";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(110, 109);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Inicio";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(9, 19);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(95, 84);
+            this.button3.TabIndex = 1;
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // FormPersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1790,6 +1813,7 @@
             this.panel_Alta_Ejemplar.PerformLayout();
             this.panel_Alta_Documento.ResumeLayout(false);
             this.panel_Alta_Documento.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1800,7 +1824,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbNombre;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TabControl Tab;
@@ -1944,5 +1968,7 @@
         private System.Windows.Forms.Button button_Bajas;
         private System.Windows.Forms.Button button_Altas;
         private System.Windows.Forms.Label label_Main_Adquisiciones;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button3;
     }
 }
