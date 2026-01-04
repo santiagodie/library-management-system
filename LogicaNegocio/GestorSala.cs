@@ -102,9 +102,15 @@ public class GestorSala : GestorUsuarios
 	public List<Prestamo> GetPrestamosRetrasados()
     {
         List<Prestamo> lista = new List<Prestamo>();
-        foreach (Prestamo prestamo in Persistencia.Persistencia.Instancia.GetPrestamos())
+
+        var prestamos = Persistencia.Persistencia.Instancia.GetPrestamos();
+        if (prestamos == null) return lista;
+
+        foreach (Prestamo prestamo in prestamos)
         {
-			if (prestamo.QuedanLibros() && DateTime.Today > prestamo.FechaFin[0])
+            if (prestamo == null || prestamo.FechaFin == null || prestamo.FechaFin.Length != 2) continue;
+
+            if (prestamo.QuedanLibros() && DateTime.Today > prestamo.FechaFin[0])
 			{
 				lista.Add(prestamo);
 			}

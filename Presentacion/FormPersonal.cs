@@ -16,6 +16,9 @@ namespace Presentacion
         public Personal personal;
 
         GestorAdquisiciones gestorAdquisiciones;
+
+        GestorSala gestorSala;
+
         //PRE: personal y rol no pueden ser nulos.
         //POST: crea un nuevo FormPersonal inicializando los componentes y configurando las pestañas según el rol.
         public FormPersonal(Personal personal, Rol rol)
@@ -40,32 +43,32 @@ namespace Presentacion
         {
 
             //-------------------------- ToolTip Adquisiciones ----------------------//
-            toolTip_Adquisiciones.SetToolTip(button_Altas, "Realizar altas de documentos o ejemplares.");
-            toolTip_Adquisiciones.SetToolTip(button_Bajas, "Realizar baja de  un ejemplar existente.");
+            toolTip_Sala.SetToolTip(button_Altas, "Realizar altas de documentos o ejemplares.");
+            toolTip_Sala.SetToolTip(button_Bajas, "Realizar baja de  un ejemplar existente.");
 
-            toolTip_Adquisiciones.SetToolTip(button_Consultas, "Realizar consultas sobre documentos o ejemplares.");
-            toolTip_Adquisiciones.SetToolTip(button_Listar, "Listar usuarios o préstamos retrasados.");
+            toolTip_Sala.SetToolTip(button_Consultas, "Realizar consultas sobre documentos o ejemplares.");
+            toolTip_Sala.SetToolTip(button_Listar, "Listar usuarios o préstamos retrasados.");
 
-            toolTip_Adquisiciones.SetToolTip(button_Volver, "Volver al menú principal.");
+            toolTip_Sala.SetToolTip(button_Volver, "Volver al menú principal.");
 
-            toolTip_Adquisiciones.SetToolTip(button_Alta_Documento, "Dar de alta un nuevo documento.");
-            toolTip_Adquisiciones.SetToolTip(button_Alta_Ejemplar, "Dar de alta un nuevo ejemplar.");
+            toolTip_Sala.SetToolTip(button_Alta_Documento, "Dar de alta un nuevo documento.");
+            toolTip_Sala.SetToolTip(button_Alta_Ejemplar, "Dar de alta un nuevo ejemplar.");
 
-            toolTip_Adquisiciones.SetToolTip(button_Validar_Alta_Documento, "Validar el alta del documento.");
-            toolTip_Adquisiciones.SetToolTip(button_Validar_Alta_Ejemplar, "Validar el alta del ejemplar.");
+            toolTip_Sala.SetToolTip(button_Validar_Alta_Documento, "Validar el alta del documento.");
+            toolTip_Sala.SetToolTip(button_Validar_Alta_Ejemplar, "Validar el alta del ejemplar.");
 
-            toolTip_Adquisiciones.SetToolTip(button_Borrar_Baja_Eje, "Validar la baja del ejemplar.");
-            toolTip_Adquisiciones.SetToolTip(button_Realizar_Consultar_Ejemplar, "Realizar la consulta del ejemplar.");
-            toolTip_Adquisiciones.SetToolTip(button_Realizar_Consultar_Disp, "Realizar la consulta de disponibilidad.");
-            toolTip_Adquisiciones.SetToolTip(button_Realizar_Consultar_Fech, "Realizar la consulta de fecha de disponibilidad.");
+            toolTip_Sala.SetToolTip(button_Borrar_Baja_Eje, "Validar la baja del ejemplar.");
+            toolTip_Sala.SetToolTip(button_Realizar_Consultar_Ejemplar, "Realizar la consulta del ejemplar.");
+            toolTip_Sala.SetToolTip(button_Realizar_Consultar_Disp, "Realizar la consulta de disponibilidad.");
+            toolTip_Sala.SetToolTip(button_Realizar_Consultar_Fech, "Realizar la consulta de fecha de disponibilidad.");
 
-            toolTip_Adquisiciones.SetToolTip(button_Consultar_Ejemplar, "Consultar un ejemplar por su código.");
-            toolTip_Adquisiciones.SetToolTip(button_Consultar_Disponible, "Consultar si hay ejemplares disponibles de un documento.");
-            toolTip_Adquisiciones.SetToolTip(button_Consultar_Fecha, "Consultar la fecha de disponibilidad de un documento.");
-            toolTip_Adquisiciones.SetToolTip(button_Consultar_Mas_Leido, "Consultar el documento más leído.");
+            toolTip_Sala.SetToolTip(button_Consultar_Ejemplar, "Consultar un ejemplar por su código.");
+            toolTip_Sala.SetToolTip(button_Consultar_Disponible, "Consultar si hay ejemplares disponibles de un documento.");
+            toolTip_Sala.SetToolTip(button_Consultar_Fecha, "Consultar la fecha de disponibilidad de un documento.");
+            toolTip_Sala.SetToolTip(button_Consultar_Mas_Leido, "Consultar el documento más leído.");
 
-            toolTip_Adquisiciones.SetToolTip(button_Listar_Documento, "Listar todos los documentos.");
-            toolTip_Adquisiciones.SetToolTip(button_Listar_Ejemplar, "Listar todos los ejemplares de un documento.");
+            toolTip_Sala.SetToolTip(button_Listar_Documento, "Listar todos los documentos.");
+            toolTip_Sala.SetToolTip(button_Listar_Ejemplar, "Listar todos los ejemplares de un documento.");
 
         }
         //-------------------------- Event Handlers Clicks de Botones ----------------------//

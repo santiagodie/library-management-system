@@ -112,5 +112,27 @@ namespace ModeloDominio
         {
             return EjemplaresPrestados.Any(e => e.Documento is Audiolibro);
         }
+
+        public DateTime FechaVencimiento
+        {
+            get
+            {
+                if (EstaFinalizado()) return DateTime.MinValue;
+
+                bool hayLibros = QuedanLibros();
+                bool hayAudios = QuedanAudios();
+
+                if (hayLibros && hayAudios)
+                {
+                    return FechaFin[0] < FechaFin[1] ? FechaFin[0] : FechaFin[1];
+                }
+
+                if (hayLibros) return FechaFin[0];
+
+                if (hayAudios) return FechaFin[1];
+
+                return DateTime.MinValue;
+            }
+        }
     }
 }

@@ -164,6 +164,7 @@ namespace Persistencia
         {
             Usuario usuario1 = Persistencia.Instancia.GetUsuario("12345678Z");
             Usuario usuario2 = Persistencia.Instancia.GetUsuario("87654321X");
+            Usuario usuario3 = Persistencia.Instancia.GetUsuario("11111111H"); //lo añado nuevo
             PersonalSala responsableSala1 = Persistencia.Instancia.GetPersonalSala("33333333P");
             PersonalSala responsableSala2 = Persistencia.Instancia.GetPersonalSala("44444444A");
 
@@ -219,6 +220,18 @@ namespace Persistencia
             prestamo4.FechaInicio = DateTime.Today.AddDays(-13);
             Persistencia.Instancia.AltaPrestamo(prestamo4);
             Persistencia.Instancia.ActualizarDisponibilidad(prestamo4Ejemplares);
+
+            //Prestamo 5: CARLOS (Vencido) (lo añadí porque no había ninguno vencido)
+            List<Ejemplar> prestamo5Ejemplares = new List<Ejemplar> { ejemplaresPrincipito[1] };
+            DateTime[] fechaFin5 = new DateTime[2];
+            fechaFin5[0] = DateTime.Today.AddDays(-5);
+            fechaFin5[1] = DateTime.MinValue;
+            Prestamo prestamo5 = new Prestamo(fechaFin5, usuario3, prestamo5Ejemplares, responsableSala1);
+            prestamo5.FechaInicio = DateTime.Today.AddDays(-20);
+            Persistencia.Instancia.AltaPrestamo(prestamo5);
+            Persistencia.Instancia.ActualizarDisponibilidad(prestamo5Ejemplares);
+
+
         }
     }
 }
