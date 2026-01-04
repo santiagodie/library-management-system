@@ -121,16 +121,19 @@
   <data name="FotoPerfil__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FotoPerfil (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ImagenBuscar__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ImagenBuscar (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ImagenPrestamo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImagenPrestamo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ImagenDevolucion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagenDevolucion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ImagenPrestamo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ImagenPrestamo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ImagenBuscar__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImagenBuscar (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logOut3__2_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logOut3 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Alta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Alta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

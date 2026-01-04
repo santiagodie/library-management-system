@@ -63,6 +63,16 @@ namespace Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Alta {
+            get {
+                object obj = ResourceManager.GetObject("Alta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FotoPerfil__1_ {
             get {
                 object obj = ResourceManager.GetObject("FotoPerfil__1_", resourceCulture);

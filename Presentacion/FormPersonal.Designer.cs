@@ -38,15 +38,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.Tab = new System.Windows.Forms.TabControl();
             this.Usuarios = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.Sala = new System.Windows.Forms.TabPage();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -177,6 +168,15 @@
             this.button_Bajas = new System.Windows.Forms.Button();
             this.button_Altas = new System.Windows.Forms.Button();
             this.label_Main_Adquisiciones = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ListarBtn = new System.Windows.Forms.Button();
+            this.BajaBtn = new System.Windows.Forms.Button();
+            this.AltaBtn = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -186,9 +186,6 @@
             this.panel3.SuspendLayout();
             this.Tab.SuspendLayout();
             this.Usuarios.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.Sala.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.gbPrestamos.SuspendLayout();
@@ -204,6 +201,9 @@
             this.panel_Baja_Ejemplar.SuspendLayout();
             this.panel_Alta_Ejemplar.SuspendLayout();
             this.panel_Alta_Documento.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -211,6 +211,8 @@
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
@@ -218,8 +220,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.91954F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.08046F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(849, 435);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
@@ -232,7 +234,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(843, 85);
+            this.panel4.Size = new System.Drawing.Size(843, 84);
             this.panel4.TabIndex = 3;
             // 
             // button1
@@ -271,9 +273,9 @@
             // 
             this.panel3.Controls.Add(this.Tab);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 94);
+            this.panel3.Location = new System.Drawing.Point(3, 93);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(843, 338);
+            this.panel3.Size = new System.Drawing.Size(843, 339);
             this.panel3.TabIndex = 0;
             // 
             // Tab
@@ -281,112 +283,23 @@
             this.Tab.Controls.Add(this.Usuarios);
             this.Tab.Controls.Add(this.Sala);
             this.Tab.Controls.Add(this.Adquisiciones);
-            this.Tab.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Tab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tab.Location = new System.Drawing.Point(0, 0);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(843, 341);
+            this.Tab.Size = new System.Drawing.Size(843, 339);
             this.Tab.TabIndex = 1;
             // 
             // Usuarios
             // 
-            this.Usuarios.Controls.Add(this.flowLayoutPanel2);
+            this.Usuarios.Controls.Add(this.tableLayoutPanel2);
             this.Usuarios.Location = new System.Drawing.Point(4, 25);
             this.Usuarios.Name = "Usuarios";
             this.Usuarios.Padding = new System.Windows.Forms.Padding(3);
-            this.Usuarios.Size = new System.Drawing.Size(835, 445);
+            this.Usuarios.Size = new System.Drawing.Size(835, 310);
             this.Usuarios.TabIndex = 0;
             this.Usuarios.Text = "Usuarios";
             this.Usuarios.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.AliceBlue;
-            this.flowLayoutPanel2.Controls.Add(this.groupBox4);
-            this.flowLayoutPanel2.Controls.Add(this.groupBox5);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(829, 115);
-            this.flowLayoutPanel2.TabIndex = 3;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.textBox3);
-            this.groupBox4.Controls.Add(this.button6);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(215, 109);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Usuarios";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 40);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Introduce el dni:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(9, 59);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 1;
-            // 
-            // button6
-            // 
-            this.button6.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button6.Location = new System.Drawing.Point(125, 31);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(79, 50);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Consultar";
-            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Controls.Add(this.textBox4);
-            this.groupBox5.Controls.Add(this.button7);
-            this.groupBox5.Location = new System.Drawing.Point(224, 3);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(215, 109);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Documentos";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 16);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Introduce el ISBN:";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(8, 59);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 4;
-            // 
-            // button7
-            // 
-            this.button7.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button7.Location = new System.Drawing.Point(130, 31);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(79, 50);
-            this.button7.TabIndex = 3;
-            this.button7.Text = "Consultar";
-            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button7.UseVisualStyleBackColor = true;
             // 
             // Sala
             // 
@@ -1747,6 +1660,106 @@
             this.label_Main_Adquisiciones.TabIndex = 6;
             this.label_Main_Adquisiciones.Text = "Gestion de Adquisiciones";
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(829, 304);
+            this.tableLayoutPanel2.TabIndex = 4;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.AliceBlue;
+            this.flowLayoutPanel2.Controls.Add(this.groupBox4);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(823, 133);
+            this.flowLayoutPanel2.TabIndex = 4;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.AutoSize = true;
+            this.groupBox4.Controls.Add(this.ListarBtn);
+            this.groupBox4.Controls.Add(this.BajaBtn);
+            this.groupBox4.Controls.Add(this.AltaBtn);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.textBox3);
+            this.groupBox4.Controls.Add(this.button6);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(529, 126);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Usuarios";
+            // 
+            // ListarBtn
+            // 
+            this.ListarBtn.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
+            this.ListarBtn.Location = new System.Drawing.Point(208, 21);
+            this.ListarBtn.Name = "ListarBtn";
+            this.ListarBtn.Size = new System.Drawing.Size(95, 84);
+            this.ListarBtn.TabIndex = 5;
+            this.ListarBtn.Text = "Listado";
+            this.ListarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ListarBtn.UseVisualStyleBackColor = true;
+            // 
+            // BajaBtn
+            // 
+            this.BajaBtn.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
+            this.BajaBtn.Location = new System.Drawing.Point(107, 21);
+            this.BajaBtn.Name = "BajaBtn";
+            this.BajaBtn.Size = new System.Drawing.Size(95, 84);
+            this.BajaBtn.TabIndex = 4;
+            this.BajaBtn.Text = "Baja";
+            this.BajaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BajaBtn.UseVisualStyleBackColor = true;
+            // 
+            // AltaBtn
+            // 
+            this.AltaBtn.Image = global::Presentacion.Properties.Resources.Alta;
+            this.AltaBtn.Location = new System.Drawing.Point(6, 21);
+            this.AltaBtn.Name = "AltaBtn";
+            this.AltaBtn.Size = new System.Drawing.Size(95, 84);
+            this.AltaBtn.TabIndex = 3;
+            this.AltaBtn.Text = "Alta";
+            this.AltaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.AltaBtn.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(328, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Introduce el dni:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(328, 65);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 22);
+            this.textBox3.TabIndex = 1;
+            // 
+            // button6
+            // 
+            this.button6.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.button6.Location = new System.Drawing.Point(444, 37);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(79, 50);
+            this.button6.TabIndex = 0;
+            this.button6.Text = "Consultar";
+            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button6.UseVisualStyleBackColor = true;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button3);
@@ -1782,11 +1795,6 @@
             this.panel3.ResumeLayout(false);
             this.Tab.ResumeLayout(false);
             this.Usuarios.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.Sala.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.gbPrestamos.ResumeLayout(false);
@@ -1813,6 +1821,11 @@
             this.panel_Alta_Ejemplar.PerformLayout();
             this.panel_Alta_Documento.ResumeLayout(false);
             this.panel_Alta_Documento.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1829,15 +1842,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TabControl Tab;
         private System.Windows.Forms.TabPage Usuarios;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TabPage Sala;
         private System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -1970,5 +1974,14 @@
         private System.Windows.Forms.Label label_Main_Adquisiciones;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button ListarBtn;
+        private System.Windows.Forms.Button BajaBtn;
+        private System.Windows.Forms.Button AltaBtn;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button6;
     }
 }
