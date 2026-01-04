@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ModeloDominio;
 
 
@@ -94,65 +95,86 @@ namespace Persistencia
         //------------------------PRESTAMO
 
         //PRE: prestamo no puede ser nulo.
-        //POST: devuelve un PrestamoDato creado a partir del Prestamo, calculando las fechas previstas de devolución.
+        //POST: devuelve un PrestamoDato creado a partir del Prestamo.
         public static PrestamoDato ToPrestamoDato(Prestamo prestamo)
         {
-            List<string> codigos = new List<string>();
-            Dictionary<string, DateTime> fechasPrevistas = new Dictionary<string, DateTime>();
-
-            foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
-            {
-                codigos.Add(ejemplar.Codigo);
-                DateTime fechaPrevista;
-                if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaInicio.AddDays(15);
-                else fechaPrevista = prestamo.FechaInicio.AddDays(10);
-
-                fechasPrevistas[ejemplar.Codigo] = fechaPrevista;
-            }
-            return new PrestamoDato(prestamo.Usuario.Dni,prestamo.FechaInicio,codigos,fechasPrevistas,prestamo.Responsable.Dni);
+            return new PrestamoDato(prestamo.Usuario.Dni, prestamo.FechaInicio, prestamo.Responsable.Dni);
         }
 
         //PRE: prestamoData no puede ser nulo.
         //POST: reconstruye un Prestamo a partir de PrestamoDato y datos relacionados de la BD. Devuelve null si faltan datos críticos.
         public static Prestamo ToPrestamo(PrestamoDato prestamoData)
         {
-
+            //Obtener usuario
             UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", prestamoData.IdUsuario) as UsuarioDato;
             if (userData == null) return null;
             Usuario usuario = ToUsuario(userData);
-            List<Ejemplar> ejemplaresPrestados = new List<Ejemplar>();
-            foreach (string codigo in prestamoData.CodigosEjemplaresPrestados)
-            {
-                EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
-                if (ejemplarData == null) return null;
-                Ejemplar ejemplar = ToEjemplar(ejemplarData);
-                if (ejemplar == null) return null;
-                ejemplaresPrestados.Add(ejemplar);
-            }
 
+            //Obtener responsable
             PersonalSalaDato responsableData = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", prestamoData.IdResponsable) as PersonalSalaDato;
             if (responsableData == null) return null;
             PersonalSala responsable = ToPersonalSala(responsableData);
 
-            DateTime[] fechasFin = new DateTime[2];
-            foreach (var ejemplar in ejemplaresPrestados)
-            {
-                if (ejemplar.Documento is Libro) fechasFin[0] = prestamoData.FechaInicio.AddDays(15);
-                else fechasFin[1] = prestamoData.FechaInicio.AddDays(10);
-            }
+            //Obtener todos los PrestamoEjemplar de préstamo
+            List<PrestamoEjemplarDato> prestamoEjemplares = BaseDatos.BaseDatos.ObtenerTodos("PrestamoEjemplarTabla")
+                .OfType<PrestamoEjemplarDato>()
+                .Where(pe => pe.IdUsuario == prestamoData.IdUsuario && pe.FechaInicio.Date == prestamoData.FechaInicio.Date).ToList();
 
-            Prestamo prestamo = new Prestamo(fechasFin, usuario, ejemplaresPrestados, responsable);
-            prestamo.FechaInicio = prestamoData.FechaInicio;  // Restaurar la fecha original
-            foreach (string codigo in prestamoData.CodigosEjemplaresDevueltos)
+            if (prestamoEjemplares.Count == 0) return null; 
+
+
+            //Reconstruir TODOS los ejemplares
+            List<Ejemplar> todosLosEjemplares = new List<Ejemplar>();
+            List<Ejemplar> ejemplaresYaDevueltos = new List<Ejemplar>();
+
+            foreach (var pe in prestamoEjemplares)
             {
-                EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
+                EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", pe.CodigoEjemplar) as EjemplarDato;
                 if (ejemplarData == null) continue;
                 Ejemplar ejemplar = ToEjemplar(ejemplarData);
                 if (ejemplar == null) continue;
-                prestamo.DevolverEjemplar(ejemplar);
+                todosLosEjemplares.Add(ejemplar);
+                if (pe.FechaDevolucion != null) ejemplaresYaDevueltos.Add(ejemplar);
             }
 
+            // Obtener fechas desde la BD (FechaPrevistaDevolucion almacenada en PrestamoEjemplarTabla)
+            DateTime[] fechasFin = new DateTime[2];
+            var librosPE = prestamoEjemplares.Where(pe => {
+                var ej = todosLosEjemplares.FirstOrDefault(e => e.Codigo == pe.CodigoEjemplar);
+                return ej?.Documento is Libro;
+            });
+            var audiosPE = prestamoEjemplares.Where(pe => {
+                var ej = todosLosEjemplares.FirstOrDefault(e => e.Codigo == pe.CodigoEjemplar);
+                return ej?.Documento is Audiolibro;
+            });
+
+            if (librosPE.Any()) fechasFin[0] = librosPE.First().FechaPrevistaDevolucion;
+            if (audiosPE.Any()) fechasFin[1] = audiosPE.First().FechaPrevistaDevolucion;
+
+            Prestamo prestamo = new Prestamo(fechasFin, usuario, todosLosEjemplares, responsable);
+            prestamo.FechaInicio = prestamoData.FechaInicio;  // Restaurar la fecha original
+            foreach (var ejemplar in ejemplaresYaDevueltos)
+            {
+                prestamo.DevolverEjemplar(ejemplar);
+            }
             return prestamo;
+        }
+        //----------------------PRESTAMO EJEMPLAR
+
+        //PRE: idUsuario, ejemplar y fechaPrevista no pueden ser nulos.
+        //POST: devuelve un PrestamoEjemplarDato creado a partir de los datos proporcionados.
+        public static PrestamoEjemplarDato ToPrestamoEjemplarDato(string idUsuario, DateTime fechaInicio, Ejemplar ejemplar, DateTime fechaPrevista, DateTime? fechaDevolucion)
+        {
+            return new PrestamoEjemplarDato(idUsuario, fechaInicio, ejemplar.Codigo, fechaPrevista, fechaDevolucion);
+        }
+
+        //PRE: peData no puede ser nulo.
+        //POST: reconstruye un Ejemplar a partir de PrestamoEjemplarDato. Devuelve null si no existe el ejemplar en la BD.
+        public static Ejemplar ToEjemplarFromPrestamoEjemplar(PrestamoEjemplarDato peData)
+        {
+            EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", peData.CodigoEjemplar) as EjemplarDato;
+            if (ejemplarData == null) return null;
+            return ToEjemplar(ejemplarData);
         }
 
         //----------------------PERSONAL
@@ -211,5 +233,7 @@ namespace Persistencia
             pa.SetHashContraseña(personaData.HashContraseña);
             return pa;
         }
+
+       
     }
 }

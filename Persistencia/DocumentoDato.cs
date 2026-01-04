@@ -5,7 +5,7 @@ using ModeloDominio;
 namespace Persistencia
 {
 
-    public class DocumentoDato : Entidad
+    internal class DocumentoDato : Entidad
     {
         //Atributos de todos los documentos
 
