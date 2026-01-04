@@ -33,24 +33,65 @@
             this.Tab = new System.Windows.Forms.TabControl();
             this.Usuarios = new System.Windows.Forms.TabPage();
             this.Sala = new System.Windows.Forms.TabPage();
+            this.panelContenedor = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.gbPrestamos = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lbNombre = new System.Windows.Forms.Label();
-            this.Adquisiciones = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btConsultarPrestUsuario = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbDni = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btPrestamo = new System.Windows.Forms.Button();
-            this.btLogOut = new System.Windows.Forms.Button();
-            this.pbFotoPerfil = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbDni = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btConsultarPrestUsuario = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btLogOut = new System.Windows.Forms.Button();
+            this.lbNombre = new System.Windows.Forms.Label();
+            this.pbFotoPerfil = new System.Windows.Forms.PictureBox();
+            this.Adquisiciones = new System.Windows.Forms.TabPage();
+            this.panel_Listar_Ejemplar = new System.Windows.Forms.Panel();
+            this.comboBox_Documento_Listar_Ejemplar = new System.Windows.Forms.ComboBox();
+            this.label_Documento_Listar_Ejemplar = new System.Windows.Forms.Label();
+            this.dataGridView_Listar_Ejemplar = new System.Windows.Forms.DataGridView();
+            this.Column_Codigo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Documento_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Responsable_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Activo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column_Disponible_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnLocalizacion_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label_Listar_Ejemplar = new System.Windows.Forms.Label();
+            this.panel_Listar_Documento = new System.Windows.Forms.Panel();
+            this.dataGridView_Listar_Documento = new System.Windows.Forms.DataGridView();
+            this.column_Titulo_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Autor_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_ISBN_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Editorial_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Año_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_AudioLibro_List_Documento = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.column_Formato_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Duracion_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Fecha_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Disponible_List_Documento = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label_Listar_Documento = new System.Windows.Forms.Label();
+            this.panel_Consultar_MasLeido = new System.Windows.Forms.Panel();
+            this.label_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.textBox_Duracion_Consultar_MasLeido = new System.Windows.Forms.TextBox();
+            this.comboBox_Formato_Consultar_MasLeido = new System.Windows.Forms.ComboBox();
+            this.label_Duracion_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.label_Formato_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.label_Año_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.textBox_Año_Consultar_MasLeido = new System.Windows.Forms.TextBox();
+            this.label_Editorial_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.label_ISBN_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.label_Autor_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.label_Titulo_Consultar_MasLeido = new System.Windows.Forms.Label();
+            this.textBox_Editorial_Consultar_MasLeido = new System.Windows.Forms.TextBox();
+            this.textBox_ISBN_Consultar_MasLeido = new System.Windows.Forms.TextBox();
+            this.textBox_Autor_Consultar_MasLeido = new System.Windows.Forms.TextBox();
+            this.textBox_Titulo_Consultar_MasLeido = new System.Windows.Forms.TextBox();
+            this.checkBox_Audiolibro_Consultar_MasLeido = new System.Windows.Forms.CheckBox();
             this.button_Realizar_Consultar_Fech = new System.Windows.Forms.Button();
             this.panel_Consultar_Fecha = new System.Windows.Forms.Panel();
             this.textBox_Fecha_Consultar_Fech = new System.Windows.Forms.TextBox();
@@ -133,67 +174,26 @@
             this.button_Altas = new System.Windows.Forms.Button();
             this.label_Main_Adquisiciones = new System.Windows.Forms.Label();
             this.toolTip_Adquisiciones = new System.Windows.Forms.ToolTip(this.components);
-            this.panel_Consultar_MasLeido = new System.Windows.Forms.Panel();
-            this.label_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.textBox_Duracion_Consultar_MasLeido = new System.Windows.Forms.TextBox();
-            this.comboBox_Formato_Consultar_MasLeido = new System.Windows.Forms.ComboBox();
-            this.label_Duracion_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.label_Formato_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.label_Año_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.textBox_Año_Consultar_MasLeido = new System.Windows.Forms.TextBox();
-            this.label_Editorial_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.label_ISBN_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.label_Autor_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.label_Titulo_Consultar_MasLeido = new System.Windows.Forms.Label();
-            this.textBox_Editorial_Consultar_MasLeido = new System.Windows.Forms.TextBox();
-            this.textBox_ISBN_Consultar_MasLeido = new System.Windows.Forms.TextBox();
-            this.textBox_Autor_Consultar_MasLeido = new System.Windows.Forms.TextBox();
-            this.textBox_Titulo_Consultar_MasLeido = new System.Windows.Forms.TextBox();
-            this.checkBox_Audiolibro_Consultar_MasLeido = new System.Windows.Forms.CheckBox();
-            this.panel_Listar_Documento = new System.Windows.Forms.Panel();
-            this.label_Listar_Documento = new System.Windows.Forms.Label();
-            this.dataGridView_Listar_Documento = new System.Windows.Forms.DataGridView();
-            this.column_Titulo_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Autor_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_ISBN_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Editorial_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Año_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_AudioLibro_List_Documento = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.column_Formato_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Duracion_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Fecha_List_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Disponible_List_Documento = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.panel_Listar_Ejemplar = new System.Windows.Forms.Panel();
-            this.dataGridView_Listar_Ejemplar = new System.Windows.Forms.DataGridView();
-            this.label_Listar_Ejemplar = new System.Windows.Forms.Label();
-            this.label_Documento_Listar_Ejemplar = new System.Windows.Forms.Label();
-            this.comboBox_Documento_Listar_Ejemplar = new System.Windows.Forms.ComboBox();
-            this.Column_Codigo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Documento_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Responsable_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Activo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column_Disponible_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ColumnLocalizacion_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tab.SuspendLayout();
             this.Sala.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.gbPrestamos.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).BeginInit();
             this.Adquisiciones.SuspendLayout();
+            this.panel_Listar_Ejemplar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Ejemplar)).BeginInit();
+            this.panel_Listar_Documento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Documento)).BeginInit();
+            this.panel_Consultar_MasLeido.SuspendLayout();
             this.panel_Consultar_Fecha.SuspendLayout();
             this.panel_Consultar_Disponible.SuspendLayout();
             this.panel_Consultar_Ejemplar.SuspendLayout();
             this.panel_Baja_Ejemplar.SuspendLayout();
             this.panel_Alta_Ejemplar.SuspendLayout();
             this.panel_Alta_Documento.SuspendLayout();
-            this.panel_Consultar_MasLeido.SuspendLayout();
-            this.panel_Listar_Documento.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Documento)).BeginInit();
-            this.panel_Listar_Ejemplar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Ejemplar)).BeginInit();
             this.SuspendLayout();
             // 
             // Tab
@@ -220,7 +220,7 @@
             // 
             // Sala
             // 
-            this.Sala.Controls.Add(this.panel2);
+            this.Sala.Controls.Add(this.panelContenedor);
             this.Sala.Controls.Add(this.flowLayoutPanel1);
             this.Sala.Controls.Add(this.panel1);
             this.Sala.Location = new System.Drawing.Point(4, 25);
@@ -231,6 +231,14 @@
             this.Sala.Text = "Sala";
             this.Sala.UseVisualStyleBackColor = true;
             // 
+            // panelContenedor
+            // 
+            this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContenedor.Location = new System.Drawing.Point(3, 192);
+            this.panelContenedor.Name = "panelContenedor";
+            this.panelContenedor.Size = new System.Drawing.Size(835, 250);
+            this.panelContenedor.TabIndex = 3;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.AliceBlue;
@@ -240,7 +248,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 77);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(835, 112);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(835, 115);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // gbPrestamos
@@ -249,11 +257,111 @@
             this.gbPrestamos.Controls.Add(this.btPrestamo);
             this.gbPrestamos.Location = new System.Drawing.Point(3, 3);
             this.gbPrestamos.Name = "gbPrestamos";
-            this.gbPrestamos.Size = new System.Drawing.Size(200, 109);
+            this.gbPrestamos.Size = new System.Drawing.Size(210, 109);
             this.gbPrestamos.TabIndex = 0;
             this.gbPrestamos.TabStop = false;
             this.gbPrestamos.Text = "Préstamos";
             this.gbPrestamos.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button2
+            // 
+            this.button2.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
+            this.button2.Location = new System.Drawing.Point(107, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(95, 84);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Devolución";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btPrestamo
+            // 
+            this.btPrestamo.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
+            this.btPrestamo.Location = new System.Drawing.Point(6, 19);
+            this.btPrestamo.Name = "btPrestamo";
+            this.btPrestamo.Size = new System.Drawing.Size(95, 84);
+            this.btPrestamo.TabIndex = 0;
+            this.btPrestamo.Text = "Préstamo";
+            this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btPrestamo.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lbDni);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.btConsultarPrestUsuario);
+            this.groupBox1.Location = new System.Drawing.Point(219, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(215, 109);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Usuarios";
+            // 
+            // lbDni
+            // 
+            this.lbDni.AutoSize = true;
+            this.lbDni.Location = new System.Drawing.Point(9, 40);
+            this.lbDni.Name = "lbDni";
+            this.lbDni.Size = new System.Drawing.Size(100, 16);
+            this.lbDni.TabIndex = 2;
+            this.lbDni.Text = "Introduce el dni:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(9, 59);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 1;
+            // 
+            // btConsultarPrestUsuario
+            // 
+            this.btConsultarPrestUsuario.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.btConsultarPrestUsuario.Location = new System.Drawing.Point(125, 31);
+            this.btConsultarPrestUsuario.Name = "btConsultarPrestUsuario";
+            this.btConsultarPrestUsuario.Size = new System.Drawing.Size(79, 50);
+            this.btConsultarPrestUsuario.TabIndex = 0;
+            this.btConsultarPrestUsuario.Text = "Consultar";
+            this.btConsultarPrestUsuario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btConsultarPrestUsuario.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Location = new System.Drawing.Point(440, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(215, 109);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Documentos";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 16);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Introduce el ISBN:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(8, 59);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
+            this.textBox2.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.button1.Location = new System.Drawing.Point(130, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 50);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Consultar";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -268,6 +376,19 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // btLogOut
+            // 
+            this.btLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btLogOut.Image = global::Presentacion.Properties.Resources.logOut3__2_;
+            this.btLogOut.Location = new System.Drawing.Point(768, 21);
+            this.btLogOut.Name = "btLogOut";
+            this.btLogOut.Size = new System.Drawing.Size(43, 38);
+            this.btLogOut.TabIndex = 2;
+            this.btLogOut.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btLogOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btLogOut.UseVisualStyleBackColor = true;
+            // 
             // lbNombre
             // 
             this.lbNombre.AutoSize = true;
@@ -276,6 +397,16 @@
             this.lbNombre.Size = new System.Drawing.Size(66, 16);
             this.lbNombre.TabIndex = 1;
             this.lbNombre.Text = "tuNombre";
+            // 
+            // pbFotoPerfil
+            // 
+            this.pbFotoPerfil.Image = ((System.Drawing.Image)(resources.GetObject("pbFotoPerfil.Image")));
+            this.pbFotoPerfil.Location = new System.Drawing.Point(28, 12);
+            this.pbFotoPerfil.Name = "pbFotoPerfil";
+            this.pbFotoPerfil.Size = new System.Drawing.Size(41, 38);
+            this.pbFotoPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbFotoPerfil.TabIndex = 0;
+            this.pbFotoPerfil.TabStop = false;
             // 
             // Adquisiciones
             // 
@@ -315,134 +446,418 @@
             this.Adquisiciones.Text = "Adquisiciones";
             this.Adquisiciones.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // panel_Listar_Ejemplar
             // 
-            this.groupBox1.Controls.Add(this.lbDni);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.btConsultarPrestUsuario);
-            this.groupBox1.Location = new System.Drawing.Point(209, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Usuarios";
+            this.panel_Listar_Ejemplar.Controls.Add(this.comboBox_Documento_Listar_Ejemplar);
+            this.panel_Listar_Ejemplar.Controls.Add(this.label_Documento_Listar_Ejemplar);
+            this.panel_Listar_Ejemplar.Controls.Add(this.dataGridView_Listar_Ejemplar);
+            this.panel_Listar_Ejemplar.Controls.Add(this.label_Listar_Ejemplar);
+            this.panel_Listar_Ejemplar.Location = new System.Drawing.Point(18, 52);
+            this.panel_Listar_Ejemplar.Name = "panel_Listar_Ejemplar";
+            this.panel_Listar_Ejemplar.Size = new System.Drawing.Size(813, 318);
+            this.panel_Listar_Ejemplar.TabIndex = 30;
+            this.panel_Listar_Ejemplar.Visible = false;
             // 
-            // groupBox2
+            // comboBox_Documento_Listar_Ejemplar
             // 
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Location = new System.Drawing.Point(415, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Documentos";
+            this.comboBox_Documento_Listar_Ejemplar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Documento_Listar_Ejemplar.FormattingEnabled = true;
+            this.comboBox_Documento_Listar_Ejemplar.Location = new System.Drawing.Point(294, 40);
+            this.comboBox_Documento_Listar_Ejemplar.Name = "comboBox_Documento_Listar_Ejemplar";
+            this.comboBox_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(225, 24);
+            this.comboBox_Documento_Listar_Ejemplar.TabIndex = 3;
+            this.comboBox_Documento_Listar_Ejemplar.SelectedIndexChanged += new System.EventHandler(this.comboBox_Documento_Listar_Ejemplar_SelectedIndexChanged);
             // 
-            // btConsultarPrestUsuario
+            // label_Documento_Listar_Ejemplar
             // 
-            this.btConsultarPrestUsuario.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.btConsultarPrestUsuario.Location = new System.Drawing.Point(115, 31);
-            this.btConsultarPrestUsuario.Name = "btConsultarPrestUsuario";
-            this.btConsultarPrestUsuario.Size = new System.Drawing.Size(79, 50);
-            this.btConsultarPrestUsuario.TabIndex = 0;
-            this.btConsultarPrestUsuario.Text = "Consultar";
-            this.btConsultarPrestUsuario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btConsultarPrestUsuario.UseVisualStyleBackColor = true;
+            this.label_Documento_Listar_Ejemplar.AutoSize = true;
+            this.label_Documento_Listar_Ejemplar.Location = new System.Drawing.Point(209, 44);
+            this.label_Documento_Listar_Ejemplar.Name = "label_Documento_Listar_Ejemplar";
+            this.label_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(76, 16);
+            this.label_Documento_Listar_Ejemplar.TabIndex = 2;
+            this.label_Documento_Listar_Ejemplar.Text = "Documento";
             // 
-            // textBox1
+            // dataGridView_Listar_Ejemplar
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 59);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 1;
+            this.dataGridView_Listar_Ejemplar.AllowUserToAddRows = false;
+            this.dataGridView_Listar_Ejemplar.AllowUserToDeleteRows = false;
+            this.dataGridView_Listar_Ejemplar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Listar_Ejemplar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column_Codigo_Listar_Ejemplar,
+            this.Column_Documento_Listar_Ejemplar,
+            this.Column_Responsable_Listar_Ejemplar,
+            this.Column_Activo_Listar_Ejemplar,
+            this.Column_Disponible_Listar_Ejemplar,
+            this.ColumnLocalizacion_Listar_Ejemplar});
+            this.dataGridView_Listar_Ejemplar.Location = new System.Drawing.Point(34, 84);
+            this.dataGridView_Listar_Ejemplar.Name = "dataGridView_Listar_Ejemplar";
+            this.dataGridView_Listar_Ejemplar.ReadOnly = true;
+            this.dataGridView_Listar_Ejemplar.RowHeadersWidth = 51;
+            this.dataGridView_Listar_Ejemplar.RowTemplate.Height = 24;
+            this.dataGridView_Listar_Ejemplar.Size = new System.Drawing.Size(744, 227);
+            this.dataGridView_Listar_Ejemplar.TabIndex = 1;
+            this.dataGridView_Listar_Ejemplar.Visible = false;
             // 
-            // panel2
+            // Column_Codigo_Listar_Ejemplar
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 189);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(835, 253);
-            this.panel2.TabIndex = 3;
+            this.Column_Codigo_Listar_Ejemplar.HeaderText = "Codigo";
+            this.Column_Codigo_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Codigo_Listar_Ejemplar.Name = "Column_Codigo_Listar_Ejemplar";
+            this.Column_Codigo_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Codigo_Listar_Ejemplar.ToolTipText = "Codigo del Ejemplar";
+            this.Column_Codigo_Listar_Ejemplar.Width = 125;
             // 
-            // lbDni
+            // Column_Documento_Listar_Ejemplar
             // 
-            this.lbDni.AutoSize = true;
-            this.lbDni.Location = new System.Drawing.Point(9, 40);
-            this.lbDni.Name = "lbDni";
-            this.lbDni.Size = new System.Drawing.Size(100, 16);
-            this.lbDni.TabIndex = 2;
-            this.lbDni.Text = "Introduce el dni:";
+            this.Column_Documento_Listar_Ejemplar.HeaderText = "Documento";
+            this.Column_Documento_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Documento_Listar_Ejemplar.Name = "Column_Documento_Listar_Ejemplar";
+            this.Column_Documento_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Documento_Listar_Ejemplar.ToolTipText = "Documento del Ejemplar";
+            this.Column_Documento_Listar_Ejemplar.Width = 125;
             // 
-            // button2
+            // Column_Responsable_Listar_Ejemplar
             // 
-            this.button2.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
-            this.button2.Location = new System.Drawing.Point(107, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 84);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Devolución";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button2.UseVisualStyleBackColor = true;
+            this.Column_Responsable_Listar_Ejemplar.HeaderText = "Responsable";
+            this.Column_Responsable_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Responsable_Listar_Ejemplar.Name = "Column_Responsable_Listar_Ejemplar";
+            this.Column_Responsable_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Responsable_Listar_Ejemplar.ToolTipText = "Responsable del Ejemplar";
+            this.Column_Responsable_Listar_Ejemplar.Width = 125;
             // 
-            // btPrestamo
+            // Column_Activo_Listar_Ejemplar
             // 
-            this.btPrestamo.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
-            this.btPrestamo.Location = new System.Drawing.Point(16, 19);
-            this.btPrestamo.Name = "btPrestamo";
-            this.btPrestamo.Size = new System.Drawing.Size(85, 84);
-            this.btPrestamo.TabIndex = 0;
-            this.btPrestamo.Text = "Préstamo";
-            this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btPrestamo.UseVisualStyleBackColor = true;
+            this.Column_Activo_Listar_Ejemplar.HeaderText = "Activo";
+            this.Column_Activo_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Activo_Listar_Ejemplar.Name = "Column_Activo_Listar_Ejemplar";
+            this.Column_Activo_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Activo_Listar_Ejemplar.ToolTipText = "Ejemplar Activo";
+            this.Column_Activo_Listar_Ejemplar.Width = 125;
             // 
-            // btLogOut
+            // Column_Disponible_Listar_Ejemplar
             // 
-            this.btLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btLogOut.Image = global::Presentacion.Properties.Resources.logOut3__2_;
-            this.btLogOut.Location = new System.Drawing.Point(768, 21);
-            this.btLogOut.Name = "btLogOut";
-            this.btLogOut.Size = new System.Drawing.Size(43, 38);
-            this.btLogOut.TabIndex = 2;
-            this.btLogOut.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btLogOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btLogOut.UseVisualStyleBackColor = true;
+            this.Column_Disponible_Listar_Ejemplar.HeaderText = "Disponible";
+            this.Column_Disponible_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Disponible_Listar_Ejemplar.Name = "Column_Disponible_Listar_Ejemplar";
+            this.Column_Disponible_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Disponible_Listar_Ejemplar.ToolTipText = "Ejemplar Disponible";
+            this.Column_Disponible_Listar_Ejemplar.Width = 125;
             // 
-            // pbFotoPerfil
+            // ColumnLocalizacion_Listar_Ejemplar
             // 
-            this.pbFotoPerfil.Image = ((System.Drawing.Image)(resources.GetObject("pbFotoPerfil.Image")));
-            this.pbFotoPerfil.Location = new System.Drawing.Point(28, 12);
-            this.pbFotoPerfil.Name = "pbFotoPerfil";
-            this.pbFotoPerfil.Size = new System.Drawing.Size(41, 38);
-            this.pbFotoPerfil.TabIndex = 0;
-            this.pbFotoPerfil.TabStop = false;
+            this.ColumnLocalizacion_Listar_Ejemplar.HeaderText = "Localizacion";
+            this.ColumnLocalizacion_Listar_Ejemplar.MinimumWidth = 6;
+            this.ColumnLocalizacion_Listar_Ejemplar.Name = "ColumnLocalizacion_Listar_Ejemplar";
+            this.ColumnLocalizacion_Listar_Ejemplar.ReadOnly = true;
+            this.ColumnLocalizacion_Listar_Ejemplar.ToolTipText = "Localizacion del Ejemplar";
+            this.ColumnLocalizacion_Listar_Ejemplar.Width = 200;
             // 
-            // label1
+            // label_Listar_Ejemplar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 16);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Introduce el ISBN:";
+            this.label_Listar_Ejemplar.AutoSize = true;
+            this.label_Listar_Ejemplar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.label_Listar_Ejemplar.Location = new System.Drawing.Point(340, 17);
+            this.label_Listar_Ejemplar.Name = "label_Listar_Ejemplar";
+            this.label_Listar_Ejemplar.Size = new System.Drawing.Size(158, 20);
+            this.label_Listar_Ejemplar.TabIndex = 0;
+            this.label_Listar_Ejemplar.Text = "Lista de Ejemplares";
             // 
-            // textBox2
+            // panel_Listar_Documento
             // 
-            this.textBox2.Location = new System.Drawing.Point(8, 53);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 4;
+            this.panel_Listar_Documento.Controls.Add(this.dataGridView_Listar_Documento);
+            this.panel_Listar_Documento.Controls.Add(this.label_Listar_Documento);
+            this.panel_Listar_Documento.Location = new System.Drawing.Point(18, 51);
+            this.panel_Listar_Documento.Name = "panel_Listar_Documento";
+            this.panel_Listar_Documento.Size = new System.Drawing.Size(813, 318);
+            this.panel_Listar_Documento.TabIndex = 29;
+            this.panel_Listar_Documento.Visible = false;
             // 
-            // button1
+            // dataGridView_Listar_Documento
             // 
-            this.button1.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button1.Location = new System.Drawing.Point(115, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 50);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Consultar";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.dataGridView_Listar_Documento.AllowUserToAddRows = false;
+            this.dataGridView_Listar_Documento.AllowUserToDeleteRows = false;
+            this.dataGridView_Listar_Documento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Listar_Documento.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.column_Titulo_List_Documento,
+            this.column_Autor_List_Documento,
+            this.column_ISBN_List_Documento,
+            this.column_Editorial_List_Documento,
+            this.column_Año_List_Documento,
+            this.column_AudioLibro_List_Documento,
+            this.column_Formato_List_Documento,
+            this.column_Duracion_List_Documento,
+            this.column_Fecha_List_Documento,
+            this.column_Disponible_List_Documento});
+            this.dataGridView_Listar_Documento.Location = new System.Drawing.Point(3, 49);
+            this.dataGridView_Listar_Documento.Name = "dataGridView_Listar_Documento";
+            this.dataGridView_Listar_Documento.ReadOnly = true;
+            this.dataGridView_Listar_Documento.RowHeadersWidth = 51;
+            this.dataGridView_Listar_Documento.RowTemplate.Height = 24;
+            this.dataGridView_Listar_Documento.Size = new System.Drawing.Size(807, 262);
+            this.dataGridView_Listar_Documento.TabIndex = 1;
+            // 
+            // column_Titulo_List_Documento
+            // 
+            this.column_Titulo_List_Documento.HeaderText = "Titulo";
+            this.column_Titulo_List_Documento.MinimumWidth = 6;
+            this.column_Titulo_List_Documento.Name = "column_Titulo_List_Documento";
+            this.column_Titulo_List_Documento.ReadOnly = true;
+            this.column_Titulo_List_Documento.Width = 125;
+            // 
+            // column_Autor_List_Documento
+            // 
+            this.column_Autor_List_Documento.HeaderText = "Autor";
+            this.column_Autor_List_Documento.MinimumWidth = 6;
+            this.column_Autor_List_Documento.Name = "column_Autor_List_Documento";
+            this.column_Autor_List_Documento.ReadOnly = true;
+            this.column_Autor_List_Documento.Width = 125;
+            // 
+            // column_ISBN_List_Documento
+            // 
+            this.column_ISBN_List_Documento.HeaderText = "ISBN";
+            this.column_ISBN_List_Documento.MinimumWidth = 6;
+            this.column_ISBN_List_Documento.Name = "column_ISBN_List_Documento";
+            this.column_ISBN_List_Documento.ReadOnly = true;
+            this.column_ISBN_List_Documento.Width = 125;
+            // 
+            // column_Editorial_List_Documento
+            // 
+            this.column_Editorial_List_Documento.HeaderText = "Editorial";
+            this.column_Editorial_List_Documento.MinimumWidth = 6;
+            this.column_Editorial_List_Documento.Name = "column_Editorial_List_Documento";
+            this.column_Editorial_List_Documento.ReadOnly = true;
+            this.column_Editorial_List_Documento.Width = 125;
+            // 
+            // column_Año_List_Documento
+            // 
+            this.column_Año_List_Documento.HeaderText = "AñoEdicion";
+            this.column_Año_List_Documento.MinimumWidth = 6;
+            this.column_Año_List_Documento.Name = "column_Año_List_Documento";
+            this.column_Año_List_Documento.ReadOnly = true;
+            this.column_Año_List_Documento.Width = 125;
+            // 
+            // column_AudioLibro_List_Documento
+            // 
+            this.column_AudioLibro_List_Documento.HeaderText = "Audiolibro";
+            this.column_AudioLibro_List_Documento.MinimumWidth = 6;
+            this.column_AudioLibro_List_Documento.Name = "column_AudioLibro_List_Documento";
+            this.column_AudioLibro_List_Documento.ReadOnly = true;
+            this.column_AudioLibro_List_Documento.Width = 70;
+            // 
+            // column_Formato_List_Documento
+            // 
+            this.column_Formato_List_Documento.HeaderText = "Formato";
+            this.column_Formato_List_Documento.MinimumWidth = 6;
+            this.column_Formato_List_Documento.Name = "column_Formato_List_Documento";
+            this.column_Formato_List_Documento.ReadOnly = true;
+            this.column_Formato_List_Documento.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.column_Formato_List_Documento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.column_Formato_List_Documento.Width = 125;
+            // 
+            // column_Duracion_List_Documento
+            // 
+            this.column_Duracion_List_Documento.HeaderText = "Duracion";
+            this.column_Duracion_List_Documento.MinimumWidth = 6;
+            this.column_Duracion_List_Documento.Name = "column_Duracion_List_Documento";
+            this.column_Duracion_List_Documento.ReadOnly = true;
+            this.column_Duracion_List_Documento.Width = 125;
+            // 
+            // column_Fecha_List_Documento
+            // 
+            this.column_Fecha_List_Documento.HeaderText = "Fecha Disponible";
+            this.column_Fecha_List_Documento.MinimumWidth = 6;
+            this.column_Fecha_List_Documento.Name = "column_Fecha_List_Documento";
+            this.column_Fecha_List_Documento.ReadOnly = true;
+            this.column_Fecha_List_Documento.Width = 125;
+            // 
+            // column_Disponible_List_Documento
+            // 
+            this.column_Disponible_List_Documento.HeaderText = "Disponible";
+            this.column_Disponible_List_Documento.MinimumWidth = 6;
+            this.column_Disponible_List_Documento.Name = "column_Disponible_List_Documento";
+            this.column_Disponible_List_Documento.ReadOnly = true;
+            this.column_Disponible_List_Documento.Width = 125;
+            // 
+            // label_Listar_Documento
+            // 
+            this.label_Listar_Documento.AutoSize = true;
+            this.label_Listar_Documento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.label_Listar_Documento.Location = new System.Drawing.Point(347, 17);
+            this.label_Listar_Documento.Name = "label_Listar_Documento";
+            this.label_Listar_Documento.Size = new System.Drawing.Size(169, 20);
+            this.label_Listar_Documento.TabIndex = 0;
+            this.label_Listar_Documento.Text = "Lista de Documentos";
+            // 
+            // panel_Consultar_MasLeido
+            // 
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Duracion_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.comboBox_Formato_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_Duracion_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_Formato_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_Año_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Año_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_Editorial_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_ISBN_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_Autor_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.label_Titulo_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Editorial_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_ISBN_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Autor_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Titulo_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Controls.Add(this.checkBox_Audiolibro_Consultar_MasLeido);
+            this.panel_Consultar_MasLeido.Location = new System.Drawing.Point(247, 74);
+            this.panel_Consultar_MasLeido.Name = "panel_Consultar_MasLeido";
+            this.panel_Consultar_MasLeido.Size = new System.Drawing.Size(355, 357);
+            this.panel_Consultar_MasLeido.TabIndex = 17;
+            this.panel_Consultar_MasLeido.Visible = false;
+            // 
+            // label_Consultar_MasLeido
+            // 
+            this.label_Consultar_MasLeido.AutoSize = true;
+            this.label_Consultar_MasLeido.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Consultar_MasLeido.Location = new System.Drawing.Point(108, 10);
+            this.label_Consultar_MasLeido.Name = "label_Consultar_MasLeido";
+            this.label_Consultar_MasLeido.Size = new System.Drawing.Size(152, 20);
+            this.label_Consultar_MasLeido.TabIndex = 15;
+            this.label_Consultar_MasLeido.Text = "Alta de Documento";
+            // 
+            // textBox_Duracion_Consultar_MasLeido
+            // 
+            this.textBox_Duracion_Consultar_MasLeido.Enabled = false;
+            this.textBox_Duracion_Consultar_MasLeido.Location = new System.Drawing.Point(127, 268);
+            this.textBox_Duracion_Consultar_MasLeido.Name = "textBox_Duracion_Consultar_MasLeido";
+            this.textBox_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Duracion_Consultar_MasLeido.TabIndex = 14;
+            this.textBox_Duracion_Consultar_MasLeido.Visible = false;
+            // 
+            // comboBox_Formato_Consultar_MasLeido
+            // 
+            this.comboBox_Formato_Consultar_MasLeido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Formato_Consultar_MasLeido.Enabled = false;
+            this.comboBox_Formato_Consultar_MasLeido.FormattingEnabled = true;
+            this.comboBox_Formato_Consultar_MasLeido.Location = new System.Drawing.Point(127, 230);
+            this.comboBox_Formato_Consultar_MasLeido.Name = "comboBox_Formato_Consultar_MasLeido";
+            this.comboBox_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_Formato_Consultar_MasLeido.TabIndex = 13;
+            this.comboBox_Formato_Consultar_MasLeido.Visible = false;
+            // 
+            // label_Duracion_Consultar_MasLeido
+            // 
+            this.label_Duracion_Consultar_MasLeido.AutoSize = true;
+            this.label_Duracion_Consultar_MasLeido.Location = new System.Drawing.Point(23, 268);
+            this.label_Duracion_Consultar_MasLeido.Name = "label_Duracion_Consultar_MasLeido";
+            this.label_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(61, 16);
+            this.label_Duracion_Consultar_MasLeido.TabIndex = 12;
+            this.label_Duracion_Consultar_MasLeido.Text = "Duración";
+            this.label_Duracion_Consultar_MasLeido.Visible = false;
+            // 
+            // label_Formato_Consultar_MasLeido
+            // 
+            this.label_Formato_Consultar_MasLeido.AutoSize = true;
+            this.label_Formato_Consultar_MasLeido.Location = new System.Drawing.Point(23, 233);
+            this.label_Formato_Consultar_MasLeido.Name = "label_Formato_Consultar_MasLeido";
+            this.label_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(57, 16);
+            this.label_Formato_Consultar_MasLeido.TabIndex = 11;
+            this.label_Formato_Consultar_MasLeido.Text = "Formato";
+            this.label_Formato_Consultar_MasLeido.Visible = false;
+            // 
+            // label_Año_Consultar_MasLeido
+            // 
+            this.label_Año_Consultar_MasLeido.AutoSize = true;
+            this.label_Año_Consultar_MasLeido.Location = new System.Drawing.Point(23, 159);
+            this.label_Año_Consultar_MasLeido.Name = "label_Año_Consultar_MasLeido";
+            this.label_Año_Consultar_MasLeido.Size = new System.Drawing.Size(79, 16);
+            this.label_Año_Consultar_MasLeido.TabIndex = 10;
+            this.label_Año_Consultar_MasLeido.Text = "Año Edición";
+            // 
+            // textBox_Año_Consultar_MasLeido
+            // 
+            this.textBox_Año_Consultar_MasLeido.Enabled = false;
+            this.textBox_Año_Consultar_MasLeido.Location = new System.Drawing.Point(127, 154);
+            this.textBox_Año_Consultar_MasLeido.MaxLength = 4;
+            this.textBox_Año_Consultar_MasLeido.Name = "textBox_Año_Consultar_MasLeido";
+            this.textBox_Año_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Año_Consultar_MasLeido.TabIndex = 9;
+            // 
+            // label_Editorial_Consultar_MasLeido
+            // 
+            this.label_Editorial_Consultar_MasLeido.AutoSize = true;
+            this.label_Editorial_Consultar_MasLeido.Location = new System.Drawing.Point(23, 132);
+            this.label_Editorial_Consultar_MasLeido.Name = "label_Editorial_Consultar_MasLeido";
+            this.label_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(56, 16);
+            this.label_Editorial_Consultar_MasLeido.TabIndex = 8;
+            this.label_Editorial_Consultar_MasLeido.Text = "Editorial";
+            // 
+            // label_ISBN_Consultar_MasLeido
+            // 
+            this.label_ISBN_Consultar_MasLeido.AutoSize = true;
+            this.label_ISBN_Consultar_MasLeido.Location = new System.Drawing.Point(23, 101);
+            this.label_ISBN_Consultar_MasLeido.Name = "label_ISBN_Consultar_MasLeido";
+            this.label_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(38, 16);
+            this.label_ISBN_Consultar_MasLeido.TabIndex = 7;
+            this.label_ISBN_Consultar_MasLeido.Text = "ISBN";
+            // 
+            // label_Autor_Consultar_MasLeido
+            // 
+            this.label_Autor_Consultar_MasLeido.AutoSize = true;
+            this.label_Autor_Consultar_MasLeido.Location = new System.Drawing.Point(23, 73);
+            this.label_Autor_Consultar_MasLeido.Name = "label_Autor_Consultar_MasLeido";
+            this.label_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(38, 16);
+            this.label_Autor_Consultar_MasLeido.TabIndex = 6;
+            this.label_Autor_Consultar_MasLeido.Text = "Autor";
+            // 
+            // label_Titulo_Consultar_MasLeido
+            // 
+            this.label_Titulo_Consultar_MasLeido.AutoSize = true;
+            this.label_Titulo_Consultar_MasLeido.Location = new System.Drawing.Point(23, 45);
+            this.label_Titulo_Consultar_MasLeido.Name = "label_Titulo_Consultar_MasLeido";
+            this.label_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(40, 16);
+            this.label_Titulo_Consultar_MasLeido.TabIndex = 5;
+            this.label_Titulo_Consultar_MasLeido.Text = "Titulo";
+            // 
+            // textBox_Editorial_Consultar_MasLeido
+            // 
+            this.textBox_Editorial_Consultar_MasLeido.Enabled = false;
+            this.textBox_Editorial_Consultar_MasLeido.Location = new System.Drawing.Point(127, 126);
+            this.textBox_Editorial_Consultar_MasLeido.Name = "textBox_Editorial_Consultar_MasLeido";
+            this.textBox_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Editorial_Consultar_MasLeido.TabIndex = 4;
+            // 
+            // textBox_ISBN_Consultar_MasLeido
+            // 
+            this.textBox_ISBN_Consultar_MasLeido.Enabled = false;
+            this.textBox_ISBN_Consultar_MasLeido.Location = new System.Drawing.Point(127, 98);
+            this.textBox_ISBN_Consultar_MasLeido.Name = "textBox_ISBN_Consultar_MasLeido";
+            this.textBox_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_ISBN_Consultar_MasLeido.TabIndex = 3;
+            // 
+            // textBox_Autor_Consultar_MasLeido
+            // 
+            this.textBox_Autor_Consultar_MasLeido.Enabled = false;
+            this.textBox_Autor_Consultar_MasLeido.Location = new System.Drawing.Point(127, 70);
+            this.textBox_Autor_Consultar_MasLeido.Name = "textBox_Autor_Consultar_MasLeido";
+            this.textBox_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Autor_Consultar_MasLeido.TabIndex = 2;
+            // 
+            // textBox_Titulo_Consultar_MasLeido
+            // 
+            this.textBox_Titulo_Consultar_MasLeido.Enabled = false;
+            this.textBox_Titulo_Consultar_MasLeido.Location = new System.Drawing.Point(127, 42);
+            this.textBox_Titulo_Consultar_MasLeido.Name = "textBox_Titulo_Consultar_MasLeido";
+            this.textBox_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Titulo_Consultar_MasLeido.TabIndex = 1;
+            // 
+            // checkBox_Audiolibro_Consultar_MasLeido
+            // 
+            this.checkBox_Audiolibro_Consultar_MasLeido.AutoSize = true;
+            this.checkBox_Audiolibro_Consultar_MasLeido.Enabled = false;
+            this.checkBox_Audiolibro_Consultar_MasLeido.Location = new System.Drawing.Point(140, 191);
+            this.checkBox_Audiolibro_Consultar_MasLeido.Name = "checkBox_Audiolibro_Consultar_MasLeido";
+            this.checkBox_Audiolibro_Consultar_MasLeido.Size = new System.Drawing.Size(94, 20);
+            this.checkBox_Audiolibro_Consultar_MasLeido.TabIndex = 0;
+            this.checkBox_Audiolibro_Consultar_MasLeido.Text = "AudioLibro";
+            this.checkBox_Audiolibro_Consultar_MasLeido.UseVisualStyleBackColor = true;
             // 
             // button_Realizar_Consultar_Fech
             // 
@@ -512,7 +927,7 @@
             this.label_Consultar_Fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Consultar_Fecha.Location = new System.Drawing.Point(53, 9);
             this.label_Consultar_Fecha.Name = "label_Consultar_Fecha";
-            this.label_Consultar_Fecha.Size = new System.Drawing.Size(257, 17);
+            this.label_Consultar_Fecha.Size = new System.Drawing.Size(307, 20);
             this.label_Consultar_Fecha.TabIndex = 15;
             this.label_Consultar_Fecha.Text = "Consultar Fecha Disponible Documento";
             // 
@@ -564,7 +979,7 @@
             this.label_Consultar_Disponible.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Consultar_Disponible.Location = new System.Drawing.Point(53, 9);
             this.label_Consultar_Disponible.Name = "label_Consultar_Disponible";
-            this.label_Consultar_Disponible.Size = new System.Drawing.Size(236, 17);
+            this.label_Consultar_Disponible.Size = new System.Drawing.Size(282, 20);
             this.label_Consultar_Disponible.TabIndex = 15;
             this.label_Consultar_Disponible.Text = "Consultar Disponibilidad Documento";
             // 
@@ -576,7 +991,7 @@
             this.checkBox_Disponible_Consultar_Disp.Enabled = false;
             this.checkBox_Disponible_Consultar_Disp.Location = new System.Drawing.Point(127, 77);
             this.checkBox_Disponible_Consultar_Disp.Name = "checkBox_Disponible_Consultar_Disp";
-            this.checkBox_Disponible_Consultar_Disp.Size = new System.Drawing.Size(119, 20);
+            this.checkBox_Disponible_Consultar_Disp.Size = new System.Drawing.Size(122, 20);
             this.checkBox_Disponible_Consultar_Disp.TabIndex = 0;
             this.checkBox_Disponible_Consultar_Disp.Text = "Hay Disponible";
             this.checkBox_Disponible_Consultar_Disp.UseVisualStyleBackColor = true;
@@ -654,7 +1069,7 @@
             this.label_Informacion_Consultar_Eje.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label_Informacion_Consultar_Eje.Location = new System.Drawing.Point(105, 75);
             this.label_Informacion_Consultar_Eje.Name = "label_Informacion_Consultar_Eje";
-            this.label_Informacion_Consultar_Eje.Size = new System.Drawing.Size(140, 17);
+            this.label_Informacion_Consultar_Eje.Size = new System.Drawing.Size(167, 20);
             this.label_Informacion_Consultar_Eje.TabIndex = 19;
             this.label_Informacion_Consultar_Eje.Text = "Informacion Ejemplar";
             this.label_Informacion_Consultar_Eje.Visible = false;
@@ -684,7 +1099,7 @@
             this.label_Consultar_Ejemplar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Consultar_Ejemplar.Location = new System.Drawing.Point(98, 5);
             this.label_Consultar_Ejemplar.Name = "label_Consultar_Ejemplar";
-            this.label_Consultar_Ejemplar.Size = new System.Drawing.Size(151, 17);
+            this.label_Consultar_Ejemplar.Size = new System.Drawing.Size(180, 20);
             this.label_Consultar_Ejemplar.TabIndex = 15;
             this.label_Consultar_Ejemplar.Text = "Consultar un  Ejemplar";
             // 
@@ -715,7 +1130,7 @@
             this.checkBox_Disponible_Consultar_Eje.Enabled = false;
             this.checkBox_Disponible_Consultar_Eje.Location = new System.Drawing.Point(154, 215);
             this.checkBox_Disponible_Consultar_Eje.Name = "checkBox_Disponible_Consultar_Eje";
-            this.checkBox_Disponible_Consultar_Eje.Size = new System.Drawing.Size(91, 20);
+            this.checkBox_Disponible_Consultar_Eje.Size = new System.Drawing.Size(94, 20);
             this.checkBox_Disponible_Consultar_Eje.TabIndex = 0;
             this.checkBox_Disponible_Consultar_Eje.Text = "Disponible";
             this.checkBox_Disponible_Consultar_Eje.UseVisualStyleBackColor = true;
@@ -857,7 +1272,7 @@
             this.label_Info_Baja_Eje.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label_Info_Baja_Eje.Location = new System.Drawing.Point(105, 116);
             this.label_Info_Baja_Eje.Name = "label_Info_Baja_Eje";
-            this.label_Info_Baja_Eje.Size = new System.Drawing.Size(140, 17);
+            this.label_Info_Baja_Eje.Size = new System.Drawing.Size(167, 20);
             this.label_Info_Baja_Eje.TabIndex = 19;
             this.label_Info_Baja_Eje.Text = "Informacion Ejemplar";
             // 
@@ -896,7 +1311,7 @@
             this.label_Baja_Ejemplares.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Baja_Ejemplares.Location = new System.Drawing.Point(120, 8);
             this.label_Baja_Ejemplares.Name = "label_Baja_Ejemplares";
-            this.label_Baja_Ejemplares.Size = new System.Drawing.Size(115, 17);
+            this.label_Baja_Ejemplares.Size = new System.Drawing.Size(137, 20);
             this.label_Baja_Ejemplares.TabIndex = 15;
             this.label_Baja_Ejemplares.Text = "Baja de Ejemplar";
             // 
@@ -944,7 +1359,7 @@
             this.checkBox_Disponible_Baja_Eje.Enabled = false;
             this.checkBox_Disponible_Baja_Eje.Location = new System.Drawing.Point(154, 256);
             this.checkBox_Disponible_Baja_Eje.Name = "checkBox_Disponible_Baja_Eje";
-            this.checkBox_Disponible_Baja_Eje.Size = new System.Drawing.Size(91, 20);
+            this.checkBox_Disponible_Baja_Eje.Size = new System.Drawing.Size(94, 20);
             this.checkBox_Disponible_Baja_Eje.TabIndex = 0;
             this.checkBox_Disponible_Baja_Eje.Text = "Disponible";
             this.checkBox_Disponible_Baja_Eje.UseVisualStyleBackColor = true;
@@ -969,7 +1384,7 @@
             this.label_Alta_Ejemplar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Alta_Ejemplar.Location = new System.Drawing.Point(108, 10);
             this.label_Alta_Ejemplar.Name = "label_Alta_Ejemplar";
-            this.label_Alta_Ejemplar.Size = new System.Drawing.Size(111, 17);
+            this.label_Alta_Ejemplar.Size = new System.Drawing.Size(132, 20);
             this.label_Alta_Ejemplar.TabIndex = 15;
             this.label_Alta_Ejemplar.Text = "Alta de Ejemplar";
             // 
@@ -1014,7 +1429,7 @@
             this.checkBox_Disponible_Alta_Eje.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_Disponible_Alta_Eje.Location = new System.Drawing.Point(140, 106);
             this.checkBox_Disponible_Alta_Eje.Name = "checkBox_Disponible_Alta_Eje";
-            this.checkBox_Disponible_Alta_Eje.Size = new System.Drawing.Size(91, 20);
+            this.checkBox_Disponible_Alta_Eje.Size = new System.Drawing.Size(94, 20);
             this.checkBox_Disponible_Alta_Eje.TabIndex = 0;
             this.checkBox_Disponible_Alta_Eje.Text = "Disponible";
             this.checkBox_Disponible_Alta_Eje.UseVisualStyleBackColor = true;
@@ -1073,7 +1488,7 @@
             this.label_Alta_Doc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Alta_Doc.Location = new System.Drawing.Point(108, 10);
             this.label_Alta_Doc.Name = "label_Alta_Doc";
-            this.label_Alta_Doc.Size = new System.Drawing.Size(128, 17);
+            this.label_Alta_Doc.Size = new System.Drawing.Size(152, 20);
             this.label_Alta_Doc.TabIndex = 15;
             this.label_Alta_Doc.Text = "Alta de Documento";
             // 
@@ -1203,7 +1618,7 @@
             this.checkBox_Audiolibro_Alta_Doc.AutoSize = true;
             this.checkBox_Audiolibro_Alta_Doc.Location = new System.Drawing.Point(140, 191);
             this.checkBox_Audiolibro_Alta_Doc.Name = "checkBox_Audiolibro_Alta_Doc";
-            this.checkBox_Audiolibro_Alta_Doc.Size = new System.Drawing.Size(91, 20);
+            this.checkBox_Audiolibro_Alta_Doc.Size = new System.Drawing.Size(94, 20);
             this.checkBox_Audiolibro_Alta_Doc.TabIndex = 0;
             this.checkBox_Audiolibro_Alta_Doc.Text = "AudioLibro";
             this.checkBox_Audiolibro_Alta_Doc.UseVisualStyleBackColor = true;
@@ -1295,390 +1710,9 @@
             this.label_Main_Adquisiciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Main_Adquisiciones.Location = new System.Drawing.Point(283, 22);
             this.label_Main_Adquisiciones.Name = "label_Main_Adquisiciones";
-            this.label_Main_Adquisiciones.Size = new System.Drawing.Size(282, 26);
+            this.label_Main_Adquisiciones.Size = new System.Drawing.Size(361, 32);
             this.label_Main_Adquisiciones.TabIndex = 6;
             this.label_Main_Adquisiciones.Text = "Gestion de Adquisiciones";
-            // 
-            // panel_Consultar_MasLeido
-            // 
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Duracion_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.comboBox_Formato_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_Duracion_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_Formato_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_Año_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Año_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_Editorial_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_ISBN_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_Autor_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.label_Titulo_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Editorial_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_ISBN_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Autor_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.textBox_Titulo_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Controls.Add(this.checkBox_Audiolibro_Consultar_MasLeido);
-            this.panel_Consultar_MasLeido.Location = new System.Drawing.Point(247, 74);
-            this.panel_Consultar_MasLeido.Name = "panel_Consultar_MasLeido";
-            this.panel_Consultar_MasLeido.Size = new System.Drawing.Size(355, 357);
-            this.panel_Consultar_MasLeido.TabIndex = 17;
-            this.panel_Consultar_MasLeido.Visible = false;
-            // 
-            // label_Consultar_MasLeido
-            // 
-            this.label_Consultar_MasLeido.AutoSize = true;
-            this.label_Consultar_MasLeido.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Consultar_MasLeido.Location = new System.Drawing.Point(108, 10);
-            this.label_Consultar_MasLeido.Name = "label_Consultar_MasLeido";
-            this.label_Consultar_MasLeido.Size = new System.Drawing.Size(128, 17);
-            this.label_Consultar_MasLeido.TabIndex = 15;
-            this.label_Consultar_MasLeido.Text = "Alta de Documento";
-            // 
-            // textBox_Duracion_Consultar_MasLeido
-            // 
-            this.textBox_Duracion_Consultar_MasLeido.Enabled = false;
-            this.textBox_Duracion_Consultar_MasLeido.Location = new System.Drawing.Point(127, 268);
-            this.textBox_Duracion_Consultar_MasLeido.Name = "textBox_Duracion_Consultar_MasLeido";
-            this.textBox_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
-            this.textBox_Duracion_Consultar_MasLeido.TabIndex = 14;
-            this.textBox_Duracion_Consultar_MasLeido.Visible = false;
-            // 
-            // comboBox_Formato_Consultar_MasLeido
-            // 
-            this.comboBox_Formato_Consultar_MasLeido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Formato_Consultar_MasLeido.Enabled = false;
-            this.comboBox_Formato_Consultar_MasLeido.FormattingEnabled = true;
-            this.comboBox_Formato_Consultar_MasLeido.Location = new System.Drawing.Point(127, 230);
-            this.comboBox_Formato_Consultar_MasLeido.Name = "comboBox_Formato_Consultar_MasLeido";
-            this.comboBox_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(121, 24);
-            this.comboBox_Formato_Consultar_MasLeido.TabIndex = 13;
-            this.comboBox_Formato_Consultar_MasLeido.Visible = false;
-            // 
-            // label_Duracion_Consultar_MasLeido
-            // 
-            this.label_Duracion_Consultar_MasLeido.AutoSize = true;
-            this.label_Duracion_Consultar_MasLeido.Location = new System.Drawing.Point(23, 268);
-            this.label_Duracion_Consultar_MasLeido.Name = "label_Duracion_Consultar_MasLeido";
-            this.label_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(61, 16);
-            this.label_Duracion_Consultar_MasLeido.TabIndex = 12;
-            this.label_Duracion_Consultar_MasLeido.Text = "Duración";
-            this.label_Duracion_Consultar_MasLeido.Visible = false;
-            // 
-            // label_Formato_Consultar_MasLeido
-            // 
-            this.label_Formato_Consultar_MasLeido.AutoSize = true;
-            this.label_Formato_Consultar_MasLeido.Location = new System.Drawing.Point(23, 233);
-            this.label_Formato_Consultar_MasLeido.Name = "label_Formato_Consultar_MasLeido";
-            this.label_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(57, 16);
-            this.label_Formato_Consultar_MasLeido.TabIndex = 11;
-            this.label_Formato_Consultar_MasLeido.Text = "Formato";
-            this.label_Formato_Consultar_MasLeido.Visible = false;
-            // 
-            // label_Año_Consultar_MasLeido
-            // 
-            this.label_Año_Consultar_MasLeido.AutoSize = true;
-            this.label_Año_Consultar_MasLeido.Location = new System.Drawing.Point(23, 159);
-            this.label_Año_Consultar_MasLeido.Name = "label_Año_Consultar_MasLeido";
-            this.label_Año_Consultar_MasLeido.Size = new System.Drawing.Size(79, 16);
-            this.label_Año_Consultar_MasLeido.TabIndex = 10;
-            this.label_Año_Consultar_MasLeido.Text = "Año Edición";
-            // 
-            // textBox_Año_Consultar_MasLeido
-            // 
-            this.textBox_Año_Consultar_MasLeido.Enabled = false;
-            this.textBox_Año_Consultar_MasLeido.Location = new System.Drawing.Point(127, 154);
-            this.textBox_Año_Consultar_MasLeido.MaxLength = 4;
-            this.textBox_Año_Consultar_MasLeido.Name = "textBox_Año_Consultar_MasLeido";
-            this.textBox_Año_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
-            this.textBox_Año_Consultar_MasLeido.TabIndex = 9;
-            // 
-            // label_Editorial_Consultar_MasLeido
-            // 
-            this.label_Editorial_Consultar_MasLeido.AutoSize = true;
-            this.label_Editorial_Consultar_MasLeido.Location = new System.Drawing.Point(23, 132);
-            this.label_Editorial_Consultar_MasLeido.Name = "label_Editorial_Consultar_MasLeido";
-            this.label_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(56, 16);
-            this.label_Editorial_Consultar_MasLeido.TabIndex = 8;
-            this.label_Editorial_Consultar_MasLeido.Text = "Editorial";
-            // 
-            // label_ISBN_Consultar_MasLeido
-            // 
-            this.label_ISBN_Consultar_MasLeido.AutoSize = true;
-            this.label_ISBN_Consultar_MasLeido.Location = new System.Drawing.Point(23, 101);
-            this.label_ISBN_Consultar_MasLeido.Name = "label_ISBN_Consultar_MasLeido";
-            this.label_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(38, 16);
-            this.label_ISBN_Consultar_MasLeido.TabIndex = 7;
-            this.label_ISBN_Consultar_MasLeido.Text = "ISBN";
-            // 
-            // label_Autor_Consultar_MasLeido
-            // 
-            this.label_Autor_Consultar_MasLeido.AutoSize = true;
-            this.label_Autor_Consultar_MasLeido.Location = new System.Drawing.Point(23, 73);
-            this.label_Autor_Consultar_MasLeido.Name = "label_Autor_Consultar_MasLeido";
-            this.label_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(38, 16);
-            this.label_Autor_Consultar_MasLeido.TabIndex = 6;
-            this.label_Autor_Consultar_MasLeido.Text = "Autor";
-            // 
-            // label_Titulo_Consultar_MasLeido
-            // 
-            this.label_Titulo_Consultar_MasLeido.AutoSize = true;
-            this.label_Titulo_Consultar_MasLeido.Location = new System.Drawing.Point(23, 45);
-            this.label_Titulo_Consultar_MasLeido.Name = "label_Titulo_Consultar_MasLeido";
-            this.label_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(40, 16);
-            this.label_Titulo_Consultar_MasLeido.TabIndex = 5;
-            this.label_Titulo_Consultar_MasLeido.Text = "Titulo";
-            // 
-            // textBox_Editorial_Consultar_MasLeido
-            // 
-            this.textBox_Editorial_Consultar_MasLeido.Enabled = false;
-            this.textBox_Editorial_Consultar_MasLeido.Location = new System.Drawing.Point(127, 126);
-            this.textBox_Editorial_Consultar_MasLeido.Name = "textBox_Editorial_Consultar_MasLeido";
-            this.textBox_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
-            this.textBox_Editorial_Consultar_MasLeido.TabIndex = 4;
-            // 
-            // textBox_ISBN_Consultar_MasLeido
-            // 
-            this.textBox_ISBN_Consultar_MasLeido.Enabled = false;
-            this.textBox_ISBN_Consultar_MasLeido.Location = new System.Drawing.Point(127, 98);
-            this.textBox_ISBN_Consultar_MasLeido.Name = "textBox_ISBN_Consultar_MasLeido";
-            this.textBox_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
-            this.textBox_ISBN_Consultar_MasLeido.TabIndex = 3;
-            // 
-            // textBox_Autor_Consultar_MasLeido
-            // 
-            this.textBox_Autor_Consultar_MasLeido.Enabled = false;
-            this.textBox_Autor_Consultar_MasLeido.Location = new System.Drawing.Point(127, 70);
-            this.textBox_Autor_Consultar_MasLeido.Name = "textBox_Autor_Consultar_MasLeido";
-            this.textBox_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
-            this.textBox_Autor_Consultar_MasLeido.TabIndex = 2;
-            // 
-            // textBox_Titulo_Consultar_MasLeido
-            // 
-            this.textBox_Titulo_Consultar_MasLeido.Enabled = false;
-            this.textBox_Titulo_Consultar_MasLeido.Location = new System.Drawing.Point(127, 42);
-            this.textBox_Titulo_Consultar_MasLeido.Name = "textBox_Titulo_Consultar_MasLeido";
-            this.textBox_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
-            this.textBox_Titulo_Consultar_MasLeido.TabIndex = 1;
-            // 
-            // checkBox_Audiolibro_Consultar_MasLeido
-            // 
-            this.checkBox_Audiolibro_Consultar_MasLeido.AutoSize = true;
-            this.checkBox_Audiolibro_Consultar_MasLeido.Enabled = false;
-            this.checkBox_Audiolibro_Consultar_MasLeido.Location = new System.Drawing.Point(140, 191);
-            this.checkBox_Audiolibro_Consultar_MasLeido.Name = "checkBox_Audiolibro_Consultar_MasLeido";
-            this.checkBox_Audiolibro_Consultar_MasLeido.Size = new System.Drawing.Size(91, 20);
-            this.checkBox_Audiolibro_Consultar_MasLeido.TabIndex = 0;
-            this.checkBox_Audiolibro_Consultar_MasLeido.Text = "AudioLibro";
-            this.checkBox_Audiolibro_Consultar_MasLeido.UseVisualStyleBackColor = true;
-            // 
-            // panel_Listar_Documento
-            // 
-            this.panel_Listar_Documento.Controls.Add(this.dataGridView_Listar_Documento);
-            this.panel_Listar_Documento.Controls.Add(this.label_Listar_Documento);
-            this.panel_Listar_Documento.Location = new System.Drawing.Point(18, 51);
-            this.panel_Listar_Documento.Name = "panel_Listar_Documento";
-            this.panel_Listar_Documento.Size = new System.Drawing.Size(813, 318);
-            this.panel_Listar_Documento.TabIndex = 29;
-            this.panel_Listar_Documento.Visible = false;
-            // 
-            // label_Listar_Documento
-            // 
-            this.label_Listar_Documento.AutoSize = true;
-            this.label_Listar_Documento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.label_Listar_Documento.Location = new System.Drawing.Point(347, 17);
-            this.label_Listar_Documento.Name = "label_Listar_Documento";
-            this.label_Listar_Documento.Size = new System.Drawing.Size(141, 17);
-            this.label_Listar_Documento.TabIndex = 0;
-            this.label_Listar_Documento.Text = "Lista de Documentos";
-            // 
-            // dataGridView_Listar_Documento
-            // 
-            this.dataGridView_Listar_Documento.AllowUserToAddRows = false;
-            this.dataGridView_Listar_Documento.AllowUserToDeleteRows = false;
-            this.dataGridView_Listar_Documento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Listar_Documento.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.column_Titulo_List_Documento,
-            this.column_Autor_List_Documento,
-            this.column_ISBN_List_Documento,
-            this.column_Editorial_List_Documento,
-            this.column_Año_List_Documento,
-            this.column_AudioLibro_List_Documento,
-            this.column_Formato_List_Documento,
-            this.column_Duracion_List_Documento,
-            this.column_Fecha_List_Documento,
-            this.column_Disponible_List_Documento});
-            this.dataGridView_Listar_Documento.Location = new System.Drawing.Point(3, 49);
-            this.dataGridView_Listar_Documento.Name = "dataGridView_Listar_Documento";
-            this.dataGridView_Listar_Documento.ReadOnly = true;
-            this.dataGridView_Listar_Documento.RowTemplate.Height = 24;
-            this.dataGridView_Listar_Documento.Size = new System.Drawing.Size(807, 262);
-            this.dataGridView_Listar_Documento.TabIndex = 1;
-            // 
-            // column_Titulo_List_Documento
-            // 
-            this.column_Titulo_List_Documento.HeaderText = "Titulo";
-            this.column_Titulo_List_Documento.Name = "column_Titulo_List_Documento";
-            this.column_Titulo_List_Documento.ReadOnly = true;
-            // 
-            // column_Autor_List_Documento
-            // 
-            this.column_Autor_List_Documento.HeaderText = "Autor";
-            this.column_Autor_List_Documento.Name = "column_Autor_List_Documento";
-            this.column_Autor_List_Documento.ReadOnly = true;
-            // 
-            // column_ISBN_List_Documento
-            // 
-            this.column_ISBN_List_Documento.HeaderText = "ISBN";
-            this.column_ISBN_List_Documento.Name = "column_ISBN_List_Documento";
-            this.column_ISBN_List_Documento.ReadOnly = true;
-            // 
-            // column_Editorial_List_Documento
-            // 
-            this.column_Editorial_List_Documento.HeaderText = "Editorial";
-            this.column_Editorial_List_Documento.Name = "column_Editorial_List_Documento";
-            this.column_Editorial_List_Documento.ReadOnly = true;
-            // 
-            // column_Año_List_Documento
-            // 
-            this.column_Año_List_Documento.HeaderText = "AñoEdicion";
-            this.column_Año_List_Documento.Name = "column_Año_List_Documento";
-            this.column_Año_List_Documento.ReadOnly = true;
-            // 
-            // column_AudioLibro_List_Documento
-            // 
-            this.column_AudioLibro_List_Documento.HeaderText = "Audiolibro";
-            this.column_AudioLibro_List_Documento.Name = "column_AudioLibro_List_Documento";
-            this.column_AudioLibro_List_Documento.ReadOnly = true;
-            this.column_AudioLibro_List_Documento.Width = 70;
-            // 
-            // column_Formato_List_Documento
-            // 
-            this.column_Formato_List_Documento.HeaderText = "Formato";
-            this.column_Formato_List_Documento.Name = "column_Formato_List_Documento";
-            this.column_Formato_List_Documento.ReadOnly = true;
-            this.column_Formato_List_Documento.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.column_Formato_List_Documento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // column_Duracion_List_Documento
-            // 
-            this.column_Duracion_List_Documento.HeaderText = "Duracion";
-            this.column_Duracion_List_Documento.Name = "column_Duracion_List_Documento";
-            this.column_Duracion_List_Documento.ReadOnly = true;
-            // 
-            // column_Fecha_List_Documento
-            // 
-            this.column_Fecha_List_Documento.HeaderText = "Fecha Disponible";
-            this.column_Fecha_List_Documento.Name = "column_Fecha_List_Documento";
-            this.column_Fecha_List_Documento.ReadOnly = true;
-            // 
-            // column_Disponible_List_Documento
-            // 
-            this.column_Disponible_List_Documento.HeaderText = "Disponible";
-            this.column_Disponible_List_Documento.Name = "column_Disponible_List_Documento";
-            this.column_Disponible_List_Documento.ReadOnly = true;
-            // 
-            // panel_Listar_Ejemplar
-            // 
-            this.panel_Listar_Ejemplar.Controls.Add(this.comboBox_Documento_Listar_Ejemplar);
-            this.panel_Listar_Ejemplar.Controls.Add(this.label_Documento_Listar_Ejemplar);
-            this.panel_Listar_Ejemplar.Controls.Add(this.dataGridView_Listar_Ejemplar);
-            this.panel_Listar_Ejemplar.Controls.Add(this.label_Listar_Ejemplar);
-            this.panel_Listar_Ejemplar.Location = new System.Drawing.Point(18, 52);
-            this.panel_Listar_Ejemplar.Name = "panel_Listar_Ejemplar";
-            this.panel_Listar_Ejemplar.Size = new System.Drawing.Size(813, 318);
-            this.panel_Listar_Ejemplar.TabIndex = 30;
-            this.panel_Listar_Ejemplar.Visible = false;
-            // 
-            // dataGridView_Listar_Ejemplar
-            // 
-            this.dataGridView_Listar_Ejemplar.AllowUserToAddRows = false;
-            this.dataGridView_Listar_Ejemplar.AllowUserToDeleteRows = false;
-            this.dataGridView_Listar_Ejemplar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Listar_Ejemplar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column_Codigo_Listar_Ejemplar,
-            this.Column_Documento_Listar_Ejemplar,
-            this.Column_Responsable_Listar_Ejemplar,
-            this.Column_Activo_Listar_Ejemplar,
-            this.Column_Disponible_Listar_Ejemplar,
-            this.ColumnLocalizacion_Listar_Ejemplar});
-            this.dataGridView_Listar_Ejemplar.Location = new System.Drawing.Point(34, 84);
-            this.dataGridView_Listar_Ejemplar.Name = "dataGridView_Listar_Ejemplar";
-            this.dataGridView_Listar_Ejemplar.ReadOnly = true;
-            this.dataGridView_Listar_Ejemplar.RowTemplate.Height = 24;
-            this.dataGridView_Listar_Ejemplar.Size = new System.Drawing.Size(744, 227);
-            this.dataGridView_Listar_Ejemplar.TabIndex = 1;
-            this.dataGridView_Listar_Ejemplar.Visible = false;
-            // 
-            // label_Listar_Ejemplar
-            // 
-            this.label_Listar_Ejemplar.AutoSize = true;
-            this.label_Listar_Ejemplar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.label_Listar_Ejemplar.Location = new System.Drawing.Point(340, 17);
-            this.label_Listar_Ejemplar.Name = "label_Listar_Ejemplar";
-            this.label_Listar_Ejemplar.Size = new System.Drawing.Size(132, 17);
-            this.label_Listar_Ejemplar.TabIndex = 0;
-            this.label_Listar_Ejemplar.Text = "Lista de Ejemplares";
-            // 
-            // label_Documento_Listar_Ejemplar
-            // 
-            this.label_Documento_Listar_Ejemplar.AutoSize = true;
-            this.label_Documento_Listar_Ejemplar.Location = new System.Drawing.Point(209, 44);
-            this.label_Documento_Listar_Ejemplar.Name = "label_Documento_Listar_Ejemplar";
-            this.label_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(76, 16);
-            this.label_Documento_Listar_Ejemplar.TabIndex = 2;
-            this.label_Documento_Listar_Ejemplar.Text = "Documento";
-            // 
-            // comboBox_Documento_Listar_Ejemplar
-            // 
-            this.comboBox_Documento_Listar_Ejemplar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Documento_Listar_Ejemplar.FormattingEnabled = true;
-            this.comboBox_Documento_Listar_Ejemplar.Location = new System.Drawing.Point(294, 40);
-            this.comboBox_Documento_Listar_Ejemplar.Name = "comboBox_Documento_Listar_Ejemplar";
-            this.comboBox_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(225, 24);
-            this.comboBox_Documento_Listar_Ejemplar.TabIndex = 3;
-            this.comboBox_Documento_Listar_Ejemplar.SelectedIndexChanged += new System.EventHandler(this.comboBox_Documento_Listar_Ejemplar_SelectedIndexChanged);
-            // 
-            // Column_Codigo_Listar_Ejemplar
-            // 
-            this.Column_Codigo_Listar_Ejemplar.HeaderText = "Codigo";
-            this.Column_Codigo_Listar_Ejemplar.Name = "Column_Codigo_Listar_Ejemplar";
-            this.Column_Codigo_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Codigo_Listar_Ejemplar.ToolTipText = "Codigo del Ejemplar";
-            // 
-            // Column_Documento_Listar_Ejemplar
-            // 
-            this.Column_Documento_Listar_Ejemplar.HeaderText = "Documento";
-            this.Column_Documento_Listar_Ejemplar.Name = "Column_Documento_Listar_Ejemplar";
-            this.Column_Documento_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Documento_Listar_Ejemplar.ToolTipText = "Documento del Ejemplar";
-            // 
-            // Column_Responsable_Listar_Ejemplar
-            // 
-            this.Column_Responsable_Listar_Ejemplar.HeaderText = "Responsable";
-            this.Column_Responsable_Listar_Ejemplar.Name = "Column_Responsable_Listar_Ejemplar";
-            this.Column_Responsable_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Responsable_Listar_Ejemplar.ToolTipText = "Responsable del Ejemplar";
-            // 
-            // Column_Activo_Listar_Ejemplar
-            // 
-            this.Column_Activo_Listar_Ejemplar.HeaderText = "Activo";
-            this.Column_Activo_Listar_Ejemplar.Name = "Column_Activo_Listar_Ejemplar";
-            this.Column_Activo_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Activo_Listar_Ejemplar.ToolTipText = "Ejemplar Activo";
-            // 
-            // Column_Disponible_Listar_Ejemplar
-            // 
-            this.Column_Disponible_Listar_Ejemplar.HeaderText = "Disponible";
-            this.Column_Disponible_Listar_Ejemplar.Name = "Column_Disponible_Listar_Ejemplar";
-            this.Column_Disponible_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Disponible_Listar_Ejemplar.ToolTipText = "Ejemplar Disponible";
-            // 
-            // ColumnLocalizacion_Listar_Ejemplar
-            // 
-            this.ColumnLocalizacion_Listar_Ejemplar.HeaderText = "Localizacion";
-            this.ColumnLocalizacion_Listar_Ejemplar.Name = "ColumnLocalizacion_Listar_Ejemplar";
-            this.ColumnLocalizacion_Listar_Ejemplar.ReadOnly = true;
-            this.ColumnLocalizacion_Listar_Ejemplar.ToolTipText = "Localizacion del Ejemplar";
-            this.ColumnLocalizacion_Listar_Ejemplar.Width = 200;
             // 
             // FormPersonal
             // 
@@ -1692,15 +1726,23 @@
             this.Sala.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.gbPrestamos.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).EndInit();
             this.Adquisiciones.ResumeLayout(false);
             this.Adquisiciones.PerformLayout();
+            this.panel_Listar_Ejemplar.ResumeLayout(false);
+            this.panel_Listar_Ejemplar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Ejemplar)).EndInit();
+            this.panel_Listar_Documento.ResumeLayout(false);
+            this.panel_Listar_Documento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Documento)).EndInit();
+            this.panel_Consultar_MasLeido.ResumeLayout(false);
+            this.panel_Consultar_MasLeido.PerformLayout();
             this.panel_Consultar_Fecha.ResumeLayout(false);
             this.panel_Consultar_Fecha.PerformLayout();
             this.panel_Consultar_Disponible.ResumeLayout(false);
@@ -1713,14 +1755,6 @@
             this.panel_Alta_Ejemplar.PerformLayout();
             this.panel_Alta_Documento.ResumeLayout(false);
             this.panel_Alta_Documento.PerformLayout();
-            this.panel_Consultar_MasLeido.ResumeLayout(false);
-            this.panel_Consultar_MasLeido.PerformLayout();
-            this.panel_Listar_Documento.ResumeLayout(false);
-            this.panel_Listar_Documento.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Documento)).EndInit();
-            this.panel_Listar_Ejemplar.ResumeLayout(false);
-            this.panel_Listar_Ejemplar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Ejemplar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1742,7 +1776,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btConsultarPrestUsuario;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lbDni;
         private System.Windows.Forms.Label label1;

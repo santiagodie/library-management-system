@@ -72,6 +72,12 @@
     <Compile Include="RolLog.Designer.cs">
       <DependentUpon>RolLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_Inicio.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Inicio.Designer.cs">
+      <DependentUpon>UC_Inicio.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormPersonal.resx">
       <DependentUpon>FormPersonal.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RolLog.resx">
       <DependentUpon>RolLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Inicio.resx">
+      <DependentUpon>UC_Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\FormUsuario.datasource" />
     <None Include="Properties\Settings.settings">

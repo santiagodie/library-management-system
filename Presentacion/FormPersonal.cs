@@ -32,6 +32,7 @@ namespace Presentacion
                 Tab.TabPages.Remove(Sala);
                 gestorAdquisiciones = new GestorAdquisiciones();
             }
+            InicializarSala();
         }
         //PRE: ---
         //POST: inicializa todos los tooltips de los controles del formulario.
@@ -719,9 +720,21 @@ namespace Presentacion
             dataGridView_Listar_Ejemplar.Visible = false;
         }
 
-    }
+        private void InicializarSala()
+        {
+            UC_Inicio inicio = new UC_Inicio();
+            MostrarPantalla(inicio);
         }
 
+        //PRE: ---
+        //POST: muestra cualquier usercontrol dentro del panel
+        private void MostrarPantalla(UserControl pantalla)
+        {
+            panelContenedor.Controls.Clear();
+            pantalla.Dock = DockStyle.Fill;
+            panelContenedor.Controls.Add(pantalla);
+            pantalla.BringToFront();
+        }
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
