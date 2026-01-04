@@ -9,13 +9,32 @@ using System.Security.Claims;
 
 namespace Persistencia
 {
-    public static class Persistencia
+    public class Persistencia : IPersistencia
     {
+        private static IPersistencia _instancia;
+        private static readonly object _lock = new object();
+
+        public static IPersistencia Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_instancia == null) _instancia = new Persistencia();
+                    }
+                }
+                return _instancia;
+            }
+        }
+        private Persistencia(){}
+
         // ------------- GESTIÓN DE PERSONAS
 
         //PRE: dni no puede ser nulo.
         //POST: devuelve true si existe una persona con ese dni en la BD.
-        public static bool ExistePersona(string dni)
+        public bool ExistePersona(string dni)
         {
             return BaseDatos.BaseDatos.Existe("PersonaTabla", dni);
         }
@@ -24,14 +43,14 @@ namespace Persistencia
 
         //PRE: dni no puede ser nulo.
         //POST: devuelve true si existe un usuario con ese dni en la BD.
-        public static bool ExisteUsuario(string dni)
+        public bool ExisteUsuario(string dni)
         {
             return BaseDatos.BaseDatos.Existe("PersonaTabla", dni) && BaseDatos.BaseDatos.Existe("UsuarioTabla", dni);
         }
 
         // PRE: usuario no puede ser nulo y no debe existir previamente en la BD.
         // POST: da de alta al usuario. Si falla, revierte los cambios en PersonaTabla.
-        public static bool AltaUsuario(Usuario usuario)
+        public bool AltaUsuario(Usuario usuario)
         {
             bool nuevaPersonaCreada = false;
             if (!BaseDatos.BaseDatos.Existe("PersonaTabla", usuario.Dni))
@@ -51,14 +70,14 @@ namespace Persistencia
 
         //PRE: usuario no puede ser nulo y debe existir en la BD.
         //POST: marca el usuario como Inactivo (baja lógica). Devuelve true si tuvo éxito.
-        public static bool BajaUsuario(Usuario usuario)
+        public bool BajaUsuario(Usuario usuario)
         {
             return BaseDatos.BaseDatos.ModificarFila("UsuarioTabla", usuario.Dni, "Estado", EstadoUsuario.Inactivo);
         }
 
         //PRE: usuario no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del usuario en PersonaTabla y UsuarioTabla. Devuelve true si tuvo éxito.
-        public static bool ActualizarUsuario(Usuario usuario)
+        public bool ActualizarUsuario(Usuario usuario)
         {
             // Guardar datos originales para rollback
             UsuarioDato datosOriginales = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", usuario.Dni) as UsuarioDato;
@@ -83,7 +102,7 @@ namespace Persistencia
 
         //PRE: dni no puede ser nulo.
         //POST: devuelve el usuario con ese dni. Si no existe, devuelve null.
-        public static Usuario GetUsuario(string dni)
+        public Usuario GetUsuario(string dni)
         {
             // UsuarioDato.PersonaId apunta a PersonaDato cuya clave es Dni
             UsuarioDato userData = BaseDatos.BaseDatos.ObtenerDatos("UsuarioTabla", dni) as UsuarioDato;
@@ -93,7 +112,7 @@ namespace Persistencia
 
         //PRE: ---
         //POST: devuelve una lista con todos los usuarios de la BD.
-        public static List<Usuario> GetListaUsuarios()
+        public List<Usuario> GetListaUsuarios()
         {
             return BaseDatos.BaseDatos.ObtenerTodos("UsuarioTabla")
                 .OfType<UsuarioDato>()
@@ -105,7 +124,7 @@ namespace Persistencia
 
         //PRE: prestamo no puede ser nulo y no debe existir previamente en la BD.
         //POST: da de alta el préstamo en PrestamoTabla y PrestamoEjemplarTabla. Devuelve true si tuvo éxito. Si falla, revierte los cambios.
-        public static bool AltaPrestamo(Prestamo prestamo)
+        public bool AltaPrestamo(Prestamo prestamo)
         {
             // Añadir fila a PrestamoTabla
             PrestamoDato prestamoData = Transformer.ToPrestamoDato(prestamo);
@@ -142,7 +161,7 @@ namespace Persistencia
 
         //PRE: prestamo no puede ser nulo y debe existir en la BD.
         //POST: actualiza la disponibilidad de los ejemplares y marca FechaDevolucion en PrestamoEjemplarTabla. Devuelve true si tuvo éxito.
-        public static bool ActualizarPrestamo(Prestamo prestamo)
+        public bool ActualizarPrestamo(Prestamo prestamo)
         {
             foreach (Ejemplar ejemplar in prestamo.EjemplaresPrestados)
             {
@@ -159,7 +178,7 @@ namespace Persistencia
 
         //PRE: ejemplar no puede ser nulo.
         //POST: devuelve el préstamo activo que contiene ese ejemplar. Si no existe, devuelve null.
-        public static Prestamo GetPrestamoActivo(Ejemplar ejemplar)
+        public Prestamo GetPrestamoActivo(Ejemplar ejemplar)
         {
             // Buscar en PrestamoEjemplarTabla un ejemplar no devuelto
             PrestamoEjemplarDato peData = BaseDatos.BaseDatos.ObtenerTodos("PrestamoEjemplarTabla")
@@ -177,7 +196,7 @@ namespace Persistencia
 
         //PRE: ---
         //POST: devuelve una lista con todos los préstamos de la BD.
-        public static List<Prestamo> GetPrestamos()
+        public List<Prestamo> GetPrestamos()
         {
             return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
                 .OfType<PrestamoDato>()
@@ -187,7 +206,7 @@ namespace Persistencia
 
         //PRE: usuario no puede ser nulo.
         //POST: devuelve una lista con todos los préstamos del usuario.
-        public static List<Prestamo> GetPrestamos(Usuario usuario)
+        public List<Prestamo> GetPrestamos(Usuario usuario)
         {
             return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
                 .OfType<PrestamoDato>()
@@ -198,7 +217,7 @@ namespace Persistencia
 
         //PRE: documento no puede ser nulo.
         //POST: devuelve una lista con todos los préstamos que contienen ejemplares de ese documento.
-        public static List<Prestamo> GetPrestamos(Documento documento)
+        public List<Prestamo> GetPrestamos(Documento documento)
         {
             var ejemplaresDocumento = BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
                 .OfType<EjemplarDato>()
@@ -222,7 +241,7 @@ namespace Persistencia
 
         //PRE: usuario no puede ser nulo y fecha debe ser válida.
         //POST: devuelve una lista con todos los préstamos del usuario en esa fecha.
-        public static List<Prestamo> GetPrestamos(Usuario usuario, DateTime fecha)
+        public List<Prestamo> GetPrestamos(Usuario usuario, DateTime fecha)
         {
             return BaseDatos.BaseDatos.ObtenerTodos("PrestamoTabla")
                 .OfType<PrestamoDato>()
@@ -233,7 +252,7 @@ namespace Persistencia
 
         //PRE: usuario y documento no pueden ser nulos.
         //POST: devuelve una lista con todos los préstamos del usuario que contienen ejemplares de ese documento.
-        public static List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
+        public List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
         {
             var ejemplaresDocumento = BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
                 .OfType<EjemplarDato>()
@@ -259,21 +278,21 @@ namespace Persistencia
 
         //PRE: documento no puede ser nulo y no debe existir previamente en la BD.
         //POST: da de alta el documento. Devuelve true si tuvo éxito.
-        public static bool AltaDocumento(Documento documento)
+        public bool AltaDocumento(Documento documento)
         {
             return BaseDatos.BaseDatos.AñadirFila("DocumentoTabla", Transformer.ToDocumentoDato(documento));
         }
 
         //PRE: ISBN no puede ser nulo.
         //POST: devuelve true si existe un documento con ese ISBN en la BD.
-        public static bool ExisteDocumento(string ISBN)
+        public bool ExisteDocumento(string ISBN)
         {
             return BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", ISBN) != null;
         }
 
         //PRE: isbn no puede ser nulo.
         //POST: devuelve el documento con ese ISBN. Si no existe, devuelve null.
-        public static Documento GetDocumento(string isbn)
+        public Documento GetDocumento(string isbn)
         {
             DocumentoDato documentData = BaseDatos.BaseDatos.ObtenerDatos("DocumentoTabla", isbn) as DocumentoDato;
              if (documentData == null) return null;
@@ -282,18 +301,18 @@ namespace Persistencia
 
         //PRE: ---
         //POST: devuelve una lista con todos los documentos de la BD.
-        public static List<Documento> GetDocumentos() 
+        public List<Documento> GetDocumentos()
         {
             return BaseDatos.BaseDatos.ObtenerTodos("DocumentoTabla")
                 .OfType<DocumentoDato>()
                 .Select(documentData => Transformer.ToDocumento(documentData))
                 .ToList()
-                ; 
+                ;
         }
 
         //PRE: documento no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del documento. Devuelve true si tuvo éxito.
-        public static bool ActualizarDocumento(Documento documento)
+        public bool ActualizarDocumento(Documento documento)
         {
             BaseDatos.BaseDatos.BorrarFila("DocumentoTabla", documento.ISBN);
              return BaseDatos.BaseDatos.AñadirFila("DocumentoTabla", Transformer.ToDocumentoDato(documento));
@@ -301,14 +320,14 @@ namespace Persistencia
 
         //PRE: ejemplar no puede ser nulo y no debe existir previamente en la BD.
         //POST: da de alta el ejemplar. Devuelve true si tuvo éxito.
-        public static bool AltaEjemplar(Ejemplar ejemplar)
+        public bool AltaEjemplar(Ejemplar ejemplar)
         {
             return BaseDatos.BaseDatos.AñadirFila("EjemplarTabla", Transformer.ToEjemplarDato(ejemplar));
         }
 
         //PRE: ejemplar no puede ser nulo y debe existir en la BD.
         //POST: marca el ejemplar como inactivo (baja lógica). Devuelve true si tuvo éxito.
-        public static bool BajaEjemplar(Ejemplar ejemplar)
+        public bool BajaEjemplar(Ejemplar ejemplar)
         {
             // Baja lógica: marcar como inactivo en lugar de borrar
             return BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Activo", false );
@@ -316,14 +335,14 @@ namespace Persistencia
 
         //PRE: codigo no puede ser nulo.
         //POST: devuelve true si existe un ejemplar con ese código en la BD.
-        public static bool ExisteEjemplar(string codigo)
+        public bool ExisteEjemplar(string codigo)
         {
             return BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) !=  null;
         }
 
         //PRE: codigo no puede ser nulo.
         //POST: devuelve el ejemplar con ese código. Si no existe, devuelve null.
-        public static Ejemplar GetEjemplar(string codigo)
+        public Ejemplar GetEjemplar(string codigo)
         {
             EjemplarDato ejemplarData = BaseDatos.BaseDatos.ObtenerDatos("EjemplarTabla", codigo) as EjemplarDato;
             if (ejemplarData == null) return null;
@@ -333,7 +352,7 @@ namespace Persistencia
 
         //PRE: documento no puede ser nulo.
         //POST: devuelve una lista con todos los ejemplares activos de ese documento.
-        public static List<Ejemplar> GetEjemplares(Documento documento)
+        public List<Ejemplar> GetEjemplares(Documento documento)
         {
             return BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
                 .OfType<EjemplarDato>()
@@ -344,7 +363,7 @@ namespace Persistencia
 
         //PRE: ejemplar no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del ejemplar. Devuelve true si tuvo éxito.
-        public static bool ActualizarEjemplar(Ejemplar ejemplar)
+        public bool ActualizarEjemplar(Ejemplar ejemplar)
         {
             BaseDatos.BaseDatos.BorrarFila("EjemplarTabla", ejemplar.Codigo);
             return BaseDatos.BaseDatos.AñadirFila("EjemplarTabla", Transformer.ToEjemplarDato(ejemplar)) ;
@@ -352,7 +371,7 @@ namespace Persistencia
 
         //PRE: ejemplares no puede ser nulo ni vacío.
         //POST: actualiza la disponibilidad de todos los ejemplares. Devuelve true si todos se actualizaron correctamente.
-        public static bool ActualizarDisponibilidad(List<Ejemplar> ejemplares)
+        public bool ActualizarDisponibilidad(List<Ejemplar> ejemplares)
         {
             return ejemplares.All(ejemplar =>
                  BaseDatos.BaseDatos.ModificarFila("EjemplarTabla", ejemplar.Codigo, "Prestado", !ejemplar.Disponible));
@@ -360,7 +379,7 @@ namespace Persistencia
 
         //PRE: isbn no puede ser nulo.
         //POST: devuelve true si hay al menos un ejemplar disponible de ese documento.
-        public static bool HayEjemplaresDisponibles(string isbn)
+        public bool HayEjemplaresDisponibles(string isbn)
         {
             return BaseDatos.BaseDatos.ObtenerTodos("EjemplarTabla")
                 .OfType<EjemplarDato>()
@@ -371,21 +390,21 @@ namespace Persistencia
 
         //PRE: dni no puede ser nulo.
         //POST: devuelve true si existe un personal sala con ese dni en la BD.
-        public static bool ExistePersonalSala(string dni)
+        public bool ExistePersonalSala(string dni)
         {
             return BaseDatos.BaseDatos.Existe("PersonaTabla", dni) && BaseDatos.BaseDatos.Existe("PersonalSalaTabla", dni);
         }
-        
+
         //PRE: dni no puede ser nulo.
         //POST: devuelve true si existe un personal de adquisiciones con ese dni en la BD.
-        public static bool ExistePersonalAdquisiciones(string dni)
+        public bool ExistePersonalAdquisiciones(string dni)
         {
             return BaseDatos.BaseDatos.Existe("PersonaTabla", dni) && BaseDatos.BaseDatos.Existe("PersonalAdquisicionesTabla", dni);
         }
-        
+
         //PRE: personalSala no puede ser nulo y no debe existir previamente en la BD.
         //POST: da de alta el personal de sala en PersonaTabla(si es necesario) y PersonalSalaTabla. Devuelve true si tuvo éxito.
-        public static bool AltaPersonalSala(PersonalSala personalSala)
+        public bool AltaPersonalSala(PersonalSala personalSala)
         {
             bool nuevaPersonaCreada = false;
             if (!BaseDatos.BaseDatos.Existe("PersonaTabla", personalSala.Dni)) {
@@ -403,7 +422,7 @@ namespace Persistencia
 
         //PRE: personalAdquisiciones no puede ser nulo y no debe existir previamente en la BD.
         //POST: da de alta el personal de adquisiciones en PersonaTabla(si necesario) y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
-        public static bool AltaPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
+        public bool AltaPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
             bool nuevaPersonaCreada = false;
             if (!BaseDatos.BaseDatos.Existe("PersonaTabla", personalAdquisiciones.Dni)) {
@@ -421,7 +440,7 @@ namespace Persistencia
 
         //PRE: personalSala no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del personal de sala en PersonaTabla y PersonalSalaTabla. Devuelve true si tuvo éxito.
-        public static bool ActualizarPersonalSala(PersonalSala personalSala)
+        public bool ActualizarPersonalSala(PersonalSala personalSala)
         {
             // Guardar datos originales para rollback
             PersonalSalaDato datosOriginales = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", personalSala.Dni) as PersonalSalaDato;
@@ -446,7 +465,7 @@ namespace Persistencia
 
         //PRE: personalAdquisiciones no puede ser nulo y debe existir en la BD.
         //POST: actualiza los datos del personal de adquisiciones en PersonaTabla y PersonalAdquisicionesTabla. Devuelve true si tuvo éxito.
-        public static bool ActualizarPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
+        public bool ActualizarPersonalAdquisiciones(PersonalAdquisiciones personalAdquisiciones)
         {
             // Guardar datos originales para rollback
             PersonalAdquisicionesDato datosOriginales = BaseDatos.BaseDatos.ObtenerDatos("PersonalAdquisicionesTabla", personalAdquisiciones.Dni) as PersonalAdquisicionesDato;
@@ -471,7 +490,7 @@ namespace Persistencia
 
         //PRE: dni no puede ser nulo.
         //POST: devuelve el personal de sala con ese dni. Si no existe, devuelve null.
-        public static PersonalSala GetPersonalSala(string dni)
+        public PersonalSala GetPersonalSala(string dni)
         {
             PersonalSalaDato personalSalaData = BaseDatos.BaseDatos.ObtenerDatos("PersonalSalaTabla", dni) as PersonalSalaDato;
             if (personalSalaData == null) return null;
@@ -480,7 +499,7 @@ namespace Persistencia
 
         //PRE: dni no puede ser nulo.
         //POST: devuelve el personal de adquisiciones con ese dni. Si no existe, devuelve null.
-        public static PersonalAdquisiciones GetPersonalAdquisiciones(string dni)
+        public PersonalAdquisiciones GetPersonalAdquisiciones(string dni)
         {
             PersonalAdquisicionesDato personalAdquisicionesData = BaseDatos.BaseDatos.ObtenerDatos("PersonalAdquisicionesTabla", dni) as PersonalAdquisicionesDato;
             if (personalAdquisicionesData == null) return null;
