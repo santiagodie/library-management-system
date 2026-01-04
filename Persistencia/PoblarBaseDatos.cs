@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Persistencia
 {
-    //Clase creada con el fin de poblar la base de datos con datos de prueba.
+    // Clase creada con el fin de poblar la base de datos con datos de prueba.
     public static class PoblarBaseDatos
     {
         private static bool poblada = false;
 
-        //PRE: ---
-        //POST: pobla la base de datos con datos de prueba si no ha sido inicializada previamente.
+        // PRE: ---
+        // POST: puebla la base de datos con datos de prueba si no ha sido inicializada previamente.
         public static void Inicializar()
         {
             if (poblada) return;
@@ -24,72 +24,74 @@ namespace Persistencia
             poblada = true;
         }
 
-        //PRE: ---
-        //POST: crea personal de sala y adquisiciones de prueba. DEBE SER PRIMERO porque Ejemplar necesita un responsable.
+        // PRE: ---
+        // POST: crea personal de sala y adquisiciones de prueba. DEBE SER PRIMERO porque Ejemplar necesita un responsable.
         private static void PoblarPersonal()
         {
-            // Personal de Sala 1: dni=33333333E, contraseña=sala123, NSS=100001
-            PersonalSala personalSala1 = new PersonalSala("Luis", "33333333E", 100001);
+            // Personal de Sala 1: dni=33333333P
+            PersonalSala personalSala1 = new PersonalSala("Luis", "33333333P", 100001);
             personalSala1.SetHashContraseña(Hash.GetHash("sala123"));
             Persistencia.AltaPersonalSala(personalSala1);
 
-            // Personal de Sala 2: dni=44444444F, contraseña=sala456, NSS=100002
-            PersonalSala personalSala2 = new PersonalSala("Santiago", "44444444F", 100002);
+            // Personal de Sala 2: dni=44444444A
+            PersonalSala personalSala2 = new PersonalSala("Santiago", "44444444A", 100002);
             personalSala2.SetHashContraseña(Hash.GetHash("sala456"));
             Persistencia.AltaPersonalSala(personalSala2);
 
-            // Personal de Adquisiciones 1: dni=55555555G, contraseña=adq123, NSS=200001
-            PersonalAdquisiciones personalAdq1 = new PersonalAdquisiciones("Ana", "55555555G", 200001);
+            // Personal de Adquisiciones 1: dni=55555555K
+            PersonalAdquisiciones personalAdq1 = new PersonalAdquisiciones("Ana", "55555555K", 200001);
             personalAdq1.SetHashContraseña(Hash.GetHash("adq123"));
             Persistencia.AltaPersonalAdquisiciones(personalAdq1);
 
-            // Personal de Adquisiciones 2: dni=66666666H, contraseña=adq456, NSS=200002
-            PersonalAdquisiciones personalAdq2 = new PersonalAdquisiciones("Javier", "66666666H", 200002);
+            // Personal de Adquisiciones 2: dni=66666666Q
+            PersonalAdquisiciones personalAdq2 = new PersonalAdquisiciones("Javier", "66666666Q", 200002);
             personalAdq2.SetHashContraseña(Hash.GetHash("adq456"));
             Persistencia.AltaPersonalAdquisiciones(personalAdq2);
 
-            // Personal de Adquisiciones 3: dni=77777777G, contraseña=adq789, NSS=3
-            PersonalAdquisiciones personalAdq3 = new PersonalAdquisiciones("Alberto", "77777777G", 200003);
+            // Personal de Adquisiciones 3: dni=77777777B
+            PersonalAdquisiciones personalAdq3 = new PersonalAdquisiciones("Alberto", "77777777B", 200003);
             personalAdq3.SetHashContraseña(Hash.GetHash("adq789"));
             Persistencia.AltaPersonalAdquisiciones(personalAdq3);
         }
 
-        //PRE: ---
-        //POST: crea usuarios de prueba con contraseñas hash.
+        // PRE: ---
+        // POST: crea usuarios de prueba con contraseñas hash.
         private static void PoblarUsuarios()
         {
-            // Usuario 1: dni=12345678A, contraseña=juan321
-            Usuario usuario1 = new Usuario("Juan", "12345678A");
+            // Usuario 1: dni=12345678Z
+            Usuario usuario1 = new Usuario("Juan", "12345678Z");
             usuario1.SetHashContraseña(Hash.GetHash("juan321"));
             Persistencia.AltaUsuario(usuario1);
 
-            // Usuario 2: dni=87654321B, contraseña=maria123
-            Usuario usuario2 = new Usuario("Maria", "87654321B");
+            // Usuario 2: dni=87654321X
+            Usuario usuario2 = new Usuario("Maria", "87654321X");
             usuario2.SetHashContraseña(Hash.GetHash("maria123"));
             Persistencia.AltaUsuario(usuario2);
 
-            // Usuario 3: dni=11111111C, contraseña=carl444
-            Usuario usuario3 = new Usuario("Carlos ", "11111111C");
+            // Usuario 3: dni=11111111H
+            Usuario usuario3 = new Usuario("Carlos ", "11111111H");
             usuario3.SetHashContraseña(Hash.GetHash("carl444"));
             Persistencia.AltaUsuario(usuario3);
 
-            // Usuario 4 (Sancionado): dni=22222222D, contraseña=sancionado
-            Usuario usuario4 = new Usuario("Lucas", "22222222D");
+            // Usuario 4 (Sancionado): dni=22222222J
+            Usuario usuario4 = new Usuario("Lucas", "22222222J");
             usuario4.SetHashContraseña(Hash.GetHash("sancionado"));
             usuario4.Sancionar();
             Persistencia.AltaUsuario(usuario4);
 
-            // Usuario 5: dni=77777777H, contraseña=adq789
-            Usuario usuario5 = new Usuario("Alberto", "77777777G");
+            // Usuario 5: dni=77777777B (Coincide con Adquisiciones 3 -> Rol Doble)
+            Usuario usuario5 = new Usuario("Alberto", "77777777B");
+            usuario5.SetHashContraseña(Hash.GetHash("adq789")); // Misma pass para no liar
             Persistencia.AltaUsuario(usuario5);
         }
 
-        //PRE: debe haberse ejecutado PoblarPersonal() antes.
-        //POST: crea documentos y ejemplares de prueba.
+        // PRE: deben haberse ejecutado PoblarPersonal() antes.
+        // POST: crea documentos y ejemplares de prueba.
         private static void PoblarDocumentosYEjemplares()
         {
-            PersonalAdquisiciones responsable1 = Persistencia.GetPersonalAdquisiciones("55555555G");
-            PersonalAdquisiciones responsable2 = Persistencia.GetPersonalAdquisiciones("66666666H");
+            // CORREGIDO: Ahora usamos los DNIS válidos (K y Q)
+            PersonalAdquisiciones responsable1 = Persistencia.GetPersonalAdquisiciones("55555555K");
+            PersonalAdquisiciones responsable2 = Persistencia.GetPersonalAdquisiciones("66666666Q");
 
             // Libro 1: El Quijote
             Libro libro1 = new Libro(
@@ -117,7 +119,7 @@ namespace Persistencia
             );
             Persistencia.AltaDocumento(libro2);
             Ejemplar ejemplar4 = new Ejemplar("Estantería B-05", true, libro2, responsable2);
-            Ejemplar ejemplar5 = new Ejemplar("Estantería B-06", false, libro2, responsable2); 
+            Ejemplar ejemplar5 = new Ejemplar("Estantería B-06", false, libro2, responsable2);
             Persistencia.AltaEjemplar(ejemplar4);
             Persistencia.AltaEjemplar(ejemplar5);
 
@@ -138,7 +140,6 @@ namespace Persistencia
             Persistencia.AltaEjemplar(ejemplar6);
             Persistencia.AltaEjemplar(ejemplar7);
             Persistencia.AltaEjemplar(ejemplar8);
-            
 
             // Libro 3: El principito
             Libro libro3 = new Libro(
@@ -157,62 +158,65 @@ namespace Persistencia
             Persistencia.AltaEjemplar(ejemplar11);
         }
 
-        //PRE: deben haberse ejecutado PoblarPersonal(), PoblarUsuarios() y PoblarDocumentosYEjemplares() antes.
-        //POST: crea préstamos de prueba con diferentes estados (activos y finalizados).
+        // PRE: deben haberse ejecutado PoblarPersonal(), PoblarUsuarios() y PoblarDocumentosYEjemplares() antes.
+        // POST: crea préstamos de prueba con diferentes estados (activos y finalizados).
         private static void PoblarPrestamos()
-        {   //Maria y Juan
-            Usuario usuario1 = Persistencia.GetUsuario("12345678A");
-            Usuario usuario2 = Persistencia.GetUsuario("87654321B");
-            PersonalSala responsableSala1 = Persistencia.GetPersonalSala("33333333E");
-            PersonalSala responsableSala2 = Persistencia.GetPersonalSala("44444444F");
+        {
+            Usuario usuario1 = Persistencia.GetUsuario("12345678Z");
+            Usuario usuario2 = Persistencia.GetUsuario("87654321X");
+            PersonalSala responsableSala1 = Persistencia.GetPersonalSala("33333333P");
+            PersonalSala responsableSala2 = Persistencia.GetPersonalSala("44444444A");
 
+            // Documentos
             Documento quijote = Persistencia.GetDocumento("978-84-376-0494-7");
             Documento cienAnos = Persistencia.GetDocumento("978-84-204-8246-8");
             Documento audio1984 = Persistencia.GetDocumento("978-84-666-1146-8");
             Documento principito = Persistencia.GetDocumento("978-84-9838-499-1");
 
+            // Ejemplares
             List<Ejemplar> ejemplaresQuijote = Persistencia.GetEjemplares(quijote);
             List<Ejemplar> ejemplaresCienAnos = Persistencia.GetEjemplares(cienAnos);
             List<Ejemplar> ejemplaresAudio = Persistencia.GetEjemplares(audio1984);
             List<Ejemplar> ejemplaresPrincipito = Persistencia.GetEjemplares(principito);
 
-            // Prestamo 1: JUAN:  2 libros
-            List<Ejemplar> prestamo1Ejemplares = new List<Ejemplar> {ejemplaresQuijote[0],ejemplaresCienAnos[0]};
+            // Prestamo 1: JUAN (2 libros)
+            List<Ejemplar> prestamo1Ejemplares = new List<Ejemplar> { ejemplaresQuijote[0], ejemplaresCienAnos[0] };
             DateTime[] fechaFin1 = new DateTime[2];
             fechaFin1[0] = DateTime.Today.AddDays(15);
-            fechaFin1[1] = DateTime.MinValue;            
+            fechaFin1[1] = DateTime.MinValue;
             Prestamo prestamo1 = new Prestamo(fechaFin1, usuario1, prestamo1Ejemplares, responsableSala1);
             Persistencia.AltaPrestamo(prestamo1);
-            Persistencia.ActualizarDisponibilidad(prestamo1Ejemplares); 
+            Persistencia.ActualizarDisponibilidad(prestamo1Ejemplares);
 
-            // Prestamo 2: MARIA: mixto 
-            List<Ejemplar> prestamo2Ejemplares = new List<Ejemplar> {ejemplaresPrincipito[0],ejemplaresAudio[0]};
+            // Prestamo 2: MARIA (mixto)
+            List<Ejemplar> prestamo2Ejemplares = new List<Ejemplar> { ejemplaresPrincipito[0], ejemplaresAudio[0] };
             DateTime[] fechaFin2 = new DateTime[2];
-            fechaFin2[0] = DateTime.Today.AddDays(15);  
-            fechaFin2[1] = DateTime.Today.AddDays(10);   
+            fechaFin2[0] = DateTime.Today.AddDays(15);
+            fechaFin2[1] = DateTime.Today.AddDays(10);
             Prestamo prestamo2 = new Prestamo(fechaFin2, usuario2, prestamo2Ejemplares, responsableSala2);
             Persistencia.AltaPrestamo(prestamo2);
             Persistencia.ActualizarDisponibilidad(prestamo2Ejemplares);
 
-            // Prestamo 3:JUAN: Prestamo finalizado
-            List<Ejemplar> prestamo3Ejemplares = new List<Ejemplar> {ejemplaresQuijote[2]};
+            // Prestamo 3: JUAN (Finalizado)
+            List<Ejemplar> prestamo3Ejemplares = new List<Ejemplar> { ejemplaresQuijote[2] };
             DateTime[] fechaFin3 = new DateTime[2];
-            fechaFin3[0] = DateTime.Today.AddDays(-10); 
+            fechaFin3[0] = DateTime.Today.AddDays(-10);
             fechaFin3[1] = DateTime.MinValue;
             Prestamo prestamo3 = new Prestamo(fechaFin3, usuario1, prestamo3Ejemplares, responsableSala2);
-            prestamo3.FechaInicio = DateTime.Today.AddDays(-25); 
+            prestamo3.FechaInicio = DateTime.Today.AddDays(-25);
+            // Simular devolución:
             prestamo3.DevolverEjemplar(ejemplaresQuijote[2]);
             ejemplaresQuijote[2].Disponible = true;
             Persistencia.AltaPrestamo(prestamo3);
             Persistencia.ActualizarEjemplar(ejemplaresQuijote[2]);
 
-            // Prestamo 4: MARIA:Prestamo proximo a vencer
-            List<Ejemplar> prestamo4Ejemplares = new List<Ejemplar> {ejemplaresCienAnos[1] };
+            // Prestamo 4: MARIA (Próximo a vencer / Retrasado)
+            List<Ejemplar> prestamo4Ejemplares = new List<Ejemplar> { ejemplaresCienAnos[1] };
             DateTime[] fechaFin4 = new DateTime[2];
             fechaFin4[0] = DateTime.Today.AddDays(2);
             fechaFin4[1] = DateTime.MinValue;
             Prestamo prestamo4 = new Prestamo(fechaFin4, usuario2, prestamo4Ejemplares, responsableSala1);
-            prestamo4.FechaInicio = DateTime.Today.AddDays(-13); 
+            prestamo4.FechaInicio = DateTime.Today.AddDays(-13);
             Persistencia.AltaPrestamo(prestamo4);
             Persistencia.ActualizarDisponibilidad(prestamo4Ejemplares);
         }

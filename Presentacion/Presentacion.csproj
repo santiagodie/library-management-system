@@ -83,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -120,6 +121,21 @@
       <Project>{29760232-10bb-483f-950d-dc6fbe5a19d7}</Project>
       <Name>Persistencia</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FotoPerfil %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logOut3 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImagenDevolucion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImagenPrestamo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImagenBuscar %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
