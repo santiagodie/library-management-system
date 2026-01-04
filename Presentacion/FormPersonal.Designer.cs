@@ -208,15 +208,15 @@
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.91954F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.08046F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(849, 435);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
@@ -229,7 +229,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(843, 85);
+            this.panel4.Size = new System.Drawing.Size(843, 84);
             this.panel4.TabIndex = 3;
             // 
             // button1
@@ -268,9 +268,9 @@
             // 
             this.panel3.Controls.Add(this.Tab);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 94);
+            this.panel3.Location = new System.Drawing.Point(3, 93);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(843, 338);
+            this.panel3.Size = new System.Drawing.Size(843, 339);
             this.panel3.TabIndex = 0;
             // 
             // Tab
@@ -278,11 +278,11 @@
             this.Tab.Controls.Add(this.Usuarios);
             this.Tab.Controls.Add(this.Sala);
             this.Tab.Controls.Add(this.Adquisiciones);
-            this.Tab.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Tab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tab.Location = new System.Drawing.Point(0, 0);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(843, 474);
+            this.Tab.Size = new System.Drawing.Size(843, 339);
             this.Tab.TabIndex = 1;
             // 
             // Usuarios
@@ -291,7 +291,7 @@
             this.Usuarios.Location = new System.Drawing.Point(4, 25);
             this.Usuarios.Name = "Usuarios";
             this.Usuarios.Padding = new System.Windows.Forms.Padding(3);
-            this.Usuarios.Size = new System.Drawing.Size(835, 445);
+            this.Usuarios.Size = new System.Drawing.Size(835, 310);
             this.Usuarios.TabIndex = 0;
             this.Usuarios.Text = "Usuarios";
             this.Usuarios.UseVisualStyleBackColor = true;
@@ -495,7 +495,7 @@
             this.Adquisiciones.Controls.Add(this.label_Main_Adquisiciones);
             this.Adquisiciones.Location = new System.Drawing.Point(4, 25);
             this.Adquisiciones.Name = "Adquisiciones";
-            this.Adquisiciones.Size = new System.Drawing.Size(841, 445);
+            this.Adquisiciones.Size = new System.Drawing.Size(835, 445);
             this.Adquisiciones.TabIndex = 2;
             this.Adquisiciones.Text = "Adquisiciones";
             this.Adquisiciones.UseVisualStyleBackColor = true;
