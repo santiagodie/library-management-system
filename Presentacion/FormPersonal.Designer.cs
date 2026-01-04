@@ -30,18 +30,31 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPersonal));
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
             this.Tab = new System.Windows.Forms.TabControl();
             this.Usuarios = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.Sala = new System.Windows.Forms.TabPage();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.gbPrestamos = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btPrestamo = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btLogOut = new System.Windows.Forms.Button();
-            this.lbNombre = new System.Windows.Forms.Label();
-            this.pbFotoPerfil = new System.Windows.Forms.PictureBox();
             this.Adquisiciones = new System.Windows.Forms.TabPage();
             this.panel_Listar_Ejemplar = new System.Windows.Forms.Panel();
             this.comboBox_Documento_Listar_Ejemplar = new System.Windows.Forms.ComboBox();
@@ -165,28 +178,18 @@
             this.button_Bajas = new System.Windows.Forms.Button();
             this.button_Altas = new System.Windows.Forms.Button();
             this.label_Main_Adquisiciones = new System.Windows.Forms.Label();
-            this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel3.SuspendLayout();
             this.Tab.SuspendLayout();
             this.Usuarios.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.Sala.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.gbPrestamos.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).BeginInit();
             this.Adquisiciones.SuspendLayout();
             this.panel_Listar_Ejemplar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Listar_Ejemplar)).BeginInit();
@@ -199,46 +202,197 @@
             this.panel_Baja_Ejemplar.SuspendLayout();
             this.panel_Alta_Ejemplar.SuspendLayout();
             this.panel_Alta_Documento.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.91954F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.08046F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(849, 435);
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.LightSlateGray;
+            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.pictureBox2);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(843, 85);
+            this.panel4.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::Presentacion.Properties.Resources.logOut3__2_;
+            this.button1.Location = new System.Drawing.Point(776, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 38);
+            this.button1.TabIndex = 2;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 16);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "tuNombre";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(28, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(41, 38);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.Tab);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 94);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(843, 338);
+            this.panel3.TabIndex = 0;
             // 
             // Tab
             // 
             this.Tab.Controls.Add(this.Usuarios);
             this.Tab.Controls.Add(this.Sala);
             this.Tab.Controls.Add(this.Adquisiciones);
-            this.Tab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Tab.Dock = System.Windows.Forms.DockStyle.Top;
             this.Tab.Location = new System.Drawing.Point(0, 0);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(849, 474);
-            this.Tab.TabIndex = 0;
+            this.Tab.Size = new System.Drawing.Size(843, 474);
+            this.Tab.TabIndex = 1;
             // 
             // Usuarios
             // 
             this.Usuarios.Controls.Add(this.flowLayoutPanel2);
-            this.Usuarios.Controls.Add(this.panel2);
             this.Usuarios.Location = new System.Drawing.Point(4, 25);
             this.Usuarios.Name = "Usuarios";
             this.Usuarios.Padding = new System.Windows.Forms.Padding(3);
-            this.Usuarios.Size = new System.Drawing.Size(841, 445);
+            this.Usuarios.Size = new System.Drawing.Size(835, 445);
             this.Usuarios.TabIndex = 0;
             this.Usuarios.Text = "Usuarios";
             this.Usuarios.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.AliceBlue;
+            this.flowLayoutPanel2.Controls.Add(this.groupBox4);
+            this.flowLayoutPanel2.Controls.Add(this.groupBox5);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(829, 115);
+            this.flowLayoutPanel2.TabIndex = 3;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.textBox3);
+            this.groupBox4.Controls.Add(this.button6);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(215, 109);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Usuarios";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 40);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Introduce el dni:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(9, 59);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 22);
+            this.textBox3.TabIndex = 1;
+            // 
+            // button6
+            // 
+            this.button6.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.button6.Location = new System.Drawing.Point(125, 31);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(79, 50);
+            this.button6.TabIndex = 0;
+            this.button6.Text = "Consultar";
+            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.textBox4);
+            this.groupBox5.Controls.Add(this.button7);
+            this.groupBox5.Location = new System.Drawing.Point(224, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(215, 109);
+            this.groupBox5.TabIndex = 2;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Documentos";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(5, 40);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(113, 16);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Introduce el ISBN:";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(8, 59);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 22);
+            this.textBox4.TabIndex = 4;
+            // 
+            // button7
+            // 
+            this.button7.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.button7.Location = new System.Drawing.Point(130, 31);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(79, 50);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "Consultar";
+            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // Sala
             // 
             this.Sala.Controls.Add(this.panelContenedor);
             this.Sala.Controls.Add(this.flowLayoutPanel1);
-            this.Sala.Controls.Add(this.panel1);
             this.Sala.Location = new System.Drawing.Point(4, 25);
             this.Sala.Name = "Sala";
             this.Sala.Padding = new System.Windows.Forms.Padding(3);
-            this.Sala.Size = new System.Drawing.Size(841, 445);
+            this.Sala.Size = new System.Drawing.Size(835, 445);
             this.Sala.TabIndex = 1;
             this.Sala.Text = "Sala";
             this.Sala.UseVisualStyleBackColor = true;
@@ -246,9 +400,9 @@
             // panelContenedor
             // 
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenedor.Location = new System.Drawing.Point(3, 192);
+            this.panelContenedor.Location = new System.Drawing.Point(3, 118);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(835, 250);
+            this.panelContenedor.Size = new System.Drawing.Size(829, 324);
             this.panelContenedor.TabIndex = 3;
             // 
             // flowLayoutPanel1
@@ -256,9 +410,9 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.AliceBlue;
             this.flowLayoutPanel1.Controls.Add(this.gbPrestamos);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 77);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(835, 115);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(829, 115);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // gbPrestamos
@@ -272,7 +426,19 @@
             this.gbPrestamos.TabIndex = 0;
             this.gbPrestamos.TabStop = false;
             this.gbPrestamos.Text = "Préstamos";
-            this.gbPrestamos.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button4
+            // 
+            this.button4.AutoSize = true;
+            this.button4.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button4.Location = new System.Drawing.Point(208, 19);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(95, 84);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Consultar";
+            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -295,51 +461,6 @@
             this.btPrestamo.Text = "Préstamo";
             this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btPrestamo.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.panel1.Controls.Add(this.btLogOut);
-            this.panel1.Controls.Add(this.lbNombre);
-            this.panel1.Controls.Add(this.pbFotoPerfil);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(835, 74);
-            this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // btLogOut
-            // 
-            this.btLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btLogOut.Image = global::Presentacion.Properties.Resources.logOut3__2_;
-            this.btLogOut.Location = new System.Drawing.Point(768, 21);
-            this.btLogOut.Name = "btLogOut";
-            this.btLogOut.Size = new System.Drawing.Size(43, 38);
-            this.btLogOut.TabIndex = 2;
-            this.btLogOut.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btLogOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btLogOut.UseVisualStyleBackColor = true;
-            // 
-            // lbNombre
-            // 
-            this.lbNombre.AutoSize = true;
-            this.lbNombre.Location = new System.Drawing.Point(16, 53);
-            this.lbNombre.Name = "lbNombre";
-            this.lbNombre.Size = new System.Drawing.Size(66, 16);
-            this.lbNombre.TabIndex = 1;
-            this.lbNombre.Text = "tuNombre";
-            // 
-            // pbFotoPerfil
-            // 
-            this.pbFotoPerfil.Image = ((System.Drawing.Image)(resources.GetObject("pbFotoPerfil.Image")));
-            this.pbFotoPerfil.Location = new System.Drawing.Point(28, 12);
-            this.pbFotoPerfil.Name = "pbFotoPerfil";
-            this.pbFotoPerfil.Size = new System.Drawing.Size(41, 38);
-            this.pbFotoPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbFotoPerfil.TabIndex = 0;
-            this.pbFotoPerfil.TabStop = false;
             // 
             // Adquisiciones
             // 
@@ -399,7 +520,6 @@
             this.comboBox_Documento_Listar_Ejemplar.Name = "comboBox_Documento_Listar_Ejemplar";
             this.comboBox_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(225, 24);
             this.comboBox_Documento_Listar_Ejemplar.TabIndex = 3;
-            this.comboBox_Documento_Listar_Ejemplar.SelectedIndexChanged += new System.EventHandler(this.comboBox_Documento_Listar_Ejemplar_SelectedIndexChanged);
             // 
             // label_Documento_Listar_Ejemplar
             // 
@@ -802,7 +922,6 @@
             this.button_Realizar_Consultar_Fech.Text = "Consultar";
             this.button_Realizar_Consultar_Fech.UseVisualStyleBackColor = true;
             this.button_Realizar_Consultar_Fech.Visible = false;
-            this.button_Realizar_Consultar_Fech.Click += new System.EventHandler(this.EventHandler_Click_RealizarConsulta);
             // 
             // panel_Consultar_Fecha
             // 
@@ -874,7 +993,6 @@
             this.button_Realizar_Consultar_Disp.Text = "Consultar";
             this.button_Realizar_Consultar_Disp.UseVisualStyleBackColor = true;
             this.button_Realizar_Consultar_Disp.Visible = false;
-            this.button_Realizar_Consultar_Disp.Click += new System.EventHandler(this.EventHandler_Click_RealizarConsulta);
             // 
             // panel_Consultar_Disponible
             // 
@@ -940,7 +1058,6 @@
             this.button_Realizar_Consultar_Ejemplar.Text = "Consultar";
             this.button_Realizar_Consultar_Ejemplar.UseVisualStyleBackColor = true;
             this.button_Realizar_Consultar_Ejemplar.Visible = false;
-            this.button_Realizar_Consultar_Ejemplar.Click += new System.EventHandler(this.EventHandler_Click_RealizarConsulta);
             // 
             // panel_Consultar_Ejemplar
             // 
@@ -1079,7 +1196,6 @@
             this.button_Listar_Ejemplar.Text = "Ejemplar";
             this.button_Listar_Ejemplar.UseVisualStyleBackColor = true;
             this.button_Listar_Ejemplar.Visible = false;
-            this.button_Listar_Ejemplar.Click += new System.EventHandler(this.EventHandler_Click_BotonesListar);
             // 
             // button_Listar_Documento
             // 
@@ -1091,7 +1207,6 @@
             this.button_Listar_Documento.Text = "Documento";
             this.button_Listar_Documento.UseVisualStyleBackColor = true;
             this.button_Listar_Documento.Visible = false;
-            this.button_Listar_Documento.Click += new System.EventHandler(this.EventHandler_Click_BotonesListar);
             // 
             // button_Consultar_Mas_Leido
             // 
@@ -1103,7 +1218,6 @@
             this.button_Consultar_Mas_Leido.Text = "Mas Leido";
             this.button_Consultar_Mas_Leido.UseVisualStyleBackColor = true;
             this.button_Consultar_Mas_Leido.Visible = false;
-            this.button_Consultar_Mas_Leido.Click += new System.EventHandler(this.EventHandler_Click_BotonesConsulta);
             // 
             // button_Consultar_Disponible
             // 
@@ -1115,7 +1229,6 @@
             this.button_Consultar_Disponible.Text = "Disponible";
             this.button_Consultar_Disponible.UseVisualStyleBackColor = true;
             this.button_Consultar_Disponible.Visible = false;
-            this.button_Consultar_Disponible.Click += new System.EventHandler(this.EventHandler_Click_BotonesConsulta);
             // 
             // button_Consultar_Fecha
             // 
@@ -1127,7 +1240,6 @@
             this.button_Consultar_Fecha.Text = "Fecha";
             this.button_Consultar_Fecha.UseVisualStyleBackColor = true;
             this.button_Consultar_Fecha.Visible = false;
-            this.button_Consultar_Fecha.Click += new System.EventHandler(this.EventHandler_Click_BotonesConsulta);
             // 
             // button_Consultar_Ejemplar
             // 
@@ -1139,7 +1251,6 @@
             this.button_Consultar_Ejemplar.Text = "Ejemplar";
             this.button_Consultar_Ejemplar.UseVisualStyleBackColor = true;
             this.button_Consultar_Ejemplar.Visible = false;
-            this.button_Consultar_Ejemplar.Click += new System.EventHandler(this.EventHandler_Click_BotonesConsulta);
             // 
             // button_Borrar_Baja_Eje
             // 
@@ -1151,7 +1262,6 @@
             this.button_Borrar_Baja_Eje.Text = "Borrar";
             this.button_Borrar_Baja_Eje.UseVisualStyleBackColor = true;
             this.button_Borrar_Baja_Eje.Visible = false;
-            this.button_Borrar_Baja_Eje.Click += new System.EventHandler(this.button_Borrar_Baja_Eje_Click);
             // 
             // panel_Baja_Ejemplar
             // 
@@ -1218,7 +1328,6 @@
             this.comboBox_Ejemplar_Baja_Eje.Name = "comboBox_Ejemplar_Baja_Eje";
             this.comboBox_Ejemplar_Baja_Eje.Size = new System.Drawing.Size(208, 24);
             this.comboBox_Ejemplar_Baja_Eje.TabIndex = 18;
-            this.comboBox_Ejemplar_Baja_Eje.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ejemplar_Baja_Eje_SelectedIndexChanged);
             // 
             // label_Ejemplar_Baja_Eje
             // 
@@ -1256,7 +1365,6 @@
             this.comboBox_Documento_Baja_Eje.Name = "comboBox_Documento_Baja_Eje";
             this.comboBox_Documento_Baja_Eje.Size = new System.Drawing.Size(208, 24);
             this.comboBox_Documento_Baja_Eje.TabIndex = 13;
-            this.comboBox_Documento_Baja_Eje.SelectedIndexChanged += new System.EventHandler(this.comboBox_Documento_Baja_Eje_SelectedIndexChanged);
             // 
             // label_Documento_Baja_Eje
             // 
@@ -1377,7 +1485,6 @@
             this.button_Validar_Alta_Ejemplar.Text = "Validar";
             this.button_Validar_Alta_Ejemplar.UseVisualStyleBackColor = true;
             this.button_Validar_Alta_Ejemplar.Visible = false;
-            this.button_Validar_Alta_Ejemplar.Click += new System.EventHandler(this.EventHandler_Click_ValidarAlta);
             // 
             // button_Validar_Alta_Documento
             // 
@@ -1389,7 +1496,6 @@
             this.button_Validar_Alta_Documento.Text = "Validar";
             this.button_Validar_Alta_Documento.UseVisualStyleBackColor = true;
             this.button_Validar_Alta_Documento.Visible = false;
-            this.button_Validar_Alta_Documento.Click += new System.EventHandler(this.EventHandler_Click_ValidarAlta);
             // 
             // panel_Alta_Documento
             // 
@@ -1432,7 +1538,6 @@
             this.textBox_Duracion_Alta_Doc.Size = new System.Drawing.Size(121, 22);
             this.textBox_Duracion_Alta_Doc.TabIndex = 14;
             this.textBox_Duracion_Alta_Doc.Visible = false;
-            this.textBox_Duracion_Alta_Doc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SoloInt);
             // 
             // comboBox_Formato_Alta_Doc
             // 
@@ -1480,7 +1585,6 @@
             this.textBox_Año_Edicion_Alta_Doc.Name = "textBox_Año_Edicion_Alta_Doc";
             this.textBox_Año_Edicion_Alta_Doc.Size = new System.Drawing.Size(121, 22);
             this.textBox_Año_Edicion_Alta_Doc.TabIndex = 9;
-            this.textBox_Año_Edicion_Alta_Doc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SoloInt);
             // 
             // label_Editorial_Alta_Doc
             // 
@@ -1555,7 +1659,6 @@
             this.checkBox_Audiolibro_Alta_Doc.TabIndex = 0;
             this.checkBox_Audiolibro_Alta_Doc.Text = "AudioLibro";
             this.checkBox_Audiolibro_Alta_Doc.UseVisualStyleBackColor = true;
-            this.checkBox_Audiolibro_Alta_Doc.CheckedChanged += new System.EventHandler(this.checkBox_Audiolibro_Alta_Doc_CheckedChanged);
             // 
             // button_Volver
             // 
@@ -1567,7 +1670,6 @@
             this.button_Volver.Text = "Volver";
             this.button_Volver.UseVisualStyleBackColor = true;
             this.button_Volver.Visible = false;
-            this.button_Volver.Click += new System.EventHandler(this.button_Volver_Click);
             // 
             // button_Alta_Ejemplar
             // 
@@ -1579,7 +1681,6 @@
             this.button_Alta_Ejemplar.Text = "Ejemplar";
             this.button_Alta_Ejemplar.UseVisualStyleBackColor = true;
             this.button_Alta_Ejemplar.Visible = false;
-            this.button_Alta_Ejemplar.Click += new System.EventHandler(this.EventHandler_Click_BotonesAlta);
             // 
             // button_Alta_Documento
             // 
@@ -1591,7 +1692,6 @@
             this.button_Alta_Documento.Text = "Documento";
             this.button_Alta_Documento.UseVisualStyleBackColor = true;
             this.button_Alta_Documento.Visible = false;
-            this.button_Alta_Documento.Click += new System.EventHandler(this.EventHandler_Click_BotonesAlta);
             // 
             // button_Listar
             // 
@@ -1602,7 +1702,6 @@
             this.button_Listar.TabIndex = 10;
             this.button_Listar.Text = "Listar";
             this.button_Listar.UseVisualStyleBackColor = true;
-            this.button_Listar.Click += new System.EventHandler(this.EventHandler_Click_BotonesInicio);
             // 
             // button_Consultas
             // 
@@ -1613,7 +1712,6 @@
             this.button_Consultas.TabIndex = 9;
             this.button_Consultas.Text = "Consultas";
             this.button_Consultas.UseVisualStyleBackColor = true;
-            this.button_Consultas.Click += new System.EventHandler(this.EventHandler_Click_BotonesInicio);
             // 
             // button_Bajas
             // 
@@ -1624,7 +1722,6 @@
             this.button_Bajas.TabIndex = 8;
             this.button_Bajas.Text = "Bajas";
             this.button_Bajas.UseVisualStyleBackColor = true;
-            this.button_Bajas.Click += new System.EventHandler(this.EventHandler_Click_BotonesInicio);
             // 
             // button_Altas
             // 
@@ -1635,7 +1732,6 @@
             this.button_Altas.TabIndex = 7;
             this.button_Altas.Text = "Altas";
             this.button_Altas.UseVisualStyleBackColor = true;
-            this.button_Altas.Click += new System.EventHandler(this.EventHandler_Click_BotonesInicio);
             // 
             // label_Main_Adquisiciones
             // 
@@ -1647,170 +1743,31 @@
             this.label_Main_Adquisiciones.TabIndex = 6;
             this.label_Main_Adquisiciones.Text = "Gestion de Adquisiciones";
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.LightSlateGray;
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(835, 74);
-            this.panel2.TabIndex = 2;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = global::Presentacion.Properties.Resources.logOut3__2_;
-            this.button3.Location = new System.Drawing.Point(768, 21);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(43, 38);
-            this.button3.TabIndex = 2;
-            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "tuNombre";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(28, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(41, 38);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.AliceBlue;
-            this.flowLayoutPanel2.Controls.Add(this.groupBox4);
-            this.flowLayoutPanel2.Controls.Add(this.groupBox5);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 77);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(835, 115);
-            this.flowLayoutPanel2.TabIndex = 3;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.textBox3);
-            this.groupBox4.Controls.Add(this.button6);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(215, 109);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Usuarios";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 40);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Introduce el dni:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(9, 59);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 1;
-            // 
-            // button6
-            // 
-            this.button6.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button6.Location = new System.Drawing.Point(125, 31);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(79, 50);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Consultar";
-            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Controls.Add(this.textBox4);
-            this.groupBox5.Controls.Add(this.button7);
-            this.groupBox5.Location = new System.Drawing.Point(224, 3);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(215, 109);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Documentos";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 16);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Introduce el ISBN:";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(8, 59);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 4;
-            // 
-            // button7
-            // 
-            this.button7.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button7.Location = new System.Drawing.Point(130, 31);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(79, 50);
-            this.button7.TabIndex = 3;
-            this.button7.Text = "Consultar";
-            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.AutoSize = true;
-            this.button4.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button4.Location = new System.Drawing.Point(208, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(95, 84);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Consultar";
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // FormPersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 474);
-            this.Controls.Add(this.Tab);
+            this.ClientSize = new System.Drawing.Size(849, 435);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormPersonal";
             this.Text = "Gestor de biblioteca";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.Tab.ResumeLayout(false);
             this.Usuarios.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.Sala.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.gbPrestamos.ResumeLayout(false);
             this.gbPrestamos.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).EndInit();
             this.Adquisiciones.ResumeLayout(false);
             this.Adquisiciones.PerformLayout();
             this.panel_Listar_Ejemplar.ResumeLayout(false);
@@ -1833,115 +1790,62 @@
             this.panel_Alta_Ejemplar.PerformLayout();
             this.panel_Alta_Documento.ResumeLayout(false);
             this.panel_Alta_Documento.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.ToolTip toolTip_Sala;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TabControl Tab;
         private System.Windows.Forms.TabPage Usuarios;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TabPage Sala;
-        private System.Windows.Forms.TabPage Adquisiciones;
-        private System.Windows.Forms.GroupBox gbPrestamos;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lbNombre;
-        private System.Windows.Forms.PictureBox pbFotoPerfil;
-        private System.Windows.Forms.Button btLogOut;
+        private System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox gbPrestamos;
+        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btPrestamo;
-        private System.Windows.Forms.Panel panelContenedor;
-        private System.Windows.Forms.Label label_Main_Adquisiciones;
-        private System.Windows.Forms.Button button_Bajas;
-        private System.Windows.Forms.Button button_Altas;
-        private System.Windows.Forms.Button button_Listar;
-        private System.Windows.Forms.Button button_Consultas;
-        private System.Windows.Forms.Button button_Alta_Ejemplar;
-        private System.Windows.Forms.Button button_Alta_Documento;
-        private System.Windows.Forms.Button button_Volver;
-        private System.Windows.Forms.Panel panel_Alta_Documento;
-        private System.Windows.Forms.TextBox textBox_Editorial_Alta_Doc;
-        private System.Windows.Forms.TextBox textBox_ISBN_Alta_Doc;
-        private System.Windows.Forms.TextBox textBox_Autor_Alta_Doc;
-        private System.Windows.Forms.TextBox textBox_Titulo_Alta_Doc;
-        private System.Windows.Forms.CheckBox checkBox_Audiolibro_Alta_Doc;
-        private System.Windows.Forms.Label label_Editorial_Alta_Doc;
-        private System.Windows.Forms.Label label_ISBN_Alta_Doc;
-        private System.Windows.Forms.Label label_Autor_Alta_Doc;
-        private System.Windows.Forms.Label label_Titulo_Alta_Doc;
-        private System.Windows.Forms.Label label_Año_Edicion_Alta_Doc;
-        private System.Windows.Forms.TextBox textBox_Año_Edicion_Alta_Doc;
-        private System.Windows.Forms.TextBox textBox_Duracion_Alta_Doc;
-        private System.Windows.Forms.ComboBox comboBox_Formato_Alta_Doc;
-        private System.Windows.Forms.Label label_Duracion_Alta_Doc;
-        private System.Windows.Forms.Label label_Formato_Alta_Doc;
-        private System.Windows.Forms.Label label_Alta_Doc;
-        private System.Windows.Forms.Button button_Validar_Alta_Documento;
-        private System.Windows.Forms.ToolTip toolTip_Sala;
-        private System.Windows.Forms.Panel panel_Alta_Ejemplar;
-        private System.Windows.Forms.Label label_Alta_Ejemplar;
-        private System.Windows.Forms.ComboBox comboBox_Documento_Alta_Eje;
-        private System.Windows.Forms.Label label_Documento_Alta_Eje;
-        private System.Windows.Forms.Label label_Localizacion_Alta_Eje;
-        private System.Windows.Forms.TextBox textBox_Localizacion_Alta_Eje;
-        private System.Windows.Forms.CheckBox checkBox_Disponible_Alta_Eje;
-        private System.Windows.Forms.Button button_Validar_Alta_Ejemplar;
-        private System.Windows.Forms.Panel panel_Baja_Ejemplar;
-        private System.Windows.Forms.Label label_Baja_Ejemplares;
-        private System.Windows.Forms.ComboBox comboBox_Documento_Baja_Eje;
-        private System.Windows.Forms.Label label_Documento_Baja_Eje;
-        private System.Windows.Forms.Label label_Localizacion_Baja_Eje;
-        private System.Windows.Forms.TextBox textBox_Localizacion_Baja_Eje;
-        private System.Windows.Forms.CheckBox checkBox_Disponible_Baja_Eje;
-        private System.Windows.Forms.Label label_Responsable_Baja_Eje;
-        private System.Windows.Forms.Label label_Ejemplar_Baja_Eje;
-        private System.Windows.Forms.TextBox textBox_Responsable_Baja_Eje;
-        private System.Windows.Forms.Label label_Info_Baja_Eje;
-        private System.Windows.Forms.ComboBox comboBox_Ejemplar_Baja_Eje;
-        private System.Windows.Forms.Button button_Borrar_Baja_Eje;
-        private System.Windows.Forms.Label label_Codigo_Baja_Eje;
-        private System.Windows.Forms.TextBox textBox_Codigo_Baja_Eje;
-        private System.Windows.Forms.Button button_Consultar_Disponible;
-        private System.Windows.Forms.Button button_Consultar_Fecha;
-        private System.Windows.Forms.Button button_Consultar_Ejemplar;
-        private System.Windows.Forms.Button button_Consultar_Mas_Leido;
-        private System.Windows.Forms.Button button_Listar_Ejemplar;
-        private System.Windows.Forms.Button button_Listar_Documento;
-        private System.Windows.Forms.Panel panel_Consultar_Ejemplar;
-        private System.Windows.Forms.TextBox textBox_Codigo_Consultar_Eje;
-        private System.Windows.Forms.Label label_Documento_Consultar_Eje;
-        private System.Windows.Forms.TextBox textBox_Responsable_Consultar_Eje;
-        private System.Windows.Forms.Label label_Informacion_Consultar_Eje;
-        private System.Windows.Forms.Label label_Responsable_Consultar_Eje;
-        private System.Windows.Forms.Label label_Consultar_Ejemplar;
-        private System.Windows.Forms.Label label_Localizacion_Consultar_Eje;
-        private System.Windows.Forms.TextBox textBox_Localizacion_Consultar_Eje;
-        private System.Windows.Forms.CheckBox checkBox_Disponible_Consultar_Eje;
-        private System.Windows.Forms.Label label_Codigo_Consultar_Eje;
-        private System.Windows.Forms.TextBox textBox_Documento_Consultar_Eje;
-        private System.Windows.Forms.Button button_Realizar_Consultar_Ejemplar;
-        private System.Windows.Forms.Panel panel_Consultar_Disponible;
-        private System.Windows.Forms.Label label_Documento_Consultar_Disp;
-        private System.Windows.Forms.Label label_Consultar_Disponible;
-        private System.Windows.Forms.CheckBox checkBox_Disponible_Consultar_Disp;
-        private System.Windows.Forms.ComboBox comboBox_Documento_Consultar_Disp;
-        private System.Windows.Forms.Button button_Realizar_Consultar_Disp;
-        private System.Windows.Forms.Panel panel_Consultar_Fecha;
-        private System.Windows.Forms.ComboBox comboBox_Documento_Consultar_Fech;
-        private System.Windows.Forms.Label label_Documento_Consultar_Fech;
-        private System.Windows.Forms.Label label_Consultar_Fecha;
-        private System.Windows.Forms.Button button_Realizar_Consultar_Fech;
-        private System.Windows.Forms.TextBox textBox_Fecha_Consultar_Fech;
-        private System.Windows.Forms.Label label_Fecha_Consultar_Fech;
+        private System.Windows.Forms.TabPage Adquisiciones;
+        private System.Windows.Forms.Panel panel_Listar_Ejemplar;
+        private System.Windows.Forms.ComboBox comboBox_Documento_Listar_Ejemplar;
+        private System.Windows.Forms.Label label_Documento_Listar_Ejemplar;
+        private System.Windows.Forms.DataGridView dataGridView_Listar_Ejemplar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Codigo_Listar_Ejemplar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Documento_Listar_Ejemplar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Responsable_Listar_Ejemplar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column_Activo_Listar_Ejemplar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column_Disponible_Listar_Ejemplar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocalizacion_Listar_Ejemplar;
+        private System.Windows.Forms.Label label_Listar_Ejemplar;
+        private System.Windows.Forms.Panel panel_Listar_Documento;
+        private System.Windows.Forms.DataGridView dataGridView_Listar_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Titulo_List_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Autor_List_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_ISBN_List_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Editorial_List_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Año_List_Documento;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn column_AudioLibro_List_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Formato_List_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Duracion_List_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Fecha_List_Documento;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn column_Disponible_List_Documento;
+        private System.Windows.Forms.Label label_Listar_Documento;
         private System.Windows.Forms.Panel panel_Consultar_MasLeido;
         private System.Windows.Forms.Label label_Consultar_MasLeido;
         private System.Windows.Forms.TextBox textBox_Duracion_Consultar_MasLeido;
@@ -1959,43 +1863,86 @@
         private System.Windows.Forms.TextBox textBox_Autor_Consultar_MasLeido;
         private System.Windows.Forms.TextBox textBox_Titulo_Consultar_MasLeido;
         private System.Windows.Forms.CheckBox checkBox_Audiolibro_Consultar_MasLeido;
-        private System.Windows.Forms.Panel panel_Listar_Documento;
-        private System.Windows.Forms.DataGridView dataGridView_Listar_Documento;
-        private System.Windows.Forms.Label label_Listar_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Titulo_List_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Autor_List_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_ISBN_List_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Editorial_List_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Año_List_Documento;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn column_AudioLibro_List_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Formato_List_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Duracion_List_Documento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Fecha_List_Documento;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn column_Disponible_List_Documento;
-        private System.Windows.Forms.Panel panel_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridView dataGridView_Listar_Ejemplar;
-        private System.Windows.Forms.Label label_Listar_Ejemplar;
-        private System.Windows.Forms.ComboBox comboBox_Documento_Listar_Ejemplar;
-        private System.Windows.Forms.Label label_Documento_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Codigo_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Documento_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Responsable_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column_Activo_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column_Disponible_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocalizacion_Listar_Ejemplar;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button_Realizar_Consultar_Fech;
+        private System.Windows.Forms.Panel panel_Consultar_Fecha;
+        private System.Windows.Forms.TextBox textBox_Fecha_Consultar_Fech;
+        private System.Windows.Forms.Label label_Fecha_Consultar_Fech;
+        private System.Windows.Forms.ComboBox comboBox_Documento_Consultar_Fech;
+        private System.Windows.Forms.Label label_Documento_Consultar_Fech;
+        private System.Windows.Forms.Label label_Consultar_Fecha;
+        private System.Windows.Forms.Button button_Realizar_Consultar_Disp;
+        private System.Windows.Forms.Panel panel_Consultar_Disponible;
+        private System.Windows.Forms.ComboBox comboBox_Documento_Consultar_Disp;
+        private System.Windows.Forms.Label label_Documento_Consultar_Disp;
+        private System.Windows.Forms.Label label_Consultar_Disponible;
+        private System.Windows.Forms.CheckBox checkBox_Disponible_Consultar_Disp;
+        private System.Windows.Forms.Button button_Realizar_Consultar_Ejemplar;
+        private System.Windows.Forms.Panel panel_Consultar_Ejemplar;
+        private System.Windows.Forms.TextBox textBox_Documento_Consultar_Eje;
+        private System.Windows.Forms.TextBox textBox_Codigo_Consultar_Eje;
+        private System.Windows.Forms.Label label_Documento_Consultar_Eje;
+        private System.Windows.Forms.TextBox textBox_Responsable_Consultar_Eje;
+        private System.Windows.Forms.Label label_Informacion_Consultar_Eje;
+        private System.Windows.Forms.Label label_Codigo_Consultar_Eje;
+        private System.Windows.Forms.Label label_Responsable_Consultar_Eje;
+        private System.Windows.Forms.Label label_Consultar_Ejemplar;
+        private System.Windows.Forms.Label label_Localizacion_Consultar_Eje;
+        private System.Windows.Forms.TextBox textBox_Localizacion_Consultar_Eje;
+        private System.Windows.Forms.CheckBox checkBox_Disponible_Consultar_Eje;
+        private System.Windows.Forms.Button button_Listar_Ejemplar;
+        private System.Windows.Forms.Button button_Listar_Documento;
+        private System.Windows.Forms.Button button_Consultar_Mas_Leido;
+        private System.Windows.Forms.Button button_Consultar_Disponible;
+        private System.Windows.Forms.Button button_Consultar_Fecha;
+        private System.Windows.Forms.Button button_Consultar_Ejemplar;
+        private System.Windows.Forms.Button button_Borrar_Baja_Eje;
+        private System.Windows.Forms.Panel panel_Baja_Ejemplar;
+        private System.Windows.Forms.TextBox textBox_Codigo_Baja_Eje;
+        private System.Windows.Forms.Label label_Codigo_Baja_Eje;
+        private System.Windows.Forms.TextBox textBox_Responsable_Baja_Eje;
+        private System.Windows.Forms.Label label_Info_Baja_Eje;
+        private System.Windows.Forms.ComboBox comboBox_Ejemplar_Baja_Eje;
+        private System.Windows.Forms.Label label_Ejemplar_Baja_Eje;
+        private System.Windows.Forms.Label label_Responsable_Baja_Eje;
+        private System.Windows.Forms.Label label_Baja_Ejemplares;
+        private System.Windows.Forms.ComboBox comboBox_Documento_Baja_Eje;
+        private System.Windows.Forms.Label label_Documento_Baja_Eje;
+        private System.Windows.Forms.Label label_Localizacion_Baja_Eje;
+        private System.Windows.Forms.TextBox textBox_Localizacion_Baja_Eje;
+        private System.Windows.Forms.CheckBox checkBox_Disponible_Baja_Eje;
+        private System.Windows.Forms.Panel panel_Alta_Ejemplar;
+        private System.Windows.Forms.Label label_Alta_Ejemplar;
+        private System.Windows.Forms.ComboBox comboBox_Documento_Alta_Eje;
+        private System.Windows.Forms.Label label_Documento_Alta_Eje;
+        private System.Windows.Forms.Label label_Localizacion_Alta_Eje;
+        private System.Windows.Forms.TextBox textBox_Localizacion_Alta_Eje;
+        private System.Windows.Forms.CheckBox checkBox_Disponible_Alta_Eje;
+        private System.Windows.Forms.Button button_Validar_Alta_Ejemplar;
+        private System.Windows.Forms.Button button_Validar_Alta_Documento;
+        private System.Windows.Forms.Panel panel_Alta_Documento;
+        private System.Windows.Forms.Label label_Alta_Doc;
+        private System.Windows.Forms.TextBox textBox_Duracion_Alta_Doc;
+        private System.Windows.Forms.ComboBox comboBox_Formato_Alta_Doc;
+        private System.Windows.Forms.Label label_Duracion_Alta_Doc;
+        private System.Windows.Forms.Label label_Formato_Alta_Doc;
+        private System.Windows.Forms.Label label_Año_Edicion_Alta_Doc;
+        private System.Windows.Forms.TextBox textBox_Año_Edicion_Alta_Doc;
+        private System.Windows.Forms.Label label_Editorial_Alta_Doc;
+        private System.Windows.Forms.Label label_ISBN_Alta_Doc;
+        private System.Windows.Forms.Label label_Autor_Alta_Doc;
+        private System.Windows.Forms.Label label_Titulo_Alta_Doc;
+        private System.Windows.Forms.TextBox textBox_Editorial_Alta_Doc;
+        private System.Windows.Forms.TextBox textBox_ISBN_Alta_Doc;
+        private System.Windows.Forms.TextBox textBox_Autor_Alta_Doc;
+        private System.Windows.Forms.TextBox textBox_Titulo_Alta_Doc;
+        private System.Windows.Forms.CheckBox checkBox_Audiolibro_Alta_Doc;
+        private System.Windows.Forms.Button button_Volver;
+        private System.Windows.Forms.Button button_Alta_Ejemplar;
+        private System.Windows.Forms.Button button_Alta_Documento;
+        private System.Windows.Forms.Button button_Listar;
+        private System.Windows.Forms.Button button_Consultas;
+        private System.Windows.Forms.Button button_Bajas;
+        private System.Windows.Forms.Button button_Altas;
+        private System.Windows.Forms.Label label_Main_Adquisiciones;
     }
 }
