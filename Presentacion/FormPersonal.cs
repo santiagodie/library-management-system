@@ -724,6 +724,7 @@ namespace Presentacion
             dataGridView_Listar_Ejemplar.Rows.Clear();
             dataGridView_Listar_Ejemplar.Visible = false;
         }
+        
 
         private void InicializarSala()
         {
@@ -776,6 +777,22 @@ namespace Presentacion
         {
             UC_Inicio inicio = new UC_Inicio();
             MostrarPantalla(inicio);
+        }
+
+        private void AltaBtn_Click(object sender, EventArgs e)
+        {
+            PanelFunciones.Controls.Clear();
+            UC_AltaUsuario alta=new UC_AltaUsuario();
+            alta.Dock= DockStyle.Fill;
+            PanelFunciones.Controls.Add(alta);
+        }
+
+        private void BajaBtn_Click(object sender, EventArgs e)
+        {
+            PanelFunciones.Controls.Clear();
+            UC_BajaUsuario baja = new UC_BajaUsuario();
+            baja.Dock = DockStyle.Fill;
+            PanelFunciones.Controls.Add(baja);
         }
     }
 }

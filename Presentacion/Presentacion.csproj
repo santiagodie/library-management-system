@@ -105,8 +105,21 @@
     <EmbeddedResource Include="FormAltaPrestamo.resx">
       <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="UC_AltaUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_AltaUsuario.Designer.cs">
+      <DependentUpon>UC_AltaUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_BajaUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_BajaUsuario.Designer.cs">
+      <DependentUpon>UC_BajaUsuario.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormPersonal.resx">
       <DependentUpon>FormPersonal.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSeleccionEjemplar.resx">
       <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
@@ -133,8 +146,14 @@
     <EmbeddedResource Include="RolLog.resx">
       <DependentUpon>RolLog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_AltaUsuario.resx">
+      <DependentUpon>UC_AltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_Inicio.resx">
       <DependentUpon>UC_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_BajaUsuario.resx">
+      <DependentUpon>UC_BajaUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\FormUsuario.datasource" />
     <None Include="Properties\Settings.settings">
@@ -181,6 +200,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Alta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Baja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lista.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

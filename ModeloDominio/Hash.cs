@@ -22,5 +22,24 @@ namespace ModeloDominio
             }
             return builder.ToString();
         }
+        public static string CrearPassword(int longitud)
+        {
+            string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_-+";
+            StringBuilder s = new StringBuilder();
+
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
+            
+            byte[] buffer = new byte[4];
+
+            while (s.Length < longitud)
+            {
+                rng.GetBytes(buffer);
+                uint n = BitConverter.ToUInt32(buffer, 0);
+                s.Append(caracteres[(int)(n % (uint)caracteres.Length)]);
+            }
+            
+
+            return s.ToString();
+        }
     }
 }

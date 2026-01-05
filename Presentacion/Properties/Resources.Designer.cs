@@ -73,6 +73,16 @@ namespace Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Baja {
+            get {
+                object obj = ResourceManager.GetObject("Baja", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FotoPerfil__1_ {
             get {
                 object obj = ResourceManager.GetObject("FotoPerfil__1_", resourceCulture);
@@ -106,6 +116,16 @@ namespace Presentacion.Properties {
         internal static System.Drawing.Bitmap ImagenPrestamo {
             get {
                 object obj = ResourceManager.GetObject("ImagenPrestamo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lista {
+            get {
+                object obj = ResourceManager.GetObject("Lista", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
