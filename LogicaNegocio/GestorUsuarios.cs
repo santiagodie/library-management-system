@@ -121,7 +121,11 @@ public class GestorUsuarios
 
     public bool BajaUsuario(Usuario usuario)
     {
-        return Persistencia.Persistencia.Instancia.BajaUsuario(usuario);
+        if (usuario.Estado != EstadoUsuario.Inactivo)
+        {
+            return Persistencia.Persistencia.Instancia.BajaUsuario(usuario);
+        }
+        return false;
     }
 
     public Usuario ConsultarUusuario(String Dni)
