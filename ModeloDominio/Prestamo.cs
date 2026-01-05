@@ -20,6 +20,8 @@ namespace ModeloDominio
 
         public DateTime FechaInicio { get; set; }//Puse public el seter, porque cuando se reconstruye con el transformer necesitamos poner la fecha original
 
+        public string Id { get; set; } //lo añado porque lo piden en la última práctica
+
         //Pre: fechaFinPrevista debe tener tamaño 2
         public Prestamo(DateTime[] fechaFin, Usuario usuario, List<Ejemplar> ejemplares, PersonalSala responsable)
         {
@@ -29,6 +31,7 @@ namespace ModeloDominio
             FechaFin = fechaFin;
             EjemplaresDevueltos = new List<Ejemplar>();
             Responsable = responsable;
+            Id = "";
         }
 
         public bool DevolverEjemplar(Ejemplar ejemplar)

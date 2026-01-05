@@ -19,7 +19,7 @@ public class GestorSala : GestorUsuarios
 		bool hayLibros = false;
 		bool hayAudio = false;
 
-        if (usuario is null || !Persistencia.Persistencia.ExisteUsuario(usuario.Dni) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count==0 || responsable is null)
+        if (usuario is null || !Persistencia.Persistencia.Instancia.ExisteUsuario(usuario.Dni) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count==0 || responsable is null)
         {
             return false;
         }
@@ -40,10 +40,10 @@ public class GestorSala : GestorUsuarios
 		if (hayAudio) fechas[1] = DateTime.Today.AddDays(10);
 
 		Prestamo nuevoPrestamo = new Prestamo(fechas, usuario, ejemplares, responsable);
-		bool guardado = Persistencia.Persistencia.AltaPrestamo(nuevoPrestamo);
+		bool guardado = Persistencia.Persistencia.Instancia.AltaPrestamo(nuevoPrestamo);
 		if (guardado)
 		{
-            Persistencia.Persistencia.ActualizarDisponibilidad(ejemplares);
+            Persistencia.Persistencia.Instancia.ActualizarDisponibilidad(ejemplares);
 			return true;
 		}
 		return false;
@@ -66,25 +66,25 @@ public class GestorSala : GestorUsuarios
 
     public Prestamo GetPrestamoActivo(Ejemplar ejemplar) //lo necesito también para que el personal de adquisiciones pueda saber fechas de disponibilidad de documentos
     {
-        return Persistencia.Persistencia.GetPrestamoActivo(ejemplar);
+        return Persistencia.Persistencia.Instancia.GetPrestamoActivo(ejemplar);
     }
 
     //Post: devuelve la lista de préstamos hechos por el usuario en ese día 
     public List<Prestamo> GetPrestamos(Usuario usuario, DateTime fecha)
     {
-        return Persistencia.Persistencia.GetPrestamos(usuario, fecha);
+        return Persistencia.Persistencia.Instancia.GetPrestamos(usuario, fecha);
     }
 
     //Post: devuelve la lista de préstamos hechos por el usuario sobre ese documento
     public List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
     {
-        return Persistencia.Persistencia.GetPrestamos(usuario, documento);
+        return Persistencia.Persistencia.Instancia.GetPrestamos(usuario, documento);
     }
 
     //Post: devuelve la lista de préstamos hechos sobre ese documento
     public List<Prestamo> GetPrestamos(Documento documento)
     {
-        return Persistencia.Persistencia.GetPrestamos(documento);
+        return Persistencia.Persistencia.Instancia.GetPrestamos(documento);
     }
 
 
@@ -94,8 +94,8 @@ public class GestorSala : GestorUsuarios
 		if(prestamo == null) return false;
 		if(!prestamo.DevolverEjemplar(ejemplar)) return false;
 		ejemplar.Disponible = true;
-		if(!Persistencia.Persistencia.ActualizarEjemplar(ejemplar)) return false;
-		if(!Persistencia.Persistencia.ActualizarPrestamo(prestamo)) return false;
+		if(!Persistencia.Persistencia.Instancia.ActualizarEjemplar(ejemplar)) return false;
+		if(!Persistencia.Persistencia.Instancia.ActualizarPrestamo(prestamo)) return false;
 		return true;
 	}
 
@@ -104,7 +104,7 @@ public class GestorSala : GestorUsuarios
     {
         List<Prestamo> lista = new List<Prestamo>();
 
-        var prestamos = Persistencia.Persistencia.GetPrestamos();
+        var prestamos = Persistencia.Persistencia.Instancia.GetPrestamos();
         if (prestamos == null) return lista;
 
         foreach (Prestamo prestamo in prestamos)
@@ -139,7 +139,7 @@ public class GestorSala : GestorUsuarios
 	public List<Ejemplar> GetEjemplaresPrestamo()
 	{
 		List<Ejemplar> lista = new List<Ejemplar>();
-		foreach (Prestamo prestamo in Persistencia.Persistencia.GetPrestamos()) {
+		foreach (Prestamo prestamo in Persistencia.Persistencia.Instancia.GetPrestamos()) {
 			lista.AddRange(prestamo.EjemplaresPrestados);
 			//lista.AddRange(prestamo.EjemplaresDevueltos);
 		}

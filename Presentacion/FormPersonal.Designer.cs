@@ -187,14 +187,11 @@ namespace Presentacion
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.ListarBtn = new System.Windows.Forms.Button();
             this.BajaBtn = new System.Windows.Forms.Button();
             this.AltaBtn = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btPrestamo = new System.Windows.Forms.Button();
             this.btBusqueda = new System.Windows.Forms.Button();
             this.btDevolucion = new System.Windows.Forms.Button();
@@ -206,7 +203,6 @@ namespace Presentacion
             this.panel3.SuspendLayout();
             this.Tab.SuspendLayout();
             this.Usuarios.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.Sala.SuspendLayout();
@@ -262,20 +258,6 @@ namespace Presentacion
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(633, 68);
             this.panel4.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::Presentacion.Properties.Resources.logOut3__2_;
-            this.button1.Location = new System.Drawing.Point(583, 17);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 31);
-            this.button1.TabIndex = 2;
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // lbNombre
             // 
@@ -538,7 +520,6 @@ namespace Presentacion
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Location = new System.Drawing.Point(2, 2);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
@@ -547,16 +528,6 @@ namespace Presentacion
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inicio";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(7, 15);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(71, 68);
-            this.button3.TabIndex = 1;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -591,32 +562,6 @@ namespace Presentacion
             this.gbPrestamos.TabIndex = 0;
             this.gbPrestamos.TabStop = false;
             this.gbPrestamos.Text = "Préstamos";
-            // 
-            // button4
-            // 
-            this.button4.AutoSize = true;
-            this.button4.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button4.Location = new System.Drawing.Point(156, 15);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(71, 68);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Consultar";
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
-            this.button2.Location = new System.Drawing.Point(80, 15);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(71, 68);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Devolución";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // btPrestamo
             // 
@@ -2098,19 +2043,6 @@ namespace Presentacion
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::Presentacion.Properties.Resources.logOut3__2_;
-            this.button1.Location = new System.Drawing.Point(776, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 38);
-            this.button1.TabIndex = 2;
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // pictureBox2
             // 
