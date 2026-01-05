@@ -81,8 +81,8 @@ public class GestorAdquisiciones : GestorUsuarios
         return fecha;
     }
 
-	//PRE: ---
-	//POST: devuelve el documento más prestado en los últimos 30 días, o null si no hay préstamos en ese período.
+    //PRE: ---
+    //POST: devuelve el documento más prestado en los últimos 30 días, o null si no hay préstamos en ese período.
     public Documento DocumentoMasLeidoMes()
     {
         List<Prestamo> prestamos = Persistencia.Persistencia.GetPrestamos();
@@ -90,7 +90,8 @@ public class GestorAdquisiciones : GestorUsuarios
         DateTime haceUnMes = DateTime.Today.AddDays(-30);
 
         var documentoTop = prestamos
-            .Where(p => p.FechaInicio >= haceUnMes)
+            .Where(p => p != null && p.FechaInicio >= haceUnMes 
+                        && p.EjemplaresPrestados != null && p.EjemplaresPrestados.Count > 0)
             .SelectMany(p => p.EjemplaresPrestados)
             .GroupBy(e => e.Documento.Titulo)
             .OrderByDescending(grupo => grupo.Count())
@@ -101,8 +102,8 @@ public class GestorAdquisiciones : GestorUsuarios
         return documentoTop.First().Documento;
     }
 
-	//PRE: ---
-	//POST: devuelve la lista de todos los documentos en la persistencia.
+    //PRE: ---
+    //POST: devuelve la lista de todos los documentos en la persistencia.
     public List<Documento> GetDocumentos()
     {
         return Persistencia.Persistencia.GetDocumentos();
