@@ -1,4 +1,6 @@
-﻿namespace Presentacion
+﻿using System.Windows.Forms;
+
+namespace Presentacion
 {
     partial class FormPersonal
     {
@@ -2311,6 +2313,7 @@
         private System.Windows.Forms.Button button_Bajas;
         private System.Windows.Forms.Button button_Altas;
         private System.Windows.Forms.Label label_Main_Adquisiciones;
+        private TableLayoutPanel PanelFunciones;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

@@ -123,7 +123,7 @@ public class GestorUsuarios
     {
         if (usuario.Estado != EstadoUsuario.Inactivo)
         {
-            return Persistencia.Persistencia.Instancia.BajaUsuario(usuario);
+            return Persistencia.Persistencia.BajaUsuario(usuario);
         }
         return false;
     }
