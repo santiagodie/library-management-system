@@ -25,6 +25,7 @@ namespace Presentacion
         {
             InitializeComponent();
             ToolTipInicializar();
+            NameLabel.Text = personal.Nombre;
             this.personal= personal;
             if (rol == Rol.PersonalSala)
             {
@@ -763,6 +764,61 @@ namespace Presentacion
             UC_BajaUsuario baja = new UC_BajaUsuario();
             baja.Dock = DockStyle.Fill;
             PanelFunciones.Controls.Add(baja);
+        }
+
+        private void ListarBtn_Click(object sender, EventArgs e)
+        {
+            PanelFunciones.Controls.Clear();
+            UC_ListadoUsuarios lista=new UC_ListadoUsuarios();
+            lista.MostrarUsuario += mostrarUsuario;
+            lista.Dock= DockStyle.Fill;
+            PanelFunciones.Controls.Add(lista);
+
+        }
+
+        private void ConsultarBtn_Click(object sender, EventArgs e)
+        {
+            GestorUsuarios gestor= new GestorUsuarios();
+            string dni = DNIBox.Text;
+            if(!string.IsNullOrEmpty(dni) && gestor.EsDniValido(dni))
+            {
+                if (gestor.ExisteUsuario(dni))
+                {
+                    mostrarUsuario(gestor.ConsultarUusuario(dni));
+                }
+                else
+                {
+                    MessageBox.Show("No existe ningún usuario con DNI " + dni);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El DNI introducido no es válido.");
+            }
+        }
+        private void mostrarUsuario(Usuario usuario)
+        {
+            DNIBox.Text = usuario.Dni;
+            PanelFunciones.Controls.Clear();
+            UC_InfoUsuario user=new UC_InfoUsuario(usuario);
+            user.MostrarPrestamos += mostrarPrestamosUsuario;
+            user.Dock= DockStyle.Fill;
+            PanelFunciones.Controls.Add(user);
+        }
+        private void mostrarPrestamosUsuario(Usuario usuario)
+        {
+            PanelFunciones.Controls.Clear();
+            UC_PrestamosUsuario prestamos = new UC_PrestamosUsuario(usuario);
+            prestamos.Dock = DockStyle.Fill;
+            PanelFunciones.Controls.Add(prestamos);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("¿Cerrar sesión y salir?", "Cerrar Sesión", MessageBoxButtons.YesNo)==DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }

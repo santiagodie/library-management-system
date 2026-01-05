@@ -32,15 +32,28 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPersonal));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.NameLabel = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
             this.Tab = new System.Windows.Forms.TabControl();
             this.Usuarios = new System.Windows.Forms.TabPage();
+            this.Panel = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ListarBtn = new System.Windows.Forms.Button();
+            this.BajaBtn = new System.Windows.Forms.Button();
+            this.AltaBtn = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.DNIBox = new System.Windows.Forms.TextBox();
+            this.ConsultarBtn = new System.Windows.Forms.Button();
             this.Sala = new System.Windows.Forms.TabPage();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.gbPrestamos = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btPrestamo = new System.Windows.Forms.Button();
             this.Adquisiciones = new System.Windows.Forms.TabPage();
             this.panel_Listar_Ejemplar = new System.Windows.Forms.Panel();
             this.comboBox_Documento_Listar_Ejemplar = new System.Windows.Forms.ComboBox();
@@ -164,25 +177,17 @@
             this.button_Bajas = new System.Windows.Forms.Button();
             this.button_Altas = new System.Windows.Forms.Button();
             this.label_Main_Adquisiciones = new System.Windows.Forms.Label();
-            this.PanelFunciones = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.ListarBtn = new System.Windows.Forms.Button();
-            this.BajaBtn = new System.Windows.Forms.Button();
-            this.AltaBtn = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btPrestamo = new System.Windows.Forms.Button();
+            this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
+            this.PanelFunciones = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel3.SuspendLayout();
             this.Tab.SuspendLayout();
             this.Usuarios.SuspendLayout();
+            this.Panel.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.Sala.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.gbPrestamos.SuspendLayout();
@@ -198,10 +203,6 @@
             this.panel_Baja_Ejemplar.SuspendLayout();
             this.panel_Alta_Ejemplar.SuspendLayout();
             this.panel_Alta_Documento.SuspendLayout();
-            this.PanelFunciones.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -217,29 +218,53 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(849, 435);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1034, 519);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.LightSlateGray;
             this.panel4.Controls.Add(this.button1);
-            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.NameLabel);
             this.panel4.Controls.Add(this.pictureBox2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(843, 84);
+            this.panel4.Size = new System.Drawing.Size(1028, 84);
             this.panel4.TabIndex = 3;
             // 
-            // label1
+            // button1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "tuNombre";
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::Presentacion.Properties.Resources.logOut3__2_;
+            this.button1.Location = new System.Drawing.Point(961, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 38);
+            this.button1.TabIndex = 2;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // NameLabel
+            // 
+            this.NameLabel.Location = new System.Drawing.Point(16, 53);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(66, 16);
+            this.NameLabel.TabIndex = 1;
+            this.NameLabel.Text = "tuNombre";
+            this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(28, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(41, 38);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
             // 
             // panel3
             // 
@@ -247,7 +272,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 93);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(843, 339);
+            this.panel3.Size = new System.Drawing.Size(1028, 423);
             this.panel3.TabIndex = 0;
             // 
             // Tab
@@ -259,19 +284,124 @@
             this.Tab.Location = new System.Drawing.Point(0, 0);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(843, 339);
+            this.Tab.Size = new System.Drawing.Size(1028, 423);
             this.Tab.TabIndex = 1;
             // 
             // Usuarios
             // 
-            this.Usuarios.Controls.Add(this.PanelFunciones);
+            this.Usuarios.Controls.Add(this.Panel);
             this.Usuarios.Location = new System.Drawing.Point(4, 25);
             this.Usuarios.Name = "Usuarios";
             this.Usuarios.Padding = new System.Windows.Forms.Padding(3);
-            this.Usuarios.Size = new System.Drawing.Size(835, 310);
+            this.Usuarios.Size = new System.Drawing.Size(1020, 394);
             this.Usuarios.TabIndex = 0;
             this.Usuarios.Text = "Usuarios";
             this.Usuarios.UseVisualStyleBackColor = true;
+            // 
+            // Panel
+            // 
+            this.Panel.ColumnCount = 1;
+            this.Panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Panel.Controls.Add(this.flowLayoutPanel2, 0, 0);
+            this.Panel.Controls.Add(this.PanelFunciones, 0, 1);
+            this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel.Location = new System.Drawing.Point(3, 3);
+            this.Panel.Name = "Panel";
+            this.Panel.RowCount = 2;
+            this.Panel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.Panel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Panel.Size = new System.Drawing.Size(1014, 388);
+            this.Panel.TabIndex = 4;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.AliceBlue;
+            this.flowLayoutPanel2.Controls.Add(this.groupBox4);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1008, 133);
+            this.flowLayoutPanel2.TabIndex = 4;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.AutoSize = true;
+            this.groupBox4.Controls.Add(this.ListarBtn);
+            this.groupBox4.Controls.Add(this.BajaBtn);
+            this.groupBox4.Controls.Add(this.AltaBtn);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.DNIBox);
+            this.groupBox4.Controls.Add(this.ConsultarBtn);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(529, 126);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Usuarios";
+            // 
+            // ListarBtn
+            // 
+            this.ListarBtn.Image = global::Presentacion.Properties.Resources.Lista;
+            this.ListarBtn.Location = new System.Drawing.Point(208, 21);
+            this.ListarBtn.Name = "ListarBtn";
+            this.ListarBtn.Size = new System.Drawing.Size(95, 84);
+            this.ListarBtn.TabIndex = 5;
+            this.ListarBtn.Text = "Listado";
+            this.ListarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ListarBtn.UseVisualStyleBackColor = true;
+            this.ListarBtn.Click += new System.EventHandler(this.ListarBtn_Click);
+            // 
+            // BajaBtn
+            // 
+            this.BajaBtn.Image = global::Presentacion.Properties.Resources.Baja;
+            this.BajaBtn.Location = new System.Drawing.Point(107, 21);
+            this.BajaBtn.Name = "BajaBtn";
+            this.BajaBtn.Size = new System.Drawing.Size(95, 84);
+            this.BajaBtn.TabIndex = 4;
+            this.BajaBtn.Text = "Baja";
+            this.BajaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BajaBtn.UseVisualStyleBackColor = true;
+            this.BajaBtn.Click += new System.EventHandler(this.BajaBtn_Click);
+            // 
+            // AltaBtn
+            // 
+            this.AltaBtn.Image = global::Presentacion.Properties.Resources.Alta;
+            this.AltaBtn.Location = new System.Drawing.Point(6, 21);
+            this.AltaBtn.Name = "AltaBtn";
+            this.AltaBtn.Size = new System.Drawing.Size(95, 84);
+            this.AltaBtn.TabIndex = 3;
+            this.AltaBtn.Text = "Alta";
+            this.AltaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.AltaBtn.UseVisualStyleBackColor = true;
+            this.AltaBtn.Click += new System.EventHandler(this.AltaBtn_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(328, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Introduce el dni:";
+            // 
+            // DNIBox
+            // 
+            this.DNIBox.Location = new System.Drawing.Point(328, 65);
+            this.DNIBox.Name = "DNIBox";
+            this.DNIBox.Size = new System.Drawing.Size(100, 22);
+            this.DNIBox.TabIndex = 1;
+            // 
+            // ConsultarBtn
+            // 
+            this.ConsultarBtn.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.ConsultarBtn.Location = new System.Drawing.Point(444, 37);
+            this.ConsultarBtn.Name = "ConsultarBtn";
+            this.ConsultarBtn.Size = new System.Drawing.Size(79, 50);
+            this.ConsultarBtn.TabIndex = 0;
+            this.ConsultarBtn.Text = "Consultar";
+            this.ConsultarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ConsultarBtn.UseVisualStyleBackColor = true;
+            this.ConsultarBtn.Click += new System.EventHandler(this.ConsultarBtn_Click);
             // 
             // Sala
             // 
@@ -314,6 +444,41 @@
             this.gbPrestamos.TabIndex = 0;
             this.gbPrestamos.TabStop = false;
             this.gbPrestamos.Text = "Préstamos";
+            // 
+            // button4
+            // 
+            this.button4.AutoSize = true;
+            this.button4.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button4.Location = new System.Drawing.Point(208, 19);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(95, 84);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Consultar";
+            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
+            this.button2.Location = new System.Drawing.Point(107, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(95, 84);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Devolución";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btPrestamo
+            // 
+            this.btPrestamo.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
+            this.btPrestamo.Location = new System.Drawing.Point(6, 19);
+            this.btPrestamo.Name = "btPrestamo";
+            this.btPrestamo.Size = new System.Drawing.Size(95, 84);
+            this.btPrestamo.TabIndex = 0;
+            this.btPrestamo.Text = "Préstamo";
+            this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btPrestamo.UseVisualStyleBackColor = true;
             // 
             // Adquisiciones
             // 
@@ -1598,179 +1763,30 @@
             // 
             // PanelFunciones
             // 
-            this.PanelFunciones.ColumnCount = 1;
-            this.PanelFunciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.PanelFunciones.Controls.Add(this.flowLayoutPanel2, 0, 0);
             this.PanelFunciones.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelFunciones.Location = new System.Drawing.Point(3, 3);
+            this.PanelFunciones.Location = new System.Drawing.Point(3, 143);
             this.PanelFunciones.Name = "PanelFunciones";
-            this.PanelFunciones.RowCount = 2;
-            this.PanelFunciones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.PanelFunciones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.PanelFunciones.Size = new System.Drawing.Size(829, 304);
-            this.PanelFunciones.TabIndex = 4;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.AliceBlue;
-            this.flowLayoutPanel2.Controls.Add(this.groupBox4);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(823, 133);
-            this.flowLayoutPanel2.TabIndex = 4;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.AutoSize = true;
-            this.groupBox4.Controls.Add(this.ListarBtn);
-            this.groupBox4.Controls.Add(this.BajaBtn);
-            this.groupBox4.Controls.Add(this.AltaBtn);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.textBox3);
-            this.groupBox4.Controls.Add(this.button6);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(529, 126);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Usuarios";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(328, 46);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Introduce el dni:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(328, 65);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::Presentacion.Properties.Resources.logOut3__2_;
-            this.button1.Location = new System.Drawing.Point(776, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 38);
-            this.button1.TabIndex = 2;
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(28, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(41, 38);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // ListarBtn
-            // 
-            this.ListarBtn.Image = global::Presentacion.Properties.Resources.Lista;
-            this.ListarBtn.Location = new System.Drawing.Point(208, 21);
-            this.ListarBtn.Name = "ListarBtn";
-            this.ListarBtn.Size = new System.Drawing.Size(95, 84);
-            this.ListarBtn.TabIndex = 5;
-            this.ListarBtn.Text = "Listado";
-            this.ListarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.ListarBtn.UseVisualStyleBackColor = true;
-            // 
-            // BajaBtn
-            // 
-            this.BajaBtn.Image = global::Presentacion.Properties.Resources.Baja;
-            this.BajaBtn.Location = new System.Drawing.Point(107, 21);
-            this.BajaBtn.Name = "BajaBtn";
-            this.BajaBtn.Size = new System.Drawing.Size(95, 84);
-            this.BajaBtn.TabIndex = 4;
-            this.BajaBtn.Text = "Baja";
-            this.BajaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.BajaBtn.UseVisualStyleBackColor = true;
-            this.BajaBtn.Click += new System.EventHandler(this.BajaBtn_Click);
-            // 
-            // AltaBtn
-            // 
-            this.AltaBtn.Image = global::Presentacion.Properties.Resources.Alta;
-            this.AltaBtn.Location = new System.Drawing.Point(6, 21);
-            this.AltaBtn.Name = "AltaBtn";
-            this.AltaBtn.Size = new System.Drawing.Size(95, 84);
-            this.AltaBtn.TabIndex = 3;
-            this.AltaBtn.Text = "Alta";
-            this.AltaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.AltaBtn.UseVisualStyleBackColor = true;
-            this.AltaBtn.Click += new System.EventHandler(this.AltaBtn_Click);
-            // 
-            // button6
-            // 
-            this.button6.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button6.Location = new System.Drawing.Point(444, 37);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(79, 50);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Consultar";
-            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.AutoSize = true;
-            this.button4.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button4.Location = new System.Drawing.Point(208, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(95, 84);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Consultar";
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
-            this.button2.Location = new System.Drawing.Point(107, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 84);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Devolución";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btPrestamo
-            // 
-            this.btPrestamo.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
-            this.btPrestamo.Location = new System.Drawing.Point(6, 19);
-            this.btPrestamo.Name = "btPrestamo";
-            this.btPrestamo.Size = new System.Drawing.Size(95, 84);
-            this.btPrestamo.TabIndex = 0;
-            this.btPrestamo.Text = "Préstamo";
-            this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btPrestamo.UseVisualStyleBackColor = true;
+            this.PanelFunciones.Size = new System.Drawing.Size(1008, 242);
+            this.PanelFunciones.TabIndex = 5;
             // 
             // FormPersonal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 435);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(1034, 519);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormPersonal";
             this.Text = "Gestor de biblioteca";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel3.ResumeLayout(false);
             this.Tab.ResumeLayout(false);
             this.Usuarios.ResumeLayout(false);
+            this.Panel.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.Sala.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.gbPrestamos.ResumeLayout(false);
@@ -1797,12 +1813,6 @@
             this.panel_Alta_Ejemplar.PerformLayout();
             this.panel_Alta_Documento.ResumeLayout(false);
             this.panel_Alta_Documento.PerformLayout();
-            this.PanelFunciones.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1813,7 +1823,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TabControl Tab;
@@ -1948,14 +1958,15 @@
         private System.Windows.Forms.Button button_Bajas;
         private System.Windows.Forms.Button button_Altas;
         private System.Windows.Forms.Label label_Main_Adquisiciones;
-        private System.Windows.Forms.TableLayoutPanel PanelFunciones;
+        private System.Windows.Forms.TableLayoutPanel Panel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button ListarBtn;
         private System.Windows.Forms.Button BajaBtn;
         private System.Windows.Forms.Button AltaBtn;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox DNIBox;
+        private System.Windows.Forms.Button ConsultarBtn;
+        private System.Windows.Forms.Panel PanelFunciones;
     }
 }
