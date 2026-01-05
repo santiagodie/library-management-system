@@ -147,7 +147,7 @@ public class GestorSala : GestorUsuarios
 	}
     public List<Prestamo> GetPrestamosActivos()
     {
-        return Persistencia.Persistencia.Instancia.GetPrestamos()
+        return Persistencia.Persistencia.GetPrestamos()
                .Where(p => p != null)
                .Where(p => p.Activo)
                .OrderBy(p => p.FechaVencimiento)
@@ -156,7 +156,7 @@ public class GestorSala : GestorUsuarios
 
     public List<Prestamo> GetUltimosPrestamos(int cantidad = 20)
     {
-        return Persistencia.Persistencia.Instancia.GetPrestamos()
+        return Persistencia.Persistencia.GetPrestamos()
                .Where(p => p != null)
                .OrderByDescending(p => p.FechaInicio)
                .Take(cantidad)
@@ -166,7 +166,7 @@ public class GestorSala : GestorUsuarios
 
     public List<Prestamo> GetUltimasDevoluciones(int cantidad = 20)
     {
-        return Persistencia.Persistencia.Instancia.GetPrestamos()
+        return Persistencia.Persistencia.GetPrestamos()
                .Where(p => p != null)
                .Where(p => p.EjemplaresDevueltos != null && p.EjemplaresDevueltos.Count > 0)
                .OrderByDescending(p => p.FechaInicio)
@@ -179,7 +179,7 @@ public class GestorSala : GestorUsuarios
     public List<ItemBusquedaPrestamo> BuscarPrestamos( string textoUsuario,string textoTitulo, string textoAutor, string textoISBN, string codigoEjemplar, string tipoFiltro, DateTime? fechaFiltro, string estadoFiltro)
     {
         List<ItemBusquedaPrestamo> resultados = new List<ItemBusquedaPrestamo>();
-        var todosLosPrestamos = Persistencia.Persistencia.Instancia.GetPrestamos();
+        var todosLosPrestamos = Persistencia.Persistencia.GetPrestamos();
 
         foreach (var p in todosLosPrestamos)
         {
@@ -268,7 +268,7 @@ public class GestorSala : GestorUsuarios
 
     public List<string> GetListaTitulos()
     {
-        return Persistencia.Persistencia.Instancia.GetDocumentos()
+        return Persistencia.Persistencia.GetDocumentos()
                 .Select(d => d.Titulo)
                 .Distinct()
                 .OrderBy(t => t)
@@ -277,7 +277,7 @@ public class GestorSala : GestorUsuarios
 
     public List<string> GetListaAutores()
     {
-        return Persistencia.Persistencia.Instancia.GetDocumentos()
+        return Persistencia.Persistencia.GetDocumentos()
                 .Select(d => d.Autor)
                 .Where(a => !string.IsNullOrEmpty(a))
                 .Distinct()
@@ -296,7 +296,7 @@ public class GestorSala : GestorUsuarios
 
     public List<string> GetListaISBNs()
     {
-        return Persistencia.Persistencia.Instancia.GetDocumentos()
+        return Persistencia.Persistencia.GetDocumentos()
                 .Select(d => d.ISBN)
                 .Distinct()
                 .ToList();
@@ -306,11 +306,11 @@ public class GestorSala : GestorUsuarios
     {
         List<Ejemplar> listaFinal = new List<Ejemplar>();
 
-        List<Documento> todosLosDocumentos = Persistencia.Persistencia.Instancia.GetDocumentos();
+        List<Documento> todosLosDocumentos = Persistencia.Persistencia.GetDocumentos();
 
         foreach (Documento doc in todosLosDocumentos)
         {
-            List<Ejemplar> ejemplaresDelLibro = Persistencia.Persistencia.Instancia.GetEjemplares(doc);
+            List<Ejemplar> ejemplaresDelLibro = Persistencia.Persistencia.GetEjemplares(doc);
 
             foreach (Ejemplar ej in ejemplaresDelLibro)
             {

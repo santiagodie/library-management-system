@@ -53,9 +53,10 @@
             // 
             this.BajaBtn.Location = new System.Drawing.Point(174, 40);
             this.BajaBtn.Name = "BajaBtn";
-            this.BajaBtn.Size = new System.Drawing.Size(75, 23);
+            this.BajaBtn.Size = new System.Drawing.Size(77, 25);
             this.BajaBtn.TabIndex = 2;
             this.BajaBtn.Text = "Baja";
+            this.BajaBtn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.BajaBtn.UseVisualStyleBackColor = true;
             this.BajaBtn.Click += new System.EventHandler(this.BajaBtn_Click);
             // 

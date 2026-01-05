@@ -243,4 +243,8 @@ public class GestorUsuarios
         }
         return ejemplares;
     }
+    public bool ExisteUsuario(string dni)
+    {
+        return Persistencia.Persistencia.ExisteUsuario(dni);
+    }
 }

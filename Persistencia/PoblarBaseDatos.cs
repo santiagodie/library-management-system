@@ -89,8 +89,8 @@ namespace Persistencia
         // POST: crea documentos y ejemplares de prueba.
         private static void PoblarDocumentosYEjemplares()
         {
-            PersonalAdquisiciones responsable1 = Persistencia.Instancia.GetPersonalAdquisiciones("55555555K");
-            PersonalAdquisiciones responsable2 = Persistencia.Instancia.GetPersonalAdquisiciones("66666666Q");
+            PersonalAdquisiciones responsable1 = Persistencia.GetPersonalAdquisiciones("55555555K");
+            PersonalAdquisiciones responsable2 = Persistencia.GetPersonalAdquisiciones("66666666Q");
 
             // Libro 1: El Quijote
             Libro libro1 = new Libro(

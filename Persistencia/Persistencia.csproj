@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPersistencia.cs" />
     <Compile Include="Persistencia.cs" />
     <Compile Include="DocumentoDato.cs" />
     <Compile Include="EjemplarDato.cs" />

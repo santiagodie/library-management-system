@@ -70,6 +70,18 @@
     <Compile Include="FormSeleccionEjemplar.Designer.cs">
       <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_Busqueda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Busqueda.Designer.cs">
+      <DependentUpon>UC_Busqueda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_PrestamosUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_PrestamosUsuario.Designer.cs">
+      <DependentUpon>UC_PrestamosUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.cs">
@@ -84,12 +96,6 @@
     <Compile Include="FormUsuario.Designer.cs">
       <DependentUpon>FormUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC_Busqueda.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UC_Busqueda.Designer.cs">
-      <DependentUpon>UC_Busqueda.cs</DependentUpon>
-    </Compile>
     <Compile Include="RolLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,9 +108,6 @@
     <Compile Include="UC_Inicio.Designer.cs">
       <DependentUpon>UC_Inicio.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormAltaPrestamo.resx">
-      <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="UC_AltaUsuario.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,12 +120,33 @@
     <Compile Include="UC_BajaUsuario.Designer.cs">
       <DependentUpon>UC_BajaUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_ListadoUsuarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_ListadoUsuarios.Designer.cs">
+      <DependentUpon>UC_ListadoUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_InfoUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_InfoUsuario.Designer.cs">
+      <DependentUpon>UC_InfoUsuario.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormAltaPrestamo.resx">
+      <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPersonal.resx">
       <DependentUpon>FormPersonal.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSeleccionEjemplar.resx">
       <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Busqueda.resx">
+      <DependentUpon>UC_Busqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_PrestamosUsuario.resx">
+      <DependentUpon>UC_PrestamosUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -140,14 +164,14 @@
     <EmbeddedResource Include="FormUsuario.resx">
       <DependentUpon>FormUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_Busqueda.resx">
-      <DependentUpon>UC_Busqueda.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RolLog.resx">
       <DependentUpon>RolLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_AltaUsuario.resx">
       <DependentUpon>UC_AltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_InfoUsuario.resx">
+      <DependentUpon>UC_InfoUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Inicio.resx">
       <DependentUpon>UC_Inicio.cs</DependentUpon>
@@ -155,7 +179,22 @@
     <EmbeddedResource Include="UC_BajaUsuario.resx">
       <DependentUpon>UC_BajaUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_ListadoUsuarios.resx">
+      <DependentUpon>UC_ListadoUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\FormUsuario.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Audiolibro.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Documento.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Ejemplar.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.EjemplarPrestado.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Hash.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Libro.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Persona.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Personal.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.PersonalAdquisiciones.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.PersonalSala.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Prestamo.datasource" />
+    <None Include="Properties\DataSources\ModeloDominio.Usuario.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -206,6 +245,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Lista.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prestamo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
