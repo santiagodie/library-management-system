@@ -46,11 +46,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAltaPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAltaPrestamo.Designer.cs">
+      <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPersonal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPersonal.Designer.cs">
       <DependentUpon>FormPersonal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrestamo.Designer.cs">
+      <DependentUpon>FormPrestamo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSeleccionEjemplar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSeleccionEjemplar.Designer.cs">
+      <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Busqueda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Busqueda.Designer.cs">
+      <DependentUpon>UC_Busqueda.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_PrestamosUsuario.cs">
       <SubType>UserControl</SubType>
@@ -108,8 +132,18 @@
     <Compile Include="UC_InfoUsuario.Designer.cs">
       <DependentUpon>UC_InfoUsuario.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormAltaPrestamo.resx">
+      <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPersonal.resx">
       <DependentUpon>FormPersonal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSeleccionEjemplar.resx">
+      <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Busqueda.resx">
+      <DependentUpon>UC_Busqueda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_PrestamosUsuario.resx">
       <DependentUpon>UC_PrestamosUsuario.cs</DependentUpon>

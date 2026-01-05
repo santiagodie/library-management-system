@@ -74,7 +74,7 @@
             this.PrestBtn.Image = global::Presentacion.Properties.Resources.Prestamo;
             this.PrestBtn.Location = new System.Drawing.Point(190, 31);
             this.PrestBtn.Name = "PrestBtn";
-            this.PrestBtn.Size = new System.Drawing.Size(95, 84);
+            this.PrestBtn.Size = new System.Drawing.Size(130, 97);
             this.PrestBtn.TabIndex = 4;
             this.PrestBtn.Text = "Préstamos";
             this.PrestBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -91,7 +91,7 @@
             this.Controls.Add(this.NameBox);
             this.Controls.Add(this.label1);
             this.Name = "UC_InfoUsuario";
-            this.Size = new System.Drawing.Size(300, 136);
+            this.Size = new System.Drawing.Size(416, 166);
             this.ResumeLayout(false);
             this.PerformLayout();
 
