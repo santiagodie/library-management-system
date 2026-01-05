@@ -32,7 +32,7 @@ public class GestorUsuarios
             return resultado;
         }
 
-        if (!Persistencia.Persistencia.Instancia.ExistePersona(dni))
+        if (!Persistencia.Persistencia.ExistePersona(dni))
         {
             resultado.MensajeError = "No existe ninguna cuenta con ese DNI.";
             return resultado;
@@ -40,15 +40,15 @@ public class GestorUsuarios
 
         string hashPass = Hash.GetHash(contraseña);
 
-        if (Persistencia.Persistencia.Instancia.ExistePersonalSala(dni))
+        if (Persistencia.Persistencia.ExistePersonalSala(dni))
         {
-            PersonalSala p = Persistencia.Persistencia.Instancia.GetPersonalSala(dni);
+            PersonalSala p = Persistencia.Persistencia.GetPersonalSala(dni);
             if (p.HashContraseña == hashPass)
             {
                 resultado.Exito = true;
                 resultado.Persona = p;
 
-                if (Persistencia.Persistencia.Instancia.ExisteUsuario(dni))
+                if (Persistencia.Persistencia.ExisteUsuario(dni))
                 {
                     resultado.Rol = Rol.UsuarioYSala; 
                 }
@@ -60,15 +60,15 @@ public class GestorUsuarios
             }
         }
 
-        if (Persistencia.Persistencia.Instancia.ExistePersonalAdquisiciones(dni))
+        if (Persistencia.Persistencia.ExistePersonalAdquisiciones(dni))
         {
-            PersonalAdquisiciones p = Persistencia.Persistencia.Instancia.GetPersonalAdquisiciones(dni);
+            PersonalAdquisiciones p = Persistencia.Persistencia.GetPersonalAdquisiciones(dni);
             if (p.HashContraseña == hashPass)
             {
                 resultado.Exito = true;
                 resultado.Persona = p;
 
-                if (Persistencia.Persistencia.Instancia.ExisteUsuario(dni))
+                if (Persistencia.Persistencia.ExisteUsuario(dni))
                 {
                     resultado.Rol = Rol.UsuarioYAdquisiciones;
                 }
@@ -80,9 +80,9 @@ public class GestorUsuarios
             }
         }
 
-        if (Persistencia.Persistencia.Instancia.ExisteUsuario(dni))
+        if (Persistencia.Persistencia.ExisteUsuario(dni))
         {
-            Usuario u = Persistencia.Persistencia.Instancia.GetUsuario(dni);
+            Usuario u = Persistencia.Persistencia.GetUsuario(dni);
             if (u.HashContraseña == hashPass)
             {
                 resultado.Exito = true;
@@ -98,7 +98,7 @@ public class GestorUsuarios
 
     public bool AltaUsuario(Usuario usuario)
     {
-        if (Persistencia.Persistencia.Instancia.ExisteUsuario(usuario.Dni))
+        if (Persistencia.Persistencia.ExisteUsuario(usuario.Dni))
         {
             //Console.WriteLine($"Error: El usuario con ID {usuario.Id} ya existe."); Creo que hay que hacerlo con excepciones para poder cogerlas en la interfaz ( try{} catch(e){} )
             return false;
@@ -116,31 +116,31 @@ public class GestorUsuarios
             return false;
         }
 
-        return Persistencia.Persistencia.Instancia.AltaUsuario(usuario);
+        return Persistencia.Persistencia.AltaUsuario(usuario);
     }
 
     public bool BajaUsuario(Usuario usuario)
     {
         if (usuario.Estado != EstadoUsuario.Inactivo)
         {
-            return Persistencia.Persistencia.Instancia.BajaUsuario(usuario);
+            return Persistencia.Persistencia.BajaUsuario(usuario);
         }
         return false;
     }
 
     public Usuario ConsultarUusuario(String Dni)
     {
-        return Persistencia.Persistencia.Instancia.GetUsuario(Dni);
+        return Persistencia.Persistencia.GetUsuario(Dni);
     }
 
     public List<Usuario> GetListaUsuarios()
     {
-        return Persistencia.Persistencia.Instancia.GetListaUsuarios();
+        return Persistencia.Persistencia.GetListaUsuarios();
     }
 
     public List<Prestamo> GetPrestamosRetrasados(Usuario usuario)
     {
-        var todos = Persistencia.Persistencia.Instancia.GetPrestamos(usuario);
+        var todos = Persistencia.Persistencia.GetPrestamos(usuario);
 
         List<Prestamo> retrasados = new List<Prestamo>();
 
@@ -162,7 +162,7 @@ public class GestorUsuarios
 
     public List<Ejemplar> GetEjemplaresPrestados(Usuario usuario)
     {
-        var todos = Persistencia.Persistencia.Instancia.GetPrestamos(usuario);
+        var todos = Persistencia.Persistencia.GetPrestamos(usuario);
         List<Ejemplar> enCasaUsuario = new List<Ejemplar>();
 
         foreach (var p in todos)
@@ -193,16 +193,16 @@ public class GestorUsuarios
 
     public DateTime GetFechaDisponible(Ejemplar ejemplar) //lo necesito para que el personal de adquisiciones pueda saber fechas de disponibilidad de documentos
     {
-        if (ejemplar.Documento is Libro) return Persistencia.Persistencia.Instancia.GetPrestamoActivo(ejemplar).FechaFin[0];
-        else if (ejemplar.Documento is Audiolibro) return Persistencia.Persistencia.Instancia.GetPrestamoActivo(ejemplar).FechaFin[1];
+        if (ejemplar.Documento is Libro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[0];
+        else if (ejemplar.Documento is Audiolibro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[1];
         return DateTime.MinValue;
     }
 
     public List<EjemplarPrestado> ObtenerMisPrestamosFiltrados(Persona personaLogueada, string textoBuscar, bool soloPendientes)
     {
-        Usuario usuario = Persistencia.Persistencia.Instancia.GetUsuario(personaLogueada.Dni);
+        Usuario usuario = Persistencia.Persistencia.GetUsuario(personaLogueada.Dni);
         if (usuario == null) return new List<EjemplarPrestado>();
-        List<Prestamo> misPrestamos = Persistencia.Persistencia.Instancia.GetPrestamos(usuario);
+        List<Prestamo> misPrestamos = Persistencia.Persistencia.GetPrestamos(usuario);
 
         var consulta = misPrestamos.AsQueryable();
 

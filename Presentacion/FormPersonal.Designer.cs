@@ -498,6 +498,7 @@ namespace Presentacion
             this.btPrestamo.Text = "Préstamo";
             this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btPrestamo.UseVisualStyleBackColor = true;
+            this.btPrestamo.Click += new System.EventHandler(this.btPrestamo_Click);
             // 
             // Adquisiciones
             // 

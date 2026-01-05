@@ -11,20 +11,6 @@ namespace Persistencia
 {
     public static class Persistencia 
     {
-        private static Persistencia _instancia;
-
-        public static Persistencia Instancia
-        {
-            get
-            {
-                if (_instancia == null)
-                {
-                    _instancia = new Persistencia();
-                }
-                return _instancia;
-            }
-        }
-
         // ------------- GESTIÓN DE PERSONAS
 
         //PRE: dni no puede ser nulo.

@@ -849,5 +849,10 @@ namespace Presentacion
                 this.Close();
             }
         }
+
+        private void btPrestamo_Click(object sender, EventArgs e)
+        {
+            FormAltaPrestamo formAlta = new FormAltaPrestamo(personal);
+        }
     }
 }
