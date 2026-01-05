@@ -26,6 +26,7 @@ namespace Presentacion
             InitializeComponent();
             ToolTipInicializar();
             this.personal= personal;
+            lbNombre.Text = personal.Nombre;
             if (rol == Rol.PersonalSala)
             {
                 Tab.TabPages.Remove(Adquisiciones);
