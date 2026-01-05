@@ -46,11 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAltaPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAltaPrestamo.Designer.cs">
+      <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPersonal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPersonal.Designer.cs">
       <DependentUpon>FormPersonal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrestamo.Designer.cs">
+      <DependentUpon>FormPrestamo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSeleccionEjemplar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSeleccionEjemplar.Designer.cs">
+      <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +84,12 @@
     <Compile Include="FormUsuario.Designer.cs">
       <DependentUpon>FormUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_Busqueda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Busqueda.Designer.cs">
+      <DependentUpon>UC_Busqueda.cs</DependentUpon>
+    </Compile>
     <Compile Include="RolLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,8 +102,14 @@
     <Compile Include="UC_Inicio.Designer.cs">
       <DependentUpon>UC_Inicio.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormAltaPrestamo.resx">
+      <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPersonal.resx">
       <DependentUpon>FormPersonal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSeleccionEjemplar.resx">
+      <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -96,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormUsuario.resx">
       <DependentUpon>FormUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Busqueda.resx">
+      <DependentUpon>UC_Busqueda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RolLog.resx">
       <DependentUpon>RolLog.cs</DependentUpon>

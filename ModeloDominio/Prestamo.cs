@@ -25,7 +25,7 @@ namespace ModeloDominio
         {
             Usuario = usuario;
             EjemplaresPrestados = ejemplares;
-            FechaInicio = DateTime.Today;
+            FechaInicio = DateTime.Now;
             FechaFin = fechaFin;
             EjemplaresDevueltos = new List<Ejemplar>();
             Responsable = responsable;
@@ -132,6 +132,24 @@ namespace ModeloDominio
                 if (hayAudios) return FechaFin[1];
 
                 return DateTime.MinValue;
+            }
+        }
+
+        // Activo = Pendiente y dentro del plazo
+        public bool Activo
+        {
+            get
+            {
+                return !EstaFinalizado() && FechaVencimiento >= DateTime.Today;
+            }
+        }
+
+        // Vencido = Pendiente y fuera de plazo
+        public bool Vencido
+        {
+            get
+            {
+                return !EstaFinalizado() && FechaVencimiento < DateTime.Today;
             }
         }
     }

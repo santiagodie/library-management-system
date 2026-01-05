@@ -12,6 +12,13 @@ using System.Windows.Forms;
 
 namespace Presentacion
 {
+    public enum TipoListado
+    {
+        Vencidos,
+        Activos,
+        Prestamos,
+        Devoluciones
+    }
     public partial class UC_Inicio : UserControl
     {
         GestorSala gestorSala;
@@ -32,41 +39,111 @@ namespace Presentacion
             lbNHoy.Text = numHoy.ToString();
             lbNSala.Text = numSala.ToString();
 
+            CargarTabla(dgvVencidos,TipoListado.Vencidos);
+            CargarTabla(dgvActivos, TipoListado.Activos);
+            CargarTabla(dgvPrestamos, TipoListado.Prestamos);
+            CargarTabla(dgvDevoluciones, TipoListado.Devoluciones);
+
+        }
+
+        private void CargarTabla(DataGridView dgvDestino, TipoListado tipo)
+        {
             DataTable tabla = new DataTable();
             tabla.Columns.Add("Usuario", typeof(string));
             tabla.Columns.Add("Documento", typeof(string));
-            tabla.Columns.Add("Fecha Límite", typeof(DateTime));
+            tabla.Columns.Add("Fecha/Info", typeof(string));
             tabla.Columns.Add("Estado", typeof(string));
 
-            List<Prestamo> listaVencidos = gestorSala.GetPrestamosRetrasados();
+            List<Prestamo> listaPrestamos = new List<Prestamo>();
 
-            foreach (Prestamo p in listaVencidos)
+            switch (tipo)
             {
-                foreach (Ejemplar ej in p.EjemplaresPrestados)
+                case TipoListado.Vencidos:
+                    listaPrestamos = gestorSala.GetPrestamosRetrasados();
+                    break;
+                case TipoListado.Activos:
+                    listaPrestamos = gestorSala.GetPrestamosActivos();
+                    break;
+                case TipoListado.Prestamos:
+                    listaPrestamos = gestorSala.GetUltimosPrestamos(20);
+                    break;
+                case TipoListado.Devoluciones:
+                    listaPrestamos = gestorSala.GetUltimasDevoluciones(20);
+                    break;
+            }
+
+            foreach (Prestamo p in listaPrestamos)
+            {
+                if (p == null) continue;
+
+                List<Ejemplar> ejemplaresAMostrar = new List<Ejemplar>();
+
+                switch (tipo)
                 {
-                    DateTime fechaLimiteItem;
+                    case TipoListado.Activos:
+                    case TipoListado.Vencidos:
+                        ejemplaresAMostrar.AddRange(p.EjemplaresPrestados);
+                        break;
 
-                    if (ej.Documento is Libro)
+                    case TipoListado.Devoluciones:
+                        ejemplaresAMostrar.AddRange(p.EjemplaresDevueltos);
+                        break;
+
+                    case TipoListado.Prestamos:
+                        ejemplaresAMostrar.AddRange(p.EjemplaresPrestados);
+                        ejemplaresAMostrar.AddRange(p.EjemplaresDevueltos);
+                        break;
+                }
+
+                if (ejemplaresAMostrar.Count == 0) continue;
+
+                DateTime fechaLimite = p.FechaVencimiento;
+                if (tipo == TipoListado.Devoluciones) fechaLimite = p.FechaInicio;
+
+                foreach (Ejemplar ej in ejemplaresAMostrar)
+                {
+                    string colFecha = "";
+                    string colEstado = "";
+
+                    switch (tipo)
                     {
-                        fechaLimiteItem = p.FechaFin[0];
-                    }
-                    else
-                    {
-                        fechaLimiteItem = p.FechaFin[1];
+                        case TipoListado.Vencidos:
+                            TimeSpan retraso = DateTime.Today - fechaLimite;
+                            colFecha = fechaLimite.ToShortDateString();
+                            colEstado = retraso.Days + " días de retraso";
+                            break;
+
+                        case TipoListado.Activos:
+                            colFecha = fechaLimite.ToShortDateString();
+                            colEstado = "En curso";
+                            break;
+
+                        case TipoListado.Prestamos:
+                            colFecha = (p.FechaInicio.Date == DateTime.Today)
+                                        ? p.FechaInicio.ToShortTimeString()
+                                        : p.FechaInicio.ToShortDateString();
+                            bool yaDevuelto = p.EjemplaresDevueltos.Contains(ej);
+                            colEstado = yaDevuelto ? "Devuelto" : "Prestado";
+                            break;
+
+                        case TipoListado.Devoluciones:
+                            colFecha = "---";
+                            colEstado = "Devuelto";
+                            break;
                     }
 
-                    if (fechaLimiteItem < DateTime.Today && fechaLimiteItem != DateTime.MinValue)
-                    {
-                        TimeSpan diferencia = DateTime.Today - fechaLimiteItem;
-                        string textoRetraso = diferencia.Days + " días de retraso";
-
-                        tabla.Rows.Add(p.Usuario.Nombre, ej.Documento.Titulo, fechaLimiteItem.ToShortDateString(), textoRetraso);
-                    }
+                    tabla.Rows.Add(p.Usuario.Nombre, ej.Documento.Titulo, colFecha, colEstado);
                 }
             }
 
-                dgvPrestamos.DataSource = tabla;
-            }
+            dgvDestino.DataSource = tabla;
+            dgvDestino.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+    }
     }
 

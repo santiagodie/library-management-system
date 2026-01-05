@@ -1,4 +1,5 @@
 ﻿using ModeloDominio;
+using Presentacion.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -747,6 +748,34 @@ namespace Presentacion
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btBusqueda_Click(object sender, EventArgs e)
+        {
+            UC_Busqueda busqueda = new UC_Busqueda();
+            MostrarPantalla(busqueda);
+        }
+
+        private void btLogOut_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show(
+                "¿Seguro que desea cerrar sesión?",
+                "Cerrar Sesión",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (respuesta == DialogResult.Yes)
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
+        }
+
+        private void btInicio_Click(object sender, EventArgs e)
+        {
+            UC_Inicio inicio = new UC_Inicio();
+            MostrarPantalla(inicio);
         }
     }
 }

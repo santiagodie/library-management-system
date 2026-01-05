@@ -89,7 +89,6 @@ namespace Persistencia
         // POST: crea documentos y ejemplares de prueba.
         private static void PoblarDocumentosYEjemplares()
         {
-            // CORREGIDO: Ahora usamos los DNIS válidos (K y Q)
             PersonalAdquisiciones responsable1 = Persistencia.Instancia.GetPersonalAdquisiciones("55555555K");
             PersonalAdquisiciones responsable2 = Persistencia.Instancia.GetPersonalAdquisiciones("66666666Q");
 
