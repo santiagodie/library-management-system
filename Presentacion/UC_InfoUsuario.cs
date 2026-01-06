@@ -13,6 +13,7 @@ namespace Presentacion
 {
     public partial class UC_InfoUsuario : UserControl
     {
+        public event Action<Usuario, bool> CambiarUsuario;
         public event Action<Usuario> MostrarPrestamos;
         private Usuario user;
         public UC_InfoUsuario(Usuario user)

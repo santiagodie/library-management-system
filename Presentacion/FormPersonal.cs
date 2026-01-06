@@ -836,8 +836,25 @@ namespace Presentacion
             PanelFunciones.Controls.Clear();
             UC_InfoUsuario user=new UC_InfoUsuario(usuario);
             user.MostrarPrestamos += mostrarPrestamosUsuario;
+            user.CambiarUsuario += cambiarInfoUsuario;
             user.Dock= DockStyle.Fill;
             PanelFunciones.Controls.Add(user);
+
+        }
+        private void cambiarInfoUsuario(Usuario usuario,bool siguiente)
+        {
+            GestorUsuarios gestor= new GestorUsuarios();
+            List<Usuario> lista = gestor.GetListaUsuarios();
+            int i=lista.IndexOf(usuario);
+            if (siguiente)
+            {
+                i++;
+            }
+            else
+            {
+                i--;
+            }
+            mostrarUsuario(lista[i]);
         }
         private void mostrarPrestamosUsuario(Usuario usuario)
         {
