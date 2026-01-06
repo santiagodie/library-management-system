@@ -109,6 +109,7 @@
             this.lbDevolucion.Size = new System.Drawing.Size(268, 409);
             this.lbDevolucion.TabIndex = 0;
             this.lbDevolucion.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.lbDevolucion_Format);
+            this.lbDevolucion.DoubleClick += new System.EventHandler(this.lbDevolucion_DoubleClick);
             // 
             // btBuscar
             // 

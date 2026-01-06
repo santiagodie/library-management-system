@@ -17,6 +17,7 @@ namespace Presentacion
         private GestorSala gestor;
         private Prestamo prestamoActivo;
         private BindingSource bsEjemplares;
+
         public FormDevolucion()
         {
             InitializeComponent();
@@ -67,6 +68,7 @@ namespace Presentacion
                     }
                 }
                 MessageBox.Show($"Operación finalizada. {totalProcesados} ejemplares devueltos.");
+                LimpiarPantalla();
                 CargarCodigos();
                 cbEjemplar.Text = "";
             }
@@ -74,6 +76,15 @@ namespace Presentacion
             {
                 MessageBox.Show("Error al procesar devoluciones: " + ex.Message);
             }
+        }
+
+        private void LimpiarPantalla()
+        {
+            lbDevolucion.Items.Clear();
+            ucDetalle.CargarDatos(null);
+            prestamoActivo = null;
+            cbEjemplar.Text = "";
+            cbEjemplar.Focus();
         }
 
         private void FormDevolucion_Load(object sender, EventArgs e)
@@ -84,8 +95,9 @@ namespace Presentacion
             lbDevolucion.FormattingEnabled = true;
             lbDevolucion.Format += lbDevolucion_Format;
 
-            cbEjemplar.DataSource = bsEjemplares;
+            lbDevolucion.DoubleClick += lbDevolucion_DoubleClick;
 
+            cbEjemplar.DataSource = bsEjemplares;
             cbEjemplar.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cbEjemplar.AutoCompleteSource = AutoCompleteSource.ListItems;
 
@@ -139,6 +151,14 @@ namespace Presentacion
                 this.DialogResult = DialogResult.Cancel;
 
                 this.Close();
+            }
+        }
+
+        private void lbDevolucion_DoubleClick(object sender, EventArgs e)
+        {
+            if (lbDevolucion.SelectedItem != null)
+            {
+                lbDevolucion.Items.Remove(lbDevolucion.SelectedItem);
             }
         }
     }

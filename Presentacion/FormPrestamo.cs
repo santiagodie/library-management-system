@@ -37,6 +37,11 @@ namespace Presentacion
             this.Controls.Add(ucInfo);
             ucInfo.BringToFront();
         }
+
+        private void FormPrestamo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
