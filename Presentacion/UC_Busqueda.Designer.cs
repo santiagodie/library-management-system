@@ -44,12 +44,12 @@
             this.cbEstado = new System.Windows.Forms.ComboBox();
             this.btLimpiar = new System.Windows.Forms.Button();
             this.btBuscar = new System.Windows.Forms.Button();
-            this.dgvResultados = new System.Windows.Forms.DataGridView();
             this.cbUsuario = new System.Windows.Forms.ComboBox();
             this.cbTitulo = new System.Windows.Forms.ComboBox();
             this.cbAutor = new System.Windows.Forms.ComboBox();
             this.cbISBN = new System.Windows.Forms.ComboBox();
             this.cbEjemplar = new System.Windows.Forms.ComboBox();
+            this.dgvResultados = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.gbFiltros.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -200,6 +200,7 @@
             // 
             // dtpFecha
             // 
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(287, 65);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(136, 22);
@@ -222,9 +223,9 @@
             this.btLimpiar.Location = new System.Drawing.Point(571, 3);
             this.btLimpiar.Name = "btLimpiar";
             this.tableLayoutPanel1.SetRowSpan(this.btLimpiar, 2);
-            this.btLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btLimpiar.Size = new System.Drawing.Size(75, 28);
             this.btLimpiar.TabIndex = 16;
-            this.btLimpiar.Text = "Limpiar";
+            this.btLimpiar.Text = "Ver todos";
             this.btLimpiar.UseVisualStyleBackColor = true;
             this.btLimpiar.Click += new System.EventHandler(this.btLimpiar_Click);
             // 
@@ -238,22 +239,6 @@
             this.btBuscar.TabIndex = 17;
             this.btBuscar.UseVisualStyleBackColor = true;
             this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
-            // 
-            // dgvResultados
-            // 
-            this.dgvResultados.AllowUserToAddRows = false;
-            this.dgvResultados.AllowUserToDeleteRows = false;
-            this.dgvResultados.AllowUserToResizeColumns = false;
-            this.dgvResultados.AllowUserToResizeRows = false;
-            this.dgvResultados.ColumnHeadersHeight = 29;
-            this.dgvResultados.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvResultados.Location = new System.Drawing.Point(0, 120);
-            this.dgvResultados.Name = "dgvResultados";
-            this.dgvResultados.RowHeadersVisible = false;
-            this.dgvResultados.RowHeadersWidth = 51;
-            this.dgvResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResultados.Size = new System.Drawing.Size(656, 419);
-            this.dgvResultados.TabIndex = 0;
             // 
             // cbUsuario
             // 
@@ -304,6 +289,22 @@
             this.cbEjemplar.Name = "cbEjemplar";
             this.cbEjemplar.Size = new System.Drawing.Size(121, 24);
             this.cbEjemplar.TabIndex = 22;
+            // 
+            // dgvResultados
+            // 
+            this.dgvResultados.AllowUserToAddRows = false;
+            this.dgvResultados.AllowUserToDeleteRows = false;
+            this.dgvResultados.AllowUserToResizeColumns = false;
+            this.dgvResultados.AllowUserToResizeRows = false;
+            this.dgvResultados.ColumnHeadersHeight = 29;
+            this.dgvResultados.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvResultados.Location = new System.Drawing.Point(0, 120);
+            this.dgvResultados.Name = "dgvResultados";
+            this.dgvResultados.RowHeadersVisible = false;
+            this.dgvResultados.RowHeadersWidth = 51;
+            this.dgvResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvResultados.Size = new System.Drawing.Size(656, 419);
+            this.dgvResultados.TabIndex = 0;
             // 
             // UC_Busqueda
             // 

@@ -73,7 +73,7 @@
             // 
             this.btAnadir.Location = new System.Drawing.Point(112, 270);
             this.btAnadir.Name = "btAnadir";
-            this.btAnadir.Size = new System.Drawing.Size(207, 23);
+            this.btAnadir.Size = new System.Drawing.Size(207, 30);
             this.btAnadir.TabIndex = 3;
             this.btAnadir.Text = "Añadir ejemplar";
             this.btAnadir.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             // 
             this.btAceptar.Location = new System.Drawing.Point(425, 385);
             this.btAceptar.Name = "btAceptar";
-            this.btAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btAceptar.Size = new System.Drawing.Size(80, 28);
             this.btAceptar.TabIndex = 9;
             this.btAceptar.Text = "Aceptar";
             this.btAceptar.UseVisualStyleBackColor = true;
@@ -108,13 +108,14 @@
             // 
             this.btCancelar.Location = new System.Drawing.Point(540, 385);
             this.btCancelar.Name = "btCancelar";
-            this.btCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btCancelar.Size = new System.Drawing.Size(82, 28);
             this.btCancelar.TabIndex = 10;
             this.btCancelar.Text = "Cancelar";
             this.btCancelar.UseVisualStyleBackColor = true;
             // 
             // dtpFecha
             // 
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(193, 147);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(126, 22);
@@ -124,9 +125,9 @@
             // 
             this.lbEjemplares.FormattingEnabled = true;
             this.lbEjemplares.ItemHeight = 16;
-            this.lbEjemplares.Location = new System.Drawing.Point(6, 13);
+            this.lbEjemplares.Location = new System.Drawing.Point(6, 29);
             this.lbEjemplares.Name = "lbEjemplares";
-            this.lbEjemplares.Size = new System.Drawing.Size(318, 292);
+            this.lbEjemplares.Size = new System.Drawing.Size(318, 276);
             this.lbEjemplares.TabIndex = 0;
             // 
             // gbEjemplares

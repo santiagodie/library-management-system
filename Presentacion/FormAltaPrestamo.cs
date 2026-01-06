@@ -18,12 +18,15 @@ namespace Presentacion
 
         private Personal responsable;
 
+        private BindingSource bsUsuarios;
+
         public FormAltaPrestamo(Personal personalLogueado)
         {
             InitializeComponent();
             gestor = new GestorSala();
             ejemplaresEnElPrestamo = new List<Ejemplar>();
             this.responsable = personalLogueado;
+            bsUsuarios = new BindingSource();
         }
 
         private void FormAltaPrestamo_Load(object sender, EventArgs e)
@@ -35,7 +38,8 @@ namespace Presentacion
 
         private void CargarUsuarios()
         {
-            cbUsuario.DataSource = gestor.GetListaUsuarios();
+            bsUsuarios.DataSource = gestor.GetListaUsuarios();
+            cbUsuario.DataSource = bsUsuarios;
 
             cbUsuario.DisplayMember = "Dni";
 

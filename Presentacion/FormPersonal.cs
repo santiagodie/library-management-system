@@ -853,6 +853,20 @@ namespace Presentacion
         private void btPrestamo_Click(object sender, EventArgs e)
         {
             FormAltaPrestamo formAlta = new FormAltaPrestamo(personal);
+            formAlta.ShowDialog();
+        }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+            if (this.panelContenedor.Controls.Count > 0)
+                this.panelContenedor.Controls.RemoveAt(0);
+
+            UC_Busqueda uc = new UC_Busqueda();
+
+            uc.Dock = DockStyle.Fill;
+
+            this.panelContenedor.Controls.Add(uc);
+            this.panelContenedor.Tag = uc;
         }
     }
 }

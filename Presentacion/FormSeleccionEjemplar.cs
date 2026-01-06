@@ -17,10 +17,13 @@ namespace Presentacion
 
         public Ejemplar EjemplarSeleccionado { get; private set; }
 
+        private BindingSource bsEjemplares;
+
         public FormSeleccionEjemplar()
         {
             InitializeComponent();
             gestor = new GestorSala();
+            bsEjemplares = new BindingSource();
         }
 
         private void CargarEjemplaresDisponibles()
@@ -33,7 +36,8 @@ namespace Presentacion
                 TextoA_Mostrar = $"Codigo: {ej.Codigo} Documento: ISBN: {ej.Documento.ISBN} Titulo: {ej.Documento.Titulo}"
             }).ToList();
 
-            cbEjemplares.DataSource = listaParaComboBox;
+            bsEjemplares.DataSource = listaParaComboBox;
+            cbEjemplares.DataSource = bsEjemplares;
             cbEjemplares.DisplayMember = "TextoA_Mostrar";
             cbEjemplares.ValueMember = "ObjetoReal";
 

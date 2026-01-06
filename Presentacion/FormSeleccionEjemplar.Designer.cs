@@ -48,14 +48,14 @@
             this.cbEjemplares.FormattingEnabled = true;
             this.cbEjemplares.Location = new System.Drawing.Point(275, 58);
             this.cbEjemplares.Name = "cbEjemplares";
-            this.cbEjemplares.Size = new System.Drawing.Size(237, 24);
+            this.cbEjemplares.Size = new System.Drawing.Size(345, 24);
             this.cbEjemplares.TabIndex = 1;
             // 
             // btAceptar
             // 
             this.btAceptar.Location = new System.Drawing.Point(169, 134);
             this.btAceptar.Name = "btAceptar";
-            this.btAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btAceptar.Size = new System.Drawing.Size(88, 33);
             this.btAceptar.TabIndex = 2;
             this.btAceptar.Text = "Aceptar";
             this.btAceptar.UseVisualStyleBackColor = true;
@@ -65,7 +65,7 @@
             // 
             this.btCancelar.Location = new System.Drawing.Point(295, 134);
             this.btCancelar.Name = "btCancelar";
-            this.btCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btCancelar.Size = new System.Drawing.Size(85, 33);
             this.btCancelar.TabIndex = 3;
             this.btCancelar.Text = "Cancelar";
             this.btCancelar.UseVisualStyleBackColor = true;
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 205);
+            this.ClientSize = new System.Drawing.Size(694, 289);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btAceptar);
             this.Controls.Add(this.cbEjemplares);

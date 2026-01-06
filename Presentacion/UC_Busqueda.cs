@@ -72,8 +72,9 @@ namespace Presentacion.Properties
 
             List<ItemBusquedaPrestamo> resultados = gestorSala.BuscarPrestamos(usuario, titulo, autor, isbn, ejemplar, tipo, fecha, estado);
 
-            dgvResultados.DataSource = null;
-            dgvResultados.DataSource = resultados;
+            BindingSource bs = new BindingSource();
+            bs.DataSource = resultados;
+            dgvResultados.DataSource = bs;
 
             if (dgvResultados.Columns.Count > 0)
             {

@@ -135,8 +135,9 @@ namespace Presentacion
                     tabla.Rows.Add(p.Usuario.Nombre, ej.Documento.Titulo, colFecha, colEstado);
                 }
             }
-
-            dgvDestino.DataSource = tabla;
+            BindingSource bs = new BindingSource();
+            bs.DataSource = tabla;
+            dgvDestino.DataSource = bs;
             dgvDestino.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 

@@ -183,6 +183,7 @@ namespace Presentacion
             this.lbNombre = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
+            this.btBuscar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.Tab.SuspendLayout();
@@ -430,17 +431,17 @@ namespace Presentacion
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(147, 134);
+            this.groupBox1.Size = new System.Drawing.Size(136, 108);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inicio";
             // 
             // btInicio
             // 
-            this.btInicio.Location = new System.Drawing.Point(12, 23);
+            this.btInicio.Location = new System.Drawing.Point(36, 23);
             this.btInicio.Margin = new System.Windows.Forms.Padding(4);
             this.btInicio.Name = "btInicio";
-            this.btInicio.Size = new System.Drawing.Size(127, 103);
+            this.btInicio.Size = new System.Drawing.Size(69, 68);
             this.btInicio.TabIndex = 1;
             this.btInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btInicio.UseVisualStyleBackColor = true;
@@ -448,14 +449,15 @@ namespace Presentacion
             // 
             // gbPrestamos
             // 
+            this.gbPrestamos.Controls.Add(this.btBuscar);
             this.gbPrestamos.Controls.Add(this.btBusqueda);
             this.gbPrestamos.Controls.Add(this.btDevolucion);
             this.gbPrestamos.Controls.Add(this.btPrestamo);
-            this.gbPrestamos.Location = new System.Drawing.Point(156, 2);
+            this.gbPrestamos.Location = new System.Drawing.Point(145, 2);
             this.gbPrestamos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbPrestamos.Name = "gbPrestamos";
             this.gbPrestamos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbPrestamos.Size = new System.Drawing.Size(313, 110);
+            this.gbPrestamos.Size = new System.Drawing.Size(352, 110);
             this.gbPrestamos.TabIndex = 0;
             this.gbPrestamos.TabStop = false;
             this.gbPrestamos.Text = "Préstamos";
@@ -478,10 +480,10 @@ namespace Presentacion
             // btDevolucion
             // 
             this.btDevolucion.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
-            this.btDevolucion.Location = new System.Drawing.Point(143, 23);
+            this.btDevolucion.Location = new System.Drawing.Point(133, 21);
             this.btDevolucion.Margin = new System.Windows.Forms.Padding(4);
             this.btDevolucion.Name = "btDevolucion";
-            this.btDevolucion.Size = new System.Drawing.Size(127, 103);
+            this.btDevolucion.Size = new System.Drawing.Size(93, 70);
             this.btDevolucion.TabIndex = 1;
             this.btDevolucion.Text = "Devolución";
             this.btDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -490,10 +492,10 @@ namespace Presentacion
             // btPrestamo
             // 
             this.btPrestamo.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
-            this.btPrestamo.Location = new System.Drawing.Point(8, 23);
+            this.btPrestamo.Location = new System.Drawing.Point(19, 20);
             this.btPrestamo.Margin = new System.Windows.Forms.Padding(4);
             this.btPrestamo.Name = "btPrestamo";
-            this.btPrestamo.Size = new System.Drawing.Size(127, 103);
+            this.btPrestamo.Size = new System.Drawing.Size(96, 71);
             this.btPrestamo.TabIndex = 0;
             this.btPrestamo.Text = "Préstamo";
             this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -1922,6 +1924,18 @@ namespace Presentacion
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
+            // btBuscar
+            // 
+            this.btBuscar.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.btBuscar.Location = new System.Drawing.Point(251, 23);
+            this.btBuscar.Name = "btBuscar";
+            this.btBuscar.Size = new System.Drawing.Size(81, 68);
+            this.btBuscar.TabIndex = 18;
+            this.btBuscar.Text = "Consultar";
+            this.btBuscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
+            // 
             // FormPersonal
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1931,6 +1945,7 @@ namespace Presentacion
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormPersonal";
             this.Text = "Gestor de biblioteca";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -2127,5 +2142,6 @@ namespace Presentacion
         private TextBox DNIBox;
         private Button ConsultarBtn;
         private Panel PanelFunciones;
+        private Button btBuscar;
     }
 }
