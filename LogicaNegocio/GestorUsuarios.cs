@@ -256,4 +256,5 @@ public class GestorUsuarios
 
         return Persistencia.Persistencia.GetEjemplar(idEjemplar);
     }
+    
 }
