@@ -22,7 +22,7 @@ public class GestorSala : GestorUsuarios
         bool hayLibros = false;
         bool hayAudio = false;
 
-        if (usuario is null || !Persistencia.Persistencia.ExisteUsuario(usuario.Dni) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count == 0 || responsable is null)
+        if (usuario is null || !Persistencia.Persistencia.Instancia.ExisteUsuario(usuario.Dni) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count == 0 || responsable is null)
         {
             return false;
         }
@@ -43,10 +43,10 @@ public class GestorSala : GestorUsuarios
         if (hayAudio) fechas[1] = DateTime.Today.AddDays(10);
 
         Prestamo nuevoPrestamo = new Prestamo(fechas, usuario, ejemplares, responsable);
-        bool guardado = Persistencia.Persistencia.AltaPrestamo(nuevoPrestamo);
+        bool guardado = Persistencia.Persistencia.Instancia.AltaPrestamo(nuevoPrestamo);
         if (guardado)
         {
-            Persistencia.Persistencia.ActualizarDisponibilidad(ejemplares);
+            Persistencia.Persistencia.Instancia.ActualizarDisponibilidad(ejemplares);
             return true;
         }
         return false;
@@ -77,28 +77,28 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve el préstamo activo que contiene al ejemplar indicado, o null si no se encuentra en préstamo.
     public Prestamo GetPrestamoActivo(Ejemplar ejemplar)
     {
-        return Persistencia.Persistencia.GetPrestamoActivo(ejemplar);
+        return Persistencia.Persistencia.Instancia.GetPrestamoActivo(ejemplar);
     }
 
     //PRE: usuario no nulo.
     //POST: devuelve la lista de préstamos iniciados por el usuario en la fecha indicada.
     public List<Prestamo> GetPrestamos(Usuario usuario, DateTime fecha)
     {
-        return Persistencia.Persistencia.GetPrestamos(usuario, fecha);
+        return Persistencia.Persistencia.Instancia.GetPrestamos(usuario, fecha);
     }
 
     //PRE: usuario y documento no nulos.
     //POST: devuelve la lista de préstamos realizados por el usuario sobre ejemplares de dicho documento.
     public List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
     {
-        return Persistencia.Persistencia.GetPrestamos(usuario, documento);
+        return Persistencia.Persistencia.Instancia.GetPrestamos(usuario, documento);
     }
 
     //PRE: documento no nulo.
     //POST: devuelve la lista de todos los préstamos asociados a un documento.
     public List<Prestamo> GetPrestamos(Documento documento)
     {
-        return Persistencia.Persistencia.GetPrestamos(documento);
+        return Persistencia.Persistencia.Instancia.GetPrestamos(documento);
     }
 
     //PRE: ejemplar no nulo y asociado a un préstamo activo.
@@ -109,8 +109,8 @@ public class GestorSala : GestorUsuarios
         if (prestamo == null) return false;
         if (!prestamo.DevolverEjemplar(ejemplar)) return false;
         ejemplar.Disponible = true;
-        if (!Persistencia.Persistencia.ActualizarEjemplar(ejemplar)) return false;
-        if (!Persistencia.Persistencia.ActualizarPrestamo(prestamo)) return false;
+        if (!Persistencia.Persistencia.Instancia.ActualizarEjemplar(ejemplar)) return false;
+        if (!Persistencia.Persistencia.Instancia.ActualizarPrestamo(prestamo)) return false;
         return true;
     }
 
@@ -122,9 +122,9 @@ public class GestorSala : GestorUsuarios
         {
             if (!prestamo.DevolverEjemplar(ej)) return false;
             ej.Disponible = true;
-            Persistencia.Persistencia.ActualizarEjemplar(ej);
+            Persistencia.Persistencia.Instancia.ActualizarEjemplar(ej);
         }
-        return Persistencia.Persistencia.ActualizarPrestamo(prestamo);
+        return Persistencia.Persistencia.Instancia.ActualizarPrestamo(prestamo);
     }
 
     //PRE: ---
@@ -132,7 +132,7 @@ public class GestorSala : GestorUsuarios
     public List<Prestamo> GetPrestamosRetrasados()
     {
         List<Prestamo> lista = new List<Prestamo>();
-        var prestamos = Persistencia.Persistencia.GetPrestamos();
+        var prestamos = Persistencia.Persistencia.Instancia.GetPrestamos();
         if (prestamos == null) return lista;
 
         foreach (Prestamo prestamo in prestamos)
@@ -167,7 +167,7 @@ public class GestorSala : GestorUsuarios
     public List<Ejemplar> GetEjemplaresPrestamo()
     {
         List<Ejemplar> lista = new List<Ejemplar>();
-        foreach (Prestamo prestamo in Persistencia.Persistencia.GetPrestamos())
+        foreach (Prestamo prestamo in Persistencia.Persistencia.Instancia.GetPrestamos())
         {
             lista.AddRange(prestamo.EjemplaresPrestados);
         }
@@ -178,7 +178,7 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve una lista con todos los préstamos activos ordenados por fecha de vencimiento.
     public List<Prestamo> GetPrestamosActivos()
     {
-        return Persistencia.Persistencia.GetPrestamos()
+        return Persistencia.Persistencia.Instancia.GetPrestamos()
                .Where(p => p != null)
                .Where(p => p.Activo)
                .OrderBy(p => p.FechaVencimiento)
@@ -189,7 +189,7 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve una lista ordenada con los códigos únicos de ejemplares actualmente prestados.
     public List<string> GetListaCodigosPrestados()
     {
-        var prestamosPendientes = Persistencia.Persistencia.GetPrestamos()
+        var prestamosPendientes = Persistencia.Persistencia.Instancia.GetPrestamos()
                                  .Where(p => !p.EstaFinalizado());
 
         return prestamosPendientes
@@ -204,7 +204,7 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve los últimos préstamos registrados, limitado por la cantidad especificada.
     public List<Prestamo> GetUltimosPrestamos(int cantidad = 20)
     {
-        return Persistencia.Persistencia.GetPrestamos()
+        return Persistencia.Persistencia.Instancia.GetPrestamos()
                .Where(p => p != null)
                .OrderByDescending(p => p.FechaInicio)
                .Take(cantidad)
@@ -215,7 +215,7 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve los préstamos que han registrado devoluciones de ejemplares recientemente.
     public List<Prestamo> GetUltimasDevoluciones(int cantidad = 20)
     {
-        return Persistencia.Persistencia.GetPrestamos()
+        return Persistencia.Persistencia.Instancia.GetPrestamos()
                .Where(p => p != null)
                .Where(p => p.EjemplaresDevueltos != null && p.EjemplaresDevueltos.Count > 0)
                .OrderByDescending(p => p.FechaInicio)
@@ -228,7 +228,7 @@ public class GestorSala : GestorUsuarios
     public List<ItemBusquedaPrestamo> BuscarPrestamos(string textoUsuario, string textoTitulo, string textoAutor, string textoISBN, string codigoEjemplar, string tipoFiltro, DateTime? fechaFiltro, string estadoFiltro)
     {
         List<ItemBusquedaPrestamo> resultados = new List<ItemBusquedaPrestamo>();
-        var todosLosPrestamos = Persistencia.Persistencia.GetPrestamos();
+        var todosLosPrestamos = Persistencia.Persistencia.Instancia.GetPrestamos();
 
         foreach (var p in todosLosPrestamos)
         {
@@ -320,7 +320,7 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve la lista de títulos únicos registrados ordenados alfabéticamente.
     public List<string> GetListaTitulos()
     {
-        return Persistencia.Persistencia.GetDocumentos()
+        return Persistencia.Persistencia.Instancia.GetDocumentos()
                 .Select(d => d.Titulo)
                 .Distinct()
                 .OrderBy(t => t)
@@ -331,7 +331,7 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve la lista de autores únicos registrados ordenados alfabéticamente.
     public List<string> GetListaAutores()
     {
-        return Persistencia.Persistencia.GetDocumentos()
+        return Persistencia.Persistencia.Instancia.GetDocumentos()
                 .Select(d => d.Autor)
                 .Where(a => !string.IsNullOrEmpty(a))
                 .Distinct()
@@ -354,7 +354,7 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve la lista de códigos ISBN registrados en el sistema.
     public List<string> GetListaISBNs()
     {
-        return Persistencia.Persistencia.GetDocumentos()
+        return Persistencia.Persistencia.Instancia.GetDocumentos()
                 .Select(d => d.ISBN)
                 .Distinct()
                 .ToList();
@@ -365,11 +365,11 @@ public class GestorSala : GestorUsuarios
     public List<Ejemplar> GetEjemplaresDisponibles()
     {
         List<Ejemplar> listaFinal = new List<Ejemplar>();
-        List<Documento> todosLosDocumentos = Persistencia.Persistencia.GetDocumentos();
+        List<Documento> todosLosDocumentos = Persistencia.Persistencia.Instancia.GetDocumentos();
 
         foreach (Documento doc in todosLosDocumentos)
         {
-            List<Ejemplar> ejemplaresDelLibro = Persistencia.Persistencia.GetEjemplares(doc);
+            List<Ejemplar> ejemplaresDelLibro = Persistencia.Persistencia.Instancia.GetEjemplares(doc);
             foreach (Ejemplar ej in ejemplaresDelLibro)
             {
                 if (ej.Disponible)
@@ -385,14 +385,18 @@ public class GestorSala : GestorUsuarios
     //POST: devuelve el número total de préstamos iniciados en la fecha de hoy.
     public int GetCantidadPrestamosHoy()
     {
-        return Persistencia.Persistencia.GetPrestamos().Count(p => p.FechaInicio.Date == DateTime.Today);
+        return Persistencia.Persistencia.Instancia.GetPrestamos()
+            .Where(p => p != null)
+            .Count(p => p.FechaInicio.Date == DateTime.Today);
     }
 
     //PRE: ---
     //POST: devuelve la cantidad total de préstamos no finalizados.
     public int GetCantidadPrestamosActivos()
     {
-        return Persistencia.Persistencia.GetPrestamos().Count(p => p.Activo);
+        return Persistencia.Persistencia.Instancia.GetPrestamos()
+            .Where(p => p != null)
+            .Count(p => p.Activo);
     }
 }
 
