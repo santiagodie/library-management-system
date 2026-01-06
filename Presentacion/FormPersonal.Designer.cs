@@ -176,10 +176,6 @@ namespace Presentacion
             this.ListarBtn = new System.Windows.Forms.Button();
             this.BajaBtn = new System.Windows.Forms.Button();
             this.AltaBtn = new System.Windows.Forms.Button();
-            this.btBuscar = new System.Windows.Forms.Button();
-            this.btBusqueda = new System.Windows.Forms.Button();
-            this.btDevolucion = new System.Windows.Forms.Button();
-            this.btPrestamo = new System.Windows.Forms.Button();
             this.btLogOut = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.bindingSource_Ejemplar_Listar_Ejemplar = new System.Windows.Forms.BindingSource(this.components);
