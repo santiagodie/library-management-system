@@ -16,6 +16,9 @@ namespace Presentacion
     {
         public Usuario usuario { get; set; }
         public List<EjemplarPrestado> listaLibros = new List<EjemplarPrestado>();
+
+        //PRE: 'usuario' no debe ser nulo.
+        //POST: Inicializa el formulario, instancia el control de usuario 'UC_PrestamosUsuario' con los datos del usuario y lo añade al panel principal ocupando todo el espacio.
         public FormUsuario(Usuario usuario)
         {
             InitializeComponent();

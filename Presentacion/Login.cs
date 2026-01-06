@@ -13,6 +13,8 @@ namespace Presentacion
             InitializeComponent();
         }
 
+        //PRE: Los controles DNIBox y PasswordBox deben estar inicializados y accesibles.
+        //POST: Valida las credenciales contra la lógica de negocio. Si son correctas, establece el RolLogueado y PersonaLogueada y cierra el formulario con DialogResult.OK. Si fallan, muestra un mensaje de error.
         private void AcceptBtn_Click(object sender, EventArgs e)
         {
             string dni = DNIBox.Text;

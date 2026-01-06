@@ -22,6 +22,8 @@ namespace Presentacion
             ConfigurarGrid();
         }
 
+        //PRE: ---
+        //POST: Limpia y define la estructura de columnas del DataGridView (Ejemplar, Estado, Botón de selección), sus propiedades de visualización y suscribe los eventos necesarios.
         private void ConfigurarGrid()
         {
             dgvLibros.AutoGenerateColumns = false;
@@ -74,6 +76,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: ---
+        //POST: Si 'p' no es nulo, rellena los controles y la tabla con la información del préstamo, formateando el estado (Activo/Vencido/Finalizado). Si 'p' es nulo, limpia la interfaz.
         public void CargarDatos(Prestamo p)
         {
             prestamoActual = p;
@@ -136,6 +140,8 @@ namespace Presentacion
             dgvLibros.DataSource = listaVisual;
         }
 
+        //PRE: ---
+        //POST: Restablece los controles de la interfaz (Usuario, Fecha, Estado) a su estado inicial vacío y elimina los datos del DataGridView.
         private void Limpiar()
         {
             tbUsuario.Text = "";
@@ -145,6 +151,8 @@ namespace Presentacion
         }
 
 
+        //PRE: La fila (e.RowIndex) debe ser válida y tener un objeto de datos asociado.
+        //POST: Modifica el estilo visual (color de fondo y texto) de las filas correspondientes a ejemplares que ya han sido devueltos.
         private void dgvLibros_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvLibros.Rows[e.RowIndex].DataBoundItem != null)
@@ -160,6 +168,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: El DataGridView debe tener filas y 'ModoSeleccion' debe estar activo.
+        //POST: Si se hace clic en el botón de selección de una fila válida y el ejemplar no ha sido devuelto, dispara el evento 'OnEjemplarSeleccionado'.
         private void dgvLibros_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 &&
@@ -186,6 +196,8 @@ namespace Presentacion
 
         }
 
+        //PRE: ---
+        //POST: Si hay un préstamo activo y tiene un usuario asociado, dispara el evento 'OnSolicitarInfoUsuario'. En caso contrario, muestra un mensaje de error.
         private void btUsuario_Click(object sender, EventArgs e)
         {
             if (prestamoActual != null && prestamoActual.Usuario != null)

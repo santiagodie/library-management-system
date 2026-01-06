@@ -23,6 +23,8 @@ namespace Presentacion
         private int indiceActualGuardado;
         private int totalGuardado;
 
+        //PRE: 'user' no debe ser nulo.
+        //POST: Inicializa el componente, asigna el usuario recibido y muestra sus datos (Nombre, DNI) en los campos correspondientes. Oculta el panel de navegación por defecto.
         public UC_InfoUsuario(Usuario user)
         {
             InitializeComponent();
@@ -32,6 +34,8 @@ namespace Presentacion
             if (panelNavegacion != null)  panelNavegacion.Visible = false;
         }
 
+        //PRE: 'totalUsuarios' debe ser mayor que 0.
+        //POST: Hace visible el panel de navegación y habilita/deshabilita los botones (primero, anterior, siguiente, último) según la posición del 'indiceActual'.
         public void ActivarNavegacion(int indiceActual, int totalUsuarios)
         {
             indiceActualGuardado = indiceActual;
@@ -50,26 +54,36 @@ namespace Presentacion
             }
         }
 
+        //PRE: ---
+        //POST: Dispara el evento 'IrAlPrimero' para navegar al primer registro de la lista.
         private void btPrimero_Click(object sender, EventArgs e)
         {
             IrAlPrimero?.Invoke();
         }
 
+        //PRE: ---
+        //POST: Dispara el evento 'CambiarUsuario' indicando dirección hacia atrás (false) para ir al usuario anterior.
         private void btAnterior_Click(object sender, EventArgs e)
         {
             CambiarUsuario?.Invoke(this.user, false);
         }
 
+        //PRE: ---
+        //POST: Dispara el evento 'CambiarUsuario' indicando dirección hacia delante (true) para ir al siguiente usuario.
         private void btSiguiente_Click(object sender, EventArgs e)
         {
             CambiarUsuario?.Invoke(this.user, true);
         }
 
+        //PRE: ---
+        //POST: Dispara el evento 'IrAlUltimo' para navegar al último registro de la lista.
         private void btUltimo_Click(object sender, EventArgs e)
         {
             IrAlUltimo?.Invoke();
         }
 
+        //PRE: El objeto 'user' local debe estar asignado.
+        //POST: Dispara el evento 'MostrarPrestamos' pasando el usuario actual para ver su historial.
         private void PrestBtn_Click(object sender, EventArgs e)
         {
             if (this.user != null)
@@ -78,6 +92,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: ---
+        //POST: Intercepta la tecla Enter. Valida que el texto sea un número dentro del rango válido. Si es correcto, dispara el evento 'IrAIndice'; si no, muestra error y restaura el valor anterior.
         private void tbIndice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -105,6 +121,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: ---
+        //POST: Restablece el valor del TextBox del índice al valor guardado anteriormente ('indiceActualGuardado' + 1) y coloca el cursor al final.
         private void RestaurarValorVisual()
         {
             tbIndice.Text = (indiceActualGuardado + 1).ToString();

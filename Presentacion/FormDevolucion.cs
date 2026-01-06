@@ -26,6 +26,8 @@ namespace Presentacion
             this.AcceptButton = btBuscar;
         }
 
+        //PRE: El campo cbEjemplar no debe estar vacío.
+        //POST: Busca el ejemplar y su préstamo activo asociado. Si se encuentra, carga los datos en el control de detalle 'ucDetalle'. Si no, notifica al usuario.
         private void btBuscar_Click(object sender, EventArgs e)
         {
             string codigo = cbEjemplar.Text.Trim();
@@ -42,6 +44,8 @@ namespace Presentacion
 
         }
 
+        //PRE: La lista de devoluciones (lbDevolucion) debe contener al menos un elemento.
+        //POST: Agrupa las devoluciones por préstamo y procesa la devolución en la capa de negocio. Muestra el número total de ejemplares devueltos al finalizar.
         private void btAceptar_Click(object sender, EventArgs e)
         {
             if (lbDevolucion.Items.Count == 0) return;
@@ -78,6 +82,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: ---
+        //POST: Resetea la interfaz: vacía la lista de devoluciones, limpia el control de detalle y pone el foco en la búsqueda.
         private void LimpiarPantalla()
         {
             lbDevolucion.Items.Clear();
@@ -87,6 +93,8 @@ namespace Presentacion
             cbEjemplar.Focus();
         }
 
+        //PRE: ---
+        //POST: Configura los eventos de los controles, inicializa el modo de selección y carga la lista de códigos para el autocompletado.
         private void FormDevolucion_Load(object sender, EventArgs e)
         {
             ucDetalle.ModoSeleccion = true;
@@ -104,6 +112,8 @@ namespace Presentacion
             CargarCodigos();
         }
 
+        //PRE: 'gestor' debe estar inicializado.
+        //POST: Obtiene la lista de códigos de ejemplares prestados y recarga el autocompletado del buscador.
         private void CargarCodigos()
         {
             List<string> codigos = gestor.GetListaCodigosPrestados();
@@ -113,6 +123,8 @@ namespace Presentacion
             cbEjemplar.SelectedIndex = -1;
         }
 
+        //PRE: 'ejemplarElegido' no debe ser nulo. 'prestamoActivo' debe estar establecido.
+        //POST: Añade el ejemplar a la lista visual de devoluciones (lbDevolucion) si no se encuentra ya en ella.
         private void UcDetalle_OnEjemplarSeleccionado(object sender, Ejemplar ejemplarElegido)
         {
 
@@ -128,6 +140,8 @@ namespace Presentacion
             });
         }
 
+        //PRE: El objeto e.ListItem debe ser de tipo LineaDevolucion.
+        //POST: Formatea la visualización del elemento en la lista mostrando el código del ejemplar y el título del documento.
         private void lbDevolucion_Format(object sender, ListControlConvertEventArgs e)
         {
             var linea = e.ListItem as LineaDevolucion;
@@ -138,6 +152,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: ---
+        //POST: Solicita confirmación al usuario. Si acepta, cierra el formulario devolviendo DialogResult.Cancel.
         private void btCancelar_Click(object sender, EventArgs e)
         {
             DialogResult respuesta = MessageBox.Show(
@@ -154,6 +170,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: Debe haber un elemento seleccionado en lbDevolucion.
+        //POST: Elimina el elemento seleccionado de la lista de devoluciones pendientes.
         private void lbDevolucion_DoubleClick(object sender, EventArgs e)
         {
             if (lbDevolucion.SelectedItem != null)

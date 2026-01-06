@@ -13,6 +13,8 @@ namespace Presentacion
 {
     public partial class FormPrestamo : Form
     {
+        //PRE: 'prestamo' no debe ser nulo.
+        //POST: Inicializa los componentes, configura el modo de selección del control de usuario y carga los datos del préstamo proporcionado.
         public FormPrestamo(Prestamo prestamo)
         {
             InitializeComponent();
@@ -21,6 +23,8 @@ namespace Presentacion
             uc_DetallePrestamo1.OnSolicitarInfoUsuario += AbrirInfoUsuario;
         }
 
+        //PRE: 'usuario' no debe ser nulo.
+        //POST: Oculta el detalle del préstamo y superpone el control UC_InfoUsuario. Configura el evento de retorno para restaurar la vista original.
         private void AbrirInfoUsuario(Usuario usuario)
         {
             UC_InfoUsuario ucInfo = new UC_InfoUsuario(usuario);

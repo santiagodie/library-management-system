@@ -159,6 +159,8 @@ namespace Persistencia
             return true;
         }
 
+        //PRE: pData e insertados no pueden ser nulos. insertados contiene los ejemplares que se llegaron a guardar antes del error.
+        //POST: Elimina de la BD el registro de préstamo y los registros de ejemplares dados, revirtiendo la operación de alta.
         private static void HacerRollback(PrestamoDato pData, List<PrestamoEjemplarDato> insertados)
         {
             foreach (var pe in insertados)

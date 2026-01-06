@@ -22,6 +22,9 @@ namespace Presentacion
     public partial class UC_Inicio : UserControl
     {
         GestorSala gestorSala;
+
+        //PRE: ---
+        //POST: Inicializa los componentes del control, instancia el 'gestorSala' y carga los datos estadísticos y las tablas de la vista inicial.
         public UC_Inicio()
         {
             InitializeComponent();
@@ -29,6 +32,8 @@ namespace Presentacion
             CargarDatos();
         }
 
+        //PRE: 'gestorSala' debe estar inicializado.
+        //POST: Obtiene las estadísticas (vencidos, hoy, activos) y rellena las cuatro tablas (dgvVencidos, dgvActivos, dgvPrestamos, dgvDevoluciones) llamando a 'CargarTabla'.
         private void CargarDatos()
         {
             int numVencidos = gestorSala.GetPrestamosRetrasados().Count;
@@ -46,6 +51,8 @@ namespace Presentacion
 
         }
 
+        //PRE: 'dgvDestino' no debe ser nulo.
+        //POST: Obtiene la lista correspondiente según el 'TipoListado', formatea los datos (fechas, estados) y los vincula al DataGridView destino.
         private void CargarTabla(DataGridView dgvDestino, TipoListado tipo)
         {
             DataTable tabla = new DataTable();
@@ -153,6 +160,8 @@ namespace Presentacion
 
         }
 
+        //PRE: El índice de fila (e.RowIndex) debe ser válido (>= 0). La tabla debe contener objetos Prestamo en la columna oculta "ObjetoReal".
+        //POST: Recupera el préstamo asociado a la fila seleccionada y abre el formulario 'FormPrestamo' con sus detalles.
         private void dgvPrestamos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
