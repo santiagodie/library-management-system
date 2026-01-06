@@ -8,158 +8,174 @@ using System.Linq;
 
 public class GestorSala : GestorUsuarios
 {
-	public GestorSala() : base()
-	{
-	}
+    //PRE: ---
+    //POST: construye una nueva instancia de GestorSala.
+    public GestorSala() : base()
+    {
+    }
 
-	public bool AltaPrestamo(Usuario usuario, List<Ejemplar> ejemplares, PersonalSala responsable)
-	{
-		
-		DateTime[] fechas = new DateTime[2];
+    //PRE: usuario, ejemplares y responsable no nulos. El usuario no debe estar sancionado. Ejemplares deben estar disponibles.
+    //POST: devuelve true si el préstamo se crea y registra correctamente en la persistencia, actualizando la disponibilidad de los ejemplares.
+    public bool AltaPrestamo(Usuario usuario, List<Ejemplar> ejemplares, PersonalSala responsable)
+    {
+        DateTime[] fechas = new DateTime[2];
+        bool hayLibros = false;
+        bool hayAudio = false;
 
-		bool hayLibros = false;
-		bool hayAudio = false;
-
-        if (usuario is null || !Persistencia.Persistencia.ExisteUsuario(usuario.Dni) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count==0 || responsable is null)
+        if (usuario is null || !Persistencia.Persistencia.ExisteUsuario(usuario.Dni) || usuario.Estado == EstadoUsuario.Sancionado || ejemplares == null || ejemplares.Count == 0 || responsable is null)
         {
             return false;
         }
 
         foreach (var ej in ejemplares)
-		{
+        {
             if (!ej.Disponible)
             {
                 return false;
             }
-            if (ej.Documento is Libro) hayLibros=true;
-			else if (ej.Documento is Audiolibro)hayAudio=true;
-		}
+            if (ej.Documento is Libro) hayLibros = true;
+            else if (ej.Documento is Audiolibro) hayAudio = true;
+        }
 
-		foreach(var ej in ejemplares) ej.Disponible = false;
+        foreach (var ej in ejemplares) ej.Disponible = false;
 
-            if (hayLibros) fechas[0]= DateTime.Today.AddDays(15);
-		if (hayAudio) fechas[1] = DateTime.Today.AddDays(10);
+        if (hayLibros) fechas[0] = DateTime.Today.AddDays(15);
+        if (hayAudio) fechas[1] = DateTime.Today.AddDays(10);
 
-		Prestamo nuevoPrestamo = new Prestamo(fechas, usuario, ejemplares, responsable);
-		bool guardado = Persistencia.Persistencia.AltaPrestamo(nuevoPrestamo);
-		if (guardado)
-		{
+        Prestamo nuevoPrestamo = new Prestamo(fechas, usuario, ejemplares, responsable);
+        bool guardado = Persistencia.Persistencia.AltaPrestamo(nuevoPrestamo);
+        if (guardado)
+        {
             Persistencia.Persistencia.ActualizarDisponibilidad(ejemplares);
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
-	public Usuario ConsultarUsuario(Prestamo prestamo) 
-	{
-		return prestamo.Usuario;
-	}
+    //PRE: prestamo no nulo.
+    //POST: devuelve el objeto Usuario asociado al préstamo.
+    public Usuario ConsultarUsuario(Prestamo prestamo)
+    {
+        return prestamo.Usuario;
+    }
 
-	public bool EstaFinalizado(Prestamo prestamo)
-	{
-		return prestamo.EstaFinalizado();
-	}
+    //PRE: prestamo no nulo.
+    //POST: devuelve true si todos los ejemplares del préstamo han sido devueltos.
+    public bool EstaFinalizado(Prestamo prestamo)
+    {
+        return prestamo.EstaFinalizado();
+    }
 
-	public List<Ejemplar> GetEjemplaresPendientes(Prestamo prestamo)
-	{
-		return prestamo.EjemplaresPrestados;
-	}
+    //PRE: prestamo no nulo.
+    //POST: devuelve la lista de ejemplares que el usuario tiene actualmente en su posesión (no devueltos).
+    public List<Ejemplar> GetEjemplaresPendientes(Prestamo prestamo)
+    {
+        return prestamo.EjemplaresPrestados;
+    }
 
-    public Prestamo GetPrestamoActivo(Ejemplar ejemplar) //lo necesito también para que el personal de adquisiciones pueda saber fechas de disponibilidad de documentos
+    //PRE: ejemplar no nulo.
+    //POST: devuelve el préstamo activo que contiene al ejemplar indicado, o null si no se encuentra en préstamo.
+    public Prestamo GetPrestamoActivo(Ejemplar ejemplar)
     {
         return Persistencia.Persistencia.GetPrestamoActivo(ejemplar);
     }
 
-    //Post: devuelve la lista de préstamos hechos por el usuario en ese día 
+    //PRE: usuario no nulo.
+    //POST: devuelve la lista de préstamos iniciados por el usuario en la fecha indicada.
     public List<Prestamo> GetPrestamos(Usuario usuario, DateTime fecha)
     {
         return Persistencia.Persistencia.GetPrestamos(usuario, fecha);
     }
 
-    //Post: devuelve la lista de préstamos hechos por el usuario sobre ese documento
+    //PRE: usuario y documento no nulos.
+    //POST: devuelve la lista de préstamos realizados por el usuario sobre ejemplares de dicho documento.
     public List<Prestamo> GetPrestamos(Usuario usuario, Documento documento)
     {
         return Persistencia.Persistencia.GetPrestamos(usuario, documento);
     }
 
-    //Post: devuelve la lista de préstamos hechos sobre ese documento
+    //PRE: documento no nulo.
+    //POST: devuelve la lista de todos los préstamos asociados a un documento.
     public List<Prestamo> GetPrestamos(Documento documento)
     {
         return Persistencia.Persistencia.GetPrestamos(documento);
     }
 
-
+    //PRE: ejemplar no nulo y asociado a un préstamo activo.
+    //POST: procesa la devolución del ejemplar, actualiza su disponibilidad y el estado del préstamo. Devuelve true si tuvo éxito.
     public bool DevolverEjemplar(Ejemplar ejemplar)
-	{
-		Prestamo prestamo = GetPrestamoActivo(ejemplar);
-		if(prestamo == null) return false;
-		if(!prestamo.DevolverEjemplar(ejemplar)) return false;
-		ejemplar.Disponible = true;
-		if(!Persistencia.Persistencia.ActualizarEjemplar(ejemplar)) return false;
-		if(!Persistencia.Persistencia.ActualizarPrestamo(prestamo)) return false;
-		return true;
-	}
+    {
+        Prestamo prestamo = GetPrestamoActivo(ejemplar);
+        if (prestamo == null) return false;
+        if (!prestamo.DevolverEjemplar(ejemplar)) return false;
+        ejemplar.Disponible = true;
+        if (!Persistencia.Persistencia.ActualizarEjemplar(ejemplar)) return false;
+        if (!Persistencia.Persistencia.ActualizarPrestamo(prestamo)) return false;
+        return true;
+    }
 
+    //PRE: prestamo y librosADevolver no nulos.
+    //POST: registra la devolución masiva de ejemplares y actualiza el préstamo. Devuelve true si se realizó correctamente.
     public bool DevolverEjemplares(Prestamo prestamo, List<Ejemplar> librosADevolver)
     {
         foreach (Ejemplar ej in librosADevolver)
         {
             if (!prestamo.DevolverEjemplar(ej)) return false;
-
             ej.Disponible = true;
-
-            Persistencia.Persistencia.ActualizarEjemplar(ej); 
+            Persistencia.Persistencia.ActualizarEjemplar(ej);
         }
-
         return Persistencia.Persistencia.ActualizarPrestamo(prestamo);
     }
 
-    //Post: devuelve la lista de todos los préstamos con algún ejemplar retrasado
+    //PRE: ---
+    //POST: devuelve una lista con todos los préstamos activos que contienen ejemplares cuya fecha límite ha expirado.
     public List<Prestamo> GetPrestamosRetrasados()
     {
         List<Prestamo> lista = new List<Prestamo>();
-
         var prestamos = Persistencia.Persistencia.GetPrestamos();
         if (prestamos == null) return lista;
 
         foreach (Prestamo prestamo in prestamos)
         {
             if (prestamo == null || prestamo.FechaFin == null || prestamo.FechaFin.Length != 2) continue;
-
             if (prestamo.Vencido)
-			{
-				lista.Add(prestamo);
-			}
+            {
+                lista.Add(prestamo);
+            }
         }
         return lista;
     }
 
-    //Post: devuelve la lista de todos los ejemplares retrasados del préstamo
+    //PRE: prestamo no nulo.
+    //POST: devuelve la lista de ejemplares del préstamo cuya fecha límite de devolución ha pasado.
     public List<Ejemplar> GetEjemplaresRetrasados(Prestamo prestamo)
-	{
+    {
         List<Ejemplar> lista = new List<Ejemplar>();
-        if ( DateTime.Today > prestamo.FechaFin[0])
+        if (DateTime.Today > prestamo.FechaFin[0])
         {
             lista.AddRange(prestamo.GetLibrosPendientes());
         }
-        if ( DateTime.Today > prestamo.FechaFin[1])
+        if (DateTime.Today > prestamo.FechaFin[1])
         {
             lista.AddRange(prestamo.GetAudiosPendientes());
         }
-		return lista;
-
+        return lista;
     }
 
-    //Post: devuelve todos los ejemplares en préstamo actualmente
-	public List<Ejemplar> GetEjemplaresPrestamo()
-	{
-		List<Ejemplar> lista = new List<Ejemplar>();
-		foreach (Prestamo prestamo in Persistencia.Persistencia.GetPrestamos()) {
-			lista.AddRange(prestamo.EjemplaresPrestados);
-			//lista.AddRange(prestamo.EjemplaresDevueltos);
-		}
-		return lista;
-	}
+    //PRE: ---
+    //POST: devuelve la lista de todos los ejemplares que se encuentran actualmente prestados.
+    public List<Ejemplar> GetEjemplaresPrestamo()
+    {
+        List<Ejemplar> lista = new List<Ejemplar>();
+        foreach (Prestamo prestamo in Persistencia.Persistencia.GetPrestamos())
+        {
+            lista.AddRange(prestamo.EjemplaresPrestados);
+        }
+        return lista;
+    }
+
+    //PRE: ---
+    //POST: devuelve una lista con todos los préstamos activos ordenados por fecha de vencimiento.
     public List<Prestamo> GetPrestamosActivos()
     {
         return Persistencia.Persistencia.GetPrestamos()
@@ -169,6 +185,8 @@ public class GestorSala : GestorUsuarios
                .ToList();
     }
 
+    //PRE: ---
+    //POST: devuelve una lista ordenada con los códigos únicos de ejemplares actualmente prestados.
     public List<string> GetListaCodigosPrestados()
     {
         var prestamosPendientes = Persistencia.Persistencia.GetPrestamos()
@@ -182,6 +200,8 @@ public class GestorSala : GestorUsuarios
             .ToList();
     }
 
+    //PRE: cantidad debe ser un entero positivo.
+    //POST: devuelve los últimos préstamos registrados, limitado por la cantidad especificada.
     public List<Prestamo> GetUltimosPrestamos(int cantidad = 20)
     {
         return Persistencia.Persistencia.GetPrestamos()
@@ -191,7 +211,8 @@ public class GestorSala : GestorUsuarios
                .ToList();
     }
 
-
+    //PRE: cantidad debe ser un entero positivo.
+    //POST: devuelve los préstamos que han registrado devoluciones de ejemplares recientemente.
     public List<Prestamo> GetUltimasDevoluciones(int cantidad = 20)
     {
         return Persistencia.Persistencia.GetPrestamos()
@@ -202,9 +223,9 @@ public class GestorSala : GestorUsuarios
                .ToList();
     }
 
-
-    //Post: devuelve un listado de préstamos filtrado
-    public List<ItemBusquedaPrestamo> BuscarPrestamos( string textoUsuario,string textoTitulo, string textoAutor, string textoISBN, string codigoEjemplar, string tipoFiltro, DateTime? fechaFiltro, string estadoFiltro)
+    //PRE: ---
+    //POST: devuelve una lista de resultados de búsqueda filtrados por los criterios proporcionados.
+    public List<ItemBusquedaPrestamo> BuscarPrestamos(string textoUsuario, string textoTitulo, string textoAutor, string textoISBN, string codigoEjemplar, string tipoFiltro, DateTime? fechaFiltro, string estadoFiltro)
     {
         List<ItemBusquedaPrestamo> resultados = new List<ItemBusquedaPrestamo>();
         var todosLosPrestamos = Persistencia.Persistencia.GetPrestamos();
@@ -295,6 +316,8 @@ public class GestorSala : GestorUsuarios
         return resultados;
     }
 
+    //PRE: ---
+    //POST: devuelve la lista de títulos únicos registrados ordenados alfabéticamente.
     public List<string> GetListaTitulos()
     {
         return Persistencia.Persistencia.GetDocumentos()
@@ -304,6 +327,8 @@ public class GestorSala : GestorUsuarios
                 .ToList();
     }
 
+    //PRE: ---
+    //POST: devuelve la lista de autores únicos registrados ordenados alfabéticamente.
     public List<string> GetListaAutores()
     {
         return Persistencia.Persistencia.GetDocumentos()
@@ -314,6 +339,8 @@ public class GestorSala : GestorUsuarios
                 .ToList();
     }
 
+    //PRE: ---
+    //POST: devuelve una lista con el formato "Nombre (DNI)" de todos los usuarios registrados.
     public List<string> GetListaUsuariosBusqueda()
     {
         return GetListaUsuarios()
@@ -323,6 +350,8 @@ public class GestorSala : GestorUsuarios
                 .ToList();
     }
 
+    //PRE: ---
+    //POST: devuelve la lista de códigos ISBN registrados en el sistema.
     public List<string> GetListaISBNs()
     {
         return Persistencia.Persistencia.GetDocumentos()
@@ -331,16 +360,16 @@ public class GestorSala : GestorUsuarios
                 .ToList();
     }
 
+    //PRE: ---
+    //POST: devuelve una lista con todos los ejemplares marcados como disponibles en el sistema.
     public List<Ejemplar> GetEjemplaresDisponibles()
     {
         List<Ejemplar> listaFinal = new List<Ejemplar>();
-
         List<Documento> todosLosDocumentos = Persistencia.Persistencia.GetDocumentos();
 
         foreach (Documento doc in todosLosDocumentos)
         {
             List<Ejemplar> ejemplaresDelLibro = Persistencia.Persistencia.GetEjemplares(doc);
-
             foreach (Ejemplar ej in ejemplaresDelLibro)
             {
                 if (ej.Disponible)
@@ -349,20 +378,24 @@ public class GestorSala : GestorUsuarios
                 }
             }
         }
-
         return listaFinal;
     }
 
+    //PRE: ---
+    //POST: devuelve el número total de préstamos iniciados en la fecha de hoy.
     public int GetCantidadPrestamosHoy()
     {
         return Persistencia.Persistencia.GetPrestamos().Count(p => p.FechaInicio.Date == DateTime.Today);
     }
 
+    //PRE: ---
+    //POST: devuelve la cantidad total de préstamos no finalizados.
     public int GetCantidadPrestamosActivos()
     {
         return Persistencia.Persistencia.GetPrestamos().Count(p => p.Activo);
     }
 }
+
 
 public class ItemBusquedaPrestamo
 {
@@ -377,5 +410,5 @@ public class ItemBusquedaPrestamo
     public string FechaInicio { get; set; }
     public string FechaLimite { get; set; }
     public string Estado { get; set; }
-    public string DniUsuario { get; set; } // lo pongo para poder pinchar en el usuario
+    public string DniUsuario { get; set; }
 }

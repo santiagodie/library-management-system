@@ -18,11 +18,12 @@ namespace ModeloDominio
 
         public PersonalSala Responsable { get; private set; }
 
-        public DateTime FechaInicio { get; set; }//Puse public el seter, porque cuando se reconstruye con el transformer necesitamos poner la fecha original
+        public DateTime FechaInicio { get; set; }
 
-        public string Id { get; set; } //lo añado porque lo piden en la última práctica
+        public string Id { get; set; }
 
-        //Pre: fechaFinPrevista debe tener tamaño 2
+        //PRE: fechaFin debe tener tamaño 2. usuario, ejemplares y responsable no pueden ser nulos.
+        //POST: crea una instancia de préstamo inicializando el usuario, ejemplares, responsable y la fecha de inicio a la actual.
         public Prestamo(DateTime[] fechaFin, Usuario usuario, List<Ejemplar> ejemplares, PersonalSala responsable)
         {
             Usuario = usuario;
@@ -34,6 +35,8 @@ namespace ModeloDominio
             Id = "";
         }
 
+        //PRE: ejemplar no debe ser nulo y debe estar en la lista de ejemplares prestados.
+        //POST: mueve el ejemplar de la lista de prestados a la de devueltos. Devuelve true si la operación tuvo éxito.
         public bool DevolverEjemplar(Ejemplar ejemplar)
         {
             if (!EjemplaresPrestados.Remove(ejemplar))
@@ -44,11 +47,15 @@ namespace ModeloDominio
             return true;
         }
 
+        //PRE: ---
+        //POST: devuelve true si no quedan ejemplares pendientes de devolver en este préstamo.
         public bool EstaFinalizado()
         {
             return EjemplaresPrestados.Count == 0;
         }
 
+        //PRE: ---
+        //POST: devuelve una cadena con la información detallada del préstamo formateada.
         public override string ToString()
         {
             string info = "DATOS DEL PRÉSTAMO\n";
@@ -76,6 +83,8 @@ namespace ModeloDominio
             return info;
         }
 
+        //PRE: ---
+        //POST: devuelve true si el objeto es un préstamo con el mismo usuario y fecha de inicio.
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
@@ -89,6 +98,8 @@ namespace ModeloDominio
             return object.Equals(this.Usuario, otro.Usuario);
         }
 
+        //PRE: ---
+        //POST: devuelve un código hash basado en el usuario y la fecha de inicio del préstamo.
         public override int GetHashCode()
         {
             int hashUsuario = (Usuario != null) ? Usuario.GetHashCode() : 0;
@@ -97,6 +108,8 @@ namespace ModeloDominio
             return (hashUsuario * 397) ^ hashFecha;
         }
 
+        //PRE: ---
+        //POST: devuelve un string con la lista de títulos de ejemplares actualmente prestados.
         public string Prestados()
         {
             string info = "";
@@ -107,6 +120,8 @@ namespace ModeloDominio
             return info;
         }
 
+        //PRE: ---
+        //POST: devuelve un string con la lista de títulos de ejemplares ya devueltos.
         public string Devueltos()
         {
             string info = "";
@@ -117,26 +132,36 @@ namespace ModeloDominio
             return info;
         }
 
+        //PRE: ---
+        //POST: devuelve la lista de ejemplares de tipo Libro que aún no han sido devueltos.
         public List<Ejemplar> GetLibrosPendientes()
         {
             return EjemplaresPrestados.Where(e => e.Documento is Libro).ToList();
         }
 
+        //PRE: ---
+        //POST: devuelve la lista de ejemplares de tipo Audiolibro que aún no han sido devueltos.
         public List<Ejemplar> GetAudiosPendientes()
         {
             return EjemplaresPrestados.Where(e => e.Documento is Audiolibro).ToList();
         }
 
+        //PRE: ---
+        //POST: devuelve true si hay ejemplares de tipo Libro pendientes de devolución.
         public bool QuedanLibros()
         {
             return EjemplaresPrestados.Any(e => e.Documento is Libro);
         }
 
+        //PRE: ---
+        //POST: devuelve true si hay ejemplares de tipo Audiolibro pendientes de devolución.
         public bool QuedanAudios()
         {
             return EjemplaresPrestados.Any(e => e.Documento is Audiolibro);
         }
 
+        //PRE: ---
+        //POST: devuelve la fecha de vencimiento más próxima según los tipos de documentos pendientes.
         public DateTime FechaVencimiento
         {
             get
@@ -159,7 +184,8 @@ namespace ModeloDominio
             }
         }
 
-        // Activo = Pendiente y dentro del plazo
+        //PRE: ---
+        //POST: devuelve true si el préstamo no ha finalizado y la fecha de vencimiento no ha pasado.
         public bool Activo
         {
             get
@@ -168,7 +194,8 @@ namespace ModeloDominio
             }
         }
 
-        // Vencido = Pendiente y fuera de plazo
+        //PRE: ---
+        //POST: devuelve true si el préstamo no ha finalizado y la fecha de vencimiento ya ha pasado.
         public bool Vencido
         {
             get
