@@ -155,6 +155,25 @@ namespace Persistencia
 
                 ejemplaresInsertados.Add(peData);
             }
+            //añadí esto y la función de rollback porque no se guardaban las devoluciones bien
+            if (prestamo.EjemplaresDevueltos != null)
+            {
+                foreach (Ejemplar ejemplar in prestamo.EjemplaresDevueltos)
+                {
+                    DateTime fechaPrevista;
+                    if (ejemplar.Documento is Libro) fechaPrevista = prestamo.FechaFin[0];
+                    else fechaPrevista = prestamo.FechaFin[1];
+
+                    PrestamoEjemplarDato peData = Transformer.ToPrestamoEjemplarDato(prestamo.Usuario.Dni, prestamo.FechaInicio, ejemplar, fechaPrevista, DateTime.Today);
+
+                    if (!BaseDatos.BaseDatos.AñadirFila("PrestamoEjemplarTabla", peData))
+                    {
+                        HacerRollback(prestamoData, ejemplaresInsertados);
+                        return false;
+                    }
+                    ejemplaresInsertados.Add(peData);
+                }
+            }
 
             return true;
         }
