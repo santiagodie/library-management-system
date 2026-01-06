@@ -48,6 +48,7 @@
             this.Controls.Add(this.uc_DetallePrestamo1);
             this.Name = "FormPrestamo";
             this.Text = "FormPrestamo";
+            this.Load += new System.EventHandler(this.FormPrestamo_Load);
             this.ResumeLayout(false);
 
         }
