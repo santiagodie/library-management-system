@@ -14,11 +14,13 @@ namespace ModeloDominio
 
         public string Editorial { get; private set; }
 
-        public int AñoEdicion {  get; private set; }
+        public int AñoEdicion { get; private set; }
 
         public string ISBN { get; private set; }
 
-        public Documento(string Titulo, string Autor, string ISBN, string Editorial, int AñoEdicion) 
+        //PRE: Titulo, Autor, ISBN y Editorial no pueden ser nulos.
+        //POST: crea una instancia de Documento con toda la información detallada proporcionada.
+        public Documento(string Titulo, string Autor, string ISBN, string Editorial, int AñoEdicion)
         {
             this.Titulo = Titulo;
             this.Autor = Autor;
@@ -27,6 +29,8 @@ namespace ModeloDominio
             this.AñoEdicion = AñoEdicion;
         }
 
+        //PRE: titulo, iSBN y autor no pueden ser nulos.
+        //POST: crea una instancia básica de Documento inicializando únicamente el título, el ISBN y el autor.
         public Documento(string titulo, string iSBN, string autor)
         {
             Titulo = titulo;

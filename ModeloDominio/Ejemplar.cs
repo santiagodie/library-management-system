@@ -9,7 +9,7 @@ namespace ModeloDominio
 {
     public class Ejemplar
     {
-        public string Localizacion {  get; set; }
+        public string Localizacion { get; set; }
 
         public bool Disponible { get; set; }
 
@@ -21,6 +21,8 @@ namespace ModeloDominio
 
         public string Codigo { get; private set; }
 
+        //PRE: Localizacion, Documento y Responsable no pueden ser nulos.
+        //POST: crea una instancia de ejemplar con estado activo y un código autogenerado.
         public Ejemplar(string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable)
         {
             this.Localizacion = Localizacion;
@@ -30,7 +32,9 @@ namespace ModeloDominio
             this.Activo = true;
             Codigo = GenerarCodigo();
         }
-        // Constructor para cuando se transforma desde persistencia y ya se tiene el código
+
+        //PRE: codigo, Localizacion, Documento y Responsable no pueden ser nulos.
+        //POST: crea una instancia de ejemplar reconstruyendo sus datos desde la persistencia.
         public Ejemplar(string codigo, string Localizacion, bool Disponible, Documento Documento, PersonalAdquisiciones Responsable, bool activo)
         {
             this.Codigo = codigo;
@@ -41,6 +45,8 @@ namespace ModeloDominio
             this.Activo = activo;
         }
 
+        //PRE: la propiedad Documento no debe ser nula.
+        //POST: devuelve un código único (string) basado en el tipo de documento, título e identificador aleatorio.
         public string GenerarCodigo()
         {
             string prefijo = "DOC";
@@ -68,6 +74,7 @@ namespace ModeloDominio
             return $"{prefijo}-{idDoc}-{idEjemplar}";
         }
     }
+
     public class EjemplarPrestado
     {
         public string Título { get; set; }
@@ -77,6 +84,8 @@ namespace ModeloDominio
         public DateTime FechaFin { get; set; }
         public bool Pendiente { get; set; }
 
+        //PRE: titulo, autor e iSBN no pueden ser nulos.
+        //POST: crea un objeto contenedor con la información de un ejemplar prestado para su visualización.
         public EjemplarPrestado(string titulo, string autor, string iSBN, DateTime fechaPrestamo, DateTime fechaFin, bool pendiente)
         {
             this.Título = titulo;

@@ -749,15 +749,6 @@ namespace Presentacion
             panelContenedor.Controls.Add(pantalla);
             pantalla.BringToFront();
         }
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         //PRE: ---
         //POST: Instancia y muestra el UserControl 'UC_Busqueda' en el panel contenedor principal.
@@ -913,10 +904,7 @@ namespace Presentacion
         //POST: Pide confirmación al usuario para cerrar el formulario actual. Si confirma, se cierra la ventana.
         private void button1_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("¿Cerrar sesión y salir?", "Cerrar Sesión", MessageBoxButtons.YesNo)==DialogResult.Yes)
-            {
-                this.Close();
-            }
+
         }
 
         //PRE: El objeto 'personal' debe estar correctamente inicializado.

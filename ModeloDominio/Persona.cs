@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDominio
 {
+    
     public enum Rol
     {
         Usuario,
@@ -17,6 +17,7 @@ namespace ModeloDominio
         UsuarioYSala,
         UsuarioYAdquisiciones
     }
+
     public abstract class Persona
     {
         public string Nombre { get; private set; }
@@ -24,7 +25,8 @@ namespace ModeloDominio
 
         public string HashContraseña { get; private set; }
 
-        //No los construimos con contraseña, se pedirá al dar de alta (logicaNegocio) y se guardará un hash
+        //PRE: nombre y dni no pueden ser nulos.
+        //POST: crea una instancia de Persona con el nombre y DNI indicados, inicializando el hash de la contraseña como una cadena vacía.
         public Persona(string nombre, string dni)
         {
             this.Nombre = nombre;
@@ -32,12 +34,11 @@ namespace ModeloDominio
             this.HashContraseña = "";
         }
 
-        //Añadi esto para poder setear el hash al recrarlo con el Transformer
+        //PRE: hash no puede ser nulo.
+        //POST: actualiza el campo HashContraseña con el valor del hash proporcionado.
         public void SetHashContraseña(string hash)
         {
             this.HashContraseña = hash;
         }
-
-        
     }
 }
