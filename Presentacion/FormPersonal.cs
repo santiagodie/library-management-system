@@ -748,15 +748,6 @@ namespace Presentacion
             panelContenedor.Controls.Add(pantalla);
             pantalla.BringToFront();
         }
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void btBusqueda_Click(object sender, EventArgs e)
         {
@@ -888,10 +879,7 @@ namespace Presentacion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("¿Cerrar sesión y salir?", "Cerrar Sesión", MessageBoxButtons.YesNo)==DialogResult.Yes)
-            {
-                this.Close();
-            }
+
         }
 
         private void btPrestamo_Click(object sender, EventArgs e)
