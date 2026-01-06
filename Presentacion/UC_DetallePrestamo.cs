@@ -87,7 +87,22 @@ namespace Presentacion
             tbUsuario.Text = $"{p.Usuario.Nombre} ({p.Usuario.Dni})";
             dtpFecha.Value = p.FechaInicio;
 
-            tbEstado.Text = p.Vencido ? "VENCIDO" : "ACTIVO";
+            if (p.EstaFinalizado())
+            {
+                tbEstado.Text = "FINALIZADO";
+                tbEstado.ForeColor = Color.Blue;
+            }
+
+            else if (p.Vencido)
+            {
+                tbEstado.Text = "VENCIDO";
+                tbEstado.ForeColor = Color.Red;
+            }
+            else
+            {
+                tbEstado.Text = "ACTIVO";
+                tbEstado.ForeColor = Color.Green;
+            }
             tbEstado.ForeColor = p.Vencido ? Color.Red : Color.Green;
 
             var listaVisual = new List<dynamic>();
@@ -124,7 +139,7 @@ namespace Presentacion
         private void Limpiar()
         {
             tbUsuario.Text = "";
-            dtpFecha.Value = DateTime.MinValue;
+            dtpFecha.Value = DateTime.Now;
             tbEstado.Text = "";
             dgvLibros.DataSource = null;
         }

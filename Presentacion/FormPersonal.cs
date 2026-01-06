@@ -1,6 +1,7 @@
 ﻿using ModeloDominio;
 using Presentacion.Properties;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +32,7 @@ namespace Presentacion
             if (rol == Rol.PersonalSala)
             {
                 Tab.TabPages.Remove(Adquisiciones);
+                gestorSala = new GestorSala();
             }
             else
             {
@@ -834,18 +836,26 @@ namespace Presentacion
         {
             DNIBox.Text = usuario.Dni;
             PanelFunciones.Controls.Clear();
-            UC_InfoUsuario user=new UC_InfoUsuario(usuario);
-            user.MostrarPrestamos += mostrarPrestamosUsuario;
-            user.CambiarUsuario += cambiarInfoUsuario;
-            user.Dock= DockStyle.Fill;
-            PanelFunciones.Controls.Add(user);
+            UC_InfoUsuario userUC=new UC_InfoUsuario(usuario);
+            List<Usuario> usuarios = gestorSala.GetListaUsuarios();
+            int indice = usuarios.IndexOf(usuario);
+            int total = usuarios.Count;
+            if (indice >= 0) userUC.ActivarNavegacion(indice, total);
 
+            userUC.MostrarPrestamos += mostrarPrestamosUsuario;
+            userUC.CambiarUsuario += cambiarInfoUsuario;
+            userUC.IrAlPrimero += () => mostrarUsuario(usuarios.First());
+            userUC.IrAlUltimo += () => mostrarUsuario(usuarios.Last());
+
+            userUC.Dock= DockStyle.Fill;
+            PanelFunciones.Controls.Add(userUC);
         }
         private void cambiarInfoUsuario(Usuario usuario,bool siguiente)
         {
             GestorUsuarios gestor= new GestorUsuarios();
             List<Usuario> lista = gestor.GetListaUsuarios();
             int i=lista.IndexOf(usuario);
+            if (i == -1) return;
             if (siguiente)
             {
                 i++;
