@@ -38,5 +38,21 @@ namespace ModeloDominio
             Estado = EstadoUsuario.Activo;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (GetType() != obj.GetType()) return false;
+
+            Usuario otro = (Usuario)obj;
+
+            return this.Dni == otro.Dni;
+        }
+
+        public override int GetHashCode()
+        {
+            return Dni != null ? Dni.GetHashCode() : 0;
+        }
+
     }
 }

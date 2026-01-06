@@ -76,6 +76,27 @@ namespace ModeloDominio
             return info;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (GetType() != obj.GetType()) return false;
+
+            Prestamo otro = (Prestamo)obj;
+
+            if (this.FechaInicio != otro.FechaInicio) return false;
+
+            return object.Equals(this.Usuario, otro.Usuario);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashUsuario = (Usuario != null) ? Usuario.GetHashCode() : 0;
+            int hashFecha = FechaInicio.GetHashCode();
+
+            return (hashUsuario * 397) ^ hashFecha;
+        }
+
         public string Prestados()
         {
             string info = "";

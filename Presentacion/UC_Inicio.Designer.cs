@@ -36,7 +36,7 @@
             this.lbNVencidos = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.lbNSala = new System.Windows.Forms.Label();
+            this.lbNActivos = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.lbNHoy = new System.Windows.Forms.Label();
@@ -109,7 +109,7 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panel4.BackColor = System.Drawing.Color.MistyRose;
             this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.lbNVencidos);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -143,7 +143,7 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Info;
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.lbNSala);
+            this.panel2.Controls.Add(this.lbNActivos);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(215, 10);
             this.panel2.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
@@ -157,20 +157,20 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(23, 29);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 16);
+            this.label4.Size = new System.Drawing.Size(118, 16);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Personas en Sala";
+            this.label4.Text = "Préstamos activos";
             // 
-            // lbNSala
+            // lbNActivos
             // 
-            this.lbNSala.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbNSala.Location = new System.Drawing.Point(0, 0);
-            this.lbNSala.Margin = new System.Windows.Forms.Padding(10);
-            this.lbNSala.Name = "lbNSala";
-            this.lbNSala.Size = new System.Drawing.Size(155, 16);
-            this.lbNSala.TabIndex = 2;
-            this.lbNSala.Text = "0";
-            this.lbNSala.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbNActivos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbNActivos.Location = new System.Drawing.Point(0, 0);
+            this.lbNActivos.Margin = new System.Windows.Forms.Padding(10);
+            this.lbNActivos.Name = "lbNActivos";
+            this.lbNActivos.Size = new System.Drawing.Size(155, 16);
+            this.lbNActivos.TabIndex = 2;
+            this.lbNActivos.Text = "0";
+            this.lbNActivos.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel3
             // 
@@ -187,9 +187,9 @@
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label5.Location = new System.Drawing.Point(28, 29);
+            this.label5.Location = new System.Drawing.Point(3, 29);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 16);
+            this.label5.Size = new System.Drawing.Size(149, 16);
             this.label5.TabIndex = 4;
             this.label5.Text = "Préstamos hoy";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -224,6 +224,7 @@
             this.dgvPrestamos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrestamos.Size = new System.Drawing.Size(183, 132);
             this.dgvPrestamos.TabIndex = 3;
+            this.dgvPrestamos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrestamos_CellDoubleClick);
             // 
             // dgvVencidos
             // 
@@ -244,6 +245,7 @@
             this.dgvVencidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVencidos.Size = new System.Drawing.Size(185, 291);
             this.dgvVencidos.TabIndex = 5;
+            this.dgvVencidos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrestamos_CellDoubleClick);
             // 
             // dgvDevoluciones
             // 
@@ -264,6 +266,7 @@
             this.dgvDevoluciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDevoluciones.Size = new System.Drawing.Size(183, 132);
             this.dgvDevoluciones.TabIndex = 6;
+            this.dgvDevoluciones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrestamos_CellDoubleClick);
             // 
             // tableLayoutPanel1
             // 
@@ -317,6 +320,7 @@
             this.dgvActivos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvActivos.Size = new System.Drawing.Size(183, 291);
             this.dgvActivos.TabIndex = 6;
+            this.dgvActivos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrestamos_CellDoubleClick);
             // 
             // gbDevoluciones
             // 
@@ -393,7 +397,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbNHoy;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lbNSala;
+        private System.Windows.Forms.Label lbNActivos;
         private System.Windows.Forms.DataGridView dgvPrestamos;
         private System.Windows.Forms.DataGridView dgvVencidos;
         private System.Windows.Forms.DataGridView dgvDevoluciones;

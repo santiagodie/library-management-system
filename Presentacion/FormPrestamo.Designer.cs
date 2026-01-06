@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.uc_DetallePrestamo1 = new Presentacion.UC_DetallePrestamo();
+            this.SuspendLayout();
+            // 
+            // uc_DetallePrestamo1
+            // 
+            this.uc_DetallePrestamo1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.uc_DetallePrestamo1.Location = new System.Drawing.Point(12, 12);
+            this.uc_DetallePrestamo1.ModoSeleccion = false;
+            this.uc_DetallePrestamo1.Name = "uc_DetallePrestamo1";
+            this.uc_DetallePrestamo1.Size = new System.Drawing.Size(381, 436);
+            this.uc_DetallePrestamo1.TabIndex = 0;
+            // 
+            // FormPrestamo
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(408, 450);
+            this.Controls.Add(this.uc_DetallePrestamo1);
+            this.Name = "FormPrestamo";
             this.Text = "FormPrestamo";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private UC_DetallePrestamo uc_DetallePrestamo1;
     }
 }

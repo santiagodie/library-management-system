@@ -32,12 +32,12 @@ namespace Presentacion
         private void CargarDatos()
         {
             int numVencidos = gestorSala.GetPrestamosRetrasados().Count;
-            int numHoy = 0;
-            int numSala = 0;
+            int numHoy = gestorSala.GetCantidadPrestamosHoy();
+            int numActivos = gestorSala.GetCantidadPrestamosActivos();
 
             lbNVencidos.Text = numVencidos.ToString();
             lbNHoy.Text = numHoy.ToString();
-            lbNSala.Text = numSala.ToString();
+            lbNActivos.Text = numActivos.ToString();
 
             CargarTabla(dgvVencidos,TipoListado.Vencidos);
             CargarTabla(dgvActivos, TipoListado.Activos);
@@ -53,6 +53,8 @@ namespace Presentacion
             tabla.Columns.Add("Documento", typeof(string));
             tabla.Columns.Add("Fecha/Info", typeof(string));
             tabla.Columns.Add("Estado", typeof(string));
+
+            tabla.Columns.Add("ObjetoReal", typeof(object));
 
             List<Prestamo> listaPrestamos = new List<Prestamo>();
 
@@ -131,20 +133,42 @@ namespace Presentacion
                             colEstado = "Devuelto";
                             break;
                     }
-
-                    tabla.Rows.Add(p.Usuario.Nombre, ej.Documento.Titulo, colFecha, colEstado);
+                    tabla.Rows.Add(p.Usuario.Nombre, ej.Documento.Titulo, colFecha, colEstado, p);
                 }
             }
             BindingSource bs = new BindingSource();
             bs.DataSource = tabla;
             dgvDestino.DataSource = bs;
             dgvDestino.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            if (dgvDestino.Columns["ObjetoReal"] != null)
+            {
+                dgvDestino.Columns["ObjetoReal"].Visible = false;
+            }
+            dgvDestino.CellDoubleClick -= dgvPrestamos_CellDoubleClick;
+            dgvDestino.CellDoubleClick += dgvPrestamos_CellDoubleClick;
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
         }
+
+        private void dgvPrestamos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridView dgv = (DataGridView)sender;
+
+                var row = dgv.Rows[e.RowIndex];
+                Prestamo p = row.Cells["ObjetoReal"].Value as Prestamo;
+
+                if (p != null)
+                {
+                    FormPrestamo frm = new FormPrestamo(p);
+                    frm.ShowDialog();
+                }
+            }
+        }
     }
-    }
+}
 

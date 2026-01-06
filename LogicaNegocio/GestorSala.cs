@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 
@@ -99,8 +100,22 @@ public class GestorSala : GestorUsuarios
 		return true;
 	}
 
+    public bool DevolverEjemplares(Prestamo prestamo, List<Ejemplar> librosADevolver)
+    {
+        foreach (Ejemplar ej in librosADevolver)
+        {
+            if (!prestamo.DevolverEjemplar(ej)) return false;
+
+            ej.Disponible = true;
+
+            Persistencia.Persistencia.ActualizarEjemplar(ej); 
+        }
+
+        return Persistencia.Persistencia.ActualizarPrestamo(prestamo);
+    }
+
     //Post: devuelve la lista de todos los préstamos con algún ejemplar retrasado
-	public List<Prestamo> GetPrestamosRetrasados()
+    public List<Prestamo> GetPrestamosRetrasados()
     {
         List<Prestamo> lista = new List<Prestamo>();
 
@@ -152,6 +167,19 @@ public class GestorSala : GestorUsuarios
                .Where(p => p.Activo)
                .OrderBy(p => p.FechaVencimiento)
                .ToList();
+    }
+
+    public List<string> GetListaCodigosPrestados()
+    {
+        var prestamosPendientes = Persistencia.Persistencia.GetPrestamos()
+                                 .Where(p => !p.EstaFinalizado());
+
+        return prestamosPendientes
+            .SelectMany(p => p.EjemplaresPrestados)
+            .Select(e => e.Codigo)
+            .Distinct()
+            .OrderBy(c => c)
+            .ToList();
     }
 
     public List<Prestamo> GetUltimosPrestamos(int cantidad = 20)
@@ -250,6 +278,7 @@ public class GestorSala : GestorUsuarios
 
                 resultados.Add(new ItemBusquedaPrestamo
                 {
+                    PrestamoCompleto = p,
                     DniUsuario = p.Usuario.Dni,
                     Usuario = $"{p.Usuario.Nombre} ({p.Usuario.Dni})",
                     Titulo = ej.Documento.Titulo,
@@ -323,10 +352,22 @@ public class GestorSala : GestorUsuarios
 
         return listaFinal;
     }
+
+    public int GetCantidadPrestamosHoy()
+    {
+        return Persistencia.Persistencia.GetPrestamos().Count(p => p.FechaInicio.Date == DateTime.Today);
+    }
+
+    public int GetCantidadPrestamosActivos()
+    {
+        return Persistencia.Persistencia.GetPrestamos().Count(p => p.Activo);
+    }
 }
 
 public class ItemBusquedaPrestamo
 {
+    [Browsable(false)]
+    public Prestamo PrestamoCompleto { get; set; }
     public string Usuario { get; set; } //Nombre o dni
     public string Titulo { get; set; }
     public string Autor { get; set; }

@@ -40,10 +40,6 @@ namespace Presentacion
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.DNIBox = new System.Windows.Forms.TextBox();
-            this.ConsultarBtn = new System.Windows.Forms.Button();
-            this.ListarBtn = new System.Windows.Forms.Button();
-            this.BajaBtn = new System.Windows.Forms.Button();
-            this.AltaBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.PanelFunciones = new System.Windows.Forms.Panel();
             this.Sala = new System.Windows.Forms.TabPage();
@@ -52,9 +48,6 @@ namespace Presentacion
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btInicio = new System.Windows.Forms.Button();
             this.gbPrestamos = new System.Windows.Forms.GroupBox();
-            this.btBusqueda = new System.Windows.Forms.Button();
-            this.btDevolucion = new System.Windows.Forms.Button();
-            this.btPrestamo = new System.Windows.Forms.Button();
             this.Adquisiciones = new System.Windows.Forms.TabPage();
             this.panel_Listar_Ejemplar = new System.Windows.Forms.Panel();
             this.comboBox_Documento_Listar_Ejemplar = new System.Windows.Forms.ComboBox();
@@ -179,11 +172,18 @@ namespace Presentacion
             this.button_Altas = new System.Windows.Forms.Button();
             this.label_Main_Adquisiciones = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btLogOut = new System.Windows.Forms.Button();
             this.lbNombre = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
+            this.ConsultarBtn = new System.Windows.Forms.Button();
+            this.ListarBtn = new System.Windows.Forms.Button();
+            this.BajaBtn = new System.Windows.Forms.Button();
+            this.AltaBtn = new System.Windows.Forms.Button();
             this.btBuscar = new System.Windows.Forms.Button();
+            this.btBusqueda = new System.Windows.Forms.Button();
+            this.btDevolucion = new System.Windows.Forms.Button();
+            this.btPrestamo = new System.Windows.Forms.Button();
+            this.btLogOut = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.Tab.SuspendLayout();
@@ -321,58 +321,6 @@ namespace Presentacion
             this.DNIBox.Size = new System.Drawing.Size(119, 22);
             this.DNIBox.TabIndex = 6;
             // 
-            // ConsultarBtn
-            // 
-            this.ConsultarBtn.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.ConsultarBtn.Location = new System.Drawing.Point(565, 51);
-            this.ConsultarBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ConsultarBtn.Name = "ConsultarBtn";
-            this.ConsultarBtn.Size = new System.Drawing.Size(87, 60);
-            this.ConsultarBtn.TabIndex = 7;
-            this.ConsultarBtn.Text = "Consultar";
-            this.ConsultarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.ConsultarBtn.UseVisualStyleBackColor = true;
-            this.ConsultarBtn.Click += new System.EventHandler(this.ConsultarBtn_Click);
-            // 
-            // ListarBtn
-            // 
-            this.ListarBtn.Image = global::Presentacion.Properties.Resources.Lista;
-            this.ListarBtn.Location = new System.Drawing.Point(277, 26);
-            this.ListarBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ListarBtn.Name = "ListarBtn";
-            this.ListarBtn.Size = new System.Drawing.Size(127, 103);
-            this.ListarBtn.TabIndex = 5;
-            this.ListarBtn.Text = "Listado";
-            this.ListarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.ListarBtn.UseVisualStyleBackColor = true;
-            this.ListarBtn.Click += new System.EventHandler(this.ListarBtn_Click);
-            // 
-            // BajaBtn
-            // 
-            this.BajaBtn.Image = global::Presentacion.Properties.Resources.Baja;
-            this.BajaBtn.Location = new System.Drawing.Point(143, 26);
-            this.BajaBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BajaBtn.Name = "BajaBtn";
-            this.BajaBtn.Size = new System.Drawing.Size(127, 103);
-            this.BajaBtn.TabIndex = 4;
-            this.BajaBtn.Text = "Baja";
-            this.BajaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.BajaBtn.UseVisualStyleBackColor = true;
-            this.BajaBtn.Click += new System.EventHandler(this.BajaBtn_Click);
-            // 
-            // AltaBtn
-            // 
-            this.AltaBtn.Image = global::Presentacion.Properties.Resources.Alta;
-            this.AltaBtn.Location = new System.Drawing.Point(8, 26);
-            this.AltaBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.AltaBtn.Name = "AltaBtn";
-            this.AltaBtn.Size = new System.Drawing.Size(127, 103);
-            this.AltaBtn.TabIndex = 3;
-            this.AltaBtn.Text = "Alta";
-            this.AltaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.AltaBtn.UseVisualStyleBackColor = true;
-            this.AltaBtn.Click += new System.EventHandler(this.AltaBtn_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -438,6 +386,7 @@ namespace Presentacion
             // 
             // btInicio
             // 
+            this.btInicio.Image = global::Presentacion.Properties.Resources.Inicio;
             this.btInicio.Location = new System.Drawing.Point(36, 23);
             this.btInicio.Margin = new System.Windows.Forms.Padding(4);
             this.btInicio.Name = "btInicio";
@@ -461,46 +410,6 @@ namespace Presentacion
             this.gbPrestamos.TabIndex = 0;
             this.gbPrestamos.TabStop = false;
             this.gbPrestamos.Text = "Préstamos";
-            // 
-            // btBusqueda
-            // 
-            this.btBusqueda.AutoSize = true;
-            this.btBusqueda.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.btBusqueda.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btBusqueda.Location = new System.Drawing.Point(476, 4);
-            this.btBusqueda.Margin = new System.Windows.Forms.Padding(4);
-            this.btBusqueda.Name = "btBusqueda";
-            this.btBusqueda.Size = new System.Drawing.Size(127, 103);
-            this.btBusqueda.TabIndex = 4;
-            this.btBusqueda.Text = "Consultar";
-            this.btBusqueda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btBusqueda.UseVisualStyleBackColor = true;
-            this.btBusqueda.Click += new System.EventHandler(this.btBusqueda_Click);
-            // 
-            // btDevolucion
-            // 
-            this.btDevolucion.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
-            this.btDevolucion.Location = new System.Drawing.Point(133, 21);
-            this.btDevolucion.Margin = new System.Windows.Forms.Padding(4);
-            this.btDevolucion.Name = "btDevolucion";
-            this.btDevolucion.Size = new System.Drawing.Size(93, 70);
-            this.btDevolucion.TabIndex = 1;
-            this.btDevolucion.Text = "Devolución";
-            this.btDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btDevolucion.UseVisualStyleBackColor = true;
-            // 
-            // btPrestamo
-            // 
-            this.btPrestamo.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
-            this.btPrestamo.Location = new System.Drawing.Point(19, 20);
-            this.btPrestamo.Margin = new System.Windows.Forms.Padding(4);
-            this.btPrestamo.Name = "btPrestamo";
-            this.btPrestamo.Size = new System.Drawing.Size(96, 71);
-            this.btPrestamo.TabIndex = 0;
-            this.btPrestamo.Text = "Préstamo";
-            this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btPrestamo.UseVisualStyleBackColor = true;
-            this.btPrestamo.Click += new System.EventHandler(this.btPrestamo_Click);
             // 
             // Adquisiciones
             // 
@@ -1889,6 +1798,120 @@ namespace Presentacion
             this.panel4.Size = new System.Drawing.Size(1048, 86);
             this.panel4.TabIndex = 3;
             // 
+            // lbNombre
+            // 
+            this.lbNombre.Location = new System.Drawing.Point(34, 58);
+            this.lbNombre.Name = "lbNombre";
+            this.lbNombre.Size = new System.Drawing.Size(66, 16);
+            this.lbNombre.TabIndex = 1;
+            this.lbNombre.Text = "tuNombre";
+            this.lbNombre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ConsultarBtn
+            // 
+            this.ConsultarBtn.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.ConsultarBtn.Location = new System.Drawing.Point(565, 51);
+            this.ConsultarBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ConsultarBtn.Name = "ConsultarBtn";
+            this.ConsultarBtn.Size = new System.Drawing.Size(87, 60);
+            this.ConsultarBtn.TabIndex = 7;
+            this.ConsultarBtn.Text = "Consultar";
+            this.ConsultarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ConsultarBtn.UseVisualStyleBackColor = true;
+            this.ConsultarBtn.Click += new System.EventHandler(this.ConsultarBtn_Click);
+            // 
+            // ListarBtn
+            // 
+            this.ListarBtn.Image = global::Presentacion.Properties.Resources.Lista;
+            this.ListarBtn.Location = new System.Drawing.Point(277, 26);
+            this.ListarBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ListarBtn.Name = "ListarBtn";
+            this.ListarBtn.Size = new System.Drawing.Size(127, 103);
+            this.ListarBtn.TabIndex = 5;
+            this.ListarBtn.Text = "Listado";
+            this.ListarBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ListarBtn.UseVisualStyleBackColor = true;
+            this.ListarBtn.Click += new System.EventHandler(this.ListarBtn_Click);
+            // 
+            // BajaBtn
+            // 
+            this.BajaBtn.Image = global::Presentacion.Properties.Resources.Baja;
+            this.BajaBtn.Location = new System.Drawing.Point(143, 26);
+            this.BajaBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BajaBtn.Name = "BajaBtn";
+            this.BajaBtn.Size = new System.Drawing.Size(127, 103);
+            this.BajaBtn.TabIndex = 4;
+            this.BajaBtn.Text = "Baja";
+            this.BajaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BajaBtn.UseVisualStyleBackColor = true;
+            this.BajaBtn.Click += new System.EventHandler(this.BajaBtn_Click);
+            // 
+            // AltaBtn
+            // 
+            this.AltaBtn.Image = global::Presentacion.Properties.Resources.Alta;
+            this.AltaBtn.Location = new System.Drawing.Point(8, 26);
+            this.AltaBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AltaBtn.Name = "AltaBtn";
+            this.AltaBtn.Size = new System.Drawing.Size(127, 103);
+            this.AltaBtn.TabIndex = 3;
+            this.AltaBtn.Text = "Alta";
+            this.AltaBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.AltaBtn.UseVisualStyleBackColor = true;
+            this.AltaBtn.Click += new System.EventHandler(this.AltaBtn_Click);
+            // 
+            // btBuscar
+            // 
+            this.btBuscar.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.btBuscar.Location = new System.Drawing.Point(251, 23);
+            this.btBuscar.Name = "btBuscar";
+            this.btBuscar.Size = new System.Drawing.Size(81, 68);
+            this.btBuscar.TabIndex = 18;
+            this.btBuscar.Text = "Consultar";
+            this.btBuscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
+            // 
+            // btBusqueda
+            // 
+            this.btBusqueda.AutoSize = true;
+            this.btBusqueda.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.btBusqueda.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btBusqueda.Location = new System.Drawing.Point(476, 4);
+            this.btBusqueda.Margin = new System.Windows.Forms.Padding(4);
+            this.btBusqueda.Name = "btBusqueda";
+            this.btBusqueda.Size = new System.Drawing.Size(127, 103);
+            this.btBusqueda.TabIndex = 4;
+            this.btBusqueda.Text = "Consultar";
+            this.btBusqueda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btBusqueda.UseVisualStyleBackColor = true;
+            this.btBusqueda.Click += new System.EventHandler(this.btBusqueda_Click);
+            // 
+            // btDevolucion
+            // 
+            this.btDevolucion.Image = global::Presentacion.Properties.Resources.ImagenDevolucion;
+            this.btDevolucion.Location = new System.Drawing.Point(133, 21);
+            this.btDevolucion.Margin = new System.Windows.Forms.Padding(4);
+            this.btDevolucion.Name = "btDevolucion";
+            this.btDevolucion.Size = new System.Drawing.Size(93, 70);
+            this.btDevolucion.TabIndex = 1;
+            this.btDevolucion.Text = "Devolución";
+            this.btDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btDevolucion.UseVisualStyleBackColor = true;
+            this.btDevolucion.Click += new System.EventHandler(this.btDevolucion_Click);
+            // 
+            // btPrestamo
+            // 
+            this.btPrestamo.Image = global::Presentacion.Properties.Resources.ImagenPrestamo;
+            this.btPrestamo.Location = new System.Drawing.Point(19, 20);
+            this.btPrestamo.Margin = new System.Windows.Forms.Padding(4);
+            this.btPrestamo.Name = "btPrestamo";
+            this.btPrestamo.Size = new System.Drawing.Size(96, 71);
+            this.btPrestamo.TabIndex = 0;
+            this.btPrestamo.Text = "Préstamo";
+            this.btPrestamo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btPrestamo.UseVisualStyleBackColor = true;
+            this.btPrestamo.Click += new System.EventHandler(this.btPrestamo_Click);
+            // 
             // btLogOut
             // 
             this.btLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1904,15 +1927,6 @@ namespace Presentacion
             this.btLogOut.UseVisualStyleBackColor = true;
             this.btLogOut.Click += new System.EventHandler(this.btLogOut_Click);
             // 
-            // lbNombre
-            // 
-            this.lbNombre.Location = new System.Drawing.Point(34, 58);
-            this.lbNombre.Name = "lbNombre";
-            this.lbNombre.Size = new System.Drawing.Size(66, 16);
-            this.lbNombre.TabIndex = 1;
-            this.lbNombre.Text = "tuNombre";
-            this.lbNombre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
@@ -1923,18 +1937,6 @@ namespace Presentacion
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
-            // 
-            // btBuscar
-            // 
-            this.btBuscar.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.btBuscar.Location = new System.Drawing.Point(251, 23);
-            this.btBuscar.Name = "btBuscar";
-            this.btBuscar.Size = new System.Drawing.Size(81, 68);
-            this.btBuscar.TabIndex = 18;
-            this.btBuscar.Text = "Consultar";
-            this.btBuscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btBuscar.UseVisualStyleBackColor = true;
-            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // FormPersonal
             // 

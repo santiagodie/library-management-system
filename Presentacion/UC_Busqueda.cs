@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloDominio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -118,5 +119,22 @@ namespace Presentacion.Properties
             cb.SelectedIndex = -1; 
             cb.Text = "";
         }
+
+        private void dgvResultados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var item = dgvResultados.Rows[e.RowIndex].DataBoundItem as ItemBusquedaPrestamo;
+
+                if (item != null && item.PrestamoCompleto != null)
+                {
+                    FormPrestamo frm = new FormPrestamo(item.PrestamoCompleto);
+                    frm.ShowDialog();
+
+                    Buscar();
+                }
+            }
+        }
     }
 }
+

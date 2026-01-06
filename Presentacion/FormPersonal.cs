@@ -868,5 +868,11 @@ namespace Presentacion
             this.panelContenedor.Controls.Add(uc);
             this.panelContenedor.Tag = uc;
         }
+
+        private void btDevolucion_Click(object sender, EventArgs e)
+        {
+            FormDevolucion formDevolucion = new FormDevolucion();
+            formDevolucion.ShowDialog();
+        }
     }
 }

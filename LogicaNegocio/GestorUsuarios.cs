@@ -247,4 +247,13 @@ public class GestorUsuarios
     {
         return Persistencia.Persistencia.ExisteUsuario(dni);
     }
+
+    //PRE: idEjemplar no puede ser nulo o vacío. El ejemplar debe existir en la persistencia.
+    //POST: devuelve el ejemplar con el código especificado, o null si no existe.
+    public Ejemplar ConsultarEjemplar(string idEjemplar)
+    {
+        if (string.IsNullOrEmpty(idEjemplar) || !Persistencia.Persistencia.ExisteEjemplar(idEjemplar)) return null;
+
+        return Persistencia.Persistencia.GetEjemplar(idEjemplar);
+    }
 }

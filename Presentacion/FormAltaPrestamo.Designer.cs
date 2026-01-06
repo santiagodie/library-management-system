@@ -112,6 +112,7 @@
             this.btCancelar.TabIndex = 10;
             this.btCancelar.Text = "Cancelar";
             this.btCancelar.UseVisualStyleBackColor = true;
+            this.btCancelar.Click += new System.EventHandler(this.btCancelar_Click);
             // 
             // dtpFecha
             // 
@@ -129,6 +130,7 @@
             this.lbEjemplares.Name = "lbEjemplares";
             this.lbEjemplares.Size = new System.Drawing.Size(318, 276);
             this.lbEjemplares.TabIndex = 0;
+            this.lbEjemplares.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.lbEjemplares_Format);
             // 
             // gbEjemplares
             // 

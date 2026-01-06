@@ -305,6 +305,7 @@
             this.dgvResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResultados.Size = new System.Drawing.Size(656, 419);
             this.dgvResultados.TabIndex = 0;
+            this.dgvResultados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResultados_CellDoubleClick);
             // 
             // UC_Busqueda
             // 

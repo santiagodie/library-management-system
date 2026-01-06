@@ -52,6 +52,12 @@
     <Compile Include="FormAltaPrestamo.Designer.cs">
       <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDevolucion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDevolucion.Designer.cs">
+      <DependentUpon>FormDevolucion.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPersonal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,12 @@
     </Compile>
     <Compile Include="UC_Busqueda.Designer.cs">
       <DependentUpon>UC_Busqueda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_DetallePrestamo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_DetallePrestamo.Designer.cs">
+      <DependentUpon>UC_DetallePrestamo.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_PrestamosUsuario.cs">
       <SubType>UserControl</SubType>
@@ -135,15 +147,24 @@
     <EmbeddedResource Include="FormAltaPrestamo.resx">
       <DependentUpon>FormAltaPrestamo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormDevolucion.resx">
+      <DependentUpon>FormDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPersonal.resx">
       <DependentUpon>FormPersonal.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPrestamo.resx">
+      <DependentUpon>FormPrestamo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSeleccionEjemplar.resx">
       <DependentUpon>FormSeleccionEjemplar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Busqueda.resx">
       <DependentUpon>UC_Busqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_DetallePrestamo.resx">
+      <DependentUpon>UC_DetallePrestamo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_PrestamosUsuario.resx">
       <DependentUpon>UC_PrestamosUsuario.cs</DependentUpon>
@@ -248,6 +269,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Prestamo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Inicio.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

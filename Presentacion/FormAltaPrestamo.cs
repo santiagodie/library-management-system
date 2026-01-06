@@ -19,6 +19,7 @@ namespace Presentacion
         private Personal responsable;
 
         private BindingSource bsUsuarios;
+        private BindingSource bsEjemplares;
 
         public FormAltaPrestamo(Personal personalLogueado)
         {
@@ -27,6 +28,7 @@ namespace Presentacion
             ejemplaresEnElPrestamo = new List<Ejemplar>();
             this.responsable = personalLogueado;
             bsUsuarios = new BindingSource();
+            bsEjemplares = new BindingSource();
         }
 
         private void FormAltaPrestamo_Load(object sender, EventArgs e)
@@ -70,10 +72,11 @@ namespace Presentacion
 
         private void ActualizarListaVisual()
         {
-            lbEjemplares.DataSource = null;
-            lbEjemplares.DataSource = ejemplaresEnElPrestamo;
+            bsEjemplares.DataSource = ejemplaresEnElPrestamo;
+            lbEjemplares.DataSource = bsEjemplares;
 
-            lbEjemplares.DisplayMember = "Codigo";
+            lbEjemplares.FormattingEnabled = true; 
+            lbEjemplares.Format += lbEjemplares_Format;
         }
 
         private void btAceptar_Click(object sender, EventArgs e)
@@ -113,6 +116,28 @@ namespace Presentacion
             catch (Exception ex)
             {
                 MessageBox.Show("Error al guardar el préstamo: " + ex.Message);
+            }
+        }
+
+        private void lbEjemplares_Format(object sender, ListControlConvertEventArgs e)
+        {
+            Ejemplar ej = (Ejemplar)e.ListItem;
+            e.Value = $"COD ejemplar:   {ej.Codigo}";
+        }
+
+        private void btCancelar_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show(
+                "¿Estás seguro de que deseas cancelar? Se perderán los datos no guardados.",
+                "Confirmar cancelación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (respuesta == DialogResult.Yes)
+            {
+            this.DialogResult = DialogResult.Cancel; 
+
+            this.Close();
             }
         }
     }

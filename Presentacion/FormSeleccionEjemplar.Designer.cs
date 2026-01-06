@@ -45,6 +45,7 @@
             // 
             // cbEjemplares
             // 
+            this.cbEjemplares.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cbEjemplares.FormattingEnabled = true;
             this.cbEjemplares.Location = new System.Drawing.Point(275, 58);
             this.cbEjemplares.Name = "cbEjemplares";

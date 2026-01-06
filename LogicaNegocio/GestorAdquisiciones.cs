@@ -46,15 +46,6 @@ public class GestorAdquisiciones : GestorUsuarios
 
     }
 
-	//PRE: idEjemplar no puede ser nulo o vacío. El ejemplar debe existir en la persistencia.
-	//POST: devuelve el ejemplar con el código especificado, o null si no existe.
-    public Ejemplar ConsultarEjemplar(string idEjemplar)
-    { 
-        if(string.IsNullOrEmpty(idEjemplar)|| !Persistencia.Persistencia.ExisteEjemplar(idEjemplar)) return null;
-
-        return Persistencia.Persistencia.GetEjemplar(idEjemplar);
-    }
-
 	//PRE: documento no puede ser nulo y debe existir en la persistencia.
 	//POST: devuelve true si hay al menos un ejemplar disponible del documento, false en caso contrario.
     public bool HayDisponibles(Documento documento)
