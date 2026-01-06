@@ -846,6 +846,18 @@ namespace Presentacion
             userUC.CambiarUsuario += cambiarInfoUsuario;
             userUC.IrAlPrimero += () => mostrarUsuario(usuarios.First());
             userUC.IrAlUltimo += () => mostrarUsuario(usuarios.Last());
+            userUC.IrAIndice += (indicePedido) =>
+            {
+                if (indicePedido >= 0 && indicePedido < usuarios.Count)
+                {
+                    mostrarUsuario(usuarios[indicePedido]);
+                }
+                else
+                {
+                    MessageBox.Show($"Por favor, introduce un número entre 1 y {usuarios.Count}.");
+                    userUC.ActivarNavegacion(indice, total); 
+                }
+            };
 
             userUC.Dock= DockStyle.Fill;
             PanelFunciones.Controls.Add(userUC);

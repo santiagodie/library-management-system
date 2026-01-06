@@ -110,6 +110,7 @@
             this.tbIndice.Size = new System.Drawing.Size(55, 22);
             this.tbIndice.TabIndex = 0;
             this.tbIndice.Text = "0";
+            this.tbIndice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbIndice_KeyPress);
             // 
             // tbTotal
             // 
