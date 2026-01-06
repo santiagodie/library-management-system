@@ -533,27 +533,32 @@ namespace Presentacion
             if (comboBox_Documento_Listar_Ejemplar.SelectedIndex != -1 && comboBox_Documento_Listar_Ejemplar.SelectedItem != null)
             {
                 if(!dataGridView_Listar_Ejemplar.Visible) dataGridView_Listar_Ejemplar.Visible = true;
-                dataGridView_Listar_Ejemplar.Rows.Clear();
+                
                 Documento documentoSeleccionado = (Documento)comboBox_Documento_Listar_Ejemplar.SelectedItem;
-                List<Ejemplar> ejemplares = gestorAdquisiciones.GetEjemplares(documentoSeleccionado).ToList();
-                foreach (Ejemplar eje in ejemplares)
-                {
-                    dataGridView_Listar_Ejemplar.Rows.Add
-                        (
-                              eje.Codigo
-                            , eje.Documento.Titulo
-                            , eje.Responsable.Nombre
-                            , eje.Activo
-                            , eje.Disponible
-                            , eje.Localizacion
-                            
-                        );
-                }
+                bindingSource_Ejemplar_Listar_Ejemplar.DataSource = gestorAdquisiciones.GetEjemplares(documentoSeleccionado).ToList();
             }
             else
             {
-                dataGridView_Listar_Ejemplar.Rows.Clear();
+                bindingSource_Ejemplar_Listar_Ejemplar.DataSource = null;
                 dataGridView_Listar_Ejemplar.Visible = false;
+            }
+        }
+        //PRE: ---
+        //POST: formatea las celdas del dataGridView para mostrar los títulos de los documentos y los nombres de los responsables.
+        private void dataGridView_Listar_Ejemplar_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            Ejemplar ejemplar = dataGridView_Listar_Ejemplar.Rows[e.RowIndex].DataBoundItem as Ejemplar;
+            if (ejemplar == null) return;
+            if (e.ColumnIndex == 1 && ejemplar.Documento != null)
+            {
+                e.Value = ejemplar.Documento.Titulo;
+                e.FormattingApplied = true;
+            }
+            else if (e.ColumnIndex == 2 && ejemplar.Responsable != null)
+            {
+                e.Value = ejemplar.Responsable.Nombre;
+                e.FormattingApplied = true;
             }
         }
 
@@ -867,6 +872,6 @@ namespace Presentacion
 
             this.panelContenedor.Controls.Add(uc);
             this.panelContenedor.Tag = uc;
-        }
+        } 
     }
 }

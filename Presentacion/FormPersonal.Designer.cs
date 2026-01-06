@@ -52,6 +52,7 @@ namespace Presentacion
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btInicio = new System.Windows.Forms.Button();
             this.gbPrestamos = new System.Windows.Forms.GroupBox();
+            this.btBuscar = new System.Windows.Forms.Button();
             this.btBusqueda = new System.Windows.Forms.Button();
             this.btDevolucion = new System.Windows.Forms.Button();
             this.btPrestamo = new System.Windows.Forms.Button();
@@ -60,12 +61,6 @@ namespace Presentacion
             this.comboBox_Documento_Listar_Ejemplar = new System.Windows.Forms.ComboBox();
             this.label_Documento_Listar_Ejemplar = new System.Windows.Forms.Label();
             this.dataGridView_Listar_Ejemplar = new System.Windows.Forms.DataGridView();
-            this.Column_Codigo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Documento_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Responsable_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Activo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column_Disponible_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ColumnLocalizacion_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label_Listar_Ejemplar = new System.Windows.Forms.Label();
             this.panel_Listar_Documento = new System.Windows.Forms.Panel();
             this.dataGridView_Listar_Documento = new System.Windows.Forms.DataGridView();
@@ -183,7 +178,13 @@ namespace Presentacion
             this.lbNombre = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolTip_Sala = new System.Windows.Forms.ToolTip(this.components);
-            this.btBuscar = new System.Windows.Forms.Button();
+            this.bindingSource_Ejemplar_Listar_Ejemplar = new System.Windows.Forms.BindingSource(this.components);
+            this.Column_Codigo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Documento_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Responsable_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Activo_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column_Disponible_Listar_Ejemplar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnLocalizacion_Listar_Ejemplar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.Tab.SuspendLayout();
@@ -209,6 +210,7 @@ namespace Presentacion
             this.panel_Alta_Documento.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Ejemplar_Listar_Ejemplar)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -257,11 +259,11 @@ namespace Presentacion
             // Usuarios
             // 
             this.Usuarios.Controls.Add(this.tableLayoutPanel2);
-            this.Usuarios.Location = new System.Drawing.Point(4, 25);
+            this.Usuarios.Location = new System.Drawing.Point(4, 22);
             this.Usuarios.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Usuarios.Name = "Usuarios";
             this.Usuarios.Padding = new System.Windows.Forms.Padding(4);
-            this.Usuarios.Size = new System.Drawing.Size(1040, 384);
+            this.Usuarios.Size = new System.Drawing.Size(1040, 387);
             this.Usuarios.TabIndex = 0;
             this.Usuarios.Text = "Usuarios";
             this.Usuarios.UseVisualStyleBackColor = true;
@@ -281,7 +283,7 @@ namespace Presentacion
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 164F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1032, 376);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1032, 379);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // flowLayoutPanel2
@@ -309,7 +311,7 @@ namespace Presentacion
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Size = new System.Drawing.Size(658, 148);
+            this.groupBox4.Size = new System.Drawing.Size(658, 146);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Usuarios";
@@ -318,7 +320,7 @@ namespace Presentacion
             // 
             this.DNIBox.Location = new System.Drawing.Point(440, 76);
             this.DNIBox.Name = "DNIBox";
-            this.DNIBox.Size = new System.Drawing.Size(119, 22);
+            this.DNIBox.Size = new System.Drawing.Size(119, 20);
             this.DNIBox.TabIndex = 6;
             // 
             // ConsultarBtn
@@ -378,7 +380,7 @@ namespace Presentacion
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(437, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 16);
+            this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Introduce el dni:";
             // 
@@ -387,18 +389,18 @@ namespace Presentacion
             this.PanelFunciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelFunciones.Location = new System.Drawing.Point(3, 167);
             this.PanelFunciones.Name = "PanelFunciones";
-            this.PanelFunciones.Size = new System.Drawing.Size(1026, 206);
+            this.PanelFunciones.Size = new System.Drawing.Size(1026, 209);
             this.PanelFunciones.TabIndex = 5;
             // 
             // Sala
             // 
             this.Sala.Controls.Add(this.panelContenedor);
             this.Sala.Controls.Add(this.flowLayoutPanel1);
-            this.Sala.Location = new System.Drawing.Point(4, 25);
+            this.Sala.Location = new System.Drawing.Point(4, 22);
             this.Sala.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Sala.Name = "Sala";
             this.Sala.Padding = new System.Windows.Forms.Padding(4);
-            this.Sala.Size = new System.Drawing.Size(1040, 384);
+            this.Sala.Size = new System.Drawing.Size(1040, 387);
             this.Sala.TabIndex = 1;
             this.Sala.Text = "Sala";
             this.Sala.UseVisualStyleBackColor = true;
@@ -409,7 +411,7 @@ namespace Presentacion
             this.panelContenedor.Location = new System.Drawing.Point(4, 118);
             this.panelContenedor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(1032, 262);
+            this.panelContenedor.Size = new System.Drawing.Size(1032, 265);
             this.panelContenedor.TabIndex = 3;
             // 
             // flowLayoutPanel1
@@ -461,6 +463,18 @@ namespace Presentacion
             this.gbPrestamos.TabIndex = 0;
             this.gbPrestamos.TabStop = false;
             this.gbPrestamos.Text = "Préstamos";
+            // 
+            // btBuscar
+            // 
+            this.btBuscar.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
+            this.btBuscar.Location = new System.Drawing.Point(251, 23);
+            this.btBuscar.Name = "btBuscar";
+            this.btBuscar.Size = new System.Drawing.Size(81, 68);
+            this.btBuscar.TabIndex = 18;
+            this.btBuscar.Text = "Consultar";
+            this.btBuscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // btBusqueda
             // 
@@ -533,10 +547,10 @@ namespace Presentacion
             this.Adquisiciones.Controls.Add(this.button_Bajas);
             this.Adquisiciones.Controls.Add(this.button_Altas);
             this.Adquisiciones.Controls.Add(this.label_Main_Adquisiciones);
-            this.Adquisiciones.Location = new System.Drawing.Point(4, 25);
+            this.Adquisiciones.Location = new System.Drawing.Point(4, 22);
             this.Adquisiciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Adquisiciones.Name = "Adquisiciones";
-            this.Adquisiciones.Size = new System.Drawing.Size(1040, 384);
+            this.Adquisiciones.Size = new System.Drawing.Size(1040, 387);
             this.Adquisiciones.TabIndex = 2;
             this.Adquisiciones.Text = "Adquisiciones";
             this.Adquisiciones.UseVisualStyleBackColor = true;
@@ -561,7 +575,7 @@ namespace Presentacion
             this.comboBox_Documento_Listar_Ejemplar.Location = new System.Drawing.Point(293, 39);
             this.comboBox_Documento_Listar_Ejemplar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Documento_Listar_Ejemplar.Name = "comboBox_Documento_Listar_Ejemplar";
-            this.comboBox_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(225, 24);
+            this.comboBox_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(225, 21);
             this.comboBox_Documento_Listar_Ejemplar.TabIndex = 3;
             this.comboBox_Documento_Listar_Ejemplar.SelectedIndexChanged += new System.EventHandler(this.comboBox_Documento_Listar_Ejemplar_SelectedIndexChanged);
             // 
@@ -570,7 +584,7 @@ namespace Presentacion
             this.label_Documento_Listar_Ejemplar.AutoSize = true;
             this.label_Documento_Listar_Ejemplar.Location = new System.Drawing.Point(209, 44);
             this.label_Documento_Listar_Ejemplar.Name = "label_Documento_Listar_Ejemplar";
-            this.label_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(76, 16);
+            this.label_Documento_Listar_Ejemplar.Size = new System.Drawing.Size(62, 13);
             this.label_Documento_Listar_Ejemplar.TabIndex = 2;
             this.label_Documento_Listar_Ejemplar.Text = "Documento";
             // 
@@ -578,6 +592,7 @@ namespace Presentacion
             // 
             this.dataGridView_Listar_Ejemplar.AllowUserToAddRows = false;
             this.dataGridView_Listar_Ejemplar.AllowUserToDeleteRows = false;
+            this.dataGridView_Listar_Ejemplar.AutoGenerateColumns = false;
             this.dataGridView_Listar_Ejemplar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Listar_Ejemplar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_Codigo_Listar_Ejemplar,
@@ -586,6 +601,7 @@ namespace Presentacion
             this.Column_Activo_Listar_Ejemplar,
             this.Column_Disponible_Listar_Ejemplar,
             this.ColumnLocalizacion_Listar_Ejemplar});
+            this.dataGridView_Listar_Ejemplar.DataSource = this.bindingSource_Ejemplar_Listar_Ejemplar;
             this.dataGridView_Listar_Ejemplar.Location = new System.Drawing.Point(35, 84);
             this.dataGridView_Listar_Ejemplar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView_Listar_Ejemplar.Name = "dataGridView_Listar_Ejemplar";
@@ -595,60 +611,7 @@ namespace Presentacion
             this.dataGridView_Listar_Ejemplar.Size = new System.Drawing.Size(744, 226);
             this.dataGridView_Listar_Ejemplar.TabIndex = 1;
             this.dataGridView_Listar_Ejemplar.Visible = false;
-            // 
-            // Column_Codigo_Listar_Ejemplar
-            // 
-            this.Column_Codigo_Listar_Ejemplar.HeaderText = "Codigo";
-            this.Column_Codigo_Listar_Ejemplar.MinimumWidth = 6;
-            this.Column_Codigo_Listar_Ejemplar.Name = "Column_Codigo_Listar_Ejemplar";
-            this.Column_Codigo_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Codigo_Listar_Ejemplar.ToolTipText = "Codigo del Ejemplar";
-            this.Column_Codigo_Listar_Ejemplar.Width = 125;
-            // 
-            // Column_Documento_Listar_Ejemplar
-            // 
-            this.Column_Documento_Listar_Ejemplar.HeaderText = "Documento";
-            this.Column_Documento_Listar_Ejemplar.MinimumWidth = 6;
-            this.Column_Documento_Listar_Ejemplar.Name = "Column_Documento_Listar_Ejemplar";
-            this.Column_Documento_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Documento_Listar_Ejemplar.ToolTipText = "Documento del Ejemplar";
-            this.Column_Documento_Listar_Ejemplar.Width = 125;
-            // 
-            // Column_Responsable_Listar_Ejemplar
-            // 
-            this.Column_Responsable_Listar_Ejemplar.HeaderText = "Responsable";
-            this.Column_Responsable_Listar_Ejemplar.MinimumWidth = 6;
-            this.Column_Responsable_Listar_Ejemplar.Name = "Column_Responsable_Listar_Ejemplar";
-            this.Column_Responsable_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Responsable_Listar_Ejemplar.ToolTipText = "Responsable del Ejemplar";
-            this.Column_Responsable_Listar_Ejemplar.Width = 125;
-            // 
-            // Column_Activo_Listar_Ejemplar
-            // 
-            this.Column_Activo_Listar_Ejemplar.HeaderText = "Activo";
-            this.Column_Activo_Listar_Ejemplar.MinimumWidth = 6;
-            this.Column_Activo_Listar_Ejemplar.Name = "Column_Activo_Listar_Ejemplar";
-            this.Column_Activo_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Activo_Listar_Ejemplar.ToolTipText = "Ejemplar Activo";
-            this.Column_Activo_Listar_Ejemplar.Width = 125;
-            // 
-            // Column_Disponible_Listar_Ejemplar
-            // 
-            this.Column_Disponible_Listar_Ejemplar.HeaderText = "Disponible";
-            this.Column_Disponible_Listar_Ejemplar.MinimumWidth = 6;
-            this.Column_Disponible_Listar_Ejemplar.Name = "Column_Disponible_Listar_Ejemplar";
-            this.Column_Disponible_Listar_Ejemplar.ReadOnly = true;
-            this.Column_Disponible_Listar_Ejemplar.ToolTipText = "Ejemplar Disponible";
-            this.Column_Disponible_Listar_Ejemplar.Width = 125;
-            // 
-            // ColumnLocalizacion_Listar_Ejemplar
-            // 
-            this.ColumnLocalizacion_Listar_Ejemplar.HeaderText = "Localizacion";
-            this.ColumnLocalizacion_Listar_Ejemplar.MinimumWidth = 6;
-            this.ColumnLocalizacion_Listar_Ejemplar.Name = "ColumnLocalizacion_Listar_Ejemplar";
-            this.ColumnLocalizacion_Listar_Ejemplar.ReadOnly = true;
-            this.ColumnLocalizacion_Listar_Ejemplar.ToolTipText = "Localizacion del Ejemplar";
-            this.ColumnLocalizacion_Listar_Ejemplar.Width = 200;
+            this.dataGridView_Listar_Ejemplar.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_Listar_Ejemplar_CellFormatting);
             // 
             // label_Listar_Ejemplar
             // 
@@ -656,7 +619,7 @@ namespace Presentacion
             this.label_Listar_Ejemplar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label_Listar_Ejemplar.Location = new System.Drawing.Point(340, 17);
             this.label_Listar_Ejemplar.Name = "label_Listar_Ejemplar";
-            this.label_Listar_Ejemplar.Size = new System.Drawing.Size(158, 20);
+            this.label_Listar_Ejemplar.Size = new System.Drawing.Size(132, 17);
             this.label_Listar_Ejemplar.TabIndex = 0;
             this.label_Listar_Ejemplar.Text = "Lista de Ejemplares";
             // 
@@ -784,7 +747,7 @@ namespace Presentacion
             this.label_Listar_Documento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label_Listar_Documento.Location = new System.Drawing.Point(347, 17);
             this.label_Listar_Documento.Name = "label_Listar_Documento";
-            this.label_Listar_Documento.Size = new System.Drawing.Size(169, 20);
+            this.label_Listar_Documento.Size = new System.Drawing.Size(141, 17);
             this.label_Listar_Documento.TabIndex = 0;
             this.label_Listar_Documento.Text = "Lista de Documentos";
             // 
@@ -819,7 +782,7 @@ namespace Presentacion
             this.label_Consultar_MasLeido.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Consultar_MasLeido.Location = new System.Drawing.Point(108, 10);
             this.label_Consultar_MasLeido.Name = "label_Consultar_MasLeido";
-            this.label_Consultar_MasLeido.Size = new System.Drawing.Size(152, 20);
+            this.label_Consultar_MasLeido.Size = new System.Drawing.Size(128, 17);
             this.label_Consultar_MasLeido.TabIndex = 15;
             this.label_Consultar_MasLeido.Text = "Alta de Documento";
             // 
@@ -829,7 +792,7 @@ namespace Presentacion
             this.textBox_Duracion_Consultar_MasLeido.Location = new System.Drawing.Point(127, 268);
             this.textBox_Duracion_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Duracion_Consultar_MasLeido.Name = "textBox_Duracion_Consultar_MasLeido";
-            this.textBox_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(121, 20);
             this.textBox_Duracion_Consultar_MasLeido.TabIndex = 14;
             this.textBox_Duracion_Consultar_MasLeido.Visible = false;
             // 
@@ -841,7 +804,7 @@ namespace Presentacion
             this.comboBox_Formato_Consultar_MasLeido.Location = new System.Drawing.Point(127, 230);
             this.comboBox_Formato_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Formato_Consultar_MasLeido.Name = "comboBox_Formato_Consultar_MasLeido";
-            this.comboBox_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(121, 21);
             this.comboBox_Formato_Consultar_MasLeido.TabIndex = 13;
             this.comboBox_Formato_Consultar_MasLeido.Visible = false;
             // 
@@ -850,7 +813,7 @@ namespace Presentacion
             this.label_Duracion_Consultar_MasLeido.AutoSize = true;
             this.label_Duracion_Consultar_MasLeido.Location = new System.Drawing.Point(23, 268);
             this.label_Duracion_Consultar_MasLeido.Name = "label_Duracion_Consultar_MasLeido";
-            this.label_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(61, 16);
+            this.label_Duracion_Consultar_MasLeido.Size = new System.Drawing.Size(50, 13);
             this.label_Duracion_Consultar_MasLeido.TabIndex = 12;
             this.label_Duracion_Consultar_MasLeido.Text = "Duración";
             this.label_Duracion_Consultar_MasLeido.Visible = false;
@@ -860,7 +823,7 @@ namespace Presentacion
             this.label_Formato_Consultar_MasLeido.AutoSize = true;
             this.label_Formato_Consultar_MasLeido.Location = new System.Drawing.Point(23, 233);
             this.label_Formato_Consultar_MasLeido.Name = "label_Formato_Consultar_MasLeido";
-            this.label_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(57, 16);
+            this.label_Formato_Consultar_MasLeido.Size = new System.Drawing.Size(45, 13);
             this.label_Formato_Consultar_MasLeido.TabIndex = 11;
             this.label_Formato_Consultar_MasLeido.Text = "Formato";
             this.label_Formato_Consultar_MasLeido.Visible = false;
@@ -870,7 +833,7 @@ namespace Presentacion
             this.label_Año_Consultar_MasLeido.AutoSize = true;
             this.label_Año_Consultar_MasLeido.Location = new System.Drawing.Point(23, 159);
             this.label_Año_Consultar_MasLeido.Name = "label_Año_Consultar_MasLeido";
-            this.label_Año_Consultar_MasLeido.Size = new System.Drawing.Size(79, 16);
+            this.label_Año_Consultar_MasLeido.Size = new System.Drawing.Size(64, 13);
             this.label_Año_Consultar_MasLeido.TabIndex = 10;
             this.label_Año_Consultar_MasLeido.Text = "Año Edición";
             // 
@@ -881,7 +844,7 @@ namespace Presentacion
             this.textBox_Año_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Año_Consultar_MasLeido.MaxLength = 4;
             this.textBox_Año_Consultar_MasLeido.Name = "textBox_Año_Consultar_MasLeido";
-            this.textBox_Año_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Año_Consultar_MasLeido.Size = new System.Drawing.Size(121, 20);
             this.textBox_Año_Consultar_MasLeido.TabIndex = 9;
             // 
             // label_Editorial_Consultar_MasLeido
@@ -889,7 +852,7 @@ namespace Presentacion
             this.label_Editorial_Consultar_MasLeido.AutoSize = true;
             this.label_Editorial_Consultar_MasLeido.Location = new System.Drawing.Point(23, 132);
             this.label_Editorial_Consultar_MasLeido.Name = "label_Editorial_Consultar_MasLeido";
-            this.label_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(56, 16);
+            this.label_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(44, 13);
             this.label_Editorial_Consultar_MasLeido.TabIndex = 8;
             this.label_Editorial_Consultar_MasLeido.Text = "Editorial";
             // 
@@ -898,7 +861,7 @@ namespace Presentacion
             this.label_ISBN_Consultar_MasLeido.AutoSize = true;
             this.label_ISBN_Consultar_MasLeido.Location = new System.Drawing.Point(23, 101);
             this.label_ISBN_Consultar_MasLeido.Name = "label_ISBN_Consultar_MasLeido";
-            this.label_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(38, 16);
+            this.label_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(32, 13);
             this.label_ISBN_Consultar_MasLeido.TabIndex = 7;
             this.label_ISBN_Consultar_MasLeido.Text = "ISBN";
             // 
@@ -907,7 +870,7 @@ namespace Presentacion
             this.label_Autor_Consultar_MasLeido.AutoSize = true;
             this.label_Autor_Consultar_MasLeido.Location = new System.Drawing.Point(23, 73);
             this.label_Autor_Consultar_MasLeido.Name = "label_Autor_Consultar_MasLeido";
-            this.label_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(38, 16);
+            this.label_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(32, 13);
             this.label_Autor_Consultar_MasLeido.TabIndex = 6;
             this.label_Autor_Consultar_MasLeido.Text = "Autor";
             // 
@@ -916,7 +879,7 @@ namespace Presentacion
             this.label_Titulo_Consultar_MasLeido.AutoSize = true;
             this.label_Titulo_Consultar_MasLeido.Location = new System.Drawing.Point(23, 46);
             this.label_Titulo_Consultar_MasLeido.Name = "label_Titulo_Consultar_MasLeido";
-            this.label_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(40, 16);
+            this.label_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(33, 13);
             this.label_Titulo_Consultar_MasLeido.TabIndex = 5;
             this.label_Titulo_Consultar_MasLeido.Text = "Titulo";
             // 
@@ -926,7 +889,7 @@ namespace Presentacion
             this.textBox_Editorial_Consultar_MasLeido.Location = new System.Drawing.Point(127, 126);
             this.textBox_Editorial_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Editorial_Consultar_MasLeido.Name = "textBox_Editorial_Consultar_MasLeido";
-            this.textBox_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Editorial_Consultar_MasLeido.Size = new System.Drawing.Size(121, 20);
             this.textBox_Editorial_Consultar_MasLeido.TabIndex = 4;
             // 
             // textBox_ISBN_Consultar_MasLeido
@@ -935,7 +898,7 @@ namespace Presentacion
             this.textBox_ISBN_Consultar_MasLeido.Location = new System.Drawing.Point(127, 98);
             this.textBox_ISBN_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_ISBN_Consultar_MasLeido.Name = "textBox_ISBN_Consultar_MasLeido";
-            this.textBox_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_ISBN_Consultar_MasLeido.Size = new System.Drawing.Size(121, 20);
             this.textBox_ISBN_Consultar_MasLeido.TabIndex = 3;
             // 
             // textBox_Autor_Consultar_MasLeido
@@ -944,7 +907,7 @@ namespace Presentacion
             this.textBox_Autor_Consultar_MasLeido.Location = new System.Drawing.Point(127, 70);
             this.textBox_Autor_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Autor_Consultar_MasLeido.Name = "textBox_Autor_Consultar_MasLeido";
-            this.textBox_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Autor_Consultar_MasLeido.Size = new System.Drawing.Size(121, 20);
             this.textBox_Autor_Consultar_MasLeido.TabIndex = 2;
             // 
             // textBox_Titulo_Consultar_MasLeido
@@ -953,7 +916,7 @@ namespace Presentacion
             this.textBox_Titulo_Consultar_MasLeido.Location = new System.Drawing.Point(127, 42);
             this.textBox_Titulo_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Titulo_Consultar_MasLeido.Name = "textBox_Titulo_Consultar_MasLeido";
-            this.textBox_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Titulo_Consultar_MasLeido.Size = new System.Drawing.Size(121, 20);
             this.textBox_Titulo_Consultar_MasLeido.TabIndex = 1;
             // 
             // checkBox_Audiolibro_Consultar_MasLeido
@@ -963,7 +926,7 @@ namespace Presentacion
             this.checkBox_Audiolibro_Consultar_MasLeido.Location = new System.Drawing.Point(140, 191);
             this.checkBox_Audiolibro_Consultar_MasLeido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_Audiolibro_Consultar_MasLeido.Name = "checkBox_Audiolibro_Consultar_MasLeido";
-            this.checkBox_Audiolibro_Consultar_MasLeido.Size = new System.Drawing.Size(94, 20);
+            this.checkBox_Audiolibro_Consultar_MasLeido.Size = new System.Drawing.Size(76, 17);
             this.checkBox_Audiolibro_Consultar_MasLeido.TabIndex = 0;
             this.checkBox_Audiolibro_Consultar_MasLeido.Text = "AudioLibro";
             this.checkBox_Audiolibro_Consultar_MasLeido.UseVisualStyleBackColor = true;
@@ -1001,7 +964,7 @@ namespace Presentacion
             this.textBox_Fecha_Consultar_Fech.Location = new System.Drawing.Point(127, 68);
             this.textBox_Fecha_Consultar_Fech.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Fecha_Consultar_Fech.Name = "textBox_Fecha_Consultar_Fech";
-            this.textBox_Fecha_Consultar_Fech.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Fecha_Consultar_Fech.Size = new System.Drawing.Size(208, 20);
             this.textBox_Fecha_Consultar_Fech.TabIndex = 20;
             this.textBox_Fecha_Consultar_Fech.Visible = false;
             // 
@@ -1010,7 +973,7 @@ namespace Presentacion
             this.label_Fecha_Consultar_Fech.AutoSize = true;
             this.label_Fecha_Consultar_Fech.Location = new System.Drawing.Point(23, 71);
             this.label_Fecha_Consultar_Fech.Name = "label_Fecha_Consultar_Fech";
-            this.label_Fecha_Consultar_Fech.Size = new System.Drawing.Size(45, 16);
+            this.label_Fecha_Consultar_Fech.Size = new System.Drawing.Size(37, 13);
             this.label_Fecha_Consultar_Fech.TabIndex = 19;
             this.label_Fecha_Consultar_Fech.Text = "Fecha";
             this.label_Fecha_Consultar_Fech.Visible = false;
@@ -1022,7 +985,7 @@ namespace Presentacion
             this.comboBox_Documento_Consultar_Fech.Location = new System.Drawing.Point(128, 34);
             this.comboBox_Documento_Consultar_Fech.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Documento_Consultar_Fech.Name = "comboBox_Documento_Consultar_Fech";
-            this.comboBox_Documento_Consultar_Fech.Size = new System.Drawing.Size(207, 24);
+            this.comboBox_Documento_Consultar_Fech.Size = new System.Drawing.Size(207, 21);
             this.comboBox_Documento_Consultar_Fech.TabIndex = 18;
             // 
             // label_Documento_Consultar_Fech
@@ -1030,7 +993,7 @@ namespace Presentacion
             this.label_Documento_Consultar_Fech.AutoSize = true;
             this.label_Documento_Consultar_Fech.Location = new System.Drawing.Point(23, 39);
             this.label_Documento_Consultar_Fech.Name = "label_Documento_Consultar_Fech";
-            this.label_Documento_Consultar_Fech.Size = new System.Drawing.Size(76, 16);
+            this.label_Documento_Consultar_Fech.Size = new System.Drawing.Size(62, 13);
             this.label_Documento_Consultar_Fech.TabIndex = 17;
             this.label_Documento_Consultar_Fech.Text = "Documento";
             // 
@@ -1040,7 +1003,7 @@ namespace Presentacion
             this.label_Consultar_Fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Consultar_Fecha.Location = new System.Drawing.Point(53, 9);
             this.label_Consultar_Fecha.Name = "label_Consultar_Fecha";
-            this.label_Consultar_Fecha.Size = new System.Drawing.Size(307, 20);
+            this.label_Consultar_Fecha.Size = new System.Drawing.Size(257, 17);
             this.label_Consultar_Fecha.TabIndex = 15;
             this.label_Consultar_Fecha.Text = "Consultar Fecha Disponible Documento";
             // 
@@ -1077,7 +1040,7 @@ namespace Presentacion
             this.comboBox_Documento_Consultar_Disp.Location = new System.Drawing.Point(128, 34);
             this.comboBox_Documento_Consultar_Disp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Documento_Consultar_Disp.Name = "comboBox_Documento_Consultar_Disp";
-            this.comboBox_Documento_Consultar_Disp.Size = new System.Drawing.Size(207, 24);
+            this.comboBox_Documento_Consultar_Disp.Size = new System.Drawing.Size(207, 21);
             this.comboBox_Documento_Consultar_Disp.TabIndex = 18;
             // 
             // label_Documento_Consultar_Disp
@@ -1085,7 +1048,7 @@ namespace Presentacion
             this.label_Documento_Consultar_Disp.AutoSize = true;
             this.label_Documento_Consultar_Disp.Location = new System.Drawing.Point(23, 39);
             this.label_Documento_Consultar_Disp.Name = "label_Documento_Consultar_Disp";
-            this.label_Documento_Consultar_Disp.Size = new System.Drawing.Size(76, 16);
+            this.label_Documento_Consultar_Disp.Size = new System.Drawing.Size(62, 13);
             this.label_Documento_Consultar_Disp.TabIndex = 17;
             this.label_Documento_Consultar_Disp.Text = "Documento";
             // 
@@ -1095,7 +1058,7 @@ namespace Presentacion
             this.label_Consultar_Disponible.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Consultar_Disponible.Location = new System.Drawing.Point(53, 9);
             this.label_Consultar_Disponible.Name = "label_Consultar_Disponible";
-            this.label_Consultar_Disponible.Size = new System.Drawing.Size(282, 20);
+            this.label_Consultar_Disponible.Size = new System.Drawing.Size(236, 17);
             this.label_Consultar_Disponible.TabIndex = 15;
             this.label_Consultar_Disponible.Text = "Consultar Disponibilidad Documento";
             // 
@@ -1108,7 +1071,7 @@ namespace Presentacion
             this.checkBox_Disponible_Consultar_Disp.Location = new System.Drawing.Point(127, 78);
             this.checkBox_Disponible_Consultar_Disp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_Disponible_Consultar_Disp.Name = "checkBox_Disponible_Consultar_Disp";
-            this.checkBox_Disponible_Consultar_Disp.Size = new System.Drawing.Size(122, 20);
+            this.checkBox_Disponible_Consultar_Disp.Size = new System.Drawing.Size(97, 17);
             this.checkBox_Disponible_Consultar_Disp.TabIndex = 0;
             this.checkBox_Disponible_Consultar_Disp.Text = "Hay Disponible";
             this.checkBox_Disponible_Consultar_Disp.UseVisualStyleBackColor = true;
@@ -1153,7 +1116,7 @@ namespace Presentacion
             this.textBox_Documento_Consultar_Eje.Location = new System.Drawing.Point(127, 110);
             this.textBox_Documento_Consultar_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Documento_Consultar_Eje.Name = "textBox_Documento_Consultar_Eje";
-            this.textBox_Documento_Consultar_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Documento_Consultar_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Documento_Consultar_Eje.TabIndex = 23;
             this.textBox_Documento_Consultar_Eje.Visible = false;
             // 
@@ -1162,7 +1125,7 @@ namespace Presentacion
             this.textBox_Codigo_Consultar_Eje.Location = new System.Drawing.Point(127, 36);
             this.textBox_Codigo_Consultar_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Codigo_Consultar_Eje.Name = "textBox_Codigo_Consultar_Eje";
-            this.textBox_Codigo_Consultar_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Codigo_Consultar_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Codigo_Consultar_Eje.TabIndex = 22;
             // 
             // label_Documento_Consultar_Eje
@@ -1170,7 +1133,7 @@ namespace Presentacion
             this.label_Documento_Consultar_Eje.AutoSize = true;
             this.label_Documento_Consultar_Eje.Location = new System.Drawing.Point(23, 113);
             this.label_Documento_Consultar_Eje.Name = "label_Documento_Consultar_Eje";
-            this.label_Documento_Consultar_Eje.Size = new System.Drawing.Size(76, 16);
+            this.label_Documento_Consultar_Eje.Size = new System.Drawing.Size(62, 13);
             this.label_Documento_Consultar_Eje.TabIndex = 21;
             this.label_Documento_Consultar_Eje.Text = "Documento";
             this.label_Documento_Consultar_Eje.Visible = false;
@@ -1181,7 +1144,7 @@ namespace Presentacion
             this.textBox_Responsable_Consultar_Eje.Location = new System.Drawing.Point(127, 180);
             this.textBox_Responsable_Consultar_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Responsable_Consultar_Eje.Name = "textBox_Responsable_Consultar_Eje";
-            this.textBox_Responsable_Consultar_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Responsable_Consultar_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Responsable_Consultar_Eje.TabIndex = 20;
             this.textBox_Responsable_Consultar_Eje.Visible = false;
             // 
@@ -1191,7 +1154,7 @@ namespace Presentacion
             this.label_Informacion_Consultar_Eje.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label_Informacion_Consultar_Eje.Location = new System.Drawing.Point(105, 75);
             this.label_Informacion_Consultar_Eje.Name = "label_Informacion_Consultar_Eje";
-            this.label_Informacion_Consultar_Eje.Size = new System.Drawing.Size(167, 20);
+            this.label_Informacion_Consultar_Eje.Size = new System.Drawing.Size(140, 17);
             this.label_Informacion_Consultar_Eje.TabIndex = 19;
             this.label_Informacion_Consultar_Eje.Text = "Informacion Ejemplar";
             this.label_Informacion_Consultar_Eje.Visible = false;
@@ -1201,7 +1164,7 @@ namespace Presentacion
             this.label_Codigo_Consultar_Eje.AutoSize = true;
             this.label_Codigo_Consultar_Eje.Location = new System.Drawing.Point(23, 39);
             this.label_Codigo_Consultar_Eje.Name = "label_Codigo_Consultar_Eje";
-            this.label_Codigo_Consultar_Eje.Size = new System.Drawing.Size(51, 16);
+            this.label_Codigo_Consultar_Eje.Size = new System.Drawing.Size(40, 13);
             this.label_Codigo_Consultar_Eje.TabIndex = 17;
             this.label_Codigo_Consultar_Eje.Text = "Codigo";
             // 
@@ -1210,7 +1173,7 @@ namespace Presentacion
             this.label_Responsable_Consultar_Eje.AutoSize = true;
             this.label_Responsable_Consultar_Eje.Location = new System.Drawing.Point(23, 183);
             this.label_Responsable_Consultar_Eje.Name = "label_Responsable_Consultar_Eje";
-            this.label_Responsable_Consultar_Eje.Size = new System.Drawing.Size(89, 16);
+            this.label_Responsable_Consultar_Eje.Size = new System.Drawing.Size(69, 13);
             this.label_Responsable_Consultar_Eje.TabIndex = 16;
             this.label_Responsable_Consultar_Eje.Text = "Responsable";
             this.label_Responsable_Consultar_Eje.Visible = false;
@@ -1221,7 +1184,7 @@ namespace Presentacion
             this.label_Consultar_Ejemplar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Consultar_Ejemplar.Location = new System.Drawing.Point(99, 5);
             this.label_Consultar_Ejemplar.Name = "label_Consultar_Ejemplar";
-            this.label_Consultar_Ejemplar.Size = new System.Drawing.Size(180, 20);
+            this.label_Consultar_Ejemplar.Size = new System.Drawing.Size(151, 17);
             this.label_Consultar_Ejemplar.TabIndex = 15;
             this.label_Consultar_Ejemplar.Text = "Consultar un  Ejemplar";
             // 
@@ -1230,7 +1193,7 @@ namespace Presentacion
             this.label_Localizacion_Consultar_Eje.AutoSize = true;
             this.label_Localizacion_Consultar_Eje.Location = new System.Drawing.Point(23, 148);
             this.label_Localizacion_Consultar_Eje.Name = "label_Localizacion_Consultar_Eje";
-            this.label_Localizacion_Consultar_Eje.Size = new System.Drawing.Size(82, 16);
+            this.label_Localizacion_Consultar_Eje.Size = new System.Drawing.Size(66, 13);
             this.label_Localizacion_Consultar_Eje.TabIndex = 5;
             this.label_Localizacion_Consultar_Eje.Text = "Localizacion";
             this.label_Localizacion_Consultar_Eje.Visible = false;
@@ -1241,7 +1204,7 @@ namespace Presentacion
             this.textBox_Localizacion_Consultar_Eje.Location = new System.Drawing.Point(127, 145);
             this.textBox_Localizacion_Consultar_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Localizacion_Consultar_Eje.Name = "textBox_Localizacion_Consultar_Eje";
-            this.textBox_Localizacion_Consultar_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Localizacion_Consultar_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Localizacion_Consultar_Eje.TabIndex = 1;
             this.textBox_Localizacion_Consultar_Eje.Visible = false;
             // 
@@ -1254,7 +1217,7 @@ namespace Presentacion
             this.checkBox_Disponible_Consultar_Eje.Location = new System.Drawing.Point(155, 215);
             this.checkBox_Disponible_Consultar_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_Disponible_Consultar_Eje.Name = "checkBox_Disponible_Consultar_Eje";
-            this.checkBox_Disponible_Consultar_Eje.Size = new System.Drawing.Size(94, 20);
+            this.checkBox_Disponible_Consultar_Eje.Size = new System.Drawing.Size(75, 17);
             this.checkBox_Disponible_Consultar_Eje.TabIndex = 0;
             this.checkBox_Disponible_Consultar_Eje.Text = "Disponible";
             this.checkBox_Disponible_Consultar_Eje.UseVisualStyleBackColor = true;
@@ -1379,7 +1342,7 @@ namespace Presentacion
             this.textBox_Codigo_Baja_Eje.Location = new System.Drawing.Point(127, 151);
             this.textBox_Codigo_Baja_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Codigo_Baja_Eje.Name = "textBox_Codigo_Baja_Eje";
-            this.textBox_Codigo_Baja_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Codigo_Baja_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Codigo_Baja_Eje.TabIndex = 22;
             // 
             // label_Codigo_Baja_Eje
@@ -1387,7 +1350,7 @@ namespace Presentacion
             this.label_Codigo_Baja_Eje.AutoSize = true;
             this.label_Codigo_Baja_Eje.Location = new System.Drawing.Point(23, 154);
             this.label_Codigo_Baja_Eje.Name = "label_Codigo_Baja_Eje";
-            this.label_Codigo_Baja_Eje.Size = new System.Drawing.Size(51, 16);
+            this.label_Codigo_Baja_Eje.Size = new System.Drawing.Size(40, 13);
             this.label_Codigo_Baja_Eje.TabIndex = 21;
             this.label_Codigo_Baja_Eje.Text = "Codigo";
             // 
@@ -1397,7 +1360,7 @@ namespace Presentacion
             this.textBox_Responsable_Baja_Eje.Location = new System.Drawing.Point(127, 222);
             this.textBox_Responsable_Baja_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Responsable_Baja_Eje.Name = "textBox_Responsable_Baja_Eje";
-            this.textBox_Responsable_Baja_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Responsable_Baja_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Responsable_Baja_Eje.TabIndex = 20;
             // 
             // label_Info_Baja_Eje
@@ -1406,7 +1369,7 @@ namespace Presentacion
             this.label_Info_Baja_Eje.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label_Info_Baja_Eje.Location = new System.Drawing.Point(105, 116);
             this.label_Info_Baja_Eje.Name = "label_Info_Baja_Eje";
-            this.label_Info_Baja_Eje.Size = new System.Drawing.Size(167, 20);
+            this.label_Info_Baja_Eje.Size = new System.Drawing.Size(140, 17);
             this.label_Info_Baja_Eje.TabIndex = 19;
             this.label_Info_Baja_Eje.Text = "Informacion Ejemplar";
             // 
@@ -1418,7 +1381,7 @@ namespace Presentacion
             this.comboBox_Ejemplar_Baja_Eje.Location = new System.Drawing.Point(127, 78);
             this.comboBox_Ejemplar_Baja_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Ejemplar_Baja_Eje.Name = "comboBox_Ejemplar_Baja_Eje";
-            this.comboBox_Ejemplar_Baja_Eje.Size = new System.Drawing.Size(208, 24);
+            this.comboBox_Ejemplar_Baja_Eje.Size = new System.Drawing.Size(208, 21);
             this.comboBox_Ejemplar_Baja_Eje.TabIndex = 18;
             this.comboBox_Ejemplar_Baja_Eje.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ejemplar_Baja_Eje_SelectedIndexChanged);
             // 
@@ -1427,7 +1390,7 @@ namespace Presentacion
             this.label_Ejemplar_Baja_Eje.AutoSize = true;
             this.label_Ejemplar_Baja_Eje.Location = new System.Drawing.Point(23, 81);
             this.label_Ejemplar_Baja_Eje.Name = "label_Ejemplar_Baja_Eje";
-            this.label_Ejemplar_Baja_Eje.Size = new System.Drawing.Size(61, 16);
+            this.label_Ejemplar_Baja_Eje.Size = new System.Drawing.Size(47, 13);
             this.label_Ejemplar_Baja_Eje.TabIndex = 17;
             this.label_Ejemplar_Baja_Eje.Text = "Ejemplar";
             // 
@@ -1436,7 +1399,7 @@ namespace Presentacion
             this.label_Responsable_Baja_Eje.AutoSize = true;
             this.label_Responsable_Baja_Eje.Location = new System.Drawing.Point(23, 224);
             this.label_Responsable_Baja_Eje.Name = "label_Responsable_Baja_Eje";
-            this.label_Responsable_Baja_Eje.Size = new System.Drawing.Size(89, 16);
+            this.label_Responsable_Baja_Eje.Size = new System.Drawing.Size(69, 13);
             this.label_Responsable_Baja_Eje.TabIndex = 16;
             this.label_Responsable_Baja_Eje.Text = "Responsable";
             // 
@@ -1446,7 +1409,7 @@ namespace Presentacion
             this.label_Baja_Ejemplares.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Baja_Ejemplares.Location = new System.Drawing.Point(120, 7);
             this.label_Baja_Ejemplares.Name = "label_Baja_Ejemplares";
-            this.label_Baja_Ejemplares.Size = new System.Drawing.Size(137, 20);
+            this.label_Baja_Ejemplares.Size = new System.Drawing.Size(115, 17);
             this.label_Baja_Ejemplares.TabIndex = 15;
             this.label_Baja_Ejemplares.Text = "Baja de Ejemplar";
             // 
@@ -1457,7 +1420,7 @@ namespace Presentacion
             this.comboBox_Documento_Baja_Eje.Location = new System.Drawing.Point(127, 42);
             this.comboBox_Documento_Baja_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Documento_Baja_Eje.Name = "comboBox_Documento_Baja_Eje";
-            this.comboBox_Documento_Baja_Eje.Size = new System.Drawing.Size(208, 24);
+            this.comboBox_Documento_Baja_Eje.Size = new System.Drawing.Size(208, 21);
             this.comboBox_Documento_Baja_Eje.TabIndex = 13;
             this.comboBox_Documento_Baja_Eje.SelectedIndexChanged += new System.EventHandler(this.comboBox_Documento_Baja_Eje_SelectedIndexChanged);
             // 
@@ -1466,7 +1429,7 @@ namespace Presentacion
             this.label_Documento_Baja_Eje.AutoSize = true;
             this.label_Documento_Baja_Eje.Location = new System.Drawing.Point(23, 46);
             this.label_Documento_Baja_Eje.Name = "label_Documento_Baja_Eje";
-            this.label_Documento_Baja_Eje.Size = new System.Drawing.Size(76, 16);
+            this.label_Documento_Baja_Eje.Size = new System.Drawing.Size(62, 13);
             this.label_Documento_Baja_Eje.TabIndex = 6;
             this.label_Documento_Baja_Eje.Text = "Documento";
             // 
@@ -1475,7 +1438,7 @@ namespace Presentacion
             this.label_Localizacion_Baja_Eje.AutoSize = true;
             this.label_Localizacion_Baja_Eje.Location = new System.Drawing.Point(23, 190);
             this.label_Localizacion_Baja_Eje.Name = "label_Localizacion_Baja_Eje";
-            this.label_Localizacion_Baja_Eje.Size = new System.Drawing.Size(82, 16);
+            this.label_Localizacion_Baja_Eje.Size = new System.Drawing.Size(66, 13);
             this.label_Localizacion_Baja_Eje.TabIndex = 5;
             this.label_Localizacion_Baja_Eje.Text = "Localizacion";
             // 
@@ -1485,7 +1448,7 @@ namespace Presentacion
             this.textBox_Localizacion_Baja_Eje.Location = new System.Drawing.Point(127, 186);
             this.textBox_Localizacion_Baja_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Localizacion_Baja_Eje.Name = "textBox_Localizacion_Baja_Eje";
-            this.textBox_Localizacion_Baja_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Localizacion_Baja_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Localizacion_Baja_Eje.TabIndex = 1;
             // 
             // checkBox_Disponible_Baja_Eje
@@ -1497,7 +1460,7 @@ namespace Presentacion
             this.checkBox_Disponible_Baja_Eje.Location = new System.Drawing.Point(155, 256);
             this.checkBox_Disponible_Baja_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_Disponible_Baja_Eje.Name = "checkBox_Disponible_Baja_Eje";
-            this.checkBox_Disponible_Baja_Eje.Size = new System.Drawing.Size(94, 20);
+            this.checkBox_Disponible_Baja_Eje.Size = new System.Drawing.Size(75, 17);
             this.checkBox_Disponible_Baja_Eje.TabIndex = 0;
             this.checkBox_Disponible_Baja_Eje.Text = "Disponible";
             this.checkBox_Disponible_Baja_Eje.UseVisualStyleBackColor = true;
@@ -1523,7 +1486,7 @@ namespace Presentacion
             this.label_Alta_Ejemplar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Alta_Ejemplar.Location = new System.Drawing.Point(108, 10);
             this.label_Alta_Ejemplar.Name = "label_Alta_Ejemplar";
-            this.label_Alta_Ejemplar.Size = new System.Drawing.Size(132, 20);
+            this.label_Alta_Ejemplar.Size = new System.Drawing.Size(111, 17);
             this.label_Alta_Ejemplar.TabIndex = 15;
             this.label_Alta_Ejemplar.Text = "Alta de Ejemplar";
             // 
@@ -1534,7 +1497,7 @@ namespace Presentacion
             this.comboBox_Documento_Alta_Eje.Location = new System.Drawing.Point(127, 73);
             this.comboBox_Documento_Alta_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Documento_Alta_Eje.Name = "comboBox_Documento_Alta_Eje";
-            this.comboBox_Documento_Alta_Eje.Size = new System.Drawing.Size(208, 24);
+            this.comboBox_Documento_Alta_Eje.Size = new System.Drawing.Size(208, 21);
             this.comboBox_Documento_Alta_Eje.TabIndex = 13;
             // 
             // label_Documento_Alta_Eje
@@ -1542,7 +1505,7 @@ namespace Presentacion
             this.label_Documento_Alta_Eje.AutoSize = true;
             this.label_Documento_Alta_Eje.Location = new System.Drawing.Point(23, 73);
             this.label_Documento_Alta_Eje.Name = "label_Documento_Alta_Eje";
-            this.label_Documento_Alta_Eje.Size = new System.Drawing.Size(76, 16);
+            this.label_Documento_Alta_Eje.Size = new System.Drawing.Size(62, 13);
             this.label_Documento_Alta_Eje.TabIndex = 6;
             this.label_Documento_Alta_Eje.Text = "Documento";
             // 
@@ -1551,7 +1514,7 @@ namespace Presentacion
             this.label_Localizacion_Alta_Eje.AutoSize = true;
             this.label_Localizacion_Alta_Eje.Location = new System.Drawing.Point(23, 46);
             this.label_Localizacion_Alta_Eje.Name = "label_Localizacion_Alta_Eje";
-            this.label_Localizacion_Alta_Eje.Size = new System.Drawing.Size(82, 16);
+            this.label_Localizacion_Alta_Eje.Size = new System.Drawing.Size(66, 13);
             this.label_Localizacion_Alta_Eje.TabIndex = 5;
             this.label_Localizacion_Alta_Eje.Text = "Localizacion";
             // 
@@ -1560,7 +1523,7 @@ namespace Presentacion
             this.textBox_Localizacion_Alta_Eje.Location = new System.Drawing.Point(127, 42);
             this.textBox_Localizacion_Alta_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Localizacion_Alta_Eje.Name = "textBox_Localizacion_Alta_Eje";
-            this.textBox_Localizacion_Alta_Eje.Size = new System.Drawing.Size(208, 22);
+            this.textBox_Localizacion_Alta_Eje.Size = new System.Drawing.Size(208, 20);
             this.textBox_Localizacion_Alta_Eje.TabIndex = 1;
             // 
             // checkBox_Disponible_Alta_Eje
@@ -1571,7 +1534,7 @@ namespace Presentacion
             this.checkBox_Disponible_Alta_Eje.Location = new System.Drawing.Point(140, 106);
             this.checkBox_Disponible_Alta_Eje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_Disponible_Alta_Eje.Name = "checkBox_Disponible_Alta_Eje";
-            this.checkBox_Disponible_Alta_Eje.Size = new System.Drawing.Size(94, 20);
+            this.checkBox_Disponible_Alta_Eje.Size = new System.Drawing.Size(75, 17);
             this.checkBox_Disponible_Alta_Eje.TabIndex = 0;
             this.checkBox_Disponible_Alta_Eje.Text = "Disponible";
             this.checkBox_Disponible_Alta_Eje.UseVisualStyleBackColor = true;
@@ -1633,7 +1596,7 @@ namespace Presentacion
             this.label_Alta_Doc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Alta_Doc.Location = new System.Drawing.Point(108, 10);
             this.label_Alta_Doc.Name = "label_Alta_Doc";
-            this.label_Alta_Doc.Size = new System.Drawing.Size(152, 20);
+            this.label_Alta_Doc.Size = new System.Drawing.Size(128, 17);
             this.label_Alta_Doc.TabIndex = 15;
             this.label_Alta_Doc.Text = "Alta de Documento";
             // 
@@ -1642,7 +1605,7 @@ namespace Presentacion
             this.textBox_Duracion_Alta_Doc.Location = new System.Drawing.Point(127, 268);
             this.textBox_Duracion_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Duracion_Alta_Doc.Name = "textBox_Duracion_Alta_Doc";
-            this.textBox_Duracion_Alta_Doc.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Duracion_Alta_Doc.Size = new System.Drawing.Size(121, 20);
             this.textBox_Duracion_Alta_Doc.TabIndex = 14;
             this.textBox_Duracion_Alta_Doc.Visible = false;
             this.textBox_Duracion_Alta_Doc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SoloInt);
@@ -1654,7 +1617,7 @@ namespace Presentacion
             this.comboBox_Formato_Alta_Doc.Location = new System.Drawing.Point(127, 230);
             this.comboBox_Formato_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Formato_Alta_Doc.Name = "comboBox_Formato_Alta_Doc";
-            this.comboBox_Formato_Alta_Doc.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_Formato_Alta_Doc.Size = new System.Drawing.Size(121, 21);
             this.comboBox_Formato_Alta_Doc.TabIndex = 13;
             this.comboBox_Formato_Alta_Doc.Visible = false;
             // 
@@ -1663,7 +1626,7 @@ namespace Presentacion
             this.label_Duracion_Alta_Doc.AutoSize = true;
             this.label_Duracion_Alta_Doc.Location = new System.Drawing.Point(23, 268);
             this.label_Duracion_Alta_Doc.Name = "label_Duracion_Alta_Doc";
-            this.label_Duracion_Alta_Doc.Size = new System.Drawing.Size(61, 16);
+            this.label_Duracion_Alta_Doc.Size = new System.Drawing.Size(50, 13);
             this.label_Duracion_Alta_Doc.TabIndex = 12;
             this.label_Duracion_Alta_Doc.Text = "Duración";
             this.label_Duracion_Alta_Doc.Visible = false;
@@ -1673,7 +1636,7 @@ namespace Presentacion
             this.label_Formato_Alta_Doc.AutoSize = true;
             this.label_Formato_Alta_Doc.Location = new System.Drawing.Point(23, 233);
             this.label_Formato_Alta_Doc.Name = "label_Formato_Alta_Doc";
-            this.label_Formato_Alta_Doc.Size = new System.Drawing.Size(57, 16);
+            this.label_Formato_Alta_Doc.Size = new System.Drawing.Size(45, 13);
             this.label_Formato_Alta_Doc.TabIndex = 11;
             this.label_Formato_Alta_Doc.Text = "Formato";
             this.label_Formato_Alta_Doc.Visible = false;
@@ -1683,7 +1646,7 @@ namespace Presentacion
             this.label_Año_Edicion_Alta_Doc.AutoSize = true;
             this.label_Año_Edicion_Alta_Doc.Location = new System.Drawing.Point(23, 159);
             this.label_Año_Edicion_Alta_Doc.Name = "label_Año_Edicion_Alta_Doc";
-            this.label_Año_Edicion_Alta_Doc.Size = new System.Drawing.Size(79, 16);
+            this.label_Año_Edicion_Alta_Doc.Size = new System.Drawing.Size(64, 13);
             this.label_Año_Edicion_Alta_Doc.TabIndex = 10;
             this.label_Año_Edicion_Alta_Doc.Text = "Año Edición";
             // 
@@ -1693,7 +1656,7 @@ namespace Presentacion
             this.textBox_Año_Edicion_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Año_Edicion_Alta_Doc.MaxLength = 4;
             this.textBox_Año_Edicion_Alta_Doc.Name = "textBox_Año_Edicion_Alta_Doc";
-            this.textBox_Año_Edicion_Alta_Doc.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Año_Edicion_Alta_Doc.Size = new System.Drawing.Size(121, 20);
             this.textBox_Año_Edicion_Alta_Doc.TabIndex = 9;
             this.textBox_Año_Edicion_Alta_Doc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SoloInt);
             // 
@@ -1702,7 +1665,7 @@ namespace Presentacion
             this.label_Editorial_Alta_Doc.AutoSize = true;
             this.label_Editorial_Alta_Doc.Location = new System.Drawing.Point(23, 132);
             this.label_Editorial_Alta_Doc.Name = "label_Editorial_Alta_Doc";
-            this.label_Editorial_Alta_Doc.Size = new System.Drawing.Size(56, 16);
+            this.label_Editorial_Alta_Doc.Size = new System.Drawing.Size(44, 13);
             this.label_Editorial_Alta_Doc.TabIndex = 8;
             this.label_Editorial_Alta_Doc.Text = "Editorial";
             // 
@@ -1711,7 +1674,7 @@ namespace Presentacion
             this.label_ISBN_Alta_Doc.AutoSize = true;
             this.label_ISBN_Alta_Doc.Location = new System.Drawing.Point(23, 101);
             this.label_ISBN_Alta_Doc.Name = "label_ISBN_Alta_Doc";
-            this.label_ISBN_Alta_Doc.Size = new System.Drawing.Size(38, 16);
+            this.label_ISBN_Alta_Doc.Size = new System.Drawing.Size(32, 13);
             this.label_ISBN_Alta_Doc.TabIndex = 7;
             this.label_ISBN_Alta_Doc.Text = "ISBN";
             // 
@@ -1720,7 +1683,7 @@ namespace Presentacion
             this.label_Autor_Alta_Doc.AutoSize = true;
             this.label_Autor_Alta_Doc.Location = new System.Drawing.Point(23, 73);
             this.label_Autor_Alta_Doc.Name = "label_Autor_Alta_Doc";
-            this.label_Autor_Alta_Doc.Size = new System.Drawing.Size(38, 16);
+            this.label_Autor_Alta_Doc.Size = new System.Drawing.Size(32, 13);
             this.label_Autor_Alta_Doc.TabIndex = 6;
             this.label_Autor_Alta_Doc.Text = "Autor";
             // 
@@ -1729,7 +1692,7 @@ namespace Presentacion
             this.label_Titulo_Alta_Doc.AutoSize = true;
             this.label_Titulo_Alta_Doc.Location = new System.Drawing.Point(23, 46);
             this.label_Titulo_Alta_Doc.Name = "label_Titulo_Alta_Doc";
-            this.label_Titulo_Alta_Doc.Size = new System.Drawing.Size(40, 16);
+            this.label_Titulo_Alta_Doc.Size = new System.Drawing.Size(33, 13);
             this.label_Titulo_Alta_Doc.TabIndex = 5;
             this.label_Titulo_Alta_Doc.Text = "Titulo";
             // 
@@ -1738,7 +1701,7 @@ namespace Presentacion
             this.textBox_Editorial_Alta_Doc.Location = new System.Drawing.Point(127, 126);
             this.textBox_Editorial_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Editorial_Alta_Doc.Name = "textBox_Editorial_Alta_Doc";
-            this.textBox_Editorial_Alta_Doc.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Editorial_Alta_Doc.Size = new System.Drawing.Size(121, 20);
             this.textBox_Editorial_Alta_Doc.TabIndex = 4;
             // 
             // textBox_ISBN_Alta_Doc
@@ -1746,7 +1709,7 @@ namespace Presentacion
             this.textBox_ISBN_Alta_Doc.Location = new System.Drawing.Point(127, 98);
             this.textBox_ISBN_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_ISBN_Alta_Doc.Name = "textBox_ISBN_Alta_Doc";
-            this.textBox_ISBN_Alta_Doc.Size = new System.Drawing.Size(121, 22);
+            this.textBox_ISBN_Alta_Doc.Size = new System.Drawing.Size(121, 20);
             this.textBox_ISBN_Alta_Doc.TabIndex = 3;
             // 
             // textBox_Autor_Alta_Doc
@@ -1754,7 +1717,7 @@ namespace Presentacion
             this.textBox_Autor_Alta_Doc.Location = new System.Drawing.Point(127, 70);
             this.textBox_Autor_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Autor_Alta_Doc.Name = "textBox_Autor_Alta_Doc";
-            this.textBox_Autor_Alta_Doc.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Autor_Alta_Doc.Size = new System.Drawing.Size(121, 20);
             this.textBox_Autor_Alta_Doc.TabIndex = 2;
             // 
             // textBox_Titulo_Alta_Doc
@@ -1762,7 +1725,7 @@ namespace Presentacion
             this.textBox_Titulo_Alta_Doc.Location = new System.Drawing.Point(127, 42);
             this.textBox_Titulo_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Titulo_Alta_Doc.Name = "textBox_Titulo_Alta_Doc";
-            this.textBox_Titulo_Alta_Doc.Size = new System.Drawing.Size(121, 22);
+            this.textBox_Titulo_Alta_Doc.Size = new System.Drawing.Size(121, 20);
             this.textBox_Titulo_Alta_Doc.TabIndex = 1;
             // 
             // checkBox_Audiolibro_Alta_Doc
@@ -1771,7 +1734,7 @@ namespace Presentacion
             this.checkBox_Audiolibro_Alta_Doc.Location = new System.Drawing.Point(140, 191);
             this.checkBox_Audiolibro_Alta_Doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_Audiolibro_Alta_Doc.Name = "checkBox_Audiolibro_Alta_Doc";
-            this.checkBox_Audiolibro_Alta_Doc.Size = new System.Drawing.Size(94, 20);
+            this.checkBox_Audiolibro_Alta_Doc.Size = new System.Drawing.Size(76, 17);
             this.checkBox_Audiolibro_Alta_Doc.TabIndex = 0;
             this.checkBox_Audiolibro_Alta_Doc.Text = "AudioLibro";
             this.checkBox_Audiolibro_Alta_Doc.UseVisualStyleBackColor = true;
@@ -1870,7 +1833,7 @@ namespace Presentacion
             this.label_Main_Adquisiciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Main_Adquisiciones.Location = new System.Drawing.Point(283, 22);
             this.label_Main_Adquisiciones.Name = "label_Main_Adquisiciones";
-            this.label_Main_Adquisiciones.Size = new System.Drawing.Size(361, 32);
+            this.label_Main_Adquisiciones.Size = new System.Drawing.Size(282, 26);
             this.label_Main_Adquisiciones.TabIndex = 6;
             this.label_Main_Adquisiciones.Text = "Gestion de Adquisiciones";
             // 
@@ -1924,17 +1887,65 @@ namespace Presentacion
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
-            // btBuscar
+            // Column_Codigo_Listar_Ejemplar
             // 
-            this.btBuscar.Image = global::Presentacion.Properties.Resources.ImagenBuscar__1_;
-            this.btBuscar.Location = new System.Drawing.Point(251, 23);
-            this.btBuscar.Name = "btBuscar";
-            this.btBuscar.Size = new System.Drawing.Size(81, 68);
-            this.btBuscar.TabIndex = 18;
-            this.btBuscar.Text = "Consultar";
-            this.btBuscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btBuscar.UseVisualStyleBackColor = true;
-            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
+            this.Column_Codigo_Listar_Ejemplar.DataPropertyName = "Codigo";
+            this.Column_Codigo_Listar_Ejemplar.HeaderText = "Codigo";
+            this.Column_Codigo_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Codigo_Listar_Ejemplar.Name = "Column_Codigo_Listar_Ejemplar";
+            this.Column_Codigo_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Codigo_Listar_Ejemplar.ToolTipText = "Codigo del Ejemplar";
+            this.Column_Codigo_Listar_Ejemplar.Width = 125;
+            // 
+            // Column_Documento_Listar_Ejemplar
+            // 
+            this.Column_Documento_Listar_Ejemplar.DataPropertyName = "Documento";
+            this.Column_Documento_Listar_Ejemplar.HeaderText = "Documento";
+            this.Column_Documento_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Documento_Listar_Ejemplar.Name = "Column_Documento_Listar_Ejemplar";
+            this.Column_Documento_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Documento_Listar_Ejemplar.ToolTipText = "Documento del Ejemplar";
+            this.Column_Documento_Listar_Ejemplar.Width = 125;
+            // 
+            // Column_Responsable_Listar_Ejemplar
+            // 
+            this.Column_Responsable_Listar_Ejemplar.DataPropertyName = "Responsable";
+            this.Column_Responsable_Listar_Ejemplar.HeaderText = "Responsable";
+            this.Column_Responsable_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Responsable_Listar_Ejemplar.Name = "Column_Responsable_Listar_Ejemplar";
+            this.Column_Responsable_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Responsable_Listar_Ejemplar.ToolTipText = "Responsable del Ejemplar";
+            this.Column_Responsable_Listar_Ejemplar.Width = 125;
+            // 
+            // Column_Activo_Listar_Ejemplar
+            // 
+            this.Column_Activo_Listar_Ejemplar.DataPropertyName = "Activo";
+            this.Column_Activo_Listar_Ejemplar.HeaderText = "Activo";
+            this.Column_Activo_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Activo_Listar_Ejemplar.Name = "Column_Activo_Listar_Ejemplar";
+            this.Column_Activo_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Activo_Listar_Ejemplar.ToolTipText = "Ejemplar Activo";
+            this.Column_Activo_Listar_Ejemplar.Width = 125;
+            // 
+            // Column_Disponible_Listar_Ejemplar
+            // 
+            this.Column_Disponible_Listar_Ejemplar.DataPropertyName = "Disponible";
+            this.Column_Disponible_Listar_Ejemplar.HeaderText = "Disponible";
+            this.Column_Disponible_Listar_Ejemplar.MinimumWidth = 6;
+            this.Column_Disponible_Listar_Ejemplar.Name = "Column_Disponible_Listar_Ejemplar";
+            this.Column_Disponible_Listar_Ejemplar.ReadOnly = true;
+            this.Column_Disponible_Listar_Ejemplar.ToolTipText = "Ejemplar Disponible";
+            this.Column_Disponible_Listar_Ejemplar.Width = 125;
+            // 
+            // ColumnLocalizacion_Listar_Ejemplar
+            // 
+            this.ColumnLocalizacion_Listar_Ejemplar.DataPropertyName = "Localizacion";
+            this.ColumnLocalizacion_Listar_Ejemplar.HeaderText = "Localizacion";
+            this.ColumnLocalizacion_Listar_Ejemplar.MinimumWidth = 6;
+            this.ColumnLocalizacion_Listar_Ejemplar.Name = "ColumnLocalizacion_Listar_Ejemplar";
+            this.ColumnLocalizacion_Listar_Ejemplar.ReadOnly = true;
+            this.ColumnLocalizacion_Listar_Ejemplar.ToolTipText = "Localizacion del Ejemplar";
+            this.ColumnLocalizacion_Listar_Ejemplar.Width = 200;
             // 
             // FormPersonal
             // 
@@ -1986,6 +1997,7 @@ namespace Presentacion
             this.panel_Alta_Documento.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Ejemplar_Listar_Ejemplar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2012,12 +2024,6 @@ namespace Presentacion
         private System.Windows.Forms.ComboBox comboBox_Documento_Listar_Ejemplar;
         private System.Windows.Forms.Label label_Documento_Listar_Ejemplar;
         private System.Windows.Forms.DataGridView dataGridView_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Codigo_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Documento_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Responsable_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column_Activo_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column_Disponible_Listar_Ejemplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocalizacion_Listar_Ejemplar;
         private System.Windows.Forms.Label label_Listar_Ejemplar;
         private System.Windows.Forms.Panel panel_Listar_Documento;
         private System.Windows.Forms.DataGridView dataGridView_Listar_Documento;
@@ -2143,5 +2149,12 @@ namespace Presentacion
         private Button ConsultarBtn;
         private Panel PanelFunciones;
         private Button btBuscar;
+        private BindingSource bindingSource_Ejemplar_Listar_Ejemplar;
+        private DataGridViewTextBoxColumn Column_Codigo_Listar_Ejemplar;
+        private DataGridViewTextBoxColumn Column_Documento_Listar_Ejemplar;
+        private DataGridViewTextBoxColumn Column_Responsable_Listar_Ejemplar;
+        private DataGridViewCheckBoxColumn Column_Activo_Listar_Ejemplar;
+        private DataGridViewCheckBoxColumn Column_Disponible_Listar_Ejemplar;
+        private DataGridViewTextBoxColumn ColumnLocalizacion_Listar_Ejemplar;
     }
 }
