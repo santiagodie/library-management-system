@@ -33,7 +33,7 @@ public class GestorUsuarios
             return resultado;
         }
 
-        if (!Persistencia.Persistencia.ExistePersona(dni))
+        if (!Persistencia.Persistencia.Instancia.ExistePersona(dni))
         {
             resultado.MensajeError = "No existe ninguna cuenta con ese DNI.";
             return resultado;
@@ -41,15 +41,15 @@ public class GestorUsuarios
 
         string hashPass = Hash.GetHash(contraseña);
 
-        if (Persistencia.Persistencia.ExistePersonalSala(dni))
+        if (Persistencia.Persistencia.Instancia.ExistePersonalSala(dni))
         {
-            PersonalSala p = Persistencia.Persistencia.GetPersonalSala(dni);
+            PersonalSala p = Persistencia.Persistencia.Instancia.GetPersonalSala(dni);
             if (p.HashContraseña == hashPass)
             {
                 resultado.Exito = true;
                 resultado.Persona = p;
 
-                if (Persistencia.Persistencia.ExisteUsuario(dni))
+                if (Persistencia.Persistencia.Instancia.ExisteUsuario(dni))
                 {
                     resultado.Rol = Rol.UsuarioYSala;
                 }
@@ -61,15 +61,15 @@ public class GestorUsuarios
             }
         }
 
-        if (Persistencia.Persistencia.ExistePersonalAdquisiciones(dni))
+        if (Persistencia.Persistencia.Instancia.ExistePersonalAdquisiciones(dni))
         {
-            PersonalAdquisiciones p = Persistencia.Persistencia.GetPersonalAdquisiciones(dni);
+            PersonalAdquisiciones p = Persistencia.Persistencia.Instancia.GetPersonalAdquisiciones(dni);
             if (p.HashContraseña == hashPass)
             {
                 resultado.Exito = true;
                 resultado.Persona = p;
 
-                if (Persistencia.Persistencia.ExisteUsuario(dni))
+                if (Persistencia.Persistencia.Instancia.ExisteUsuario(dni))
                 {
                     resultado.Rol = Rol.UsuarioYAdquisiciones;
                 }
@@ -81,9 +81,9 @@ public class GestorUsuarios
             }
         }
 
-        if (Persistencia.Persistencia.ExisteUsuario(dni))
+        if (Persistencia.Persistencia.Instancia.ExisteUsuario(dni))
         {
-            Usuario u = Persistencia.Persistencia.GetUsuario(dni);
+            Usuario u = Persistencia.Persistencia.Instancia.GetUsuario(dni);
             if (u.HashContraseña == hashPass)
             {
                 resultado.Exito = true;
@@ -101,7 +101,7 @@ public class GestorUsuarios
     //POST: registra al usuario en el sistema. Devuelve true si el alta se realizó con éxito en la persistencia.
     public bool AltaUsuario(Usuario usuario)
     {
-        if (Persistencia.Persistencia.ExisteUsuario(usuario.Dni))
+        if (Persistencia.Persistencia.Instancia.ExisteUsuario(usuario.Dni))
         {
             return false;
         }
@@ -116,7 +116,7 @@ public class GestorUsuarios
             return false;
         }
 
-        return Persistencia.Persistencia.AltaUsuario(usuario);
+        return Persistencia.Persistencia.Instancia.AltaUsuario(usuario);
     }
 
     //PRE: usuario no puede ser nulo y debe estar en un estado diferente de Inactivo.
@@ -125,7 +125,7 @@ public class GestorUsuarios
     {
         if (usuario.Estado != EstadoUsuario.Inactivo)
         {
-            return Persistencia.Persistencia.BajaUsuario(usuario);
+            return Persistencia.Persistencia.Instancia.BajaUsuario(usuario);
         }
         return false;
     }
@@ -134,21 +134,21 @@ public class GestorUsuarios
     //POST: devuelve el objeto Usuario asociado al DNI proporcionado, o null si no se encuentra en la persistencia.
     public Usuario ConsultarUusuario(String Dni)
     {
-        return Persistencia.Persistencia.GetUsuario(Dni);
+        return Persistencia.Persistencia.Instancia.GetUsuario(Dni);
     }
 
     //PRE: ---
     //POST: devuelve una lista con todos los usuarios registrados en el sistema.
     public List<Usuario> GetListaUsuarios()
     {
-        return Persistencia.Persistencia.GetListaUsuarios();
+        return Persistencia.Persistencia.Instancia.GetListaUsuarios();
     }
 
     //PRE: usuario no puede ser nulo.
     //POST: devuelve la lista de préstamos activos del usuario que han superado su fecha límite de devolución.
     public List<Prestamo> GetPrestamosRetrasados(Usuario usuario)
     {
-        var todos = Persistencia.Persistencia.GetPrestamos(usuario);
+        var todos = Persistencia.Persistencia.Instancia.GetPrestamos(usuario);
 
         List<Prestamo> retrasados = new List<Prestamo>();
 
@@ -172,7 +172,7 @@ public class GestorUsuarios
     //POST: devuelve la lista de ejemplares que el usuario tiene prestados actualmente (sin devolver).
     public List<Ejemplar> GetEjemplaresPrestados(Usuario usuario)
     {
-        var todos = Persistencia.Persistencia.GetPrestamos(usuario);
+        var todos = Persistencia.Persistencia.Instancia.GetPrestamos(usuario);
         List<Ejemplar> enCasaUsuario = new List<Ejemplar>();
 
         foreach (var p in todos)
@@ -206,8 +206,8 @@ public class GestorUsuarios
     //POST: devuelve la fecha de devolución prevista para el ejemplar según su tipo de documento.
     public DateTime GetFechaDisponible(Ejemplar ejemplar)
     {
-        if (ejemplar.Documento is Libro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[0];
-        else if (ejemplar.Documento is Audiolibro) return Persistencia.Persistencia.GetPrestamoActivo(ejemplar).FechaFin[1];
+        if (ejemplar.Documento is Libro) return Persistencia.Persistencia.Instancia.GetPrestamoActivo(ejemplar).FechaFin[0];
+        else if (ejemplar.Documento is Audiolibro) return Persistencia.Persistencia.Instancia.GetPrestamoActivo(ejemplar).FechaFin[1];
         return DateTime.MinValue;
     }
 
@@ -215,9 +215,9 @@ public class GestorUsuarios
     //POST: devuelve una lista de objetos EjemplarPrestado filtrada por texto y estado de pendiente, ordenada por fecha de inicio.
     public List<EjemplarPrestado> ObtenerMisPrestamosFiltrados(Persona personaLogueada, string textoBuscar, bool soloPendientes)
     {
-        Usuario usuario = Persistencia.Persistencia.GetUsuario(personaLogueada.Dni);
+        Usuario usuario = Persistencia.Persistencia.Instancia.GetUsuario(personaLogueada.Dni);
         if (usuario == null) return new List<EjemplarPrestado>();
-        List<Prestamo> misPrestamos = Persistencia.Persistencia.GetPrestamos(usuario);
+        List<Prestamo> misPrestamos = Persistencia.Persistencia.Instancia.GetPrestamos(usuario);
 
         var consulta = misPrestamos.AsQueryable();
 
@@ -263,15 +263,15 @@ public class GestorUsuarios
     //POST: devuelve true si existe un usuario con el DNI especificado en el sistema.
     public bool ExisteUsuario(string dni)
     {
-        return Persistencia.Persistencia.ExisteUsuario(dni);
+        return Persistencia.Persistencia.Instancia.ExisteUsuario(dni);
     }
 
     //PRE: idEjemplar no puede ser nulo o vacío. El ejemplar debe existir en la persistencia.
     //POST: devuelve el ejemplar con el código especificado, o null si no existe.
     public Ejemplar ConsultarEjemplar(string idEjemplar)
     {
-        if (string.IsNullOrEmpty(idEjemplar) || !Persistencia.Persistencia.ExisteEjemplar(idEjemplar)) return null;
+        if (string.IsNullOrEmpty(idEjemplar) || !Persistencia.Persistencia.Instancia.ExisteEjemplar(idEjemplar)) return null;
 
-        return Persistencia.Persistencia.GetEjemplar(idEjemplar);
+        return Persistencia.Persistencia.Instancia.GetEjemplar(idEjemplar);
     }
 }
