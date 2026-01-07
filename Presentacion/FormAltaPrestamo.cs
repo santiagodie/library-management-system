@@ -21,6 +21,8 @@ namespace Presentacion
         private BindingSource bsUsuarios;
         private BindingSource bsEjemplares;
 
+        //PRE: 'personalLogueado' no debe ser nulo.
+        //POST: Inicializa los componentes del formulario, instancia el gestor de sala y prepara las listas de binding para usuarios y ejemplares.
         public FormAltaPrestamo(Personal personalLogueado)
         {
             InitializeComponent();
@@ -31,6 +33,8 @@ namespace Presentacion
             bsEjemplares = new BindingSource();
         }
 
+        //PRE: ---
+        //POST: Establece la fecha actual en el selector de fecha (deshabilitado) y carga la lista de usuarios disponibles.
         private void FormAltaPrestamo_Load(object sender, EventArgs e)
         {
             dtpFecha.Value = DateTime.Today;
@@ -38,6 +42,8 @@ namespace Presentacion
             CargarUsuarios();
         }
 
+        //PRE: La instancia de 'gestor' debe estar correctamente inicializada.
+        //POST: Obtiene la lista de usuarios del sistema y la vincula al ComboBox cbUsuario.
         private void CargarUsuarios()
         {
             bsUsuarios.DataSource = gestor.GetListaUsuarios();
@@ -48,6 +54,8 @@ namespace Presentacion
             cbUsuario.SelectedIndex = -1;
         }
 
+        //PRE: ---
+        //POST: Abre el formulario de selección de ejemplar. Si se selecciona uno válido y no está repetido, lo añade a la lista 'ejemplaresEnElPrestamo' y actualiza la vista.
         private void btAnadir_Click(object sender, EventArgs e)
         {
             FormSeleccionEjemplar frmSeleccion = new FormSeleccionEjemplar();
@@ -70,6 +78,8 @@ namespace Presentacion
             }
         }
 
+        //PRE: La lista 'ejemplaresEnElPrestamo' debe estar inicializada.
+        //POST: Actualiza el DataSource del ListBox 'lbEjemplares' para reflejar los cambios en la lista de objetos.
         private void ActualizarListaVisual()
         {
             bsEjemplares.DataSource = ejemplaresEnElPrestamo;
@@ -79,6 +89,8 @@ namespace Presentacion
             lbEjemplares.Format += lbEjemplares_Format;
         }
 
+        //PRE: Se debe haber seleccionado un usuario, ingresado un ID y añadido al menos un ejemplar a la lista.
+        //POST: Intenta registrar el préstamo en el sistema. Si tiene éxito, muestra confirmación y cierra el formulario. Si falla, captura la excepción y muestra el error.
         private void btAceptar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbID.Text))
@@ -119,12 +131,16 @@ namespace Presentacion
             }
         }
 
+        //PRE: El objeto 'e.ListItem' debe ser de tipo Ejemplar.
+        //POST: Formatea la visualización del elemento en el ListBox para mostrar el texto "COD ejemplar:" seguido del código del ejemplar.
         private void lbEjemplares_Format(object sender, ListControlConvertEventArgs e)
         {
             Ejemplar ej = (Ejemplar)e.ListItem;
             e.Value = $"COD ejemplar:   {ej.Codigo}";
         }
 
+        //PRE: ---
+        //POST: Solicita confirmación al usuario mediante un cuadro de diálogo. Si confirma, cierra el formulario con resultado Cancel; de lo contrario, no realiza ninguna acción.
         private void btCancelar_Click(object sender, EventArgs e)
         {
             DialogResult respuesta = MessageBox.Show(

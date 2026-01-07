@@ -18,6 +18,8 @@ namespace Presentacion
             InitializeComponent();
         }
 
+        //PRE: Los campos NameBox y DNIBox deben contener datos.
+        //POST: Valida el DNI y crea un nuevo objeto Usuario. Si el alta en el gestor es exitosa, limpia los campos; si no, informa del error (ej. usuario duplicado).
         private void AltaBtn_Click(object sender, EventArgs e)
         {
             string name=NameBox.Text;

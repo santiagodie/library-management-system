@@ -17,6 +17,9 @@ namespace Presentacion
         private List<Usuario> users;
         private BindingSource source;
         public event Action<Usuario> MostrarUsuario;
+
+        //PRE: ---
+        //POST: Inicializa el componente, obtiene la lista completa de usuarios del gestor y la vincula al DataGridView para su visualización.
         public UC_ListadoUsuarios()
         {
             InitializeComponent();
@@ -27,6 +30,8 @@ namespace Presentacion
             Lista.DataSource = source;
         }
 
+        //PRE: La columna pulsada debe tener un 'DataPropertyName' válido correspondiente a una propiedad de la clase Usuario.
+        //POST: Ordena la lista de usuarios ('users') basándose en la propiedad de la columna seleccionada y refresca la vista.
         private void Lista_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             PropertyInfo prop = typeof(Usuario).GetProperty(Lista.Columns[e.ColumnIndex].DataPropertyName);
@@ -39,6 +44,8 @@ namespace Presentacion
             source.ResetBindings(false);
         }
 
+        //PRE: El índice de fila (e.RowIndex) debe ser válido (>= 0).
+        //POST: Recupera el objeto Usuario de la fila seleccionada y dispara el evento 'MostrarUsuario' para navegar a su detalle.
         private void Lista_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

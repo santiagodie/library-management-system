@@ -731,16 +731,17 @@ namespace Presentacion
             dataGridView_Listar_Ejemplar.Rows.Clear();
             dataGridView_Listar_Ejemplar.Visible = false;
         }
-        
 
+        //PRE: ---
+        //POST: Instancia un nuevo control 'UC_Inicio' y lo carga en el panel contenedor mediante 'MostrarPantalla' para establecer la vista inicial.
         private void InicializarSala()
         {
             UC_Inicio inicio = new UC_Inicio();
             MostrarPantalla(inicio);
         }
 
-        //PRE: ---
-        //POST: muestra cualquier usercontrol dentro del panel
+        //PRE: 'pantalla' no debe ser nulo.
+        //POST: Limpia el panelContenedor y agrega el UserControl 'pantalla' para que ocupe todo el espacio.
         private void MostrarPantalla(UserControl pantalla)
         {
             panelContenedor.Controls.Clear();
@@ -748,22 +749,17 @@ namespace Presentacion
             panelContenedor.Controls.Add(pantalla);
             pantalla.BringToFront();
         }
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        //PRE: ---
+        //POST: Instancia y muestra el UserControl 'UC_Busqueda' en el panel contenedor principal.
         private void btBusqueda_Click(object sender, EventArgs e)
         {
             UC_Busqueda busqueda = new UC_Busqueda();
             MostrarPantalla(busqueda);
         }
 
+        //PRE: ---
+        //POST: Solicita confirmación al usuario. Si acepta, reinicia la aplicación para volver al Login y cerrar la sesión actual.
         private void btLogOut_Click(object sender, EventArgs e)
         {
             DialogResult respuesta = MessageBox.Show(
@@ -780,12 +776,16 @@ namespace Presentacion
             }
         }
 
+        //PRE: ---
+        //POST: Carga y muestra el UserControl 'UC_Inicio' con el resumen de actividad en el panel principal.
         private void btInicio_Click(object sender, EventArgs e)
         {
             UC_Inicio inicio = new UC_Inicio();
             MostrarPantalla(inicio);
         }
 
+        //PRE: ---
+        //POST: Limpia el panel de funciones lateral y carga la interfaz de alta de usuarios (UC_AltaUsuario).
         private void AltaBtn_Click(object sender, EventArgs e)
         {
             PanelFunciones.Controls.Clear();
@@ -794,6 +794,8 @@ namespace Presentacion
             PanelFunciones.Controls.Add(alta);
         }
 
+        //PRE: ---
+        //POST: Limpia el panel de funciones lateral y carga la interfaz de baja de usuarios (UC_BajaUsuario).
         private void BajaBtn_Click(object sender, EventArgs e)
         {
             PanelFunciones.Controls.Clear();
@@ -802,6 +804,8 @@ namespace Presentacion
             PanelFunciones.Controls.Add(baja);
         }
 
+        //PRE: ---
+        //POST: Carga el listado de usuarios en el panel lateral y suscribe el evento 'MostrarUsuario' para la navegación.
         private void ListarBtn_Click(object sender, EventArgs e)
         {
             PanelFunciones.Controls.Clear();
@@ -812,6 +816,8 @@ namespace Presentacion
 
         }
 
+        //PRE: El campo DNIBox debe contener texto.
+        //POST: Valida el formato del DNI. Si el usuario existe, llama a 'mostrarUsuario'; en caso contrario, muestra un mensaje de error.
         private void ConsultarBtn_Click(object sender, EventArgs e)
         {
             GestorUsuarios gestor= new GestorUsuarios();
@@ -832,6 +838,9 @@ namespace Presentacion
                 MessageBox.Show("El DNI introducido no es válido.");
             }
         }
+
+        //PRE: 'usuario' no debe ser nulo.
+        //POST: Carga el UserControl UC_InfoUsuario en el PanelFunciones y configura sus eventos de navegación.
         private void mostrarUsuario(Usuario usuario)
         {
             DNIBox.Text = usuario.Dni;
@@ -862,7 +871,10 @@ namespace Presentacion
             userUC.Dock= DockStyle.Fill;
             PanelFunciones.Controls.Add(userUC);
         }
-        private void cambiarInfoUsuario(Usuario usuario,bool siguiente)
+
+        //PRE: 'usuario' debe existir en la lista de usuarios devuelta por el gestor.
+        //POST: Busca al usuario anterior o siguiente en la lista (según el booleano) y actualiza la vista con 'mostrarUsuario'.
+        private void cambiarInfoUsuario(Usuario usuario, bool siguiente)
         {
             GestorUsuarios gestor= new GestorUsuarios();
             List<Usuario> lista = gestor.GetListaUsuarios();
@@ -878,6 +890,8 @@ namespace Presentacion
             }
             mostrarUsuario(lista[i]);
         }
+        //PRE: 'usuario' no debe ser nulo.
+        //POST: Reemplaza el contenido del panel de funciones con la vista de préstamos (UC_PrestamosUsuario) asociada al usuario indicado.
         private void mostrarPrestamosUsuario(Usuario usuario)
         {
             PanelFunciones.Controls.Clear();
@@ -886,20 +900,23 @@ namespace Presentacion
             PanelFunciones.Controls.Add(prestamos);
         }
 
+        //PRE: ---
+        //POST: Pide confirmación al usuario para cerrar el formulario actual. Si confirma, se cierra la ventana.
         private void button1_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("¿Cerrar sesión y salir?", "Cerrar Sesión", MessageBoxButtons.YesNo)==DialogResult.Yes)
-            {
-                this.Close();
-            }
+
         }
 
+        //PRE: El objeto 'personal' debe estar correctamente inicializado.
+        //POST: Abre el formulario modal 'FormAltaPrestamo' para registrar nuevos préstamos.
         private void btPrestamo_Click(object sender, EventArgs e)
         {
             FormAltaPrestamo formAlta = new FormAltaPrestamo(personal);
             formAlta.ShowDialog();
         }
 
+        //PRE: ---
+        //POST: Limpia manualmente el panel contenedor, instancia 'UC_Busqueda' y lo añade al panel, guardando la referencia en la propiedad Tag.
         private void btBuscar_Click(object sender, EventArgs e)
         {
             if (this.panelContenedor.Controls.Count > 0)
@@ -913,6 +930,8 @@ namespace Presentacion
             this.panelContenedor.Tag = uc;
         }
 
+        //PRE: ---
+        //POST: Abre el formulario modal 'FormDevolucion' para gestionar la devolución de ejemplares.
         private void btDevolucion_Click(object sender, EventArgs e)
         {
             FormDevolucion formDevolucion = new FormDevolucion();

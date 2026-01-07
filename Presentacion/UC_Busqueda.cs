@@ -20,6 +20,8 @@ namespace Presentacion.Properties
             gestorSala = new GestorSala();
         }
 
+        //PRE: ---
+        //POST: Inicializa los ComboBoxes de estado y tipo si están vacíos, carga las listas de datos (títulos, autores, usuarios, ISBNs) y realiza una búsqueda inicial.
         private void UC_Busqueda_Load(object sender, EventArgs e)
         {
             if (cbEstado.Items.Count == 0)
@@ -42,6 +44,8 @@ namespace Presentacion.Properties
             Buscar();
         }
 
+        //PRE: La instancia 'gestorSala' debe estar inicializada.
+        //POST: Carga los datos de títulos, autores, usuarios e ISBNs obtenidos del gestor en sus respectivos ComboBoxes y resetea su selección.
         private void CargarDatosCombos()
         {
             cbTitulo.DataSource = gestorSala.GetListaTitulos();
@@ -58,6 +62,8 @@ namespace Presentacion.Properties
         }
 
 
+        //PRE: Los controles de filtrado (ComboBoxes, DatePicker) deben estar inicializados.
+        //POST: Recoge los filtros seleccionados, consulta a la capa de negocio (gestorSala) y actualiza el DataGridView 'dgvResultados' con los préstamos encontrados.
         private void Buscar()
         {
             string usuario = cbUsuario.Text;
@@ -83,11 +89,15 @@ namespace Presentacion.Properties
             }
         }
 
+        //PRE: ---
+        //POST: Llama al método 'Buscar' para filtrar y mostrar los préstamos según los criterios seleccionados.
         private void btBuscar_Click(object sender, EventArgs e)
         {
             Buscar();
         }
 
+        //PRE: ---
+        //POST: Resetea todos los controles de filtro a sus valores por defecto (vacíos o "Todos") y realiza una nueva búsqueda sin filtros.
         private void btLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarCb(cbUsuario);
@@ -105,6 +115,8 @@ namespace Presentacion.Properties
             Buscar();
         }
 
+        //PRE: ---
+        //POST: Detecta si se ha pulsado la tecla Enter. En caso afirmativo, anula el evento predeterminado y ejecuta la búsqueda.
         private void UC_Busqueda_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -114,12 +126,16 @@ namespace Presentacion.Properties
             }
         }
 
+        //PRE: 'cb' no debe ser nulo.
+        //POST: Establece el índice seleccionado a -1 y borra el texto del ComboBox recibido.
         private void LimpiarCb(ComboBox cb)
         {
             cb.SelectedIndex = -1; 
             cb.Text = "";
         }
 
+        //PRE: El índice de fila (e.RowIndex) debe ser válido (>= 0).
+        //POST: Abre el formulario 'FormPrestamo' con los detalles del préstamo seleccionado. Al cerrar el formulario, refresca la búsqueda.
         private void dgvResultados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

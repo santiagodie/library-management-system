@@ -17,6 +17,8 @@ namespace Presentacion
             InitializeComponent();
         }
 
+        //PRE: El control DNIBox debe contener texto.
+        //POST: Valida el formato del DNI. Si es válido, pide confirmación al usuario y solicita la baja al gestor. Muestra un mensaje con el resultado (éxito o error si el usuario no existe).
         private void BajaBtn_Click(object sender, EventArgs e)
         {
             string dni=DNIBox.Text;

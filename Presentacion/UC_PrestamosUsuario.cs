@@ -17,6 +17,9 @@ namespace Presentacion
         public Usuario usuario { get; set; }
         public List<EjemplarPrestado> listaLibros=new List<EjemplarPrestado>();
         private BindingSource source;
+
+        //PRE: 'usuario' no debe ser nulo.
+        //POST: Inicializa el control, configura el formato de columnas del DataGridView y carga los préstamos asociados al usuario recibido.
         public UC_PrestamosUsuario(Usuario usuario)
         {
             InitializeComponent();
@@ -30,13 +33,17 @@ namespace Presentacion
             CargarLibros(null, PendientesBox.Checked);
         }
 
-        private void CargarLibros(string titulo,bool pendientes)
+        //PRE: La propiedad 'usuario' debe estar asignada y no ser nula.
+        //POST: Obtiene la lista de préstamos filtrada por título y estado (pendientes o todos) usando el gestor y actualiza el DataSource del Grid.
+        private void CargarLibros(string titulo, bool pendientes)
         {
             GestorUsuarios gestor = new GestorUsuarios();
             List<EjemplarPrestado> lista = gestor.ObtenerMisPrestamosFiltrados(this.usuario, titulo, pendientes);
             source.DataSource=lista;
         }
 
+        //PRE: ---
+        //POST: Recoge los valores actuales de los filtros (texto y checkbox) y recarga la lista de libros mostrada.
         private void Cambio(object sender, EventArgs e)
         {
             CargarLibros(BookBox.Text,PendientesBox.Checked);
