@@ -219,7 +219,9 @@ public class GestorUsuarios
         if (usuario == null) return new List<EjemplarPrestado>();
         List<Prestamo> misPrestamos = Persistencia.Persistencia.Instancia.GetPrestamos(usuario);
 
-        var consulta = misPrestamos.AsQueryable();
+        if (misPrestamos == null) return new List<EjemplarPrestado>();
+
+        var consulta = misPrestamos.Where(p => p != null).AsQueryable();
 
         if (soloPendientes)
         {
@@ -238,8 +240,10 @@ public class GestorUsuarios
         List<EjemplarPrestado> ejemplares = new List<EjemplarPrestado>();
         foreach (Prestamo p in prestamos)
         {
+            if (p.EjemplaresPrestados == null) continue;
             foreach (Ejemplar e in p.EjemplaresPrestados)
             {
+                if (e == null || e.Documento == null) continue;
                 Documento d = e.Documento;
                 int i;
                 if (d is Libro)
